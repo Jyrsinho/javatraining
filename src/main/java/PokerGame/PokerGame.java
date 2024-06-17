@@ -8,6 +8,20 @@ public class PokerGame{
 
     private Hand[] hands;
     private final int AMOUNT_OF_PLAYERS = 2;
+
+    private final String[] pokerHandValues = {
+                                                    "Royal Flush",
+                                                    "Straight Flush",
+                                                    "Four of a Kind",
+                                                    "Full House",
+                                                    "Flush",
+                                                    "Straight",
+                                                    "Three of a Kind",
+                                                    "Two Pair",
+                                                    "One Pair",
+                                                    "High Card"
+    };
+
     /**
      * Constructor for the PokerGame
      */

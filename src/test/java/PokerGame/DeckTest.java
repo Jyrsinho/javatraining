@@ -63,7 +63,7 @@ public class DeckTest {
         assertEquals(13,deck.suitCounter("spades"));
     }
 
-    @Ignore
+    @Test
     public void testDeckShouldSortItselfAccordingToCardValues() {
         deck.addCard(new Card("Hearts", 5));
         deck.addCard(new Card("Spades", 2));
