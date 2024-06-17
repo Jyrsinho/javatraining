@@ -12,6 +12,7 @@ public class Hand {
      * Constructor for Hand
      */
     public Hand() {
+
     }
 
 
@@ -35,7 +36,7 @@ public class Hand {
     }
 
     /**
-     * Testprogram for the Hand-class
+     * Test program for the Hand-class
      * @param args none
      */
     public static void main (String []args) {

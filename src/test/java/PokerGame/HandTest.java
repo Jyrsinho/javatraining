@@ -15,6 +15,7 @@ public class HandTest {
     Card fiveOfClubs;
     Card twoOfClubs;
 
+
     @Before
     public void beforeTests() {
         handOne = new Hand();
@@ -35,6 +36,7 @@ public class HandTest {
         handOne.addCardToHand(fiveOfHearts);
         assertEquals(1, handOne.getHandLength());
     }
+
 
     @Test
     public void testShouldBeAbleToAddSeveralCardsToArrayList() throws TooManyElementsException {

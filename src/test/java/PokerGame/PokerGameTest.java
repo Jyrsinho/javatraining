@@ -7,8 +7,5 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class PokerGameTest {
 
-    @Test
-    public void ConstructorShouldCreateACard() {
 
-    }
 }
