@@ -1,6 +1,8 @@
 package PokerGame;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 /**
  * Class that contains all the cards in the deck.
@@ -20,12 +22,40 @@ public class Deck {
         cards = new ArrayList<>();
     }
 
+
+    /**
+     * Initializes Deck. Fills the deck with 52 cards. 4 different suits. 13 different values.
+     */
+    public void initialize() {
+        for (int i = 0; i < suits.length; i++) {
+            for (int j = 2; j <= 14; j++) {
+                Card card = new Card(suits[i], j);
+                cards.add(card);
+            }
+        }
+    }
+
+
     /**
      * Adds card to the Deck
      * @param card to be added
      */
     public void addCard(Card card) {
         cards.add(card);
+    }
+
+    /**
+     * Method to get all cards in the deck
+     * @return List of all the cards in the deck
+     */
+    public List<Card> getCards() {
+        return cards;
+
+    }
+
+
+    public void sortDeck() {
+        Collections.sort(cards);
     }
 
 
@@ -56,18 +86,5 @@ public class Deck {
         return amountOfCardsInDeckOfSuit;
     }
 
-
-    /**
-     * Initializes Deck. Fills the deck with 52 cards. 4 different suits. 13 different values.
-     * TODO: Kesken
-     */
-    public void initialize() {
-        for (int i = 0; i < suits.length; i++) {
-                for (int j = 2; j <= 14; j++) {
-                    Card card = new Card(suits[i], j);
-                    cards.add(card);
-                }
-            }
-        }
     }
 

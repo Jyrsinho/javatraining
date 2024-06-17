@@ -56,4 +56,9 @@ public class Card implements Comparable<Card> {
     public int hashCode() {
         return Objects.hash(value, suit);
     }
+
+    @Override
+    public String toString() {
+        return suit + ":" + value;
+    }
 } // end of Hand Class
