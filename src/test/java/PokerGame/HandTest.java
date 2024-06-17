@@ -5,6 +5,10 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.Arrays;
+
 public class HandTest {
 
     Hand handOne;
@@ -14,6 +18,7 @@ public class HandTest {
     Card sevenOfSpades;
     Card fiveOfClubs;
     Card twoOfClubs;
+    CardSorter sorter;
 
 
     @Before
@@ -25,6 +30,7 @@ public class HandTest {
         sevenOfSpades = new Card("spades", 7);
         fiveOfClubs = new Card("clubs", 5);
         twoOfClubs = new Card("clubs", 2);
+        sorter = new CardSorter();
 
     }
 
@@ -61,5 +67,18 @@ public class HandTest {
         } catch (TooManyElementsException e) {
             assertEquals("Cannot add more than 5 cards to the hand.", e.getMessage());
         }
+    }
+
+    @Test
+    public void testShouldBeAbleToSortCardsAccordingToValue() throws TooManyElementsException {
+        handOne.addCardToHand(fiveOfHearts);
+        handOne.addCardToHand(threeOfHearts);
+        handOne.addCardToHand(tenOfDiamonds);
+        handOne.addCardToHand(sevenOfSpades);
+        handOne.addCardToHand(twoOfClubs);
+
+
+
+
     }
 }

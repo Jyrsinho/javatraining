@@ -7,6 +7,7 @@ import java.util.ArrayList;
  * Knows all the cards in the deck.
  */
 public class Deck {
+
     private ArrayList<Card> cards;
     private int cardsInDeck = 52;
     private final String [] suits = {"clubs", "diamonds", "hearts", "spades"};

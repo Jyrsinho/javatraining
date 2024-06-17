@@ -6,14 +6,13 @@ package PokerGame;
 
 public class PokerGame{
 
-    String [] arrayOfSuits = {"S","C","H","D"};
-    String [] arrayOfValues = {"2","3","4","5", "6","7", "8", "9", "10", "11","12","13","14"};
-    Hand[] Hands = {};
-
+    private Hand[] hands;
+    private final int AMOUNT_OF_PLAYERS = 2;
     /**
      * Constructor for the PokerGame
      */
     public PokerGame() {
+        hands = new Hand[AMOUNT_OF_PLAYERS];
     }
 
 
