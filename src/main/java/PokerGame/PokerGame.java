@@ -54,8 +54,27 @@ public class PokerGame{
         List<Card> cardList = hand.getCards();
         Card highCard = cardList.get(4);
 
+        if (checkIfFlush(hand)) return "Flush";
 
         return "High Card: " + highCard.toString();
+    }
+
+
+    /**
+     * Checks if the hand is a flush
+     * @return True if hand is a flush - False if hand is not a flush
+     */
+    public boolean checkIfFlush (Hand hand) {
+        String firsCardSuit = hand.getCards().get(0).getSuit();
+        for (int i = 1; i < hand.getHandLength(); i++) {
+            if (hand.getCards().get(i).getSuit().equals(firsCardSuit)) {
+                continue;
+            }
+            else {
+                return false;
+            }
+        }
+        return true;
     }
 
 

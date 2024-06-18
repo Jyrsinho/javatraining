@@ -8,6 +8,12 @@ public class Card implements Comparable<Card> {
     private final int value;
 
 
+    /**
+     * TODO System to check if the cards value and suit are legal.
+     * Constructor for Card
+     * @param suit of a card
+     * @param value of a card
+     */
     public Card(String suit, int value) {
         this.suit = suit;
         this.value = value;

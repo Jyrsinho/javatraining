@@ -2,9 +2,10 @@ package PokerGame;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Iterator;
 import java.util.List;
 
-public class Hand {
+public class Hand implements Iterable<Card> {
 
     ArrayList<Card> cardArrayHand;
     private static final int MAX_CARDS = 5;
@@ -68,6 +69,11 @@ public class Hand {
             hand += ", ";
         }
         return hand;
+    }
+
+    @Override
+    public Iterator<Card> iterator() {
+        return null;
     }
 
     /**

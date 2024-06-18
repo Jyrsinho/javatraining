@@ -36,16 +36,26 @@ public class PokerGameTest {
 
     }
 
-    @Ignore
-    public void testHandShouldBeValuedRoyalFlushIfRoalFlush() throws TooManyElementsException {
+    @Test
+    public void testHandShouldBeValuedFlushIfFlush() throws TooManyElementsException {
         hand.addCardToHand(new Card("diamonds",14));
-        hand.addCardToHand(new Card("diamonds",13));
-        hand.addCardToHand(new Card("diamonds",12));
-        hand.addCardToHand(new Card("diamonds",11));
         hand.addCardToHand(new Card("diamonds",10));
+        hand.addCardToHand(new Card("diamonds",7));
+        hand.addCardToHand(new Card("diamonds",4));
+        hand.addCardToHand(new Card("diamonds",2));
 
-        assertEquals("Royal Flush", game.evaluateHand(hand));
+        assertEquals("Flush", game.evaluateHand(hand));
     }
 
+    @Test
+    public void testHandShouldNotBeValuedWithFlushIfNotAllCarsAreTheSameSuit() throws TooManyElementsException {
+        hand.addCardToHand(new Card("diamonds",14));
+        hand.addCardToHand(new Card("diamonds",10));
+        hand.addCardToHand(new Card("clubs",7));
+        hand.addCardToHand(new Card("diamonds",4));
+        hand.addCardToHand(new Card("diamonds",2));
+
+        assertFalse(game.checkIfFlush(hand));
+    }
 
 }
