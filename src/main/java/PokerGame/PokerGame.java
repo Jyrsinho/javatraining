@@ -35,6 +35,7 @@ public class PokerGame{
      */
     public void initialize() {
         deck = new Deck();
+        deck.shuffle();
     }
 
 

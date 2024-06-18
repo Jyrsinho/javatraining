@@ -94,5 +94,29 @@ public class Deck {
         return amountOfCardsInDeckOfSuit;
     }
 
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder("Deck contains: ");
+        for (int i = 0; i < cards.size(); i++) {
+            sb.append(cards.get(i));
+        }
+        return sb.toString();
+    }
+
+    /**
+     * Test program for the Deck class
+     * @param args
+     */
+    public static void main (String[] args) {
+
+        Deck deck = new Deck();
+        deck.initialize();
+        deck.getCards();
+        System.out.println(deck);
+        deck.sortDeck();
+        System.out.println(deck);
+    }
+
+
     }
 
