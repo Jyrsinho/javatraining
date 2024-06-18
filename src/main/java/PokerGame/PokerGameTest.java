@@ -58,4 +58,26 @@ public class PokerGameTest {
         assertFalse(game.checkIfFlush(hand));
     }
 
+    @Test
+    public void testHandShouldBeValuedStraight() throws TooManyElementsException {
+        hand.addCardToHand(new Card("diamonds",14));
+        hand.addCardToHand(new Card("diamonds",13));
+        hand.addCardToHand(new Card("clubs",12));
+        hand.addCardToHand(new Card("spades",11));
+        hand.addCardToHand(new Card("diamonds",10));
+
+        assertEquals("Straight", game.evaluateHand(hand));
+    }
+
+    @Test
+    public void testHandShouldNotBeValuedStraightIfNotStraight() throws TooManyElementsException {
+        hand.addCardToHand(new Card("diamonds",14));
+        hand.addCardToHand(new Card("diamonds",10));
+        hand.addCardToHand(new Card("clubs",7));
+        hand.addCardToHand(new Card("diamonds",4));
+        hand.addCardToHand(new Card("diamonds",2));
+
+        assertFalse(game.checkIfStraight(hand));
+    }
+
 }

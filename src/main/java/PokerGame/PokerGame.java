@@ -55,6 +55,7 @@ public class PokerGame{
         Card highCard = cardList.get(4);
 
         if (checkIfFlush(hand)) return "Flush";
+        if (checkIfStraight(hand)) return "Straight";
 
         return "High Card: " + highCard.toString();
     }
@@ -77,6 +78,41 @@ public class PokerGame{
         return true;
     }
 
+    /**
+     * Checks if the hand is a straight
+     * @param hand to be checked
+     * @return true if hand is a straight - false if not
+     */
+    public boolean checkIfStraight (Hand hand) {
+        int maxDifference = 1;
+        Card currentCard = hand.getCards().get(0);
 
+        for (int i = 1; i < hand.getHandLength(); i++) {
+            if (hand.getCards().get(i).getValue() - currentCard.getValue() > maxDifference) {
+                return false;
+            }
+            currentCard = hand.getCards().get(i);
+        }
+        return true;
+    }
+
+    /**
+     * Test Class for Poker Game
+     * @param args null
+     */
+    public static void main(String[] args) throws TooManyElementsException {
+
+        PokerGame game = new PokerGame();
+        game.initialize();
+
+        Hand hand = new Hand();
+        hand.addCardToHand(new Card("diamonds",14));
+        hand.addCardToHand(new Card("diamonds",13));
+        hand.addCardToHand(new Card("clubs",12));
+        hand.addCardToHand(new Card("spades",11));
+        hand.addCardToHand(new Card("diamonds",10));
+
+        game.evaluateHand(hand);
+    }
 
 } // end of Poker Class
