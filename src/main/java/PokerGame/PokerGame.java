@@ -1,5 +1,8 @@
 package PokerGame;
 
+import java.lang.reflect.Array;
+import java.util.List;
+
 /**
  * Class that contains all the cards of the game
  */
@@ -30,12 +33,29 @@ public class PokerGame{
         hands = new Hand[AMOUNT_OF_PLAYERS];
     }
 
+
     /**
      * Initializes the Game. Creates a new deck.
      */
     public void initialize() {
         deck = new Deck();
         deck.shuffle();
+    }
+
+
+    /**
+     * Evaluates the hand
+     * @param hand to be evaluated
+     * @return the value of a hand as a String
+     */
+    public String evaluateHand (Hand hand) {
+
+        hand.sortHand();
+        List<Card> cardList = hand.getCards();
+        Card highCard = cardList.get(4);
+
+
+        return "High Card: " + highCard.toString();
     }
 
 

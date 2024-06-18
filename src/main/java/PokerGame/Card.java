@@ -59,6 +59,6 @@ public class Card implements Comparable<Card> {
 
     @Override
     public String toString() {
-        return suit + ":" + value;
+        return value + "of" + suit;
     }
 } // end of Hand Class

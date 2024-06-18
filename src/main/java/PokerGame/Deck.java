@@ -99,6 +99,7 @@ public class Deck {
         StringBuilder sb = new StringBuilder("Deck contains: ");
         for (int i = 0; i < cards.size(); i++) {
             sb.append(cards.get(i));
+            sb.append(" ,");
         }
         return sb.toString();
     }
