@@ -2,8 +2,7 @@ package PokerGame;
 
 import org.junit.Before;
 import org.junit.Test;
-
-import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.Assertions;
 
 public class CardTest {
 
@@ -23,23 +22,23 @@ public class CardTest {
 
     @Test
     public void testConstructorInitializesCorrectly() {
-        assertEquals("hearts", fiveOfHearts.getSuit());
-        assertEquals(5, fiveOfHearts.getValue());
+        Assertions.assertEquals("hearts", fiveOfHearts.getSuit());
+        Assertions.assertEquals(5, fiveOfHearts.getValue());
     }
 
     @Test
     public void testShouldReturnNegativeIntegerWhenComparedToHigherValueCard() {
-        assertTrue(fiveOfHearts.compareTo(tenOfSpades) < 0);
+        Assertions.assertTrue(fiveOfHearts.compareTo(tenOfSpades) < 0);
     }
 
     @Test
     public void testShouldReturnPositiveIntegerWhenComparedToLowerValueCard() {
-        assertTrue(fiveOfHearts.compareTo(twoofClubs) > 0);
+        Assertions.assertTrue(fiveOfHearts.compareTo(twoofClubs) > 0);
     }
 
     @Test
     public void testShouldReturnZeroWhenComparedToEqualValueCard() {
-        assertEquals(0, fiveOfHearts.compareTo(fiveofDiamonds));
+        Assertions.assertEquals(0, fiveOfHearts.compareTo(fiveofDiamonds));
     }
 
     @Test (expected = NullPointerException.class)

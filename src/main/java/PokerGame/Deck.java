@@ -44,6 +44,7 @@ public class Deck {
         cards.add(card);
     }
 
+
     /**
      * Method to get all cards in the deck
      * @return List of all the cards in the deck
@@ -53,7 +54,9 @@ public class Deck {
 
     }
 
-
+    /**
+     * Sorts the deck based on card values
+      */
     public void sortDeck() {
         Collections.sort(cards);
     }
@@ -65,6 +68,11 @@ public class Deck {
      */
     public int getLength() {
         return cards.size();
+    }
+
+
+    public void shuffle() {
+
     }
 
 

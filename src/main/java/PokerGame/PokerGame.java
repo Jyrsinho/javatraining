@@ -6,6 +6,7 @@ package PokerGame;
 
 public class PokerGame{
 
+    private Deck deck;
     private Hand[] hands;
     private final int AMOUNT_OF_PLAYERS = 2;
 
@@ -28,6 +29,14 @@ public class PokerGame{
     public PokerGame() {
         hands = new Hand[AMOUNT_OF_PLAYERS];
     }
+
+    /**
+     * Initializes the Game. Creates a new deck.
+     */
+    public void initialize() {
+        deck = new Deck();
+    }
+
 
 
 } // end of Poker Class

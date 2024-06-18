@@ -1,6 +1,8 @@
 package PokerGame;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 public class Hand {
 
@@ -34,6 +36,24 @@ public class Hand {
         }
         cardArrayHand.add(card);
     }
+
+
+    /**
+     * Method to get all cards in the hand
+     * @return List of all the cards in the hand
+     */
+    public List<Card> getCards() {
+        return cardArrayHand;
+
+    }
+
+    /**
+     * Sorts the hand based on the value of cards.
+     */
+    public void sortHand() {
+        Collections.sort(cardArrayHand);
+    }
+
 
     /**
      * Overriding the toString() method

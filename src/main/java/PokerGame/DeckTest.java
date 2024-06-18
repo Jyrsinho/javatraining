@@ -2,8 +2,8 @@ package PokerGame;
 
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,31 +22,31 @@ public class DeckTest {
 
     @Test
     public void testShouldAddCardToDeck() {
-        assertEquals(0, deck.getLength());
+        Assertions.assertEquals(0, deck.getLength());
 
         Card fiveofHearts = new Card ("hearts", 5);
         deck.addCard(fiveofHearts);
-        assertEquals(1, deck.getLength());
+        Assertions.assertEquals(1, deck.getLength());
 
     }
 
 
     @Test
     public void testDeckShouldInitializeDeckWith52Cards() {
-        assertEquals(0, deck.getLength());
+        Assertions.assertEquals(0, deck.getLength());
 
         deck.initialize();
-        assertEquals(52, deck.getLength());
+        Assertions.assertEquals(52, deck.getLength());
     }
 
 
     @Test
     public void testDeckSuitCounterShouldReturnOneIfDeckHasOneCardOfGivenSuit() {
-        assertEquals(0, deck.suitCounter("hearts"));
+        Assertions.assertEquals(0, deck.suitCounter("hearts"));
 
         Card fiveofHearts = new Card ("hearts", 5);
         deck.addCard(fiveofHearts);
-        assertEquals(1, deck.suitCounter("hearts"));
+        Assertions.assertEquals(1, deck.suitCounter("hearts"));
 
     }
 
@@ -54,13 +54,13 @@ public class DeckTest {
     @Test
     public void testDeckShouldInitializeDeckWith13Hearts() {
         deck.initialize();
-        assertEquals(13,deck.suitCounter("hearts"));
+        Assertions.assertEquals(13,deck.suitCounter("hearts"));
     }
 
     @Test
     public void testDeckShouldInitializeDeckWith13Spades() {
         deck.initialize();
-        assertEquals(13,deck.suitCounter("spades"));
+        Assertions.assertEquals(13,deck.suitCounter("spades"));
     }
 
     @Test
@@ -78,6 +78,6 @@ public class DeckTest {
         expectedOrder.add(new Card("Clubs", 10));
         expectedOrder.add(new Card("Diamonds", 14));
 
-        assertEquals(expectedOrder, sortedCards);
+        Assertions.assertEquals(expectedOrder, sortedCards);
     }
 }

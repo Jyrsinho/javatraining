@@ -3,7 +3,9 @@ module org.example.javaharjoituksia {
     requires javafx.controls;
     requires javafx.fxml;
     requires junit;
+    requires org.junit.jupiter.api;
 
 
-    opens org.example.javaharjoituksia to javafx.fxml;
 }
+
+
