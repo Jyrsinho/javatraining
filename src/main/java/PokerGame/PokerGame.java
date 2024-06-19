@@ -53,6 +53,7 @@ public class PokerGame{
         hand.sortHand();
         List<Card> cardList = hand.getCards();
         Card highCard = cardList.get(4);
+        int [] valueHistogram = createValueHistogramForHand(hand);
 
         for (int i = 0; i < hand.getHandLength(); i++) {
             for (int j = i+1; j < hand.getHandLength(); j++) {
@@ -65,6 +66,28 @@ public class PokerGame{
 
 
         return "High Card: " + highCard.toString();
+    }
+
+    /**
+     * Creates a histogram filled with the amount of cards of a certain value found in a hand that is evaluated
+     * @return int array histogram filled with the amount of cards of a certain value found in a hand that is evaluated
+     */
+    public int [] createValueHistogramForHand(Hand hand) {
+
+        // INDICES      0  1  2  3  4  5  6  7   8   9  10  11  12
+        // CARD VALUES  2  3  4  5  6  7  8  9  10  11  12  13  14
+
+        int [] cardValueHistogram = new int[15];
+        List<Card> cardList = hand.getCards();
+
+        for (int i = 0; i < cardValueHistogram.length; i++) {
+            for (int j = 0; j < cardList.size(); j++) {
+                if (cardList.get(j).getValue() == i) {
+                    cardValueHistogram[i]++;
+                }
+            }
+            }
+        return cardValueHistogram;
     }
 
 
