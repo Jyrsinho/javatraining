@@ -97,6 +97,7 @@ public class PokerGame{
         List<Card> cardList = hand.getCards();
         Card highCard = cardList.get(4);
 
+        if (checkIfStraight(hand) && checkIfFlush(hand) && highCard.getValue() ==14) return "Royal Flush";
         if (checkIfStraight(hand) && checkIfFlush(hand)) return "Straight Flush";
         if (checkIfStraight(hand)) return "Straight";
         if (checkIfFlush(hand)) return "Flush";
