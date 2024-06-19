@@ -160,4 +160,16 @@ public class PokerGameTest {
 
         assertEquals("Royal Flush", game.evaluateHand(hand));
     }
+
+    @Test
+    public void testShouldReturnTrueIfHandHasAtLeastOnePair() throws TooManyElementsException {
+        int [] histogram = {0,0,0,0,4,};
+        assertEquals(true, game.checkIfHandIsPaired(histogram));
+    }
+
+    @Test
+    public void testShouldReturnFalseIfHandHasNoPair() throws  TooManyElementsException {
+        int [] histogram = {0,0,1,1,1,1,1};
+        assertEquals(false, game.checkIfHandIsPaired(histogram));
+    }
 }

@@ -50,10 +50,24 @@ public class PokerGame{
      */
     public String evaluateHand (Hand hand) {
 
-        hand.sortHand();
-        List<Card> cardList = hand.getCards();
-        Card highCard = cardList.get(4);
-        int [] valueHistogram = createValueHistogramForHand(hand);
+        int[] valueHistogram = createValueHistogramForHand(hand);
+        boolean isPaired = checkIfHandIsPaired(valueHistogram);
+
+        if (isPaired) {
+            return evaluatePairedHand(valueHistogram);
+        }
+        else {
+            return evaluateHandWithoutAPair(hand);
+        }
+
+    }
+
+    /**
+     * evaluates a hand that has a pair
+     * @param valueHistogram array of integers where cards of a hand are organized according to their values.
+     * @return value of a hand.
+     */
+    public String evaluatePairedHand(int [] valueHistogram) {
         int amountOfPairs = 0;
         boolean threeOfAKind = false;
         boolean fourOfAKind = false;
@@ -64,19 +78,43 @@ public class PokerGame{
             else if (valueHistogram[i] == 3) threeOfAKind = true;
             else if (valueHistogram[i] == 4) fourOfAKind = true;
         }
-        if (amountOfPairs > 0 || threeOfAKind || fourOfAKind) {
-            if (fourOfAKind) return "Four of a Kind";
-            if ((threeOfAKind) && (amountOfPairs == 1)) return "Full House";
-            if (threeOfAKind) return "Three of a Kind";
-            if (amountOfPairs == 1) return "One Pair";
-            if (amountOfPairs == 2) return "Two Pair";
+        if (fourOfAKind) return "Four of a Kind";
+        if ((threeOfAKind) && (amountOfPairs == 1)) return "Full House";
+        if (threeOfAKind) return "Three of a Kind";
+        if (amountOfPairs == 1) return "One Pair";
+        if (amountOfPairs == 2) return "Two Pair";
+        return "-1";
+    }
+
+
+    /**
+     * evaluates a hand without a pair
+     * @param hand to be evaluated
+     * @return value of the hand
+     */
+    public String evaluateHandWithoutAPair(Hand hand) {
+        hand.sortHand();
+        List<Card> cardList = hand.getCards();
+        Card highCard = cardList.get(4);
+
+        if (checkIfStraight(hand) && checkIfFlush(hand)) return "Straight Flush";
+        if (checkIfStraight(hand)) return "Straight";
+        if (checkIfFlush(hand)) return "Flush";
+
+        return ("High Card: " + highCard);
+
+    }
+    /**
+     * Checks whether the hand has more than one card with same value
+     * @param valueHistogram
+     * @return true if hand has at least one pair, false if all cards in the hand are of different value
+     */
+    public boolean checkIfHandIsPaired(int [] valueHistogram) {
+
+        for (int i = 0; i < valueHistogram.length; i++) {
+            if (valueHistogram[i] > 1) return true;
         }
-        else
-        if (checkIfStraight(hand)) handValue.append("Straight");
-        if (checkIfFlush(hand)) handValue.append("Flush");
-
-
-        return "High Card: " + highCard.toString();
+        return false;
     }
 
     /**
