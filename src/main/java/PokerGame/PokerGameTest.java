@@ -127,7 +127,7 @@ public class PokerGameTest {
     }
 
 
-    @Ignore
+    @Test
     public void testEvaluateShouldReturnTwoPairIfHandContainsTwoPairs() throws TooManyElementsException {
         hand.addCardToHand(new Card("diamonds", 14));
         hand.addCardToHand(new Card("diamonds", 10));
@@ -137,5 +137,27 @@ public class PokerGameTest {
 
         assertEquals("Two Pair", game.evaluateHand(hand));
 
+    }
+
+    @Test
+    public void testEvaluateShouldReturnStraightFlush()throws TooManyElementsException {
+        hand.addCardToHand(new Card("diamonds", 10));
+        hand.addCardToHand(new Card("diamonds", 9));
+        hand.addCardToHand(new Card("diamonds", 8));
+        hand.addCardToHand(new Card("diamonds", 7));
+        hand.addCardToHand(new Card("diamonds", 6));
+
+        assertEquals("Straight Flush", game.evaluateHand(hand));
+    }
+
+    @Ignore
+    public void testEvaluateShouldReturnRoyalFlush()throws TooManyElementsException {
+        hand.addCardToHand(new Card("diamonds", 10));
+        hand.addCardToHand(new Card("diamonds", 9));
+        hand.addCardToHand(new Card("diamonds", 8));
+        hand.addCardToHand(new Card("diamonds", 7));
+        hand.addCardToHand(new Card("diamonds", 6));
+
+        assertEquals("Royal Flush", game.evaluateHand(hand));
     }
 }
