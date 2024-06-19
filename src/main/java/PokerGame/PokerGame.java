@@ -54,13 +54,20 @@ public class PokerGame{
         List<Card> cardList = hand.getCards();
         Card highCard = cardList.get(4);
         int [] valueHistogram = createValueHistogramForHand(hand);
+        int amountOfPairs = 0;
+        boolean threeOfAKind = false;
+        boolean fourOfAKind = false;
 
-        for (int i = 0; i < hand.getHandLength(); i++) {
-            for (int j = i+1; j < hand.getHandLength(); j++) {
-                if (cardList.get(i).getValue() == cardList.get(j).getValue()) return "One Pair";
-            }
+        for (int i = 0; i < valueHistogram.length; i++) {
+            if (valueHistogram[i] == 2) amountOfPairs++;
+            else if (valueHistogram[i] == 3) threeOfAKind = true;
+            else if (valueHistogram[i] == 4) fourOfAKind = true;
         }
-
+        if (fourOfAKind) return "Four of a Kind";
+        if ((threeOfAKind) && (amountOfPairs == 1)) return "Full House";
+        if (threeOfAKind) return "Three of a Kind";
+        if (amountOfPairs == 1) return "One Pair";
+        if (amountOfPairs == 2) return "Two Pair";
         if (checkIfFlush(hand)) return "Flush";
         if (checkIfStraight(hand)) return "Straight";
 
