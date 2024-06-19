@@ -57,19 +57,23 @@ public class PokerGame{
         int amountOfPairs = 0;
         boolean threeOfAKind = false;
         boolean fourOfAKind = false;
+        StringBuilder handValue = new StringBuilder();
 
         for (int i = 0; i < valueHistogram.length; i++) {
             if (valueHistogram[i] == 2) amountOfPairs++;
             else if (valueHistogram[i] == 3) threeOfAKind = true;
             else if (valueHistogram[i] == 4) fourOfAKind = true;
         }
-        if (fourOfAKind) return "Four of a Kind";
-        if ((threeOfAKind) && (amountOfPairs == 1)) return "Full House";
-        if (threeOfAKind) return "Three of a Kind";
-        if (amountOfPairs == 1) return "One Pair";
-        if (amountOfPairs == 2) return "Two Pair";
-        if (checkIfFlush(hand)) return "Flush";
-        if (checkIfStraight(hand)) return "Straight";
+        if (amountOfPairs > 0 || threeOfAKind || fourOfAKind) {
+            if (fourOfAKind) return "Four of a Kind";
+            if ((threeOfAKind) && (amountOfPairs == 1)) return "Full House";
+            if (threeOfAKind) return "Three of a Kind";
+            if (amountOfPairs == 1) return "One Pair";
+            if (amountOfPairs == 2) return "Two Pair";
+        }
+        else
+        if (checkIfStraight(hand)) handValue.append("Straight");
+        if (checkIfFlush(hand)) handValue.append("Flush");
 
 
         return "High Card: " + highCard.toString();
