@@ -54,8 +54,15 @@ public class PokerGame{
         List<Card> cardList = hand.getCards();
         Card highCard = cardList.get(4);
 
+        for (int i = 0; i < hand.getHandLength(); i++) {
+            for (int j = i+1; j < hand.getHandLength(); j++) {
+                if (cardList.get(i).getValue() == cardList.get(j).getValue()) return "One Pair";
+            }
+        }
+
         if (checkIfFlush(hand)) return "Flush";
         if (checkIfStraight(hand)) return "Straight";
+
 
         return "High Card: " + highCard.toString();
     }
@@ -86,9 +93,12 @@ public class PokerGame{
     public boolean checkIfStraight (Hand hand) {
         int maxDifference = 1;
         Card currentCard = hand.getCards().get(0);
+        Card nextCard;
 
         for (int i = 1; i < hand.getHandLength(); i++) {
-            if (hand.getCards().get(i).getValue() - currentCard.getValue() > maxDifference) {
+            nextCard = hand.getCards().get(i);
+            if (Math.abs(currentCard.getValue() - nextCard.getValue()) > maxDifference)
+            {
                 return false;
             }
             currentCard = hand.getCards().get(i);
@@ -108,11 +118,12 @@ public class PokerGame{
         Hand hand = new Hand();
         hand.addCardToHand(new Card("diamonds",14));
         hand.addCardToHand(new Card("diamonds",13));
-        hand.addCardToHand(new Card("clubs",12));
+        hand.addCardToHand(new Card("clubs",7));
         hand.addCardToHand(new Card("spades",11));
         hand.addCardToHand(new Card("diamonds",10));
 
         game.evaluateHand(hand);
+        game.checkIfStraight(hand);
     }
 
 } // end of Poker Class

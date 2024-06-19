@@ -1,15 +1,11 @@
 package PokerGame;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
 
-import java.util.ArrayList;
-import java.util.List;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 
 public class PokerGameTest {
 
@@ -78,6 +74,17 @@ public class PokerGameTest {
         hand.addCardToHand(new Card("diamonds",2));
 
         assertFalse(game.checkIfStraight(hand));
+    }
+
+    @Test
+    public void testEvaluateShouldReturnAPairIfHandContainsAPair() throws TooManyElementsException {
+        hand.addCardToHand(new Card("diamonds",14));
+        hand.addCardToHand(new Card("diamonds",10));
+        hand.addCardToHand(new Card("clubs",14));
+        hand.addCardToHand(new Card("spades",4));
+        hand.addCardToHand(new Card("hearts",2));
+
+        assertEquals("One Pair", game.evaluateHand(hand));
     }
 
 }
