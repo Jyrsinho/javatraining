@@ -49,6 +49,14 @@ private String value;
         return this.color;
     }
 
+    /**
+     * getter for players hands value
+     * @return players hands evaluation
+     */
+    public String getHandValue() {
+       return hand.getHandValue();
+    }
+
     public String toString() {
         return "Player name:" + getName() + "- Player color: " + getColor();
 

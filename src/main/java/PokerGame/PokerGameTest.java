@@ -206,8 +206,21 @@ public class PokerGameTest {
         assertEquals("One Pair", hand2.getHandValue());
     }
 
+    @Test
+    public void testShouldReturnCorrectIndexValueForHandValue() {
+        assertEquals(0, game.getNumericalValueForHandValue("Royal Flush"));
+        assertEquals(1, game.getNumericalValueForHandValue("Straight Flush"));
+        assertEquals(2, game.getNumericalValueForHandValue("Four of a Kind"));
+        assertEquals(3, game.getNumericalValueForHandValue("Full House"));
+        assertEquals(4, game.getNumericalValueForHandValue("Flush"));
+        assertEquals(5, game.getNumericalValueForHandValue("Straight"));
+        assertEquals(6, game.getNumericalValueForHandValue("Three of a Kind"));
+        assertEquals(7, game.getNumericalValueForHandValue("Two Pair"));
+        assertEquals(8, game.getNumericalValueForHandValue("One Pair"));
+        assertEquals(9, game.getNumericalValueForHandValue("High Card"));
+    }
 
-    //TODO COMPARING HANDS
+
     @Ignore
     public void testShouldDeclareHandWithRoyalFlushWinnerOverHandWithPair() throws TooManyElementsException {
         hand.addCardToHand(new Card("diamonds", 14));
@@ -223,6 +236,24 @@ public class PokerGameTest {
         hand2.addCardToHand(new Card("clubs", 10));
 
 
-        assertEquals("Player One", game.findOutWinner());
+        assertEquals("playerOne", game.findOutWinner());
+    }
+
+    @Ignore
+    public void testShouldDeclareHandWithThreeOfAKindWinnerOverHandWithOnePair() throws TooManyElementsException{
+        hand.addCardToHand(new Card("diamonds", 14));
+        hand.addCardToHand(new Card("clubs", 13));
+        hand.addCardToHand(new Card("diamonds", 12));
+        hand.addCardToHand(new Card("clubs", 9));
+        hand.addCardToHand(new Card("diamonds", 9));
+
+        hand2.addCardToHand(new Card("diamonds", 10));
+        hand2.addCardToHand(new Card("clubs", 13));
+        hand2.addCardToHand(new Card("clubs", 12));
+        hand2.addCardToHand(new Card("spades", 10));
+        hand2.addCardToHand(new Card("clubs", 10));
+
+
+        assertEquals("playerTwo", game.findOutWinner());
     }
 }

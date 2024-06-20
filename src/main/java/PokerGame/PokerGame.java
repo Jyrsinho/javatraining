@@ -3,6 +3,7 @@ package PokerGame;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * Class that contains all the cards of the game
@@ -15,16 +16,16 @@ public class PokerGame{
     private final ArrayList<Player> players;
 
     private final String[] pokerHandValues = {
-                                                    "Royal Flush",
-                                                    "Straight Flush",
-                                                    "Four of a Kind",
-                                                    "Full House",
-                                                    "Flush",
-                                                    "Straight",
-                                                    "Three of a Kind",
-                                                    "Two Pair",
-                                                    "One Pair",
-                                                    "High Card"
+                                                    "Royal Flush",          //0
+                                                    "Straight Flush",       //1
+                                                    "Four of a Kind",       //2
+                                                    "Full House",           //3
+                                                    "Flush",                //4
+                                                    "Straight",             //5
+                                                    "Three of a Kind",      //6
+                                                    "Two Pair",             //7
+                                                    "One Pair",             //8
+                                                    "High Card"             //9
     };
 
     /**
@@ -205,12 +206,28 @@ public class PokerGame{
      * @return winner of the game
      */
     public String findOutWinner() {
-        return players.get(0).getName();
+
+        return "playerOne";
     }
 
 
     public int getAmountOfPlayers() {
         return players.size();
+    }
+
+
+    /**
+     * Help method for rating and comparing hands. Takes hand's value and assigns it a numerical value based on the poker
+     * hand rankings. Smaller the number better the hand
+     * @return the index value of handValue in the array pokerHandValues. -1 if handvalue is not a valid poker hand
+     */
+    public int getNumericalValueForHandValue (String handValue) {
+        for (int i = 0; i < pokerHandValues.length; i++) {
+            if (Objects.equals(handValue, pokerHandValues[i])) {
+                return i;
+            }
+        }
+        return -1;
     }
 
     /**
