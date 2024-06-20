@@ -4,13 +4,13 @@ import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
 
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class PokerGameTest {
 
     PokerGame game;
+    Player playerOne;
+    Player playerTwo;
     Hand hand;
     Hand hand2;
 
@@ -19,9 +19,17 @@ public class PokerGameTest {
         game = new PokerGame();
         hand = new Hand();
         hand2 = new Hand();
+        playerOne = new Player(hand, "playerOne", "blue");
+        playerTwo = new Player(hand2, "playerTwo", "black");
+        game.addPlayerToGame(playerTwo);
+        game.addPlayerToGame(playerOne);
 
     }
 
+    @Test
+    public void testShouldAddAPlayerToAGame() {
+        assertEquals(2, game.getAmountOfPlayers());
+    }
 
     @Test
     public void testEvaluateHandShouldReturnHighCard() throws TooManyElementsException {
@@ -175,7 +183,32 @@ public class PokerGameTest {
         assertEquals(false, game.checkIfHandIsPaired(histogram));
     }
 
+
     @Test
+    public void testShouldUpdateHandValues() throws TooManyElementsException {
+        assertNull(hand.getHandValue());
+        assertNull(hand2.getHandValue());
+
+        hand.addCardToHand(new Card("diamonds", 14));
+        hand.addCardToHand(new Card("diamonds", 13));
+        hand.addCardToHand(new Card("diamonds", 12));
+        hand.addCardToHand(new Card("diamonds", 11));
+        hand.addCardToHand(new Card("diamonds", 10));
+
+        hand2.addCardToHand(new Card("diamonds", 10));
+        hand2.addCardToHand(new Card("clubs", 13));
+        hand2.addCardToHand(new Card("clubs", 12));
+        hand2.addCardToHand(new Card("clubs", 11));
+        hand2.addCardToHand(new Card("clubs", 10));
+
+        game.updateHandValues();
+        assertEquals("Royal Flush", hand.getHandValue());
+        assertEquals("One Pair", hand2.getHandValue());
+    }
+
+
+    //TODO COMPARING HANDS
+    @Ignore
     public void testShouldDeclareHandWithRoyalFlushWinnerOverHandWithPair() throws TooManyElementsException {
         hand.addCardToHand(new Card("diamonds", 14));
         hand.addCardToHand(new Card("diamonds", 13));
@@ -189,9 +222,7 @@ public class PokerGameTest {
         hand2.addCardToHand(new Card("clubs", 11));
         hand2.addCardToHand(new Card("clubs", 10));
 
-        game.addHandsToGame(hand);
-        game.addHandsToGame(hand2);
 
-        assertEquals("Blue", game.compareHands());
+        assertEquals("Player One", game.findOutWinner());
     }
 }

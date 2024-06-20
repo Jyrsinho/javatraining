@@ -1,6 +1,7 @@
 package PokerGame;
 
 import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -11,7 +12,7 @@ public class PokerGame{
 
     private Deck deck;
     private final int AMOUNT_OF_PLAYERS = 2;
-    private Player[] players;
+    private final ArrayList<Player> players;
 
     private final String[] pokerHandValues = {
                                                     "Royal Flush",
@@ -30,7 +31,7 @@ public class PokerGame{
      * Constructor for the PokerGame
      */
     public PokerGame() {
-        players = new Player[AMOUNT_OF_PLAYERS];
+        players = new ArrayList<>();
     }
 
 
@@ -40,18 +41,30 @@ public class PokerGame{
     public void initialize() {
         deck = new Deck();
         deck.shuffle();
+
         //deck.deal();
     }
 
     /**
-     * Adds players to a game's array of players
-     * TODO : NOT WORKING
+     * adds a Player to a game
      * @param player to be added
      */
-    public void addPlayersToGame(Player player) {
-        players[0] = player;
-}
+    public void addPlayerToGame(Player player) {
+        players.add(player);
+    }
 
+
+    /**
+     * updates the hand values of all the players in the game
+     */
+    public void updateHandValues() {
+        String handValue;
+        for (int i = 0; i < players.size(); i++) {
+            handValue = evaluateHand(players.get(i).getHand());
+            players.get(i).updateHandValue(handValue);
+
+        }
+    }
 
     /**
      * Evaluates the hand
@@ -187,8 +200,18 @@ public class PokerGame{
         return true;
     }
 
+    /**
+     * Finds out the winner of the game
+     * @return winner of the game
+     */
+    public String findOutWinner() {
+        return players.get(0).getName();
+    }
 
 
+    public int getAmountOfPlayers() {
+        return players.size();
+    }
 
     /**
      * Test Class for Poker Game
