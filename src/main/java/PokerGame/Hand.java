@@ -9,6 +9,7 @@ public class Hand implements Iterable<Card> {
 
     ArrayList<Card> cardArrayHand;
     private static final int MAX_CARDS = 5;
+    private String color;
 
 
     /**
@@ -25,6 +26,14 @@ public class Hand implements Iterable<Card> {
      */
     public int getHandLength() {
         return cardArrayHand.size();
+    }
+
+    /**
+     * Getter for color
+     * @return the colour of the hand
+     */
+    public String getColor () {
+        return this.color;
     }
 
 

@@ -12,11 +12,13 @@ public class PokerGameTest {
 
     PokerGame game;
     Hand hand;
+    Hand hand2;
 
     @Before
     public void setUp() {
         game = new PokerGame();
         hand = new Hand();
+        hand2 = new Hand();
 
     }
 
@@ -171,5 +173,25 @@ public class PokerGameTest {
     public void testShouldReturnFalseIfHandHasNoPair() throws  TooManyElementsException {
         int [] histogram = {0,0,1,1,1,1,1};
         assertEquals(false, game.checkIfHandIsPaired(histogram));
+    }
+
+    @Test
+    public void testShouldDeclareHandWithRoyalFlushWinnerOverHandWithPair() throws TooManyElementsException {
+        hand.addCardToHand(new Card("diamonds", 14));
+        hand.addCardToHand(new Card("diamonds", 13));
+        hand.addCardToHand(new Card("diamonds", 12));
+        hand.addCardToHand(new Card("diamonds", 11));
+        hand.addCardToHand(new Card("diamonds", 10));
+
+        hand2.addCardToHand(new Card("diamonds", 10));
+        hand2.addCardToHand(new Card("clubs", 13));
+        hand2.addCardToHand(new Card("clubs", 12));
+        hand2.addCardToHand(new Card("clubs", 11));
+        hand2.addCardToHand(new Card("clubs", 10));
+
+        game.addHandsToGame(hand);
+        game.addHandsToGame(hand2);
+
+        assertEquals("Blue", game.compareHands());
     }
 }
