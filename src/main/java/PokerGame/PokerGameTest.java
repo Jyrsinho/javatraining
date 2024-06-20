@@ -208,20 +208,21 @@ public class PokerGameTest {
 
     @Test
     public void testShouldReturnCorrectIndexValueForHandValue() {
-        assertEquals(0, game.getNumericalValueForHandValue("Royal Flush"));
-        assertEquals(1, game.getNumericalValueForHandValue("Straight Flush"));
-        assertEquals(2, game.getNumericalValueForHandValue("Four of a Kind"));
-        assertEquals(3, game.getNumericalValueForHandValue("Full House"));
-        assertEquals(4, game.getNumericalValueForHandValue("Flush"));
-        assertEquals(5, game.getNumericalValueForHandValue("Straight"));
-        assertEquals(6, game.getNumericalValueForHandValue("Three of a Kind"));
-        assertEquals(7, game.getNumericalValueForHandValue("Two Pair"));
-        assertEquals(8, game.getNumericalValueForHandValue("One Pair"));
-        assertEquals(9, game.getNumericalValueForHandValue("High Card"));
+        assertEquals(0, game.getIndexValueForHandValue("Royal Flush"));
+        assertEquals(1, game.getIndexValueForHandValue("Straight Flush"));
+        assertEquals(2, game.getIndexValueForHandValue("Four of a Kind"));
+        assertEquals(3, game.getIndexValueForHandValue("Full House"));
+        assertEquals(4, game.getIndexValueForHandValue("Flush"));
+        assertEquals(5, game.getIndexValueForHandValue("Straight"));
+        assertEquals(6, game.getIndexValueForHandValue("Three of a Kind"));
+        assertEquals(7, game.getIndexValueForHandValue("Two Pair"));
+        assertEquals(8, game.getIndexValueForHandValue("One Pair"));
+        assertEquals(9, game.getIndexValueForHandValue("High Card"));
+        assertEquals(-1, game.getIndexValueForHandValue("Banaani"));
     }
 
 
-    @Ignore
+    @Test
     public void testShouldDeclareHandWithRoyalFlushWinnerOverHandWithPair() throws TooManyElementsException {
         hand.addCardToHand(new Card("diamonds", 14));
         hand.addCardToHand(new Card("diamonds", 13));
@@ -235,11 +236,17 @@ public class PokerGameTest {
         hand2.addCardToHand(new Card("clubs", 11));
         hand2.addCardToHand(new Card("clubs", 10));
 
+        game.updateHandValues();
+
+        System.out.println("Player One Hand: " + hand.getCards());
+        System.out.println("Player One Hand Value: " + playerOne.getHandValue());
+        System.out.println("Player Two Hand: " + hand2.getCards());
+        System.out.println("Player Two Hand Value: " + playerTwo.getHandValue());
 
         assertEquals("playerOne", game.findOutWinner());
     }
 
-    @Ignore
+    @Test
     public void testShouldDeclareHandWithThreeOfAKindWinnerOverHandWithOnePair() throws TooManyElementsException{
         hand.addCardToHand(new Card("diamonds", 14));
         hand.addCardToHand(new Card("clubs", 13));
@@ -253,7 +260,15 @@ public class PokerGameTest {
         hand2.addCardToHand(new Card("spades", 10));
         hand2.addCardToHand(new Card("clubs", 10));
 
+        game.updateHandValues();
+
+        System.out.println("Player One Hand: " + hand.getCards());
+        System.out.println("Player One Hand Value: " + playerOne.getHandValue());
+        System.out.println("Player Two Hand: " + hand2.getCards());
+        System.out.println("Player Two Hand Value: " + playerTwo.getHandValue());
 
         assertEquals("playerTwo", game.findOutWinner());
     }
+
+
 }

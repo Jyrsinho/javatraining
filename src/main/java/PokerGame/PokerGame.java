@@ -207,7 +207,9 @@ public class PokerGame{
      */
     public String findOutWinner() {
 
-        return "playerOne";
+        if (getIndexValueForHandValue(players.get(0).getHandValue()) < getIndexValueForHandValue(players.get(1).getHandValue())) return players.get(0).getName();
+        else return players.get(1).getName();
+
     }
 
 
@@ -221,7 +223,7 @@ public class PokerGame{
      * hand rankings. Smaller the number better the hand
      * @return the index value of handValue in the array pokerHandValues. -1 if handvalue is not a valid poker hand
      */
-    public int getNumericalValueForHandValue (String handValue) {
+    public int getIndexValueForHandValue (String handValue) {
         for (int i = 0; i < pokerHandValues.length; i++) {
             if (Objects.equals(handValue, pokerHandValues[i])) {
                 return i;
@@ -240,23 +242,29 @@ public class PokerGame{
         game.initialize();
 
         Hand hand1 = new Hand();
-        hand1.addCardToHand(new Card("diamonds",14));
-        hand1.addCardToHand(new Card("diamonds",13));
-        hand1.addCardToHand(new Card("clubs",7));
-        hand1.addCardToHand(new Card("spades",11));
-        hand1.addCardToHand(new Card("diamonds",10));
+        hand1.addCardToHand(new Card("diamonds", 14));
+        hand1.addCardToHand(new Card("diamonds", 13));
+        hand1.addCardToHand(new Card("diamonds", 12));
+        hand1.addCardToHand(new Card("diamonds", 11));
+        hand1.addCardToHand(new Card("diamonds", 10));
 
-        System.out.println(game.evaluateHand(hand1));
+        Player playerOne = new Player(hand1,"playerOne", "blue");
 
         Hand hand2 = new Hand();
-        hand2.addCardToHand(new Card("diamonds",14));
-        hand2.addCardToHand(new Card("diamonds",13));
-        hand2.addCardToHand(new Card("diamonds",7));
-        hand2.addCardToHand(new Card("diamonds",11));
-        hand2.addCardToHand(new Card("diamonds",10));
+        hand2.addCardToHand(new Card("diamonds", 10));
+        hand2.addCardToHand(new Card("clubs", 13));
+        hand2.addCardToHand(new Card("clubs", 12));
+        hand2.addCardToHand(new Card("clubs", 11));
+        hand2.addCardToHand(new Card("clubs", 10));
 
+        Player playerTwo = new Player(hand2, "playerTwo", "black");
 
-        System.out.println(game.evaluateHand(hand2));
+        game.addPlayerToGame(playerOne);
+        game.addPlayerToGame(playerTwo);
+
+        game.updateHandValues();
+
+        System.out.println(game.findOutWinner());
 
 
     }
