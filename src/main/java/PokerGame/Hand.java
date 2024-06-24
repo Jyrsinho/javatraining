@@ -10,6 +10,8 @@ public class Hand implements Iterable<Card> {
     ArrayList<Card> cardArrayHand;
     private static final int MAX_CARDS = 5;
     private String value;
+    private int rankingValue;
+    boolean isPaired = false;
 
 
     /**
@@ -18,14 +20,20 @@ public class Hand implements Iterable<Card> {
     public Hand() {
         cardArrayHand = new ArrayList<>();
         value = null;
+        rankingValue = -1;
     }
 
 
     /**
      * updates the hand's value
      */
-    public void updateHandValue(String value) {
+    public void updateHandValue(String value, int rankingValue) {
         this.value = value;
+        this.rankingValue = rankingValue;
+    }
+
+    public void updateHandValue(boolean isPaired) {
+        this.isPaired = true;
     }
 
     /**
@@ -43,6 +51,14 @@ public class Hand implements Iterable<Card> {
      */
     public String getHandValue() {
         return this.value;
+    }
+
+    /**
+     * returns the ranking value of the hand as it stands in the pokerHandValues array
+     * @return the ranking value of the hand as it stands in the pokerHandValues array
+     */
+    public int getRankingValue() {
+        return this.rankingValue;
     }
 
 
@@ -109,4 +125,6 @@ public class Hand implements Iterable<Card> {
         System.out.println(hand);
 
     }
+
+
 }

@@ -2,6 +2,7 @@ package PokerGame;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Objects;
 
@@ -60,9 +61,11 @@ public class PokerGame{
      */
     public void updateHandValues() {
         String handValue;
+        int handRankingValue;
         for (int i = 0; i < players.size(); i++) {
             handValue = evaluateHand(players.get(i).getHand());
-            players.get(i).updateHandValue(handValue);
+            handRankingValue = getIndexValueForHandValue(handValue);
+            players.get(i).updateHandValue(handValue, handRankingValue);
 
         }
     }
@@ -78,6 +81,7 @@ public class PokerGame{
         boolean isPaired = checkIfHandIsPaired(valueHistogram);
 
         if (isPaired) {
+            hand.updateHandValue(isPaired);
             return evaluatePairedHand(valueHistogram);
         }
         else {
@@ -124,7 +128,7 @@ public class PokerGame{
         if (checkIfStraight(hand)) return "Straight";
         if (checkIfFlush(hand)) return "Flush";
 
-        return ("High Card: " + highCard);
+        return ("High Card");
 
     }
     /**
@@ -207,12 +211,83 @@ public class PokerGame{
      */
     public String findOutWinner() {
 
-        if (getIndexValueForHandValue(players.get(0).getHandValue()) < getIndexValueForHandValue(players.get(1).getHandValue())) return players.get(0).getName();
-        else return players.get(1).getName();
+        ArrayList<Player> listOfPotentialWinners = new ArrayList<>();
+        int bestIndexValue = players.getFirst().getHandRankingValue();
+        listOfPotentialWinners.add(players.getFirst());
 
+
+        for (int i = 1; i < players.size(); i++) {
+            if (players.get(i).getHandRankingValue() < bestIndexValue) {
+                listOfPotentialWinners.add(players.get(i));
+                listOfPotentialWinners.removeFirst();
+            }
+            else if (players.get((i)).getHandRankingValue() == bestIndexValue) {
+                listOfPotentialWinners.add(players.get(i));
+            }
+        }
+
+        if (listOfPotentialWinners.size() == 1) {
+            return listOfPotentialWinners.get(0).getName();
+        }
+        else return tiebreaker(listOfPotentialWinners);
     }
 
 
+
+    /**
+     * Finds out the winner in case that the hands same basic value and are separated only by their high card.
+     * TODO right now only works with hands that do not pair.
+     * @return winner's name
+     */
+    public String tiebreaker(ArrayList<Player> listOfPotentialWinners) {
+
+        boolean winningHandIsPaired = listOfPotentialWinners.get(0).getHand().isPaired;
+
+        if (winningHandIsPaired) {
+           return tiebreakerForPairedHands(listOfPotentialWinners);
+        }
+        else return tiebreakerForNonPairedHands(listOfPotentialWinners);
+    }
+
+    /**
+     * Checks which of potential winners has the best hand in case that the winning hand is not pairing one
+     * and there are several players with same valued hand.
+     * @param listOfPotentialWinners arraylist containing all the players that have the potential winning hand
+     * @return winner/winners
+     */
+    public String tiebreakerForNonPairedHands(ArrayList<Player> listOfPotentialWinners) {
+        String winner = listOfPotentialWinners.get(0).getName();
+
+        for (int i = 0; i < listOfPotentialWinners.size()-1; i++) {         // Go through all the players
+            for (int j = 4; j >= 0; j--) {                                   // Go throuhg all the cards
+                if (listOfPotentialWinners.get(i+1).getHand().getCards().get(j).getValue() > listOfPotentialWinners.get(i).getHand().getCards().get(j).getValue()) {
+                    winner = listOfPotentialWinners.get(i+1).getName();
+                    break;
+            }
+            }
+        }
+
+        return winner;
+    }
+
+
+    /**
+     * Checks which of potential winners has the best hand in case that the winning hand is pairing one
+     * and there are several players with same winning pair or two pair.
+     * @param listOfPotentialWinners
+     * @return
+     */
+    public String tiebreakerForPairedHands(ArrayList <Player> listOfPotentialWinners) {
+
+
+        return listOfPotentialWinners.get(0).getName();
+    }
+
+
+    /**
+     * returns the amount of players in the game
+     * @return amount of players in the game
+     */
     public int getAmountOfPlayers() {
         return players.size();
     }

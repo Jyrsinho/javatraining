@@ -89,9 +89,5 @@ public class HandTest {
 
         Assertions.assertEquals(expectedOrder, sortedHand);
 
-
-
-
-
     }
 }

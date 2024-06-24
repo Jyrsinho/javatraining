@@ -24,8 +24,8 @@ private String value;
      * updates player's hand's value
      * @param handValue new value for players hand
      */
-    public void updateHandValue(String handValue) {
-        this.hand.updateHandValue(handValue);
+    public void updateHandValue(String handValue, int rankingValue) {
+        this.hand.updateHandValue(handValue, rankingValue);
     }
 
     public Hand getHand() {
@@ -55,6 +55,14 @@ private String value;
      */
     public String getHandValue() {
        return hand.getHandValue();
+    }
+
+    /**
+     * getter for players hands ranking value
+     * @return players hands ranking value. Smaller the number better the hand.
+     */
+    public int getHandRankingValue() {
+        return hand.getRankingValue();
     }
 
     public String toString() {
