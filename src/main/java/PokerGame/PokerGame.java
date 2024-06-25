@@ -78,6 +78,7 @@ public class PokerGame{
     public String evaluateHand (Hand hand) {
 
         int[] valueHistogram = createValueHistogramForHand(hand);
+        hand.updateHandValue(valueHistogram);
         boolean isPaired = checkIfHandIsPaired(valueHistogram);
 
         if (isPaired) {
@@ -278,9 +279,32 @@ public class PokerGame{
      * @return
      */
     public String tiebreakerForPairedHands(ArrayList <Player> listOfPotentialWinners) {
+        String winner = listOfPotentialWinners.get(0).getName();
+        Player player1;
+        Player player2;
+        int player1HighestPairOrSet = 0;
+        int player2HighestPairOrSet = 0;
+
+//find the highest valued pairs
+        for (int i = 0, j=1; j < listOfPotentialWinners.size(); i++, j++) {
+            player1 = listOfPotentialWinners.get(i);
+            player2 = listOfPotentialWinners.get(j);
+            for (int k = 4; k >= 2 ; k--) {
+                for (int l = 14; l > 1; l--) {
+                    if (player1.getHand().cardHistogram[l] == k) {
+                        player1HighestPairOrSet = l;
+                    }
+                    if (player2.getHand().cardHistogram[l] == k) {
+                        player2HighestPairOrSet = l;
+                    }
+                }
+            }
+            if (player2HighestPairOrSet > player1HighestPairOrSet)
+                winner = player2.getName();
+        }
 
 
-        return listOfPotentialWinners.get(0).getName();
+        return winner;
     }
 
 

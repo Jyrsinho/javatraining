@@ -12,6 +12,8 @@ public class Hand implements Iterable<Card> {
     private String value;
     private int rankingValue;
     boolean isPaired = false;
+    int[] cardHistogram;
+    int [] highestPairedValue;
 
 
     /**
@@ -34,6 +36,10 @@ public class Hand implements Iterable<Card> {
 
     public void updateHandValue(boolean isPaired) {
         this.isPaired = true;
+    }
+
+    public void updateHandValue(int [] cardHistogram) {
+        this.cardHistogram = cardHistogram;
     }
 
     /**
