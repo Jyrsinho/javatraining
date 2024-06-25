@@ -545,7 +545,40 @@ public class PokerGameTest {
     }
 
     @Test
-    public void testShouldOutcomeShouldBeTieIfPlayersHaveEqualFlushes() throws TooManyElementsException {
+    public void testShouldEvaluateTieIfPlayersHaveEqualFlushes() throws TooManyElementsException {
+        hand2.addCardToHand(new Card("clubs", 14));
+        hand2.addCardToHand(new Card("clubs", 10));
+        hand2.addCardToHand(new Card("clubs", 7));
+        hand2.addCardToHand(new Card("clubs", 8));
+        hand2.addCardToHand(new Card("clubs", 2));
 
+        hand.addCardToHand(new Card("hearts", 14));
+        hand.addCardToHand(new Card("hearts", 10));
+        hand.addCardToHand(new Card("hearts", 7));
+        hand.addCardToHand(new Card("hearts", 8));
+        hand.addCardToHand(new Card("hearts", 2));
+
+        game.updateHandValues();
+
+        assertEquals("Tie: playerOne and PlayerTwo", game.findOutWinner());
+    }
+
+    @Test
+    public void testShouldEvaluateTieIfPlayersHaveEqualStraights() throws TooManyElementsException {
+        hand2.addCardToHand(new Card("clubs", 12));
+        hand2.addCardToHand(new Card("diamonds", 11));
+        hand2.addCardToHand(new Card("hearts", 10));
+        hand2.addCardToHand(new Card("clubs", 9));
+        hand2.addCardToHand(new Card("clubs", 8));
+
+        hand.addCardToHand(new Card("spades", 12));
+        hand.addCardToHand(new Card("clubs", 11));
+        hand.addCardToHand(new Card("hearts", 10));
+        hand.addCardToHand(new Card("hearts", 9));
+        hand.addCardToHand(new Card("hearts", 8));
+
+        game.updateHandValues();
+
+        assertEquals("Tie: playerOne and PlayerTwo", game.findOutWinner());
     }
 }

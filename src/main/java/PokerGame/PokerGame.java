@@ -257,19 +257,28 @@ public class PokerGame{
      * @return winner/winners
      */
     public String tiebreakerForNonPairedHands(ArrayList<Player> listOfPotentialWinners) {
+
         String winner = listOfPotentialWinners.get(0).getName();
 
         for (int i = 0; i < listOfPotentialWinners.size()-1; i++) {         // Go through all the players
-            for (int j = 4; j >= 0; j--) {                                   // Go throuhg all the cards
-                if (listOfPotentialWinners.get(i+1).getHand().getCards().get(j).getValue() > listOfPotentialWinners.get(i).getHand().getCards().get(j).getValue()) {
-                    winner = listOfPotentialWinners.get(i+1).getName();
+                Player playerOne = listOfPotentialWinners.get(i);
+                Player playerTwo = listOfPotentialWinners.get(i+1);
+                Hand playerOneHand = playerOne.getHand();
+                Hand playerTwoHand = playerTwo.getHand();
+
+                for (int j = 4; j >= 0; j--) {                                   // Go throuhg all the cards
+                if (playerOneHand.getCards().get(j).getValue() < playerTwoHand.getCards().get(j).getValue()) {
+                    winner = playerTwo.getName();
                     break;
             }
             }
+
+
         }
 
         return winner;
     }
+
 
 
     /**
