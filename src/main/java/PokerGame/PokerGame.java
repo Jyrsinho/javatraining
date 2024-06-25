@@ -279,32 +279,40 @@ public class PokerGame{
      * @return
      */
     public String tiebreakerForPairedHands(ArrayList <Player> listOfPotentialWinners) {
-        String winner = listOfPotentialWinners.get(0).getName();
-        Player player1;
-        Player player2;
-        int player1HighestPairOrSet = 0;
-        int player2HighestPairOrSet = 0;
+        ArrayList<Player> listOfPotentialWinners2 = new ArrayList<>();
+        listOfPotentialWinners2.add(listOfPotentialWinners.getFirst());
+        Player playerWithBestHand;
+        Player comparablePlayer;
+        int playerWithBestHandHighestPairOrSet = 0;
+        int comparablePlayerHighestPairOrSet = 0;
 
 //find the highest valued pairs
         for (int i = 0, j=1; j < listOfPotentialWinners.size(); i++, j++) {
-            player1 = listOfPotentialWinners.get(i);
-            player2 = listOfPotentialWinners.get(j);
+            playerWithBestHand = listOfPotentialWinners.get(i);
+            comparablePlayer = listOfPotentialWinners.get(j);
             for (int k = 4; k >= 2 ; k--) {
                 for (int l = 14; l > 1; l--) {
-                    if (player1.getHand().cardHistogram[l] == k) {
-                        player1HighestPairOrSet = l;
+                    if (playerWithBestHand.getHand().cardHistogram[l] == k) {
+                        playerWithBestHandHighestPairOrSet = l;
                     }
-                    if (player2.getHand().cardHistogram[l] == k) {
-                        player2HighestPairOrSet = l;
+                    if (comparablePlayer.getHand().cardHistogram[l] == k) {
+                        comparablePlayerHighestPairOrSet = l;
                     }
                 }
             }
-            if (player2HighestPairOrSet > player1HighestPairOrSet)
-                winner = player2.getName();
+            if (comparablePlayerHighestPairOrSet > playerWithBestHandHighestPairOrSet) {
+                listOfPotentialWinners.removeFirst();
+                listOfPotentialWinners2.add(comparablePlayer);
+            } else if (playerWithBestHandHighestPairOrSet == comparablePlayerHighestPairOrSet){
+                listOfPotentialWinners2.add(comparablePlayer);
+            }
         }
 
 
-        return winner;
+        if (listOfPotentialWinners2.size() == 1) {
+            return listOfPotentialWinners2.get(0).getName();
+        }
+        else return tiebreakerForNonPairedHands(listOfPotentialWinners2);
     }
 
 

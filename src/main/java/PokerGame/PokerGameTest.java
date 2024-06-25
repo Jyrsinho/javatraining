@@ -11,16 +11,21 @@ public class PokerGameTest {
     PokerGame game;
     Player playerOne;
     Player playerTwo;
+    Player playerThree;
     Hand hand;
     Hand hand2;
+    Hand hand3;
 
     @Before
     public void setUp() {
         game = new PokerGame();
         hand = new Hand();
         hand2 = new Hand();
+        hand3 = new Hand();
         playerOne = new Player(hand, "playerOne", "blue");
         playerTwo = new Player(hand2, "playerTwo", "black");
+        playerThree = new Player(hand3, "playerThree", "white");
+
         game.addPlayerToGame(playerTwo);
         game.addPlayerToGame(playerOne);
 
@@ -453,4 +458,94 @@ public class PokerGameTest {
         assertEquals("playerTwo", game.findOutWinner());
     }
 
+    @Test
+    public void testShouldDeclareWinnerSetOfThreesWithHigherValuedSet() throws TooManyElementsException {
+        hand.addCardToHand(new Card("clubs", 13));
+        hand.addCardToHand(new Card("spades", 12));
+        hand.addCardToHand(new Card("clubs", 6));
+        hand.addCardToHand(new Card("spades", 6));
+        hand.addCardToHand(new Card("clubs", 6));
+
+        hand2.addCardToHand(new Card("diamonds", 7));
+        hand2.addCardToHand(new Card("spades", 7));
+        hand2.addCardToHand(new Card("diamonds", 7));
+        hand2.addCardToHand(new Card("hearts", 3));
+        hand2.addCardToHand(new Card("diamonds", 2));
+
+        game.updateHandValues();
+
+        assertEquals("playerTwo", game.findOutWinner());
+    }
+
+    @Test
+    public void testShouldDeclareWinnerFourOfAKindWithHigherValuedSetOfFours() throws TooManyElementsException {
+
+        hand.addCardToHand(new Card("clubs", 13));
+        hand.addCardToHand(new Card("spades", 13));
+        hand.addCardToHand(new Card("diamonds", 13));
+        hand.addCardToHand(new Card("hearts", 13));
+        hand.addCardToHand(new Card("clubs", 6));
+
+        hand2.addCardToHand(new Card("diamonds", 10));
+        hand2.addCardToHand(new Card("spades", 10));
+        hand2.addCardToHand(new Card("hearts", 10));
+        hand2.addCardToHand(new Card("clubs", 10));
+        hand2.addCardToHand(new Card("diamonds", 2));
+
+        game.updateHandValues();
+
+        assertEquals("playerOne", game.findOutWinner());
+    }
+
+    @Test
+    public void testShouldDeclareWinnerWithHighestPairWithThreePlayers() throws TooManyElementsException {
+        game.addPlayerToGame(playerThree);
+
+        hand.addCardToHand(new Card("clubs", 13));
+        hand.addCardToHand(new Card("spades", 13));
+        hand.addCardToHand(new Card("diamonds", 7));
+        hand.addCardToHand(new Card("hearts", 8));
+        hand.addCardToHand(new Card("clubs", 2));
+
+        hand2.addCardToHand(new Card("diamonds", 14));
+        hand2.addCardToHand(new Card("spades", 14));
+        hand2.addCardToHand(new Card("hearts", 4));
+        hand2.addCardToHand(new Card("clubs", 9));
+        hand2.addCardToHand(new Card("diamonds", 6));
+
+        hand3.addCardToHand(new Card("spades", 10));
+        hand3.addCardToHand(new Card("hearts", 10));
+        hand3.addCardToHand(new Card("clubs", 3));
+        hand3.addCardToHand(new Card("diamonds", 2));
+        hand3.addCardToHand(new Card("spades", 7));
+
+        game.updateHandValues();
+
+        assertEquals("playerTwo", game.findOutWinner());
+    }
+
+    @Test
+    public void testWinnerShouldBePairWithHighestKickerIfPairsAreEqual() throws TooManyElementsException {
+
+        hand2.addCardToHand(new Card("clubs", 14));
+        hand2.addCardToHand(new Card("spades", 14));
+        hand2.addCardToHand(new Card("diamonds", 7));
+        hand2.addCardToHand(new Card("diamonds", 8));
+        hand2.addCardToHand(new Card("diamonds", 2));
+
+        hand.addCardToHand(new Card("hearts", 14));
+        hand.addCardToHand(new Card("diamonds", 14));
+        hand.addCardToHand(new Card("hearts", 7));
+        hand.addCardToHand(new Card("hearts", 8));
+        hand.addCardToHand(new Card("hearts", 3));
+
+        game.updateHandValues();
+
+        assertEquals("playerOne", game.findOutWinner());
+    }
+
+    @Test
+    public void testShouldOutcomeShouldBeTieIfPlayersHaveEqualFlushes() throws TooManyElementsException {
+
+    }
 }
