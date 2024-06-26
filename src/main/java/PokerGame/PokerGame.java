@@ -1,8 +1,6 @@
 package PokerGame;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Objects;
 
@@ -82,7 +80,7 @@ public class PokerGame{
         boolean isPaired = checkIfHandIsPaired(valueHistogram);
 
         if (isPaired) {
-            hand.updateHandValue(isPaired);
+            hand.updateHandValue(true);
             return evaluatePairedHand(valueHistogram);
         }
         else {
@@ -101,10 +99,10 @@ public class PokerGame{
         boolean threeOfAKind = false;
         boolean fourOfAKind = false;
 
-        for (int i = 0; i < valueHistogram.length; i++) {
-            if (valueHistogram[i] == 2) amountOfPairs++;
-            else if (valueHistogram[i] == 3) threeOfAKind = true;
-            else if (valueHistogram[i] == 4) fourOfAKind = true;
+        for (int j : valueHistogram) {
+            if (j == 2) amountOfPairs++;
+            else if (j == 3) threeOfAKind = true;
+            else if (j == 4) fourOfAKind = true;
         }
         if (fourOfAKind) return "Four of a Kind";
         if ((threeOfAKind) && (amountOfPairs == 1)) return "Full House";
@@ -134,13 +132,13 @@ public class PokerGame{
     }
     /**
      * Checks whether the hand has more than one card with same value
-     * @param valueHistogram
+     * @param valueHistogram array where all the values of a hand are sorted according to their appearance frequency.
      * @return true if hand has at least one pair, false if all cards in the hand are of different value
      */
     public boolean checkIfHandIsPaired(int [] valueHistogram) {
 
-        for (int i = 0; i < valueHistogram.length; i++) {
-            if (valueHistogram[i] > 1) return true;
+        for (int j : valueHistogram) {
+            if (j > 1) return true;
         }
         return false;
     }
@@ -158,8 +156,8 @@ public class PokerGame{
         List<Card> cardList = hand.getCards();
 
         for (int i = 0; i < cardValueHistogram.length; i++) {
-            for (int j = 0; j < cardList.size(); j++) {
-                if (cardList.get(j).getValue() == i) {
+            for (Card card : cardList) {
+                if (card.getValue() == i) {
                     cardValueHistogram[i]++;
                 }
             }
@@ -173,12 +171,10 @@ public class PokerGame{
      * @return True if hand is a flush - False if hand is not a flush
      */
     public boolean checkIfFlush (Hand hand) {
-        String firsCardSuit = hand.getCards().get(0).getSuit();
+        String firstCardSuit = hand.getCards().getFirst().getSuit();
         for (int i = 1; i < hand.getHandLength(); i++) {
-            if (hand.getCards().get(i).getSuit().equals(firsCardSuit)) {
-                continue;
-            }
-            else {
+            String nextCardSuit = hand.getCards().get(i).getSuit();
+            if (!nextCardSuit.equals(firstCardSuit)) {
                 return false;
             }
         }
@@ -192,7 +188,7 @@ public class PokerGame{
      */
     public boolean checkIfStraight (Hand hand) {
         int maxDifference = 1;
-        Card currentCard = hand.getCards().get(0);
+        Card currentCard = hand.getCards().getFirst();
         Card nextCard;
 
         for (int i = 1; i < hand.getHandLength(); i++) {
@@ -228,7 +224,7 @@ public class PokerGame{
         }
 
         if (listOfPotentialWinners.size() == 1) {
-            return listOfPotentialWinners.get(0).getName();
+            return listOfPotentialWinners.getFirst().getName();
         }
         else return tiebreaker(listOfPotentialWinners);
     }
@@ -237,12 +233,11 @@ public class PokerGame{
 
     /**
      * Finds out the winner in case that the hands same basic value and are separated only by their high card.
-     * TODO right now only works with hands that do not pair.
      * @return winner's name
      */
     public String tiebreaker(ArrayList<Player> listOfPotentialWinners) {
 
-        boolean winningHandIsPaired = listOfPotentialWinners.get(0).getHand().isPaired;
+        boolean winningHandIsPaired = listOfPotentialWinners.getFirst().getHand().isPaired;
 
         if (winningHandIsPaired) {
            return tiebreakerForPairedHands(listOfPotentialWinners);
@@ -308,8 +303,8 @@ public class PokerGame{
     /**
      * Checks which of potential winners has the best hand in case that the winning hand is pairing one
      * and there are several players with same winning pair or two pair.
-     * @param listOfPotentialWinners
-     * @return
+     * @param listOfPotentialWinners list of players who have best valued hand so far
+     * @return winner or winners of a deal
      */
     public String tiebreakerForPairedHands(ArrayList <Player> listOfPotentialWinners) {
         ArrayList<Player> listOfPotentialWinners2 = new ArrayList<>();
@@ -343,7 +338,7 @@ public class PokerGame{
 
 
         if (listOfPotentialWinners2.size() == 1) {
-            return listOfPotentialWinners2.get(0).getName();
+            return listOfPotentialWinners2.getFirst().getName();
         }
         else return tiebreakerForNonPairedHands(listOfPotentialWinners2);
     }
@@ -376,7 +371,7 @@ public class PokerGame{
      * Test Class for Poker Game
      * @param args null
      */
-    public static void main(String[] args) throws TooManyElementsException {
+    public static void main(String[] args)  {
 
 
 

@@ -3,9 +3,8 @@ package PokerGame;
 public class Player {
 
 private Hand hand;
-private String name;
-private String color;
-private String value;
+private final String name;
+private final String color;
 
 
 

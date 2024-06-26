@@ -13,7 +13,6 @@ public class Hand implements Iterable<Card> {
     private int rankingValue;
     boolean isPaired = false;
     int[] cardHistogram;
-    int [] highestPairedValue;
 
 
     /**
@@ -103,9 +102,9 @@ public class Hand implements Iterable<Card> {
     @Override
     public String toString() {
         String hand = "Hand contains: ";
-        for (int i = 0; i <cardArrayHand.size() ; i++) {
-            hand += cardArrayHand.get(i).getSuit();
-            hand += cardArrayHand.get(i).getValue();
+        for (Card card : cardArrayHand) {
+            hand += card.getSuit();
+            hand += card.getValue();
             hand += ", ";
         }
         return hand;

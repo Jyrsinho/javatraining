@@ -1,7 +1,6 @@
 package PokerGame;
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -177,15 +176,15 @@ public class PokerGameTest {
     }
 
     @Test
-    public void testShouldReturnTrueIfHandHasAtLeastOnePair() throws TooManyElementsException {
+    public void testShouldReturnTrueIfHandHasAtLeastOnePair()  {
         int [] histogram = {0,0,0,0,4,};
-        assertEquals(true, game.checkIfHandIsPaired(histogram));
+        assertTrue(game.checkIfHandIsPaired(histogram));
     }
 
     @Test
-    public void testShouldReturnFalseIfHandHasNoPair() throws  TooManyElementsException {
+    public void testShouldReturnFalseIfHandHasNoPair()  {
         int [] histogram = {0,0,1,1,1,1,1};
-        assertEquals(false, game.checkIfHandIsPaired(histogram));
+        assertFalse(game.checkIfHandIsPaired(histogram));
     }
 
 
