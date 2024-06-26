@@ -62,10 +62,10 @@ public class PokerGame{
     public void updateHandValues() {
         String handValue;
         int handRankingValue;
-        for (int i = 0; i < players.size(); i++) {
-            handValue = evaluateHand(players.get(i).getHand());
+        for (Player player : players) {
+            handValue = evaluateHand(player.getHand());
             handRankingValue = getIndexValueForHandValue(handValue);
-            players.get(i).updateHandValue(handValue, handRankingValue);
+            player.updateHandValue(handValue, handRankingValue);
 
         }
     }
@@ -151,8 +151,8 @@ public class PokerGame{
      */
     public int [] createValueHistogramForHand(Hand hand) {
 
-        // INDICES      0  1  2  3  4  5  6  7   8   9  10  11  12
-        // CARD VALUES  2  3  4  5  6  7  8  9  10  11  12  13  14
+        // INDICES        0  1  2  3  4  5  6  7  8  9  10  11  12  13  14
+        // CARD VALUES          2  3  4  5  6  7  8  9  10  11  12  13  14
 
         int [] cardValueHistogram = new int[15];
         List<Card> cardList = hand.getCards();
@@ -258,25 +258,49 @@ public class PokerGame{
      */
     public String tiebreakerForNonPairedHands(ArrayList<Player> listOfPotentialWinners) {
 
-        String winner = listOfPotentialWinners.get(0).getName();
+        Player playerWithBestHand = listOfPotentialWinners.getFirst();
+        ArrayList <Player> listOfWinners =  new ArrayList<>();
+        listOfWinners.add(playerWithBestHand);
 
         for (int i = 0; i < listOfPotentialWinners.size()-1; i++) {         // Go through all the players
-                Player playerOne = listOfPotentialWinners.get(i);
-                Player playerTwo = listOfPotentialWinners.get(i+1);
-                Hand playerOneHand = playerOne.getHand();
-                Hand playerTwoHand = playerTwo.getHand();
+                Player comparablePlayer = listOfPotentialWinners.get(i+1);
+                Hand bestPlayersHand = playerWithBestHand.getHand();
+                Hand comparablePlayerHand = comparablePlayer.getHand();
 
-                for (int j = 4; j >= 0; j--) {                                   // Go throuhg all the cards
-                if (playerOneHand.getCards().get(j).getValue() < playerTwoHand.getCards().get(j).getValue()) {
-                    winner = playerTwo.getName();
-                    break;
-            }
-            }
+                for (int j = 4; j >= 0; j--) {      // Go throuhg all the cards
+                    int bestPlayerCardValue = bestPlayersHand.getCards().get(j).getValue();
+                    int comparablePlayerCardValue = comparablePlayerHand.getCards().get(j).getValue();
+                    if (bestPlayerCardValue < comparablePlayerCardValue) {
+                        playerWithBestHand = comparablePlayer;
+                        listOfWinners.clear();
+                        listOfWinners.add(comparablePlayer);
+                         break;
+                    }
+                    if (bestPlayerCardValue > comparablePlayerCardValue){
+                        break;
+                    }
+                    if (j ==0 ){
+                        listOfWinners.add(comparablePlayer);
+                    }
+                }
+        }
+        if (listOfWinners.size() == 1) return listOfWinners.getFirst().getName();
+
+        return convertWinnersArrayToString(listOfWinners);
+    }
 
 
+    public String convertWinnersArrayToString(ArrayList<Player> t) {
+        StringBuilder sb = new StringBuilder("Tie: ");
+
+        for (int i = 0, j =1; i <t.size() ; i++, j++) {
+            sb.append(t.get(i).getName());
+            if (j < t.size()) sb.append(" & ");
         }
 
-        return winner;
+
+        return String.valueOf(sb);
+
     }
 
 
@@ -354,33 +378,6 @@ public class PokerGame{
      */
     public static void main(String[] args) throws TooManyElementsException {
 
-        PokerGame game = new PokerGame();
-        game.initialize();
-
-        Hand hand1 = new Hand();
-        hand1.addCardToHand(new Card("diamonds", 14));
-        hand1.addCardToHand(new Card("diamonds", 13));
-        hand1.addCardToHand(new Card("diamonds", 12));
-        hand1.addCardToHand(new Card("diamonds", 11));
-        hand1.addCardToHand(new Card("diamonds", 10));
-
-        Player playerOne = new Player(hand1,"playerOne", "blue");
-
-        Hand hand2 = new Hand();
-        hand2.addCardToHand(new Card("diamonds", 10));
-        hand2.addCardToHand(new Card("clubs", 13));
-        hand2.addCardToHand(new Card("clubs", 12));
-        hand2.addCardToHand(new Card("clubs", 11));
-        hand2.addCardToHand(new Card("clubs", 10));
-
-        Player playerTwo = new Player(hand2, "playerTwo", "black");
-
-        game.addPlayerToGame(playerOne);
-        game.addPlayerToGame(playerTwo);
-
-        game.updateHandValues();
-
-        System.out.println(game.findOutWinner());
 
 
     }
