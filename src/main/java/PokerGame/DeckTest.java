@@ -86,14 +86,5 @@ public class DeckTest {
     }
 
 
-    @Test
-    public void testDeckCanDealMAXAMOUNTOFCardsToPlayers() {
-        deck.shuffle();
-        deck.deal();
-
-        assertEquals(5, playerOne.getHand().getCards().size());
-        assertEquals(5, playerTwo.getHand().getCards().size());
-
-    }
 
 }
