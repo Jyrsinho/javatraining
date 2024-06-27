@@ -43,9 +43,23 @@ public class PokerGame{
     /**
      * Initializes the Game. Creates a new deck.
      */
-    public void initialize() {
+    public void initialize() throws TooManyElementsException {
+        deck.initialize();
         deck.shuffle();
-        // deal(deck, players); TODO CREATE A METHOD FOR DEALING THE CARDS TO PLAYERS
+        deal();
+    }
+
+
+    /**
+     * Deals the amount of cards that is defined in the setup to all the players in the game.
+     */
+    public void deal() throws TooManyElementsException {
+        for (int i = 0; i < AMOUNT_OF_PLAYERS; i++) {
+            for (int j = 0; j < AMOUNT_OF_CARDS_TO_BE_DEALT; j++) {
+                players.get(i).getHand().addCardToHand(deck.getFirst());
+                deck.getCards().removeFirst();
+            }
+        }
     }
 
     /**

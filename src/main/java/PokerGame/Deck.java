@@ -56,6 +56,15 @@ public class Deck {
     }
 
     /**
+     * Returns the card at the first index of the deck
+     * @return
+     */
+    public Card getFirst() {
+        return cards.getFirst();
+    }
+
+
+    /**
      * Sorts the deck based on card values
       */
     public void sortDeck() {
@@ -73,7 +82,7 @@ public class Deck {
 
 
     public void shuffle() {
-
+        Collections.shuffle(cards);
     }
 
 

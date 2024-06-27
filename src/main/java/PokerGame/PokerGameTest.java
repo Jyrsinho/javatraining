@@ -35,6 +35,22 @@ public class PokerGameTest {
         assertEquals(2, game.getAmountOfPlayers());
     }
 
+    @Test
+    public void testShouldDealFiveCardsToEachPlayerInTheGame() throws TooManyElementsException {
+
+        game.initialize();
+        System.out.println(playerOne.getHand());
+        assertEquals(5, playerOne.getHand().getCards().size());
+    }
+
+    @Test
+    public void testShouldDealFiveDifferentCardsToEachPlayerInTheGame() throws TooManyElementsException {
+        game.initialize();
+        System.out.println(playerOne.getHand());
+        System.out.println(playerTwo.getHand());
+        assertFalse(playerTwo.getHand().getCards().get(0).equals(playerTwo.getHand().getCards().get(1)));
+    }
+
 
     @Test
     public void testShouldUpdateHandValues() throws TooManyElementsException {
