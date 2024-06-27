@@ -1,7 +1,6 @@
 package PokerGame;
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -177,15 +176,15 @@ public class PokerGameTest {
     }
 
     @Test
-    public void testShouldReturnTrueIfHandHasAtLeastOnePair() throws TooManyElementsException {
+    public void testShouldReturnTrueIfHandHasAtLeastOnePair()  {
         int [] histogram = {0,0,0,0,4,};
-        assertEquals(true, game.checkIfHandIsPaired(histogram));
+        assertTrue(game.checkIfHandIsPaired(histogram));
     }
 
     @Test
-    public void testShouldReturnFalseIfHandHasNoPair() throws  TooManyElementsException {
+    public void testShouldReturnFalseIfHandHasNoPair()  {
         int [] histogram = {0,0,1,1,1,1,1};
-        assertEquals(false, game.checkIfHandIsPaired(histogram));
+        assertFalse(game.checkIfHandIsPaired(histogram));
     }
 
 
@@ -560,7 +559,7 @@ public class PokerGameTest {
 
         game.updateHandValues();
 
-        assertEquals("Tie: playerOne and PlayerTwo", game.findOutWinner());
+        assertEquals("Tie: playerTwo & playerOne", game.findOutWinner());
     }
 
     @Test
@@ -579,6 +578,52 @@ public class PokerGameTest {
 
         game.updateHandValues();
 
-        assertEquals("Tie: playerOne and PlayerTwo", game.findOutWinner());
+        assertEquals("Tie: playerTwo & playerOne", game.findOutWinner());
+    }
+
+    @Test
+    public void testShouldAwardWinForPlayerWithBetterSmallerPairInCaseBothPlayersHaveTwoPairWithSameHighPair() throws TooManyElementsException {
+        hand2.addCardToHand(new Card("clubs", 12));
+        hand2.addCardToHand(new Card("diamonds", 12));
+        hand2.addCardToHand(new Card("hearts", 10));
+        hand2.addCardToHand(new Card("clubs", 10));
+        hand2.addCardToHand(new Card("clubs", 8));
+
+        hand.addCardToHand(new Card("spades", 12));
+        hand.addCardToHand(new Card("hearts", 12));
+        hand.addCardToHand(new Card("hearts", 8));
+        hand.addCardToHand(new Card("hearts", 9));
+        hand.addCardToHand(new Card("hearts", 9));
+
+        game.updateHandValues();
+
+        assertEquals("playerTwo", game.findOutWinner());
+    }
+
+    @Test
+    public void testShouldBeThreeWayTieIfThreePlayerAllHaveSameHandsWithHighCard() throws TooManyElementsException {
+        game.addPlayerToGame(playerThree);
+
+        hand2.addCardToHand(new Card("clubs", 12));
+        hand2.addCardToHand(new Card("diamonds", 11));
+        hand2.addCardToHand(new Card("diamonds", 8));
+        hand2.addCardToHand(new Card("diamonds", 7));
+        hand2.addCardToHand(new Card("diamonds", 6));
+
+        hand.addCardToHand(new Card("hearts", 12));
+        hand.addCardToHand(new Card("clubs", 11));
+        hand.addCardToHand(new Card("clubs", 8));
+        hand.addCardToHand(new Card("clubs", 7));
+        hand.addCardToHand(new Card("clubs", 6));
+
+        hand3.addCardToHand(new Card("spades", 12));
+        hand3.addCardToHand(new Card("hearts", 11));
+        hand3.addCardToHand(new Card("hearts", 8));
+        hand3.addCardToHand(new Card("hearts", 7));
+        hand3.addCardToHand(new Card("hearts", 6));
+
+        game.updateHandValues();
+
+        assertEquals("Tie: playerTwo & playerOne & playerThree", game.findOutWinner());
     }
 }

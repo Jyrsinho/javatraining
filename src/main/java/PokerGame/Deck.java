@@ -10,7 +10,7 @@ import java.util.List;
  */
 public class Deck {
 
-    private ArrayList<Card> cards;
+    private final ArrayList<Card> cards;
     private int cardsInDeck = 52;
     private final String [] suits = {"clubs", "diamonds", "hearts", "spades"};
 
@@ -27,9 +27,9 @@ public class Deck {
      * Initializes Deck. Fills the deck with 52 cards. 4 different suits. 13 different values.
      */
     public void initialize() {
-        for (int i = 0; i < suits.length; i++) {
+        for (String suit : suits) {
             for (int j = 2; j <= 14; j++) {
-                Card card = new Card(suits[i], j);
+                Card card = new Card(suit, j);
                 cards.add(card);
             }
         }
@@ -78,7 +78,7 @@ public class Deck {
 
 
     /**
-     * return the amount cards in the deck that are of given suit
+     * Test program that returns the amount cards in the deck that are of given suit
      * @param suit that is looked for
      * @return amount of cards in the deck that are of given suit
      */
@@ -87,9 +87,9 @@ public class Deck {
 
         int amountOfCardsInDeckOfSuit = 0;
 
-        for (int i = 0; i < cards.size(); i++) {
-            if (cards.get(i).getSuit().equals(suit)) {
-                amountOfCardsInDeckOfSuit ++;
+        for (Card card : cards) {
+            if (card.getSuit().equals(suit)) {
+                amountOfCardsInDeckOfSuit++;
             }
         }
         return amountOfCardsInDeckOfSuit;
@@ -98,8 +98,8 @@ public class Deck {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder("Deck contains: ");
-        for (int i = 0; i < cards.size(); i++) {
-            sb.append(cards.get(i));
+        for (Card card : cards) {
+            sb.append(card);
             sb.append(" ,");
         }
         return sb.toString();
@@ -107,7 +107,7 @@ public class Deck {
 
     /**
      * Test program for the Deck class
-     * @param args
+     * @param args not used
      */
     public static void main (String[] args) {
 
