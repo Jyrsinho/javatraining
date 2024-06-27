@@ -14,6 +14,7 @@ public class PokerGame{
 
     private Deck deck;
     private final int AMOUNT_OF_PLAYERS = 2;
+    private final int AMOUNT_OF_CARDS_TO_BE_DEALT = 5;
     private final ArrayList<Player> players;
 
     private final String[] pokerHandValues = {
@@ -43,8 +44,7 @@ public class PokerGame{
     public void initialize() {
         deck = new Deck();
         deck.shuffle();
-
-        //deck.deal();
+        // deal(deck, players); TODO CREATE A METHOD FOR DEALING THE CARDS TO PLAYERS
     }
 
     /**

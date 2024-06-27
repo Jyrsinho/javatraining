@@ -13,11 +13,15 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class DeckTest {
 
     private Deck deck;
+    Player playerOne = new Player(new Hand(), "playerOne", "blue");
+    Player playerTwo = new Player(new Hand(), "playerTwo", "red");
 
     @Before
     public void setUp() {
         deck = new Deck();
+
     }
+
 
 
     @Test
@@ -80,4 +84,16 @@ public class DeckTest {
 
         Assertions.assertEquals(expectedOrder, sortedCards);
     }
+
+
+    @Test
+    public void testDeckCanDealMAXAMOUNTOFCardsToPlayers() {
+        deck.shuffle();
+        deck.deal();
+
+        assertEquals(5, playerOne.getHand().getCards().size());
+        assertEquals(5, playerTwo.getHand().getCards().size());
+
+    }
+
 }
