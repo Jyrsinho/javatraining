@@ -36,6 +36,7 @@ public class Deck {
     }
 
 
+
     /**
      * Adds card to the Deck
      * @param card to be added
@@ -53,6 +54,15 @@ public class Deck {
         return cards;
 
     }
+
+    /**
+     * Returns the card at the first index of the deck
+     * @return
+     */
+    public Card getFirst() {
+        return cards.getFirst();
+    }
+
 
     /**
      * Sorts the deck based on card values
