@@ -71,8 +71,11 @@ public class Deck {
     }
 
 
+    /**
+     * shufflest the deck
+     */
     public void shuffle() {
-
+        Collections.shuffle(cards);
     }
 
 

@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 public class DeckTest {
 
@@ -26,7 +27,7 @@ public class DeckTest {
 
         Card fiveofHearts = new Card ("hearts", 5);
         deck.addCard(fiveofHearts);
-        Assertions.assertEquals(1, deck.getLength());
+        assertEquals(1, deck.getLength());
 
     }
 
@@ -36,7 +37,7 @@ public class DeckTest {
         Assertions.assertEquals(0, deck.getLength());
 
         deck.initialize();
-        Assertions.assertEquals(52, deck.getLength());
+        assertEquals(52, deck.getLength());
     }
 
 
@@ -79,5 +80,24 @@ public class DeckTest {
         expectedOrder.add(new Card("Diamonds", 14));
 
         Assertions.assertEquals(expectedOrder, sortedCards);
+    }
+
+    @Test
+    public void testShouldShuffleTheDeck() {
+        deck.addCard(new Card("Hearts", 5));
+        deck.addCard(new Card("Spades", 2));
+        deck.addCard(new Card("Diamonds", 14));
+        deck.addCard(new Card("Clubs", 10));
+        deck.sortDeck();
+        System.out.println("Deck before shuffle:");
+        System.out.println(deck);
+        String deckBeforeShuffle = deck.toString();
+        deck.shuffle();
+        String deckAfterShuffle = deck.toString();
+        System.out.println("Deck after shuffle:");
+        System.out.println(deck);
+
+        assertNotEquals(deckAfterShuffle, deckBeforeShuffle);
+
     }
 }
