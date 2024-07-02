@@ -80,6 +80,14 @@ public class PokerGame{
     }
 
     /**
+     * returns the amount of cards in the deck
+     * return the amount of cards in the deck
+     */
+    public int getAmountOfCardsInDeck() {
+        return deck.getLength();
+    }
+
+    /**
      * gives a task for the HandEvaluator to evaluate hands of every player in the game
      */
     public void evaluateHands() {

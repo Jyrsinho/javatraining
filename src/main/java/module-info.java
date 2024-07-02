@@ -5,6 +5,6 @@ module org.example.javaharjoituksia {
     requires junit;
     requires org.junit.jupiter.api;
 
+    exports fxMainWindow;
 }
-
 

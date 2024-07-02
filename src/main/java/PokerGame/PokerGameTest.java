@@ -48,7 +48,13 @@ public class PokerGameTest {
         game.initialize();
         System.out.println(playerOne.getHand());
         System.out.println(playerTwo.getHand());
-        assertFalse(playerTwo.getHand().getCards().get(0).equals(playerTwo.getHand().getCards().get(1)));
+        assertNotEquals(playerTwo.getHand().getCards().get(0), playerTwo.getHand().getCards().get(1));
+    }
+
+    @Test
+    public void testShouldRemoveDealtCardsFromTheDeck() throws TooManyElementsException{
+        game.initialize();
+        assertEquals(42, game.getAmountOfCardsInDeck());
     }
 
 
