@@ -1,5 +1,6 @@
 module org.example.javaharjoituksia {
     exports PokerGame;
+    exports PrefixPhoneNumbers;
     requires javafx.controls;
     requires javafx.fxml;
     requires junit;
