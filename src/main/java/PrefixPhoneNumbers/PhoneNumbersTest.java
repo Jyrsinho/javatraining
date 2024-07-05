@@ -1,7 +1,6 @@
 package PrefixPhoneNumbers;
 
-import org.junit.Before;
-import org.junit.Ignore;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -9,11 +8,27 @@ import static org.junit.jupiter.api.Assertions.*;
 public class PhoneNumbersTest {
 
 
+    PhoneNumber phoneNumber1;           // 0100
+    PhoneNumber phoneNumber2;           // 999
+    PhoneNumber phoneNumber3;           // 010
+    PhoneNumber phoneNumber4;           // 10
+    PhoneNumber phoneNumber5;           // 9822
+    PhoneNumber phoneNumber6;
+
+    @BeforeEach
+    public void setUp() {
+        this.phoneNumber1 = new PhoneNumber("0100");
+        this.phoneNumber2 = new PhoneNumber("999");
+        this.phoneNumber3 = new PhoneNumber("010");
+        this.phoneNumber4 = new PhoneNumber("10");
+        this.phoneNumber5 = new PhoneNumber("9822");
+        this.phoneNumber6 = new PhoneNumber("100");
+    }
 
     @Test
-    public void testShouldBeAbleToReturnTheAmountOfPhonenumbersInCurrentInstanceOfPhoneNumbers() {
-        String [] pNumberArray = {  "0100",
-                "0100"
+    public void testShouldBeAbleToReturnTheAmountOfPhonenumbers() {
+        PhoneNumber [] pNumberArray = {  phoneNumber1,      //0100
+                                         phoneNumber2       //999
         };
         PhoneNumbers phoneNumbers = new PhoneNumbers(pNumberArray);
         assertEquals(2, phoneNumbers.getTheAmountOfPhoneNumbers());
@@ -23,8 +38,8 @@ public class PhoneNumbersTest {
     @Test
     public void testShouldEvaluateFalseWhenGivenArrayWithTwoIdenticalNumbers() {
 
-        String [] pNumberArray = {  "0100",
-                                    "0100"
+        PhoneNumber [] pNumberArray = {     phoneNumber1,       //0100
+                                            phoneNumber1        //0100
         };
         PhoneNumbers phoneNumbers = new PhoneNumbers(pNumberArray);
         assertFalse(phoneNumbers.isConsistent());
@@ -34,22 +49,49 @@ public class PhoneNumbersTest {
     @Test
     public void testShouldReturnTrueWithTwoCompletelyDifferentNumbers() {
 
-        String[] pNumberArray = {  "0100",
-                "9999"
+        PhoneNumber[] pNumberArray = {  phoneNumber1,       //0100
+                                        phoneNumber2        //999
         };
         PhoneNumbers phoneNumbers = new PhoneNumbers(pNumberArray);
         assertTrue(phoneNumbers.isConsistent());
     }
 
     @Test
+    public void testArraySortingShouldSortNumbersBasedOnTheirLength() {
+        PhoneNumber[] input1 = {            phoneNumber5,       //9822
+                                            phoneNumber2,       //999
+                                            phoneNumber4        //10
+        };
+        PhoneNumbers phoneNumbers = new PhoneNumbers(input1);
+        phoneNumbers.sortArray();
+        String expected1 = "10, 999, 9822";
+
+        assertEquals(expected1, phoneNumbers.toString(), "The array should be sorted by length.");
+
+    }
+
+
+
+    @Test
     public void testShouldRetunrFalseWithTwoCompletelyDifferentNumbersAndOneWithSamePrefix() {
-        String[] t =  { "0100",
-                        "9822",
-                        "010"
+        PhoneNumber[] t =  { phoneNumber1,      // 0100
+                             phoneNumber5,      // 9822
+                             phoneNumber3       // 010
 
         };
         PhoneNumbers phoneNumbers = new PhoneNumbers(t);
         assertFalse(phoneNumbers.isConsistent());
+    }
+
+    @Test
+    public void testShouldReturnTrueWithOnePhoneNumberContainingOtherInTheEndOfTheNumber() {
+        PhoneNumber[] t =  {  phoneNumber1,     //0100
+                         phoneNumber5,          //9822
+                         phoneNumber6           //100
+
+        };
+        PhoneNumbers phoneNumbers = new PhoneNumbers(t);
+        assertTrue(phoneNumbers.isConsistent());
     }
 
 
