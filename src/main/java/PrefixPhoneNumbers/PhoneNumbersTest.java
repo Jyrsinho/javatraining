@@ -70,6 +70,20 @@ public class PhoneNumbersTest {
 
     }
 
+    @Test
+    public void testShouldSortEqualLengthNumbersBasedOnTheirNumbersValues() {
+        PhoneNumber[] input1 = {        phoneNumber2,       //999
+                                        phoneNumber3,       //010
+                                        phoneNumber6        //100
+        };
+        PhoneNumbers phoneNumbers = new PhoneNumbers(input1);
+        phoneNumbers.sortArray();
+        String expected = "010, 100, 999";
+
+        assertEquals(expected, phoneNumbers.toString());
+
+    }
+
 
 
     @Test

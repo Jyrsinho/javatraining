@@ -3,6 +3,10 @@ package PrefixPhoneNumbers;
 //TODO turn phonenumbers Strings into phonenumber objects
 //TODO Turn this class into a generic class that can evaluate "String typed phonenumbers and int typed numbers
 
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+
 public class PhoneNumbers {
 
     PhoneNumber [] phoneNumbers;
@@ -25,19 +29,8 @@ public class PhoneNumbers {
      */
     public void sortArray() {
 
-
-        for (int i = 0; i < phoneNumbers.length-1; i++) {
-            int currentMinimum = i;
-            for (int j = i+1; j < phoneNumbers.length; j++) {
-                if (phoneNumbers[j].getLength() < phoneNumbers[i].getLength()) {
-                    currentMinimum = j;
-                }
-            }
-            PhoneNumber temp = phoneNumbers[i];
-            phoneNumbers[i] = phoneNumbers[currentMinimum];
-            phoneNumbers[currentMinimum] = temp;
-        }
-
+        List<PhoneNumber> phoneNumberList = Arrays.asList(phoneNumbers);
+        Collections.sort(phoneNumberList);
 
     }
 
