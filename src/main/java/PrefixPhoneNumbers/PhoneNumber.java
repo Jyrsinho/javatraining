@@ -29,6 +29,19 @@ public class PhoneNumber implements Comparable<PhoneNumber> {
         return this.getPhoneNumber();
     }
 
+
+    /**
+     * Checks whether this phoneNumber is a prefix of a given phoneNumber
+     * @param comparablePNumber PhoneNumber that could include this PhoneNumber as a prefix
+     * @return true if this PhoneNumber is a prefix of comparablePNumber
+     */
+    public boolean isAPrefixOf(PhoneNumber comparablePNumber) {
+        return comparablePNumber.getPhoneNumber().substring(0,this.getLength()).equals(this.getPhoneNumber());
+
+    }
+
+
+
     @Override
     public int compareTo(PhoneNumber o) {
         if (this.getLength() == o.getLength()) {
@@ -47,4 +60,5 @@ public class PhoneNumber implements Comparable<PhoneNumber> {
             return -1;
         }
     }
+
 }
