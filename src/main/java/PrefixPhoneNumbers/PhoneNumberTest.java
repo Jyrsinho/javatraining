@@ -27,12 +27,13 @@ public class PhoneNumberTest {
         assertTrue(phoneNumber1.isAPrefixOf(phoneNumber2));
     }
 
+
     @Test
     public void ZeroOneShouldNotBeAPrefixOfNNineNineNIne() {
         assertFalse(phoneNumber1.isAPrefixOf(phoneNumber3));
     }
 
-    @Ignore
+    @Test
     public void OneZeroShouldNotBeAPrefixOfZeroOneZero() {
         assertFalse(phoneNumber4.isAPrefixOf(phoneNumber2));
     }

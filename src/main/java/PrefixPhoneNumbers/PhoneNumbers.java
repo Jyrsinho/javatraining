@@ -1,6 +1,5 @@
 package PrefixPhoneNumbers;
 
-//TODO turn phonenumbers Strings into phonenumber objects
 //TODO Turn this class into a generic class that can evaluate "String typed phonenumbers and int typed numbers
 
 import java.util.Arrays;
@@ -31,7 +30,6 @@ public class PhoneNumbers {
 
         List<PhoneNumber> phoneNumberList = Arrays.asList(phoneNumbers);
         Collections.sort(phoneNumberList);
-
     }
 
 
@@ -40,32 +38,15 @@ public class PhoneNumbers {
      * @return true if current PhoneNumbers instance is consistent, false if it is not consistent
      */
     public boolean isConsistent() {
-        sortArray();                    //sorts the phoneNumbers array from shortest element to longest
+        sortArray();                    //sorts the phoneNumbers array from the shortest element to longest
         boolean isConsistent = true;
 
-        outerLoop:
-        for (int i = 0; i < phoneNumbers.length -1; i++) {
-            PhoneNumber phoneNumber = phoneNumbers[i];
-            for (int j = i+1; j < phoneNumbers.length; j++) {
-                PhoneNumber comparablePhoneNumber = phoneNumbers[j];
-                isConsistent = !containsPrefix(phoneNumber, comparablePhoneNumber);
-                if (!isConsistent) break outerLoop;
+        for (int i = 0, j= i+1; i < phoneNumbers.length -1; i++, j++) {
+            isConsistent = !phoneNumbers[i].isAPrefixOf(phoneNumbers[j]);
+            if (!isConsistent)  break;
             }
-        }
 
         return isConsistent;
-
-    }
-
-    /**
-     * checks if one phonenumber starts with another phonenumber
-     * @param phoneNumber that could be included in the beginning of a comparablePhoneNumber
-     * @param comparablePhoneNumber that might include the phoneNumber
-     * @return true if beginning of comparablePhoneNumber begins with phoneNumber
-     */
-    public boolean containsPrefix(PhoneNumber phoneNumber, PhoneNumber comparablePhoneNumber) {
-        String comparablePhoneNumberBeginning = comparablePhoneNumber.getPhoneNumber().substring(0, phoneNumber.getLength());
-        return comparablePhoneNumberBeginning.equals(phoneNumber.getPhoneNumber());
     }
 
 

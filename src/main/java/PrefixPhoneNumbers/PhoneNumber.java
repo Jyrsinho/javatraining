@@ -41,7 +41,6 @@ public class PhoneNumber implements Comparable<PhoneNumber> {
     }
 
 
-
     @Override
     public int compareTo(PhoneNumber o) {
         if (this.getLength() == o.getLength()) {
