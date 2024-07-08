@@ -1,11 +1,13 @@
 package PrefixPhoneNumbers;
 
+import org.junit.Ignore;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class PhoneNumbersTest {
+public class NumbersTest {
 
 
     PhoneNumber phoneNumber1;           // 0100
@@ -15,6 +17,12 @@ public class PhoneNumbersTest {
     PhoneNumber phoneNumber5;           // 9822
     PhoneNumber phoneNumber6;
 
+    Numbers <PhoneNumber> phoneNumbers;
+    // Numbers <FaxNumber> faxNumbers;
+
+   // FaxNumber faxNumber1;
+   //  FaxNumber faxNumber2;
+
     @BeforeEach
     public void setUp() {
         this.phoneNumber1 = new PhoneNumber("0100");
@@ -23,38 +31,54 @@ public class PhoneNumbersTest {
         this.phoneNumber4 = new PhoneNumber("10");
         this.phoneNumber5 = new PhoneNumber("9822");
         this.phoneNumber6 = new PhoneNumber("100");
+        phoneNumbers = new Numbers<>();
+       // Numbers <FaxNumber> faxNumber = new Numbers<>();
+
+
+        //this.faxNumber1 = new FaxNumber(100100);
+        //this.faxNumber2 = new FaxNumber(100);
     }
 
+    @AfterEach
+    public void tearDown() {
+        phoneNumbers = null;
+    }
+
+
     @Test
-    public void testShouldBeAbleToReturnTheAmountOfPhonenumbers() {
-        PhoneNumber [] pNumberArray = {  phoneNumber1,      //0100
-                                         phoneNumber2       //999
-        };
-        PhoneNumbers phoneNumbers = new PhoneNumbers(pNumberArray);
-        assertEquals(2, phoneNumbers.getTheAmountOfPhoneNumbers());
+    public void testShouldBeAbleToReturnTheAmountOfNumbers() {
+
+        phoneNumbers.add(phoneNumber1);
+        phoneNumbers.add(phoneNumber2);
+        assertEquals(2, phoneNumbers.getLength());
     }
 
 
     @Test
     public void testShouldEvaluateFalseWhenGivenArrayWithTwoIdenticalNumbers() {
 
-        PhoneNumber [] pNumberArray = {     phoneNumber1,       //0100
-                                            phoneNumber1        //0100
-        };
-        PhoneNumbers phoneNumbers = new PhoneNumbers(pNumberArray);
+        phoneNumbers.add(phoneNumber1); //0100
+        phoneNumbers.add(phoneNumber1); //0100
         assertFalse(phoneNumbers.isConsistent());
     }
+
 
 
     @Test
     public void testShouldReturnTrueWithTwoCompletelyDifferentNumbers() {
 
-        PhoneNumber[] pNumberArray = {  phoneNumber1,       //0100
-                                        phoneNumber2        //999
-        };
-        PhoneNumbers phoneNumbers = new PhoneNumbers(pNumberArray);
+        phoneNumbers.add(phoneNumber1); //0100
+        phoneNumbers.add(phoneNumber2); //999
+        System.out.println(phoneNumbers);
         assertTrue(phoneNumbers.isConsistent());
     }
+
+    @Test
+    public void testShouldReturnTrueWhenGivenEmptyArray() {
+        assertTrue(phoneNumbers.isConsistent());
+    }
+
+
 
     @Test
     public void testArraySortingShouldSortNumbersBasedOnTheirLength() {
@@ -62,21 +86,22 @@ public class PhoneNumbersTest {
                                             phoneNumber2,       //999
                                             phoneNumber4        //10
         };
-        PhoneNumbers phoneNumbers = new PhoneNumbers(input1);
+        phoneNumbers.add(phoneNumber5); //98222
+        phoneNumbers.add(phoneNumber2); //999
+        phoneNumbers.add(phoneNumber4); //10
         phoneNumbers.sortArray();
         String expected1 = "10, 999, 9822";
 
         assertEquals(expected1, phoneNumbers.toString(), "The array should be sorted by length.");
-
     }
+
 
     @Test
     public void testShouldSortEqualLengthNumbersBasedOnTheirNumbersValues() {
-        PhoneNumber[] input1 = {        phoneNumber2,       //999
-                                        phoneNumber3,       //010
-                                        phoneNumber6        //100
-        };
-        PhoneNumbers phoneNumbers = new PhoneNumbers(input1);
+
+        phoneNumbers.add(phoneNumber2); ///999
+        phoneNumbers.add(phoneNumber3); //010
+        phoneNumbers.add(phoneNumber6); //100
         phoneNumbers.sortArray();
         String expected = "010, 100, 999";
 
@@ -85,17 +110,15 @@ public class PhoneNumbersTest {
     }
 
 
-
     @Test
     public void testShouldRetunrFalseWithTwoCompletelyDifferentNumbersAndOneWithSamePrefix() {
-        PhoneNumber[] t =  { phoneNumber1,      // 0100
-                             phoneNumber5,      // 9822
-                             phoneNumber3       // 010
 
-        };
-        PhoneNumbers phoneNumbers = new PhoneNumbers(t);
+        phoneNumbers.add(phoneNumber1); ///0100
+        phoneNumbers.add(phoneNumber5); //9822
+        phoneNumbers.add(phoneNumber3); //010
         assertFalse(phoneNumbers.isConsistent());
     }
+
 
     @Test
     public void testShouldReturnTrueWithOnePhoneNumberContainingOtherInTheEndOfTheNumber() {
@@ -104,9 +127,13 @@ public class PhoneNumbersTest {
                          phoneNumber6           //100
 
         };
-        PhoneNumbers phoneNumbers = new PhoneNumbers(t);
+        phoneNumbers.add(phoneNumber1);
+        phoneNumbers.add(phoneNumber5);
+        phoneNumbers.add(phoneNumber6);
         assertTrue(phoneNumbers.isConsistent());
     }
+
+
 
 
 
