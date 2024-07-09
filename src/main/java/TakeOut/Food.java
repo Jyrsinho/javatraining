@@ -12,6 +12,15 @@ public class Food implements PricedItem<Number>{
         this.price = price;
     }
 
+
+    public String getName() {
+        return this.name;
+    }
+
+    public String getDescription() {
+        return this.description;
+    }
+
     @Override
     public Number getPrice() {
         return this.price;
