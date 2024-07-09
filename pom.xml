@@ -31,7 +31,6 @@
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-api</artifactId>
             <version>${junit.version}</version>
-            <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.junit.jupiter</groupId>
@@ -39,13 +38,11 @@
             <version>${junit.version}</version>
             <scope>test</scope>
         </dependency>
-
-        <!-- TestNG dependency (jos käytät TestNG:tä JUnitin lisäksi) -->
         <dependency>
-            <groupId>org.testng</groupId>
-            <artifactId>testng</artifactId>
-            <version>7.10.2</version>
-            <scope>test</scope>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.13.1</version>
+            <scope>compile</scope>
         </dependency>
     </dependencies>
 
