@@ -1,20 +1,18 @@
 package PokerGame;
 
 
-import org.junit.Before;
-import org.junit.Test;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class DeckTest {
 
     private Deck deck;
 
-    @Before
+    @BeforeEach
     public void setUp() {
         deck = new Deck();
     }

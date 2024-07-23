@@ -1,8 +1,10 @@
 package PokerGame;
 
-import org.junit.Before;
-import org.junit.Test;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class CardTest {
 
@@ -11,7 +13,7 @@ public class CardTest {
     private Card fiveofDiamonds;
     private Card twoofClubs;
 
-    @Before
+    @BeforeEach
     public void setUp() {
         fiveOfHearts = new Card("hearts", 5);    // Base card
         tenOfSpades = new Card("spades", 10);   // Higher value card
@@ -41,9 +43,11 @@ public class CardTest {
         Assertions.assertEquals(0, fiveOfHearts.compareTo(fiveofDiamonds));
     }
 
-    @Test (expected = NullPointerException.class)
+    @Test
     public void testShouldThrowNullPointerExceptionWhenCardIsNull() {
-        fiveOfHearts.compareTo(null);
+        assertThrows(NullPointerException.class, () -> {
+            fiveOfHearts.compareTo(null);
+        });
     }
 
 

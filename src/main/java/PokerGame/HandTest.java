@@ -1,12 +1,9 @@
 package PokerGame;
 
-import static org.junit.jupiter.api.Assertions.*;
-
-import org.junit.Before;
-import org.junit.Ignore;
-import org.junit.Test;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.extension.Extension;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,7 +20,7 @@ public class HandTest {
     CardSorter sorter;
 
 
-    @Before
+    @BeforeEach
     public void beforeTests() {
         handOne = new Hand();
         fiveOfHearts = new Card("hearts", 5);
@@ -46,7 +43,7 @@ public class HandTest {
     }
 
 
-    @Ignore
+    @Disabled
     public void testShouldBeAbleToAddSeveralCardsToArrayList() throws TooManyElementsException {
         Assertions.assertEquals(0, handOne.getHandLength());
         handOne.addCardToHand(fiveOfHearts);

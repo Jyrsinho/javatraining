@@ -1,7 +1,7 @@
 package PokerGame;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -15,7 +15,7 @@ public class PokerGameTest {
     Hand hand2;
     Hand hand3;
 
-    @Before
+    @BeforeEach
     public void setUp() {
         game = new PokerGame();
         hand = new Hand();

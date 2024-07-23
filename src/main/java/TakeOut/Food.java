@@ -1,5 +1,6 @@
 package TakeOut;
 
+
 public class Food implements PricedItem<Number>{
 
     private String name;
@@ -35,4 +36,5 @@ public class Food implements PricedItem<Number>{
     public String toString(){
         return STR."\{name}: \{description}  Cost: $\{price}";
     }
+
 }

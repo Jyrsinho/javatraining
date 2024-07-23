@@ -1,8 +1,8 @@
 package PrefixPhoneNumbers;
 
-import org.junit.Before;
-import org.junit.Ignore;
-import org.junit.Test;
+
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -17,7 +17,7 @@ public class PhoneNumberTest {
     PhoneNumber phoneNumber3 = new PhoneNumber("999");
     PhoneNumber phoneNumber4 = new PhoneNumber("10");
 
-    @Before
+    @BeforeEach
     public void setUp(){
 
     }

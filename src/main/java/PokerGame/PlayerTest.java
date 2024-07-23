@@ -1,17 +1,16 @@
 package PokerGame;
 
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.jupiter.api.Assertions.*;
 
-import static org.junit.Assert.assertEquals;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class PlayerTest {
 
     private Player timo;
 
-    @Before
+    @BeforeEach
     public void setUp() {
         timo = new Player(null,"Timo", "blue");
     }
