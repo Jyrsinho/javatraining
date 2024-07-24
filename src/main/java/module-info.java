@@ -2,7 +2,6 @@ module org.example.javaharjoituksia {
     exports PokerGame;
     exports PrefixPhoneNumbers;
     exports TakeOut;
-    exports fxMainWindow;
     exports NumberConverter;
 
     requires javafx.controls;
