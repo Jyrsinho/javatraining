@@ -1,4 +1,4 @@
-package PokerGame;
+package Pokergametest;
 
 
 import org.junit.platform.suite.api.SelectClasses;

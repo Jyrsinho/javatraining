@@ -1,6 +1,7 @@
-package PokerGame;
+package Pokergametest;
 
 
+import PokerGame.Player;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

@@ -1,9 +1,11 @@
-package PokerGame;
+package Pokergametest;
 
+import PokerGame.*;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class HandEvaluatorTest {
 
@@ -40,7 +42,7 @@ public class HandEvaluatorTest {
         hand.addCardToHand(new Card("hearts", 10));
         hand.addCardToHand(new Card("clubs", 12));
 
-        assertEquals("High Card", handEvaluator.evaluateHand(hand));
+        Assertions.assertEquals("High Card", handEvaluator.evaluateHand(hand));
 
     }
 
@@ -53,7 +55,7 @@ public class HandEvaluatorTest {
         hand.addCardToHand(new Card("diamonds", 4));
         hand.addCardToHand(new Card("diamonds", 2));
 
-        assertEquals("Flush", handEvaluator.evaluateHand(hand));
+        Assertions.assertEquals("Flush", handEvaluator.evaluateHand(hand));
     }
 
     @Test
@@ -64,7 +66,7 @@ public class HandEvaluatorTest {
         hand.addCardToHand(new Card("diamonds", 4));
         hand.addCardToHand(new Card("diamonds", 2));
 
-        assertFalse(handEvaluator.checkIfFlush(hand));
+        Assertions.assertFalse(handEvaluator.checkIfFlush(hand));
     }
 
     @Test
@@ -75,7 +77,7 @@ public class HandEvaluatorTest {
         hand.addCardToHand(new Card("spades", 11));
         hand.addCardToHand(new Card("diamonds", 10));
 
-        assertEquals("Straight", handEvaluator.evaluateHand(hand));
+        Assertions.assertEquals("Straight", handEvaluator.evaluateHand(hand));
     }
 
     @Test
@@ -86,7 +88,7 @@ public class HandEvaluatorTest {
         hand.addCardToHand(new Card("diamonds", 4));
         hand.addCardToHand(new Card("diamonds", 2));
 
-        assertFalse(handEvaluator.checkIfStraight(hand));
+        Assertions.assertFalse(handEvaluator.checkIfStraight(hand));
     }
 
     @Test
@@ -97,7 +99,7 @@ public class HandEvaluatorTest {
         hand.addCardToHand(new Card("spades", 4));
         hand.addCardToHand(new Card("hearts", 2));
 
-        assertEquals("One Pair", handEvaluator.evaluateHand(hand));
+        Assertions.assertEquals("One Pair", handEvaluator.evaluateHand(hand));
     }
 
     @Test
@@ -108,7 +110,7 @@ public class HandEvaluatorTest {
         hand.addCardToHand(new Card("spades", 4));
         hand.addCardToHand(new Card("hearts", 2));
 
-        assertEquals(15, handEvaluator.createValueHistogramForHand(hand).length);
+        Assertions.assertEquals(15, handEvaluator.createValueHistogramForHand(hand).length);
     }
 
     @Test
@@ -119,9 +121,9 @@ public class HandEvaluatorTest {
         hand.addCardToHand(new Card("clubs", 14));
         hand.addCardToHand(new Card("clubs", 10));
         hand.addCardToHand(new Card("hearts", 14));
-        assertEquals(3, handEvaluator.createValueHistogramForHand(hand)[14]);
-        assertEquals(2, handEvaluator.createValueHistogramForHand(hand)[10]);
-        assertEquals(0, handEvaluator.createValueHistogramForHand(hand)[3]);
+        Assertions.assertEquals(3, handEvaluator.createValueHistogramForHand(hand)[14]);
+        Assertions.assertEquals(2, handEvaluator.createValueHistogramForHand(hand)[10]);
+        Assertions.assertEquals(0, handEvaluator.createValueHistogramForHand(hand)[3]);
     }
 
 
@@ -133,10 +135,10 @@ public class HandEvaluatorTest {
         hand.addCardToHand(new Card("spades", 4));
         hand.addCardToHand(new Card("hearts", 2));
 
-        assertEquals(2, handEvaluator.createValueHistogramForHand(hand)[14]);
-        assertEquals(1, handEvaluator.createValueHistogramForHand(hand)[10]);
-        assertEquals(1, handEvaluator.createValueHistogramForHand(hand)[4]);
-        assertEquals(1, handEvaluator.createValueHistogramForHand(hand)[2]);
+        Assertions.assertEquals(2, handEvaluator.createValueHistogramForHand(hand)[14]);
+        Assertions.assertEquals(1, handEvaluator.createValueHistogramForHand(hand)[10]);
+        Assertions.assertEquals(1, handEvaluator.createValueHistogramForHand(hand)[4]);
+        Assertions.assertEquals(1, handEvaluator.createValueHistogramForHand(hand)[2]);
     }
 
 
@@ -148,7 +150,7 @@ public class HandEvaluatorTest {
         hand.addCardToHand(new Card("clubs", 10));
         hand.addCardToHand(new Card("hearts", 2));
 
-        assertEquals("Two Pair", handEvaluator.evaluateHand(hand));
+        Assertions.assertEquals("Two Pair", handEvaluator.evaluateHand(hand));
 
     }
 
@@ -160,7 +162,7 @@ public class HandEvaluatorTest {
         hand.addCardToHand(new Card("diamonds", 7));
         hand.addCardToHand(new Card("diamonds", 6));
 
-        assertEquals("Straight Flush", handEvaluator.evaluateHand(hand));
+        Assertions.assertEquals("Straight Flush", handEvaluator.evaluateHand(hand));
     }
 
     @Test
@@ -171,7 +173,7 @@ public class HandEvaluatorTest {
         hand.addCardToHand(new Card("diamonds", 11));
         hand.addCardToHand(new Card("diamonds", 10));
 
-        assertEquals("Royal Flush", handEvaluator.evaluateHand(hand));
+        Assertions.assertEquals("Royal Flush", handEvaluator.evaluateHand(hand));
     }
 
 
@@ -179,13 +181,13 @@ public class HandEvaluatorTest {
     @Test
     public void testShouldReturnTrueIfHandHasAtLeastOnePair()  {
         int [] histogram = {0,0,0,0,4,};
-        assertTrue(handEvaluator.checkIfHandIsPaired(histogram));
+        Assertions.assertTrue(handEvaluator.checkIfHandIsPaired(histogram));
     }
 
     @Test
     public void testShouldReturnFalseIfHandHasNoPair()  {
         int [] histogram = {0,0,1,1,1,1,1};
-        assertFalse(handEvaluator.checkIfHandIsPaired(histogram));
+        Assertions.assertFalse(handEvaluator.checkIfHandIsPaired(histogram));
     }
 
 

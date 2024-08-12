@@ -1,6 +1,8 @@
-package PokerGame;
+package Pokergametest;
 
 
+import PokerGame.Card;
+import PokerGame.Deck;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -22,7 +24,7 @@ public class DeckTest {
     public void testShouldAddCardToDeck() {
         Assertions.assertEquals(0, deck.getLength());
 
-        Card fiveofHearts = new Card ("hearts", 5);
+        Card fiveofHearts = new Card("hearts", 5);
         deck.addCard(fiveofHearts);
         Assertions.assertEquals(1, deck.getLength());
 
@@ -42,7 +44,7 @@ public class DeckTest {
     public void testDeckSuitCounterShouldReturnOneIfDeckHasOneCardOfGivenSuit() {
         Assertions.assertEquals(0, deck.suitCounter("hearts"));
 
-        Card fiveofHearts = new Card ("hearts", 5);
+        Card fiveofHearts = new Card("hearts", 5);
         deck.addCard(fiveofHearts);
         Assertions.assertEquals(1, deck.suitCounter("hearts"));
 
@@ -52,13 +54,13 @@ public class DeckTest {
     @Test
     public void testDeckShouldInitializeDeckWith13Hearts() {
         deck.initialize();
-        Assertions.assertEquals(13,deck.suitCounter("hearts"));
+        Assertions.assertEquals(13, deck.suitCounter("hearts"));
     }
 
     @Test
     public void testDeckShouldInitializeDeckWith13Spades() {
         deck.initialize();
-        Assertions.assertEquals(13,deck.suitCounter("spades"));
+        Assertions.assertEquals(13, deck.suitCounter("spades"));
     }
 
     @Test

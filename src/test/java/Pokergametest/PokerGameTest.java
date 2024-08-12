@@ -1,5 +1,7 @@
-package PokerGame;
+package Pokergametest;
 
+import PokerGame.*;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -40,7 +42,7 @@ public class PokerGameTest {
 
         game.initialize();
         System.out.println(playerOne.getHand());
-        assertEquals(5, playerOne.getHand().getCards().size());
+        Assertions.assertEquals(5, playerOne.getHand().getCards().size());
     }
 
     @Test
@@ -48,11 +50,11 @@ public class PokerGameTest {
         game.initialize();
         System.out.println(playerOne.getHand());
         System.out.println(playerTwo.getHand());
-        assertNotEquals(playerTwo.getHand().getCards().get(0), playerTwo.getHand().getCards().get(1));
+        Assertions.assertNotEquals(playerTwo.getHand().getCards().get(0), playerTwo.getHand().getCards().get(1));
     }
 
     @Test
-    public void testShouldRemoveDealtCardsFromTheDeck() throws TooManyElementsException{
+    public void testShouldRemoveDealtCardsFromTheDeck() throws TooManyElementsException {
         game.initialize();
         assertEquals(42, game.getAmountOfCardsInDeck());
     }
@@ -76,8 +78,8 @@ public class PokerGameTest {
         hand2.addCardToHand(new Card("clubs", 10));
 
         game.updateHandValues();
-        assertEquals("Royal Flush", hand.getHandValue());
-        assertEquals("One Pair", hand2.getHandValue());
+        Assertions.assertEquals("Royal Flush", hand.getHandValue());
+        Assertions.assertEquals("One Pair", hand2.getHandValue());
     }
 
 
@@ -107,7 +109,7 @@ public class PokerGameTest {
     }
 
     @Test
-    public void testShouldDeclareHandWithThreeOfAKindWinnerOverHandWithOnePair() throws TooManyElementsException{
+    public void testShouldDeclareHandWithThreeOfAKindWinnerOverHandWithOnePair() throws TooManyElementsException {
         hand.addCardToHand(new Card("diamonds", 14));
         hand.addCardToHand(new Card("clubs", 13));
         hand.addCardToHand(new Card("diamonds", 12));
@@ -258,10 +260,10 @@ public class PokerGameTest {
 
         game.updateHandValues();
 
-        assertEquals("One Pair", hand.getHandValue());
-        assertEquals(8, hand.getRankingValue());
-        assertEquals("Flush", hand2.getHandValue());
-        assertEquals(4, hand2.getRankingValue());
+        Assertions.assertEquals("One Pair", hand.getHandValue());
+        Assertions.assertEquals(8, hand.getRankingValue());
+        Assertions.assertEquals("Flush", hand2.getHandValue());
+        Assertions.assertEquals(4, hand2.getRankingValue());
     }
 
     @Test

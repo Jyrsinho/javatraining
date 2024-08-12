@@ -1,5 +1,9 @@
-package PokerGame;
+package Pokergametest;
 
+import PokerGame.Card;
+import PokerGame.CardSorter;
+import PokerGame.Hand;
+import PokerGame.TooManyElementsException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;

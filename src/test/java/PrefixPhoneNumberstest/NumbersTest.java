@@ -1,5 +1,7 @@
-package PrefixPhoneNumbers;
+package PrefixPhoneNumberstest;
 
+import PrefixPhoneNumbers.Numbers;
+import PrefixPhoneNumbers.PhoneNumber;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -16,7 +18,7 @@ public class NumbersTest {
     PhoneNumber phoneNumber5;           // 9822
     PhoneNumber phoneNumber6;
 
-    Numbers <PhoneNumber> phoneNumbers;
+    Numbers<PhoneNumber> phoneNumbers;
     // Numbers <FaxNumber> faxNumbers;
 
    // FaxNumber faxNumber1;

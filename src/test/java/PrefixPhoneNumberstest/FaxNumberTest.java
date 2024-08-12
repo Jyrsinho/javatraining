@@ -1,6 +1,7 @@
-package PrefixPhoneNumbers;
+package PrefixPhoneNumberstest;
 
 
+import PrefixPhoneNumbers.FaxNumber;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
