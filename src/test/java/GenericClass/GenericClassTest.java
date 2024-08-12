@@ -26,4 +26,10 @@ public class GenericClassTest {
         Printer printer = new Printer();
         assertEquals( "String", printer.getDataAsClass("Hello"));
     }
+
+    @Test
+    public void testShouldDeclareIntegerAsIntegerWhenGivenInteger() {
+        Printer printer = new Printer();
+        assertEquals( "Integer", printer.getDataAsClass(123));
+    }
 }
