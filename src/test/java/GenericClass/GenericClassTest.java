@@ -10,7 +10,20 @@ public class GenericClassTest {
     public void testShouldPrintTheStringWhenGivenString() {
         Printer printer = new Printer();
 
-        assertEquals("Hello", printer.print("Hello"));
+        assertEquals("Hello", printer.getDataAsString("Hello"));
 
+    }
+
+    @Test
+    public void testShouldPrintTheIntegerWhenGivenInteger() {
+        Printer printer = new Printer();
+        assertEquals("123", printer.getDataAsString("123"));
+    }
+
+    @Test
+    public void testShouldDeclareStringAsStringWhenGivenString() {
+
+        Printer printer = new Printer();
+        assertEquals( "String", printer.getDataAsClass("Hello"));
     }
 }
