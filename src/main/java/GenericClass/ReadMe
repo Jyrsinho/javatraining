@@ -15,7 +15,7 @@ Constraints:
 
 Example:
 Input:
-2               0
+2               0   Length of Output = this * 2
 1               1   Divided by one = Integer or String
 gfg             2   Divided by two = value
 2               3

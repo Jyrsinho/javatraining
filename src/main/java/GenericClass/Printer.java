@@ -1,16 +1,19 @@
 package GenericClass;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+
 public class Printer<T> {
 
-    private T data;
-    private int amountOfValuesToPrint;
+    T data;
 
-    public Printer() {}
+    public Printer(T data){
+        this.data = data;
+    }
 
 
-    public String getDataAsString(T data) {
+    public String getDataAsString() {
 
-        System.out.println(data.getClass());
         System.out.println(data);
 
         return data.toString();
@@ -18,13 +21,23 @@ public class Printer<T> {
 
 
     public String getDataAsClass(T data) {
+        System.out.println(data.getClass());
+
         return data.getClass().getSimpleName();
+    }
+
+
+    public ArrayList<T> createOutput(T[] input) {
+
+        ArrayList<T> outPut = new ArrayList<>(Arrays.asList(input));
+
+
+        return outPut;
     }
 
 
 
     public static void main(String[] args) {
-        Printer printer = new Printer();
-        printer.getDataAsString("Auto");
+
     }
 }

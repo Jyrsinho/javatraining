@@ -5,39 +5,58 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class GenericClassTest {
+public class GenericClassTest<T> {
 
-    Printer printer;
+    Printer<T> printer;
+    T data;
 
     @BeforeEach
     void setUp() {
-        printer = new Printer();
     }
+
 
     @Test
     public void testShouldPrintTheStringWhenGivenString() {
-        assertEquals("Hello", printer.getDataAsString("Hello"));
+        String data = "Hello";
+        Printer<String> printer = new Printer<>(data);
+
+        assertEquals("Hello", printer.getDataAsString());
 
     }
+
 
     @Test
     public void testShouldPrintTheIntegerWhenGivenInteger() {
-        assertEquals("123", printer.getDataAsString("123"));
+        int data = 123;
+        Printer<Integer> printer = new Printer<>(data);
+        assertEquals("123", printer.getDataAsString());
     }
+
 
     @Test
     public void testShouldDeclareStringAsStringWhenGivenString() {
-
-        assertEquals( "String", printer.getDataAsClass("Hello"));
+        String data = "Hello";
+        Printer<String> printer = new Printer<>(data);
+        assertEquals( "String", printer.getDataAsClass(data));
     }
+
 
     @Test
     public void testShouldDeclareIntegerAsIntegerWhenGivenInteger() {
+        int data = 123;
+        Printer<Integer> printer = new Printer<>(data);
         assertEquals( "Integer", printer.getDataAsClass(123));
     }
 
-    @Test
-    public void testShouldReturnArray() {
+/*
+    @Disabled
+    public void testShouldReturnOutputArrayOfFourElements() {
+       T[] input = {2, 1,"gfg",2,5};
+
+
+       assertEquals(4,printer.createOutput(input).length);
 
     }
+
+ */
 }
