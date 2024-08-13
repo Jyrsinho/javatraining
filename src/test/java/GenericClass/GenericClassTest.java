@@ -37,7 +37,7 @@ public class GenericClassTest<T> {
     public void testShouldDeclareStringAsStringWhenGivenString() {
         String data = "Hello";
         Printer<String> printer = new Printer<>(data);
-        assertEquals( "String", printer.getDataAsClass(data));
+        assertEquals( "String", printer.getDataAsClass());
     }
 
 
@@ -45,7 +45,7 @@ public class GenericClassTest<T> {
     public void testShouldDeclareIntegerAsIntegerWhenGivenInteger() {
         int data = 123;
         Printer<Integer> printer = new Printer<>(data);
-        assertEquals( "Integer", printer.getDataAsClass(123));
+        assertEquals( "Integer", printer.getDataAsClass());
     }
 
 /*

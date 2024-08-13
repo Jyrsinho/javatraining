@@ -14,16 +14,21 @@ public class Printer<T> {
 
     public String getDataAsString() {
 
-        System.out.println(data);
+        print(data);
 
         return data.toString();
     }
 
 
-    public String getDataAsClass(T data) {
-        System.out.println(data.getClass());
-
+    public String getDataAsClass() {
+        System.out.println(data.getClass().getSimpleName());
+        print(data);
         return data.getClass().getSimpleName();
+    }
+
+
+    public <T> void print(T data){
+        System.out.println(data);
     }
 
 
