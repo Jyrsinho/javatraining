@@ -7,8 +7,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class GenericClassTest<T> {
 
-    Printer<T> printer;
-    T data;
 
     @BeforeEach
     void setUp() {
@@ -16,11 +14,11 @@ public class GenericClassTest<T> {
 
 
     @Test
-    public void testShouldPrintTheStringWhenGivenString() {
+    public void testShouldReturnTheStringWhenGivenString() {
         String data = "Hello";
-        Printer<String> printer = new Printer<>(data);
+        Generic<String> generic = new Generic<>(data);
 
-        assertEquals("Hello", printer.getDataAsString());
+        assertEquals("Hello", generic.getValue());
 
     }
 
@@ -28,35 +26,31 @@ public class GenericClassTest<T> {
     @Test
     public void testShouldPrintTheIntegerWhenGivenInteger() {
         int data = 123;
-        Printer<Integer> printer = new Printer<>(data);
-        assertEquals("123", printer.getDataAsString());
+        Generic<Integer> generic = new Generic<>(data);
+        assertEquals(123, generic.getValue());
     }
 
 
     @Test
     public void testShouldDeclareStringAsStringWhenGivenString() {
         String data = "Hello";
-        Printer<String> printer = new Printer<>(data);
-        assertEquals( "String", printer.getDataAsClass());
+        Generic<String> generic = new Generic<>(data);
+        assertEquals( "String", generic.showType());
     }
 
 
     @Test
     public void testShouldDeclareIntegerAsIntegerWhenGivenInteger() {
         int data = 123;
-        Printer<Integer> printer = new Printer<>(data);
-        assertEquals( "Integer", printer.getDataAsClass());
+        Generic<Integer> generic = new Generic<>(data);
+        assertEquals( "Integer", generic.showType());
     }
 
-/*
-    @Disabled
-    public void testShouldReturnOutputArrayOfFourElements() {
-       T[] input = {2, 1,"gfg",2,5};
-
-
-       assertEquals(4,printer.createOutput(input).length);
+    @Test
+    public void testShouldGiveAnOutputOfTwoLinesWhenGivenOneElementToPrint() {
 
     }
 
- */
+
+
 }
