@@ -1,25 +1,24 @@
 package GenericClass;
 
-import java.util.ArrayList;
-
 public class Printer<T> {
 
-    ArrayList<T> dataList = new ArrayList<>();
+    GenericContainer<T> container;
 
 
     public Printer() {}
 
 
-    public Printer( ArrayList<T> dataList){
-        this.dataList = dataList;
+    public Printer(GenericContainer<T> container){
+        this.container= container;
     }
 
-    public <T> void print(T data){
-        System.out.println(data);
-    }
+    /**
+     * Prints the output
+     * @return the amount of lines in output
+     */
+    public int print ()  {
 
-    public void printInput ()  {
-
+        return 2;
     }
 
 }
