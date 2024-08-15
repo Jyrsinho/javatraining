@@ -2,23 +2,29 @@ package GenericClass;
 
 public class Printer<T> {
 
-    GenericContainer<T> container;
 
 
-    public Printer() {}
-
-
-    public Printer(GenericContainer<T> container){
-        this.container= container;
+    public Printer() {
     }
 
-    /**
-     * Prints the output
-     * @return the amount of lines in output
-     */
-    public int print ()  {
 
-        return 2;
+    public  void print(T data) {
+        System.out.println(data.getClass().getSimpleName());
+        System.out.println(data);
+
     }
 
+    public static void main(String[] args) {
+
+        Integer int1 = 1;
+        Printer<Integer> Iprinter = new Printer<>();
+        Iprinter.print(int1);
+
+        String string = "Hello World";
+        Printer<String> sPrinter = new Printer<>();
+        sPrinter.print(string);
+
+
+
+    }
 }
