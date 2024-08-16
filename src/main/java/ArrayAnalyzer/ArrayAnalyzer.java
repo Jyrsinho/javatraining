@@ -15,13 +15,14 @@ public class ArrayAnalyzer {
      */
     public int[] createHistogram() {
 
-        int [] histogram = new int[10];
+        int MAX_RESPONSE = 10;
+        int []histogram= new int[MAX_RESPONSE];
 
-        for (int i = 0; i < histogram.length; i++) {
-            for (int j = 0; j < t.length; j++) {
-                if (t[j] == i) histogram[i]++;
-            }
+        for (int i = 0; i < t.length; i++) {
+            histogram[t[i]]++;
         }
+
+
         return histogram;
     }
 
