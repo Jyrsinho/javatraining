@@ -29,6 +29,16 @@ public class ArrayAnazylerTest {
 
     }
 
+    @Test
+    public void testHistogramShouldHaveTwoInIndexZeroAndTwoInIndexNine() {
+        int[] array = {0,0,9,9};
+        ArrayAnalyzer arrayAnalyzer = new ArrayAnalyzer(array);
+
+        int [] histogram = arrayAnalyzer.createHistogram();
+        assertEquals(2,histogram[0]);
+        assertEquals(2,histogram[9]);
+    }
+
     /*
     @Test
     public void testShouldReturnThreeFromArrayFullOfThrees() {

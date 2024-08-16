@@ -17,8 +17,10 @@ public class ArrayAnalyzer {
 
         int [] histogram = new int[10];
 
-        for (int i = 0; i < t.length; i++) {
-
+        for (int i = 0; i < histogram.length; i++) {
+            for (int j = 0; j < t.length; j++) {
+                if (t[j] == i) histogram[i]++;
+            }
         }
         return histogram;
     }
