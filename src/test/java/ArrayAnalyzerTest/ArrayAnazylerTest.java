@@ -15,6 +15,14 @@ public class ArrayAnazylerTest {
 
         assertEquals(3, arrayAnalyzer.findMode());
 
+    }
+
+    @Test
+    public void testShouldReturnFourFromArrayFullOfFours() {
+        int[] array = {4,4,4};
+        ArrayAnalyzer arrayAnalyzer = new ArrayAnalyzer(array);
+
+        assertEquals(4, arrayAnalyzer.findMode());
 
     }
 }
