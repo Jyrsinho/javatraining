@@ -36,6 +36,7 @@ public class ArrayAnalyzer {
         for (int i = 0; i < histogram.length; i++) {
             if (histogram[i] > largestmodeValue) {
                 mode = i;
+                largestmodeValue = histogram[i];
             }
         }
 

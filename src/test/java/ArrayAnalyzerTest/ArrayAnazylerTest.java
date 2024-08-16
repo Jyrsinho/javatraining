@@ -66,5 +66,13 @@ public class ArrayAnazylerTest {
         assertEquals(5, arrayAnalyzer.findMode());
     }
 
+    @Test
+    public void testShouldReturnZeroFromArraySixSixZeroZeroZero() {
+        int[] array = {6,6,0,0,0};
+        ArrayAnalyzer arrayAnalyzer = new ArrayAnalyzer(array);
+
+        assertEquals(0, arrayAnalyzer.findMode());
+    }
+
 
 }
