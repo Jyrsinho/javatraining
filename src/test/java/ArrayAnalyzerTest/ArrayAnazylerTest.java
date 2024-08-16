@@ -39,7 +39,7 @@ public class ArrayAnazylerTest {
         assertEquals(2,histogram[9]);
     }
 
-    /*
+
     @Test
     public void testShouldReturnThreeFromArrayFullOfThrees() {
         int[] array = {3,3,3,3,3};
@@ -66,5 +66,5 @@ public class ArrayAnazylerTest {
         assertEquals(5, arrayAnalyzer.findMode());
     }
 
-     */
+
 }

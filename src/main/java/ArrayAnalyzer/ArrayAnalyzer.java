@@ -31,10 +31,10 @@ public class ArrayAnalyzer {
         int []histogram = createHistogram();
 
         int mode = 0;
-        int modevalue = histogram[0];
+        int largestmodeValue = 0;
 
-        for (int i = 0; i < t.length; i++) {
-            if (histogram[i] < modevalue) {
+        for (int i = 0; i < histogram.length; i++) {
+            if (histogram[i] > largestmodeValue) {
                 mode = i;
             }
         }
