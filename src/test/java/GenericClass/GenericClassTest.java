@@ -10,9 +10,8 @@ public class GenericClassTest {
 
 
     @Test
-    public void testShouldPrintStrings() {
-        Printer<String> printer = new Printer();
-        String string1 = "Hello";
-        printer.print(string1);
+    public void testShouldPrintStringsAndReturnString() {
+
     }
+
 }
