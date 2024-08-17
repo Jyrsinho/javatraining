@@ -60,6 +60,13 @@ public class Student implements Comparable<Student> {
             return o1.getAge() - o2.getAge();
         }
     };
+
+    public static final Comparator<Student> BY_GRADE
+            = new Comparator<>() {
+        public int compare(Student o1, Student o2) {
+            return (int) (o1.getGrade() - o2.getGrade());
+        }
+    };
 }
 
 

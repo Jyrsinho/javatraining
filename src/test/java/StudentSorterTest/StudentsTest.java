@@ -5,6 +5,7 @@ import StudentSorter.Students;
 import org.junit.jupiter.api.Test;
 
 import static StudentSorter.Student.BY_AGE;
+import static StudentSorter.Student.BY_GRADE;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class StudentsTest {
@@ -64,6 +65,28 @@ public class StudentsTest {
 
     }
 
+    @Test
+    public void testShouldSortStudentsByGrade() {
+        Students students = new Students();
+        students.addStudent(new Student("Timo22", 22, 90));
+        students.addStudent(new Student("Timo25", 25, 90));
+        students.addStudent(new Student("Aapo2", 2, 99));
 
+        students.sort(BY_GRADE);
+
+        assertEquals("Timo22", students.getStudent(0).getName());
+
+    }
+
+    @Test
+    public void testShouldSortStudentsByAgeReverseOrder() {
+        Students students = new Students();
+        students.addStudent(new Student("Timo22", 22, 90));
+        students.addStudent(new Student("Timo25", 25, 90));
+        students.addStudent(new Student("Aapo2", 2, 99));
+
+        students.sort(BY_AGE.reversed());
+        assertEquals("Timo25", students.getStudent(0).getName());
+    }
 
 }
