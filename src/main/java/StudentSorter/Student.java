@@ -1,4 +1,4 @@
-package StundentSorter;
+package StudentSorter;
 
 public class Student {
 

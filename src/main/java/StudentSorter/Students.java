@@ -1,4 +1,4 @@
-package StundentSorter;
+package StudentSorter;
 
 public class Students {
 
@@ -41,6 +41,14 @@ public class Students {
 
     public void sort() {
 
+    }
+
+    /**
+     * returns the amount of students in students array
+     * @return  the amount of students in students array
+     */
+    public int getAmountOfStudents() {
+        return amountOfStudents;
     }
 
     public static void main(String[] args) {
