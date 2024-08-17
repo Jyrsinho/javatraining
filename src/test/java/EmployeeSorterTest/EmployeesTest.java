@@ -16,6 +16,16 @@ public class EmployeesTest {
 
         assertEquals(1, employees.getLength());
 
+    }
+
+    @Test
+    public void testShouldRemoveEmployees() {
+        Employees employees = new Employees();
+        Employee timo1 = new Employee("Timo1", 22, 2300);
+        employees.add(timo1);
+        employees.removeEmployee(timo1);
+
+        assertEquals(0, employees.getLength());
 
     }
 
