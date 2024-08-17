@@ -1,6 +1,7 @@
 package StudentSorter;
 
 import java.util.Arrays;
+import java.util.Comparator;
 
 public class Students {
 
@@ -56,12 +57,17 @@ public class Students {
     }
 
 
-    public void sortByAge () {
+    public void sort () {
 
        Arrays.sort(students);
 
     }
 
+
+    public void sort (Comparator<Student> theComparator) {
+        Arrays.sort(students, theComparator);
+
+    }
 
 
     public Student getStudent(int index) {

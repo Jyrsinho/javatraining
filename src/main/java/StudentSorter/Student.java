@@ -1,5 +1,7 @@
 package StudentSorter;
 
+import java.util.Comparator;
+
 public class Student implements Comparable<Student> {
 
     private String name;
@@ -51,6 +53,13 @@ public class Student implements Comparable<Student> {
     public int compareTo(Student o) {
         return this.name.compareTo(o.name);
     }
+
+    public static final Comparator<Student> BY_AGE
+            = new Comparator<>() {
+        public int compare(Student o1, Student o2) {
+            return o1.getAge() - o2.getAge();
+        }
+    };
 }
 
 
