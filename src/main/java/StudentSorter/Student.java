@@ -1,6 +1,6 @@
 package StudentSorter;
 
-public class Student {
+public class Student implements Comparable<Student> {
 
     private String name;
     private int age;
@@ -35,4 +35,18 @@ public class Student {
     public void setGrade(double grade) {
         this.grade = grade;
     }
+
+    @Override
+    public String toString() {
+        return "Student [name=" + name + ", age=" + age + ", grade=" + grade + "]";
+    }
+
+
+    @Override
+    public int compareTo(Student o) {
+        return this.age - o.age;
+    }
 }
+
+
+

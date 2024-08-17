@@ -1,17 +1,18 @@
 package StudentSorter;
 
+import java.util.Arrays;
+
 public class Students {
 
     Student [] students;
-    private final int MAX_ARRAY_SIZE = 10;
     private int  amountOfStudents = 0;
 
     public Students() {
-        this.students = new Student[MAX_ARRAY_SIZE];
+        this.students = new Student[amountOfStudents];
     }
 
     public void printStudents() {
-        for (int i = 0; i < MAX_ARRAY_SIZE; i++) {
+        for (int i = 0; i < amountOfStudents; i++) {
             System.out.println(students[i]);
         }
     }
@@ -21,7 +22,13 @@ public class Students {
      * @param student to be added
      */
     public void addStudent(Student student) {
-        students[amountOfStudents] = student;
+        Student [] newStudents = new Student[students.length + 1];
+        for (int i = 0; i < students.length; i++) {
+            newStudents[i] = students[i];
+        }
+
+        newStudents[amountOfStudents] = student;
+        students = newStudents;
         amountOfStudents++;
 
     }
@@ -39,9 +46,6 @@ public class Students {
         }
     }
 
-    public void sort() {
-
-    }
 
     /**
      * returns the amount of students in students array
@@ -51,10 +55,32 @@ public class Students {
         return amountOfStudents;
     }
 
+
+    public void sort () {
+
+       Arrays.sort(students);
+
+    }
+
+
+    public Student getStudent(int index) {
+        return students[index];
+
+    }
+
     public static void main(String[] args) {
 
 
         Students students = new Students();
+        Student student1 = new Student("Timo1", 5,90);
+        students.addStudent(student1);
+        Student student2 = new Student("Timo2", 2,90);
+        students.addStudent(student2);
+
+        System.out.println("Ennen sorttia:");
+        students.printStudents();
+        students.sort();
+        System.out.println("Sortin jalkeen:");
         students.printStudents();
     }
 }
