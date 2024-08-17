@@ -38,16 +38,18 @@ public class StudentsTest {
     }
 
     @Test
-    public void testShouldSortStudentsByAge() {
+    public void testShouldSortStudentsname() {
 
         Students students = new Students();
         students.addStudent(new Student("Timo22", 22, 90));
         students.addStudent(new Student("Timo25", 25, 90));
-        students.addStudent(new Student("Timo2", 2, 99));
+        students.addStudent(new Student("Aapo2", 2, 99));
 
-        students.sort();
-        assertEquals("Timo2", students.getStudent(0).getName());
+        students.sortByAge();
+        assertEquals("Aapo2", students.getStudent(0).getName());
 
     }
+
+
 
 }

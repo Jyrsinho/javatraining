@@ -41,10 +41,15 @@ public class Student implements Comparable<Student> {
         return "Student [name=" + name + ", age=" + age + ", grade=" + grade + "]";
     }
 
-
+    /**
+     * Natural sorting order. Sorts students based on their names.
+     * @param o the object to be compared.
+     * @return negative if this is smaller than o, 0 if both students have equal values, 1 if
+     * o is larger.
+     */
     @Override
     public int compareTo(Student o) {
-        return this.age - o.age;
+        return this.name.compareTo(o.name);
     }
 }
 

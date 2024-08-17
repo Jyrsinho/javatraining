@@ -56,11 +56,12 @@ public class Students {
     }
 
 
-    public void sort () {
+    public void sortByAge () {
 
        Arrays.sort(students);
 
     }
+
 
 
     public Student getStudent(int index) {
@@ -71,16 +72,5 @@ public class Students {
     public static void main(String[] args) {
 
 
-        Students students = new Students();
-        Student student1 = new Student("Timo1", 5,90);
-        students.addStudent(student1);
-        Student student2 = new Student("Timo2", 2,90);
-        students.addStudent(student2);
-
-        System.out.println("Ennen sorttia:");
-        students.printStudents();
-        students.sort();
-        System.out.println("Sortin jalkeen:");
-        students.printStudents();
     }
 }
