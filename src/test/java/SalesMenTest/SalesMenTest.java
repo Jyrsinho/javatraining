@@ -34,6 +34,27 @@ public class SalesMenTest {
         int [] t = {1,2,3};
         assertEquals(2, findMedian(t));
 
+    }
+
+    @Test
+    public void testShouldReturnMedianFromArrayOfUnevenAmountOfIntegers2() {
+        int [] t = {1,2,3,4,5};
+        assertEquals(3, findMedian(t));
+
+    }
+
+
+    @Test
+    public void testShouldReturnMedianFromArrayOfEvenAmountOfIntegers() {
+        int [] t = {1,2,3,4};
+        assertEquals(2.5, findMedian(t));
+
+    }
+
+    @Test
+    public void testShouldReturnMedianFromArrayOfEvenAmountOfIntegers2() {
+        int [] t = {0,1,2,3,4,5,6,7,8,9};
+        assertEquals(4.5, findMedian(t));
 
     }
 
