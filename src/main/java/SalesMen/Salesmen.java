@@ -50,7 +50,7 @@ public class Salesmen {
 
     public static int findBestMedianSales(int [][]sales) {
 
-        double currentMedian = 0;
+        double currentMedian;
         double bestMedian = 0;
         int bestMedianholder = 0;
 
