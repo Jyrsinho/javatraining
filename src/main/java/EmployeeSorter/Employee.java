@@ -1,6 +1,8 @@
 package EmployeeSorter;
 
-public class Employee {
+import java.util.Comparator;
+
+public class Employee implements Comparable<Employee> {
 
     private String name;
     private int age;
@@ -38,6 +40,17 @@ public class Employee {
     public void setSalary(double salary) {
         this.salary = salary;
     }
+
+    @Override
+    public int compareTo(Employee o) {
+        return this.name.compareTo(o.name);
+    }
+
+    // Comparator to compare Employees by age
+    public static final Comparator<Employee> BY_AGE = Comparator.comparingInt(Employee::getAge);
+
+    // Comparator to compare Employees by salary
+    public static final Comparator<Employee> BY_SALARY = Comparator.comparingDouble(Employee::getSalary);
 }
 
 

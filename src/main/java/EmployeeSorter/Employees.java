@@ -1,6 +1,7 @@
 package EmployeeSorter;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 
 public class Employees {
 
@@ -24,5 +25,21 @@ public class Employees {
 
     public ArrayList<Employee> getEmployees() {
         return employees;
+    }
+
+    public void sort() {
+
+        employees.sort(null);
+
+    }
+
+    public void sort(Comparator<Employee> comparator) {
+
+        employees.sort(comparator);
+
+    }
+
+    public Employee get(int index) {
+        return employees.get(index);
     }
 }
