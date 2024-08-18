@@ -2,13 +2,20 @@ package SalesMenTest;
 
 import org.junit.jupiter.api.Test;
 
-import static SalesMen.Salesmen.bestAverage;
-import static SalesMen.Salesmen.findMedian;
+import static SalesMen.Salesmen.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class SalesMenTest {
 
 
+
+    @Test
+    public void testShouldReturnAverageSale() {
+        int[] sales = {1,2,3};
+
+        assertEquals(2, countAverageSales(sales));
+
+    }
 
     @Test
     public void testShouldReturnBestAverage() {

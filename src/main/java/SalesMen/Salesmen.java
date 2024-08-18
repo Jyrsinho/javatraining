@@ -20,16 +20,15 @@ public class Salesmen {
 
     public static int bestAverage(int [][]sales) {
 
-        int highestAverage = 0;
+        double highestAverage = 0;
+        double currentAverage = 0;
         int highestAverageSalesman = 0;
-        int sum = 0;
 
         for (int i = 0; i < sales.length; i++) {
-            for (int j = 0; j < sales[i].length; j++) {
-            sum += sales[i][j];
-            }
-            if (sum / sales[i].length > highestAverage) {
-                highestAverage = sum / sales[i].length;
+            currentAverage = countAverageSales(sales[i]);
+
+            if (currentAverage > highestAverage) {
+                highestAverage = currentAverage;
                 highestAverageSalesman = i;
             }
         }
@@ -38,7 +37,18 @@ public class Salesmen {
         }
 
 
-    public static int bestMedian(int [][]sales) {
+    public static double countAverageSales(int []sales) {
+        int sum = 0;
+
+        for (int i = 0; i < sales.length; i++) {
+            sum += sales[i];
+        }
+
+        return sum / sales.length;
+
+    }
+
+    public static int findBestMedianSales(int [][]sales) {
 
         int currentMedian = 0;
         int bestMedian = 0;
