@@ -1,6 +1,5 @@
 package SalesMenTest;
 
-import org.junit.Ignore;
 import org.junit.jupiter.api.Test;
 
 import static SalesMen.Salesmen.*;
@@ -95,7 +94,7 @@ public class SalesMenTest {
         assertFalse(arrayIsAscending(t));
     }
 
-    @Ignore
+    @Test
     public void testShouldReturnFalseThatArrayIsSorted2(){
         int []t = {3,2,1};
         assertTrue(arrayIsSorted(t));

@@ -85,9 +85,15 @@ public class Salesmen {
         boolean arrayIsAscending = arrayIsAscending(t);
 
         for (int i = 0; i < t.length-1; i++) {
-            if (t[i] > t[i+1]) {
+            if (arrayIsAscending && t[i] > t[i+1]) {
                 sorted = false;
+                break;
             }
+            if (!arrayIsAscending && t[i] < t[i+1]) {
+                sorted = false;
+                break;
+            }
+
         }
 
         return sorted;
