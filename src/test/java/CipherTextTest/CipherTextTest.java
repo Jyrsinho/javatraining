@@ -14,4 +14,11 @@ public class CipherTextTest {
         assertEquals("BVUP", cipherText.encrypt());
 
     }
+
+    @Test
+    public void testCipherText2() {
+        CipherText cipherText = new CipherText("BABA");
+
+        assertEquals("CBCB", cipherText.encrypt());
+    }
 }
