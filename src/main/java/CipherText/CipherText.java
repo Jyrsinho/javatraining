@@ -37,15 +37,23 @@ public class CipherText {
 
         for (int i = 0; i < plainText.length(); i++) {
             int charactersIndex = findCharIndexFromAlphabet(plainText.charAt(i));
-
-            if (charactersIndex + factor * steps > alphabet.length-1 ||charactersIndex + factor * steps < 0 ){
-                cryptedText.append(alphabet[charactersIndex + factor * steps + factor * -1 *alphabet.length]);
-            } else {
-                cryptedText.append(alphabet[charactersIndex + factor * steps]);
-            }
+            cryptedText.append(findCharacterToBeAppended(charactersIndex,factor,steps));
         }
 
         return cryptedText.toString();
+    }
+
+
+    public char findCharacterToBeAppended(int oCharacterIndex, int factor, int steps) {
+        int newCharacterIndex;
+
+        if (oCharacterIndex + factor * steps > alphabet.length-1 ||oCharacterIndex + factor * steps < 0 ){
+            newCharacterIndex = oCharacterIndex + factor * steps - factor  * alphabet.length;
+        } else {
+            newCharacterIndex = oCharacterIndex + factor * steps;
+        }
+
+        return alphabet[newCharacterIndex];
     }
 
     /**
