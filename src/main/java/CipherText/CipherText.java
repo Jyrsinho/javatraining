@@ -2,17 +2,21 @@ package CipherText;
 
 public class CipherText {
 
-    private char[] alphabet = {
+    private final char[] alphabet = {
             'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J',
             'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T',
             'U', 'V', 'W', 'X', 'Y', 'Z'
     };
+
+    private char[] randomAlphabet;
 
 
     private final String plainText;
     private final int steps;
     private final boolean reversed;
     private String cryptedText;
+
+
 
     /**
      * Constructor
@@ -29,8 +33,25 @@ public class CipherText {
         return plainText;
     }
 
+
+    public int getAlphabetLength() {
+        return alphabet.length;
+    }
+
+
     public void setCryptedText(String cryptedText) {
         this.cryptedText = cryptedText;
+    }
+
+
+    public char[]  createRandomAlphabet() {
+        char[] randomAlphabet = new char[alphabet.length];
+
+        for (int i = 0; i < alphabet.length; i++) {
+            randomAlphabet[i] = alphabet[i];
+        }
+
+        return randomAlphabet;
     }
 
 

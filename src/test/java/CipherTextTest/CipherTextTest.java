@@ -3,7 +3,7 @@ package CipherTextTest;
 import CipherText.CipherText;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class CipherTextTest {
 
@@ -55,6 +55,25 @@ public class CipherTextTest {
         CipherText cipherText = new CipherText("ABBA",2,true);
         cipherText.encrypt();
         assertEquals("ABBA", cipherText.decrypt());
+    }
+
+    @Test
+    public void testShouldCreateRandomAlphabetOfSameLengthAsOriginal() {
+        CipherText cipherText = new CipherText("ABBA",1,false);
+
+        char []randomAlphabet = cipherText.createRandomAlphabet();
+
+        assertEquals(cipherText.getAlphabetLength(), randomAlphabet.length);
+
+    }
+
+
+    @Test
+    public void testShouldCreateRandomAlphabet() {
+        CipherText cipherText = new CipherText("ABBA",1,false);
+        char []randomAlphabet = cipherText.createRandomAlphabet();
+
+        assertNotEquals('A', randomAlphabet[0]);
     }
 
 }
