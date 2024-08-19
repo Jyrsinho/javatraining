@@ -70,9 +70,16 @@ public class SalesMenTest {
 
     @Test
     public void testShouldReturnTrueThatArrayIsSorted(){
-        int []t = {1,2,3,4,5,6,7,8,9};
+        int []t = {1,2,3};
 
         assertEquals(true, arrayIsSorted(t));
+    }
+
+    @Test
+    public void testShouldReturnFalseThatArrayIsNotSorted(){
+        int []t = {1,3,2};
+
+        assertEquals(false, arrayIsSorted(t));
     }
 
 }

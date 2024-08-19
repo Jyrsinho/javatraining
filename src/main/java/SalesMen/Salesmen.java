@@ -80,4 +80,16 @@ public class Salesmen {
         return median;
     }
 
+    public static boolean arrayIsSorted(int []t) {
+        boolean sorted = true;
+
+        for (int i = 0; i < t.length-1; i++) {
+            if (t[i] > t[i+1]) {
+                sorted = false;
+            }
+        }
+
+        return sorted;
+    }
+
 }
