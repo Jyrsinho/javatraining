@@ -11,7 +11,7 @@ public class CipherTextTest {
     public void testCipherText() {
         CipherText cipherText = new CipherText("AUTO");
 
-        assertEquals("BVUP", cipherText.encrypt());
+        assertEquals("BVUP", cipherText.encrypt(1, false));
 
     }
 
@@ -19,6 +19,13 @@ public class CipherTextTest {
     public void testCipherText2() {
         CipherText cipherText = new CipherText("BABA");
 
-        assertEquals("CBCB", cipherText.encrypt());
+        assertEquals("CBCB", cipherText.encrypt(1, false));
+    }
+
+    @Test
+    public void testShouldReturnCipherTextWhenPlainTextCharsAtTheEndOfAlphabet() {
+        CipherText cipherText = new CipherText("ZORRO");
+
+        assertEquals("APSSP", cipherText.encrypt(1, false));
     }
 }

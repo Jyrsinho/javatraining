@@ -8,6 +8,7 @@ public class CipherText {
             'U', 'V', 'W', 'X', 'Y', 'Z'
     };
 
+
     private final String plainText;
 
     /**
@@ -28,12 +29,16 @@ public class CipherText {
      * Encrypts the plaintext attribute of the CipherText object
      * @return encrypted version of the plaintext
      */
-    public String encrypt() {
+    public String encrypt(int steps, boolean reversed) {
         StringBuilder cryptedText = new StringBuilder();
 
         for (int i = 0; i < plainText.length(); i++) {
             int charactersIndex = findCharIndexFromAlphabet(plainText.charAt(i));
-            cryptedText.append(alphabet[charactersIndex+1]);
+            if (charactersIndex == alphabet.length-1){
+                cryptedText.append(alphabet[0]);
+            } else {
+                cryptedText.append(alphabet[charactersIndex + 1]);
+            }
         }
 
         return cryptedText.toString();
