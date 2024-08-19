@@ -27,6 +27,8 @@ public class ArrayAnalyzer {
     }
 
 
+
+
     public int findMode() {
 
         int []histogram = createHistogram();
@@ -40,7 +42,6 @@ public class ArrayAnalyzer {
                 largestmodeValue = histogram[i];
             }
         }
-
         return mode;
     }
 }

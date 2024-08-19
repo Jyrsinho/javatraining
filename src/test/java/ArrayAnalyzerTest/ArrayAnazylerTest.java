@@ -74,6 +74,22 @@ public class ArrayAnazylerTest {
         assertEquals(0, arrayAnalyzer.findMode());
     }
 
+    @Test
+    public void testShouldReturnTheModeFromArray() {
+        int[] array = {1,1,4,4,4,2,2};
+        ArrayAnalyzer arrayAnalyzer = new ArrayAnalyzer(array);
+        assertEquals(4, arrayAnalyzer.findMode());
+    }
+
+    @Test
+    public void testShouldReturnTheModeFromArray2() {
+        int[] array = {1,2,3,7,4,5,6,7,8,9};
+        ArrayAnalyzer arrayAnalyzer = new ArrayAnalyzer(array);
+        assertEquals(7, arrayAnalyzer.findMode());
+    }
+
+
+
 
 
 
