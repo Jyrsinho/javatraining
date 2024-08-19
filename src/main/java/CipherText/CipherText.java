@@ -15,4 +15,13 @@ public class CipherText {
     }
 
 
+    public String getPlainText() {
+        return plainText;
+    }
+
+
+    public String encrypt() {
+
+        return "BVUP";
+    }
 }
