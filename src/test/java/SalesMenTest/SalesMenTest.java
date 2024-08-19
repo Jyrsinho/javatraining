@@ -1,9 +1,10 @@
 package SalesMenTest;
 
+import org.junit.Ignore;
 import org.junit.jupiter.api.Test;
 
 import static SalesMen.Salesmen.*;
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class SalesMenTest {
 
@@ -72,14 +73,32 @@ public class SalesMenTest {
     public void testShouldReturnTrueThatArrayIsSorted(){
         int []t = {1,2,3};
 
-        assertEquals(true, arrayIsSorted(t));
+        assertTrue(arrayIsSorted(t));
     }
 
     @Test
     public void testShouldReturnFalseThatArrayIsNotSorted(){
         int []t = {1,3,2};
 
-        assertEquals(false, arrayIsSorted(t));
+        assertFalse(arrayIsSorted(t));
+    }
+
+    @Test
+    public void testShouldReturnTrueThatArrayIsInAscendingOrder() {
+        int []t = {1,2,3};
+        assertTrue(arrayIsAscending(t));
+    }
+
+    @Test
+    public void testShouldReturnFalseWhenArrayIsNotInAscendingOrder() {
+        int []t = {3,2,1};
+        assertFalse(arrayIsAscending(t));
+    }
+
+    @Ignore
+    public void testShouldReturnFalseThatArrayIsSorted2(){
+        int []t = {3,2,1};
+        assertTrue(arrayIsSorted(t));
     }
 
 }

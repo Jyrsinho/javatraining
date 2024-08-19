@@ -82,6 +82,7 @@ public class Salesmen {
 
     public static boolean arrayIsSorted(int []t) {
         boolean sorted = true;
+        boolean arrayIsAscending = arrayIsAscending(t);
 
         for (int i = 0; i < t.length-1; i++) {
             if (t[i] > t[i+1]) {
@@ -90,6 +91,12 @@ public class Salesmen {
         }
 
         return sorted;
+    }
+
+    public static boolean arrayIsAscending(int []t) {
+        if (t.length == 1) return true;
+        return t[0] < t[1];
+
     }
 
 }
