@@ -12,20 +12,25 @@ public class CipherText {
     private final String plainText;
     private final int steps;
     private final boolean reversed;
+    private String cryptedText;
 
     /**
      * Constructor
      * @param plainText plaintext
      */
-    public CipherText(String plainText, int steps, boolean revesed) {
+    public CipherText(String plainText, int steps, boolean reversed) {
         this.plainText = plainText;
         this.steps = steps;
-        this.reversed = revesed;
+        this.reversed = reversed;
     }
 
 
     public String getPlainText() {
         return plainText;
+    }
+
+    public void setCryptedText(String cryptedText) {
+        this.cryptedText = cryptedText;
     }
 
 
@@ -44,18 +49,26 @@ public class CipherText {
             cryptedText.append(findCharacterToBeAppended(charactersIndex,factor,steps));
         }
 
+        this.cryptedText = cryptedText.toString();
         return cryptedText.toString();
     }
 
-    /*
 
-    public String decrypt(String cipherText, int steps, boolean reversed) {
+    public String decrypt() {
+        StringBuilder decryptedText = new StringBuilder();
+        int factor;
+        if (reversed) factor = 1;
+        else factor = -1;
 
-        // If you want to decrypt the encrypted message you just have to reverse the boolean reversed.
-        String decryptedString = encrypt(steps *-1, reversed);
+        for (int i = 0; i < cryptedText.length(); i++) {
+            int charactersIndex = findCharIndexFromAlphabet(cryptedText.charAt(i));
+            decryptedText.append(findCharacterToBeAppended(charactersIndex,factor,steps));
+        }
+
+        return decryptedText.toString();
     }
 
-     */
+
 
 
     public char findCharacterToBeAppended(int oCharacterIndex, int factor, int steps) {

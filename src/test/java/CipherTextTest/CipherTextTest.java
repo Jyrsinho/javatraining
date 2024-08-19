@@ -49,7 +49,7 @@ public class CipherTextTest {
 
         assertEquals("XYYX", cipherText.encrypt());
     }
-/*
+
     @Test
     public void testShouldConvertCipherTextBackToPlaintext() {
         CipherText cipherText = new CipherText("ABBA",2,true);
@@ -57,6 +57,4 @@ public class CipherTextTest {
         assertEquals("ABBA", cipherText.decrypt());
     }
 
-
- */
 }
