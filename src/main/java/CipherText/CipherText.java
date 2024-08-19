@@ -31,13 +31,17 @@ public class CipherText {
      */
     public String encrypt(int steps, boolean reversed) {
         StringBuilder cryptedText = new StringBuilder();
+        int factor;                                     //determines whether we move forwards or backwards in alphabet array
+        if (reversed) factor = -1;
+        else factor = 1;
 
         for (int i = 0; i < plainText.length(); i++) {
             int charactersIndex = findCharIndexFromAlphabet(plainText.charAt(i));
-            if (charactersIndex == alphabet.length-1){
-                cryptedText.append(alphabet[0]);
+
+            if (charactersIndex + factor * steps > alphabet.length-1 ||charactersIndex + factor * steps < 0 ){
+                cryptedText.append(alphabet[charactersIndex + factor * steps + factor * -1 *alphabet.length]);
             } else {
-                cryptedText.append(alphabet[charactersIndex + 1]);
+                cryptedText.append(alphabet[charactersIndex + factor * steps]);
             }
         }
 

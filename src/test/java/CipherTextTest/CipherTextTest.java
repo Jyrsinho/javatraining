@@ -28,4 +28,25 @@ public class CipherTextTest {
 
         assertEquals("APSSP", cipherText.encrypt(1, false));
     }
+
+    @Test
+    public void testShouldGiveProperCipherTextWhenThreeStepsAtTheEndOfAlphabet() {
+        CipherText cipherText = new CipherText("ZYX");
+
+        assertEquals("CBA", cipherText.encrypt(3, false));
+    }
+
+    @Test
+    public void testShouldGiveProperCipherTextWhenGoingBackWardsInAlphabet() {
+        CipherText cipherText = new CipherText("ABBA");
+        assertEquals("ZAAZ", cipherText.encrypt(1, true));
+
+    }
+
+    @Test
+    public void testShouldGiveProperCipherTextWhenThreeStepsAtTheBeginningOfAlphabet() {
+        CipherText cipherText = new CipherText("ABBA");
+
+        assertEquals("XYYX", cipherText.encrypt(3, true));
+    }
 }
