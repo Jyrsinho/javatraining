@@ -96,8 +96,16 @@ public class StudentsTest {
     }
 
     @Test
-    public void getGradeQuartiles() {
+    public void testShouldFindTheGradeGradeMedian() {
         Students students = new Students();
+        students.addStudent(new Student("Timo22", 22, 0));
+        students.addStudent(new Student("Timo25", 22, 25));
+        students.addStudent(new Student("Timo50", 22, 50));
+        students.addStudent(new Student("Timo75", 25, 75));
+        students.addStudent(new Student("Timo100", 2, 100));
+
+        assertEquals(50 ,students.findMedian());
+
     }
 
 }
