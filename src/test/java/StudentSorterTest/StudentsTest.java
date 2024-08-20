@@ -7,6 +7,7 @@ import org.junit.jupiter.api.Test;
 
 import static StudentSorter.Student.BY_AGE;
 import static StudentSorter.Student.BY_GRADE;
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class StudentsTest {
@@ -188,6 +189,30 @@ public class StudentsTest {
         students.addStudent(new Student("Timo75", 22, 75));
 
         assertEquals(62.5, students.findThirdQuartile());
+    }
+
+    @Test
+    public void testShouldReturnArrayOfQuartiles() {
+        students.addStudent(new Student("Timo22", 22, 1));
+        students.addStudent(new Student("Timo25", 22, 49));
+        students.addStudent(new Student("Timo24", 22, 50));
+        students.addStudent(new Student("Timo75", 22, 75));
+
+        double[] expected = new double []{25, 49.5, 62.5};
+        assertArrayEquals(expected, students.getQuartiles());
+    }
+
+    @Test
+    public void testShouldReturnArrayOfQuartiles2() {
+        students.addStudent(new Student("Timo22", 22, 1));
+        students.addStudent(new Student("Timo25", 22, 49));
+        students.addStudent(new Student("Timo24", 22, 50));
+        students.addStudent(new Student("Timo75", 22, 75));
+        students.addStudent(new Student("Kaapo2", 2, 99));
+
+        double [] expected = new double []{25, 50, 87};
+        assertArrayEquals(expected, students.getQuartiles());
+
     }
 
 }

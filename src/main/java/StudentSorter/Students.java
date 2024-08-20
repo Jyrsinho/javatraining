@@ -80,6 +80,20 @@ public class Students {
 
     }
 
+    public double[] getQuartiles() {
+
+        double[] quartiles = new double[3];
+        quartiles[0] = findFirstQuartile();
+        quartiles[1] = findMedian(getStudents());
+        quartiles[2] = findThirdQuartile();
+
+
+        for (double quartile : quartiles) {
+            System.out.println(quartile);
+        }
+
+        return quartiles;
+    }
 
     public double findMedian(Student [] studentarray) {
         sort(BY_GRADE);
