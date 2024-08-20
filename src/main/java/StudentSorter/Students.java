@@ -3,6 +3,8 @@ package StudentSorter;
 import java.util.Arrays;
 import java.util.Comparator;
 
+import static StudentSorter.Student.BY_GRADE;
+
 public class Students {
 
     Student [] students;
@@ -71,8 +73,11 @@ public class Students {
 
 
     public double findMedian() {
+        sort(BY_GRADE);
 
-        return students[students.length/2].getGrade();
+        if (students.length % 2 == 1) return students[students.length/2].getGrade();
+
+        else return (students[students.length/2].getGrade() + students[students.length/2 - 1].getGrade()) / 2;
     }
 
 

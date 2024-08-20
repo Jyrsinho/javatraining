@@ -96,7 +96,7 @@ public class StudentsTest {
     }
 
     @Test
-    public void testShouldFindTheGradeGradeMedian() {
+    public void testShouldFindTheGradeGradeMedianFromUnevenLengthArray() {
         students.addStudent(new Student("Timo22", 22, 0));
         students.addStudent(new Student("Timo25", 22, 25));
         students.addStudent(new Student("Timo50", 22, 50));
@@ -108,11 +108,29 @@ public class StudentsTest {
     }
 
     @Test
-    public void testShouldFindTheGradeGradeMedian2() {
+    public void testShouldFindTheGradeGradeMedianFromUnevenLengthArray2() {
         students.addStudent(new Student("Timo22", 22, 0));
         students.addStudent(new Student("Timo25", 22, 25));
         students.addStudent(new Student("Timo50", 22, 50));
 
+        assertEquals(25 ,students.findMedian());
+    }
+
+
+    @Test
+    public void testShouldFindTheGradeMedianFromEvenLengthArray() {
+        students.addStudent(new Student("Timo22", 22, 0));
+        students.addStudent(new Student("Timo25", 22, 25));
+
+        assertEquals(12.5, students.findMedian());
+    }
+
+    @Test
+    public void testShouldFindMedianFromUnsortedArray() {
+        students.addStudent(new Student("Timo22", 22, 0));
+        students.addStudent(new Student("Timo25", 22, 25));
+        students.addStudent(new Student("Aapo2", 2, 99));
+        students.sort();
         assertEquals(25 ,students.findMedian());
     }
 
