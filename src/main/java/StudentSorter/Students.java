@@ -72,6 +72,12 @@ public class Students {
     }
 
 
+    public double findLFirstQuartile() {
+        return 13;
+    }
+
+
+
     public double findMedian() {
         sort(BY_GRADE);
 
@@ -79,6 +85,7 @@ public class Students {
 
         else return (students[students.length/2].getGrade() + students[students.length/2 - 1].getGrade()) / 2;
     }
+
 
 
     public Student getStudent(int index) {

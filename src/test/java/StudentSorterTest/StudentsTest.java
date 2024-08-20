@@ -134,4 +134,17 @@ public class StudentsTest {
         assertEquals(25 ,students.findMedian());
     }
 
+    @Test
+    public void testShouldFindFirstQuartile() {
+        students.addStudent(new Student("Timo22", 22, 1));
+        students.addStudent(new Student("Timo25", 22, 25));
+        students.addStudent(new Student("Aapo2", 2, 99));
+        students.addStudent(new Student("Timo24", 22, 50));
+        students.addStudent(new Student("Timo75", 22, 75));
+
+        assertEquals(13 ,students.findLFirstQuartile());
+    }
+
+
+
 }
