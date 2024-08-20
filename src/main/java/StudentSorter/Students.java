@@ -49,6 +49,9 @@ public class Students {
         }
     }
 
+    public Student[] getStudents() {
+        return students;
+    }
 
     /**
      * returns the amount of students in students array
@@ -72,18 +75,22 @@ public class Students {
     }
 
 
-    public double findLFirstQuartile() {
-        return 13;
+    public double findFirstQuartile() {
+        Student [] lowerHalf = new Student [amountOfStudents/2];
+
+        System.arraycopy(students, 0, lowerHalf, 0, lowerHalf.length);
+
+        return findMedian(lowerHalf);
     }
 
 
 
-    public double findMedian() {
+    public double findMedian(Student [] studentarray) {
         sort(BY_GRADE);
 
-        if (students.length % 2 == 1) return students[students.length/2].getGrade();
+        if (studentarray.length % 2 == 1) return studentarray[studentarray.length/2].getGrade();
 
-        else return (students[students.length/2].getGrade() + students[students.length/2 - 1].getGrade()) / 2;
+        else return (studentarray[studentarray.length/2].getGrade() + studentarray[studentarray.length/2 - 1].getGrade()) / 2;
     }
 
 

@@ -103,7 +103,7 @@ public class StudentsTest {
         students.addStudent(new Student("Timo75", 25, 75));
         students.addStudent(new Student("Timo100", 2, 100));
 
-        assertEquals(50 ,students.findMedian());
+        assertEquals(50 ,students.findMedian(students.getStudents()));
 
     }
 
@@ -113,7 +113,7 @@ public class StudentsTest {
         students.addStudent(new Student("Timo25", 22, 25));
         students.addStudent(new Student("Timo50", 22, 50));
 
-        assertEquals(25 ,students.findMedian());
+        assertEquals(25 ,students.findMedian(students.getStudents()));
     }
 
 
@@ -122,7 +122,7 @@ public class StudentsTest {
         students.addStudent(new Student("Timo22", 22, 0));
         students.addStudent(new Student("Timo25", 22, 25));
 
-        assertEquals(12.5, students.findMedian());
+        assertEquals(12.5, students.findMedian(students.getStudents()));
     }
 
     @Test
@@ -131,18 +131,29 @@ public class StudentsTest {
         students.addStudent(new Student("Timo25", 22, 25));
         students.addStudent(new Student("Aapo2", 2, 99));
         students.sort();
-        assertEquals(25 ,students.findMedian());
+        assertEquals(25 ,students.findMedian(students.getStudents()));
     }
 
     @Test
-    public void testShouldFindFirstQuartile() {
+    public void testShouldFindFirstQuartileFromUnevenLengthArray() {
         students.addStudent(new Student("Timo22", 22, 1));
         students.addStudent(new Student("Timo25", 22, 25));
         students.addStudent(new Student("Aapo2", 2, 99));
         students.addStudent(new Student("Timo24", 22, 50));
         students.addStudent(new Student("Timo75", 22, 75));
 
-        assertEquals(13 ,students.findLFirstQuartile());
+        assertEquals(13 ,students.findFirstQuartile());
+    }
+
+    @Test
+    public void testShouldFindFirstQuartileFromEvenLengthArray() {
+        students.addStudent(new Student("Timo22", 22, 1));
+        students.addStudent(new Student("Timo25", 22, 49));
+        students.addStudent(new Student("Aapo2", 2, 99));
+        students.addStudent(new Student("Timo24", 22, 50));
+
+        assertEquals(25,students.findFirstQuartile());
+
     }
 
 
