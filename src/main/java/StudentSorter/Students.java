@@ -78,51 +78,6 @@ public class Students {
 
     }
 
-    public double[] getQuartiles(Comparator<Student> theComparator) {
-
-        double[] quartiles = new double[3];
-        quartiles[0] = findFirstQuartile(theComparator);
-        quartiles[1] = findMedian(getStudents(), theComparator);
-        quartiles[2] = findThirdQuartile(theComparator);
-
-
-        for (double quartile : quartiles) {
-            System.out.println(quartile);
-        }
-
-        return quartiles;
-    }
-
-    public double findMedian(Student [] studentarray, Comparator<Student> theComparator) {
-        sort(theComparator);
-
-        if (studentarray.length % 2 == 1) return studentarray[studentarray.length/2].getGrade();
-
-        else return (studentarray[studentarray.length/2].getGrade() + studentarray[studentarray.length/2 - 1].getGrade()) / 2;
-    }
-
-
-    public double findFirstQuartile(Comparator<Student> theComparator) {
-        Student [] lowerHalf = new Student [amountOfStudents/2];
-
-        System.arraycopy(students, 0, lowerHalf, 0, lowerHalf.length);
-
-        return findMedian(lowerHalf, theComparator);
-    }
-
-
-    public double findThirdQuartile(Comparator<Student> theComparator) {
-        Student [] upperHalf = new Student [amountOfStudents/2];
-
-        if (amountOfStudents % 2 == 1){
-            System.arraycopy(students, amountOfStudents/2 + 1, upperHalf, 0, upperHalf.length);
-        }
-        else {
-            System.arraycopy(students, amountOfStudents / 2, upperHalf, 0, upperHalf.length);
-        }
-
-        return findMedian(upperHalf, theComparator);
-    }
 
 
     public Student getStudent(int index) {
