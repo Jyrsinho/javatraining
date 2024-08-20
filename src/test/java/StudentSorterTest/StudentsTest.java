@@ -2,6 +2,7 @@ package StudentSorterTest;
 
 import StudentSorter.Student;
 import StudentSorter.Students;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static StudentSorter.Student.BY_AGE;
@@ -10,9 +11,15 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class StudentsTest {
 
+    Students students;
+
+    @BeforeEach
+    public void setUp() {
+        students = new Students();
+    }
+
     @Test
     public void testShouldAddStudentToStudentsArray() {
-        Students students = new Students();
         assertEquals(0, students.getAmountOfStudents());
 
         Student student1 = new Student("Timo", 22, 90);
@@ -27,7 +34,7 @@ public class StudentsTest {
 
     @Test
     public void testShouldDeleteStudentFromStudentsArray() {
-        Students students = new Students();
+
         Student student1 = new Student("Timo", 22, 90);
         students.addStudent(student1);
 
@@ -42,7 +49,7 @@ public class StudentsTest {
     @Test
     public void testShouldSortStudentsname() {
 
-        Students students = new Students();
+
         students.addStudent(new Student("Timo22", 22, 90));
         students.addStudent(new Student("Timo25", 25, 90));
         students.addStudent(new Student("Aapo2", 2, 99));
@@ -54,7 +61,7 @@ public class StudentsTest {
 
     @Test
     public void testShouldSortStudentsage() {
-        Students students = new Students();
+
         students.addStudent(new Student("Timo22", 22, 90));
         students.addStudent(new Student("Timo25", 25, 90));
         students.addStudent(new Student("Aapo2", 2, 99));
@@ -67,7 +74,7 @@ public class StudentsTest {
 
     @Test
     public void testShouldSortStudentsByGrade() {
-        Students students = new Students();
+
         students.addStudent(new Student("Timo22", 22, 90));
         students.addStudent(new Student("Timo25", 25, 90));
         students.addStudent(new Student("Aapo2", 2, 99));
@@ -80,13 +87,17 @@ public class StudentsTest {
 
     @Test
     public void testShouldSortStudentsByAgeReverseOrder() {
-        Students students = new Students();
         students.addStudent(new Student("Timo22", 22, 90));
         students.addStudent(new Student("Timo25", 25, 90));
         students.addStudent(new Student("Aapo2", 2, 99));
 
         students.sort(BY_AGE.reversed());
         assertEquals("Timo25", students.getStudent(0).getName());
+    }
+
+    @Test
+    public void getGradeQuartiles() {
+        Students students = new Students();
     }
 
 }
