@@ -156,6 +156,17 @@ public class StudentsTest {
 
     }
 
+    @Test
+    public void testShouldFindThirdQuartileFromUnevenLengthArray() {
+        students.addStudent(new Student("Timo22", 22, 1));
+        students.addStudent(new Student("Timo25", 22, 49));
+        students.addStudent(new Student("Timo24", 22, 50));
+        students.addStudent(new Student("Timo75", 22, 75));
+        students.addStudent(new Student("Aapo2", 2, 99));
+
+        assertEquals(87, students.findThirdQuartile());
+    }
+
 
 
 }

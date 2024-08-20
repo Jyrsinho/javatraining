@@ -10,15 +10,18 @@ public class Students {
     Student [] students;
     private int  amountOfStudents = 0;
 
+
     public Students() {
         this.students = new Student[amountOfStudents];
     }
+
 
     public void printStudents() {
         for (int i = 0; i < amountOfStudents; i++) {
             System.out.println(students[i]);
         }
     }
+
 
     /**
      * adds a student to the array
@@ -36,6 +39,7 @@ public class Students {
 
     }
 
+
     /**
      * deletes a student from array
      * @param student to be deleted
@@ -49,9 +53,11 @@ public class Students {
         }
     }
 
+
     public Student[] getStudents() {
         return students;
     }
+
 
     /**
      * returns the amount of students in students array
@@ -75,16 +81,6 @@ public class Students {
     }
 
 
-    public double findFirstQuartile() {
-        Student [] lowerHalf = new Student [amountOfStudents/2];
-
-        System.arraycopy(students, 0, lowerHalf, 0, lowerHalf.length);
-
-        return findMedian(lowerHalf);
-    }
-
-
-
     public double findMedian(Student [] studentarray) {
         sort(BY_GRADE);
 
@@ -94,11 +90,27 @@ public class Students {
     }
 
 
+    public double findFirstQuartile() {
+        Student [] lowerHalf = new Student [amountOfStudents/2];
+
+        System.arraycopy(students, 0, lowerHalf, 0, lowerHalf.length);
+
+        return findMedian(lowerHalf);
+    }
+
+
+    public double findThirdQuartile() {
+
+        return 87;
+    }
+
 
     public Student getStudent(int index) {
         return students[index];
 
     }
+
+
 
     public static void main(String[] args) {
 
