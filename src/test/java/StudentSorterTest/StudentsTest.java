@@ -97,7 +97,6 @@ public class StudentsTest {
 
     @Test
     public void testShouldFindTheGradeGradeMedian() {
-        Students students = new Students();
         students.addStudent(new Student("Timo22", 22, 0));
         students.addStudent(new Student("Timo25", 22, 25));
         students.addStudent(new Student("Timo50", 22, 50));
@@ -106,6 +105,15 @@ public class StudentsTest {
 
         assertEquals(50 ,students.findMedian());
 
+    }
+
+    @Test
+    public void testShouldFindTheGradeGradeMedian2() {
+        students.addStudent(new Student("Timo22", 22, 0));
+        students.addStudent(new Student("Timo25", 22, 25));
+        students.addStudent(new Student("Timo50", 22, 50));
+
+        assertEquals(25 ,students.findMedian());
     }
 
 }

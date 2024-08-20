@@ -70,8 +70,9 @@ public class Students {
     }
 
 
-    public int findMedian() {
-        return 50;
+    public double findMedian() {
+
+        return students[students.length/2].getGrade();
     }
 
 
