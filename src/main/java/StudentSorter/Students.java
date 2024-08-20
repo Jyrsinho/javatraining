@@ -3,8 +3,6 @@ package StudentSorter;
 import java.util.Arrays;
 import java.util.Comparator;
 
-import static StudentSorter.Student.BY_GRADE;
-
 public class Students {
 
     Student [] students;
@@ -80,12 +78,12 @@ public class Students {
 
     }
 
-    public double[] getQuartiles() {
+    public double[] getQuartiles(Comparator<Student> theComparator) {
 
         double[] quartiles = new double[3];
-        quartiles[0] = findFirstQuartile();
-        quartiles[1] = findMedian(getStudents());
-        quartiles[2] = findThirdQuartile();
+        quartiles[0] = findFirstQuartile(theComparator);
+        quartiles[1] = findMedian(getStudents(), theComparator);
+        quartiles[2] = findThirdQuartile(theComparator);
 
 
         for (double quartile : quartiles) {
@@ -95,8 +93,8 @@ public class Students {
         return quartiles;
     }
 
-    public double findMedian(Student [] studentarray) {
-        sort(BY_GRADE);
+    public double findMedian(Student [] studentarray, Comparator<Student> theComparator) {
+        sort(theComparator);
 
         if (studentarray.length % 2 == 1) return studentarray[studentarray.length/2].getGrade();
 
@@ -104,16 +102,16 @@ public class Students {
     }
 
 
-    public double findFirstQuartile() {
+    public double findFirstQuartile(Comparator<Student> theComparator) {
         Student [] lowerHalf = new Student [amountOfStudents/2];
 
         System.arraycopy(students, 0, lowerHalf, 0, lowerHalf.length);
 
-        return findMedian(lowerHalf);
+        return findMedian(lowerHalf, theComparator);
     }
 
 
-    public double findThirdQuartile() {
+    public double findThirdQuartile(Comparator<Student> theComparator) {
         Student [] upperHalf = new Student [amountOfStudents/2];
 
         if (amountOfStudents % 2 == 1){
@@ -123,7 +121,7 @@ public class Students {
             System.arraycopy(students, amountOfStudents / 2, upperHalf, 0, upperHalf.length);
         }
 
-        return findMedian(upperHalf);
+        return findMedian(upperHalf, theComparator);
     }
 
 

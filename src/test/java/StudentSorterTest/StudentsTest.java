@@ -104,7 +104,7 @@ public class StudentsTest {
         students.addStudent(new Student("Timo75", 25, 75));
         students.addStudent(new Student("Timo100", 2, 100));
 
-        assertEquals(50 ,students.findMedian(students.getStudents()));
+        assertEquals(50 ,students.findMedian(students.getStudents(), BY_GRADE));
 
     }
 
@@ -114,7 +114,7 @@ public class StudentsTest {
         students.addStudent(new Student("Timo25", 22, 25));
         students.addStudent(new Student("Timo50", 22, 50));
 
-        assertEquals(25 ,students.findMedian(students.getStudents()));
+        assertEquals(25 ,students.findMedian(students.getStudents(), BY_GRADE));
     }
 
 
@@ -123,7 +123,7 @@ public class StudentsTest {
         students.addStudent(new Student("Timo22", 22, 0));
         students.addStudent(new Student("Timo25", 22, 25));
 
-        assertEquals(12.5, students.findMedian(students.getStudents()));
+        assertEquals(12.5, students.findMedian(students.getStudents(), BY_GRADE));
     }
 
     @Test
@@ -132,7 +132,7 @@ public class StudentsTest {
         students.addStudent(new Student("Timo25", 22, 25));
         students.addStudent(new Student("Aapo2", 2, 99));
         students.sort();
-        assertEquals(25 ,students.findMedian(students.getStudents()));
+        assertEquals(25 ,students.findMedian(students.getStudents(), BY_GRADE));
     }
 
     @Test
@@ -143,7 +143,7 @@ public class StudentsTest {
         students.addStudent(new Student("Timo24", 22, 50));
         students.addStudent(new Student("Timo75", 22, 75));
 
-        assertEquals(13 ,students.findFirstQuartile());
+        assertEquals(13 ,students.findFirstQuartile(BY_GRADE));
     }
 
     @Test
@@ -153,7 +153,7 @@ public class StudentsTest {
         students.addStudent(new Student("Aapo2", 2, 99));
         students.addStudent(new Student("Timo24", 22, 50));
 
-        assertEquals(25,students.findFirstQuartile());
+        assertEquals(25,students.findFirstQuartile(BY_GRADE));
 
     }
 
@@ -166,7 +166,7 @@ public class StudentsTest {
         students.addStudent(new Student("Aapo2", 2, 52));
         students.addStudent(new Student("Aapo2", 2, 99));
 
-        assertEquals(48,students.findFirstQuartile());
+        assertEquals(48,students.findFirstQuartile(BY_GRADE));
 
     }
 
@@ -178,7 +178,7 @@ public class StudentsTest {
         students.addStudent(new Student("Timo75", 22, 75));
         students.addStudent(new Student("Aapo2", 2, 99));
 
-        assertEquals(87, students.findThirdQuartile());
+        assertEquals(87, students.findThirdQuartile(BY_GRADE));
     }
 
     @Test
@@ -188,7 +188,7 @@ public class StudentsTest {
         students.addStudent(new Student("Timo24", 22, 50));
         students.addStudent(new Student("Timo75", 22, 75));
 
-        assertEquals(62.5, students.findThirdQuartile());
+        assertEquals(62.5, students.findThirdQuartile(BY_GRADE));
     }
 
     @Test
@@ -199,7 +199,7 @@ public class StudentsTest {
         students.addStudent(new Student("Timo75", 22, 75));
 
         double[] expected = new double []{25, 49.5, 62.5};
-        assertArrayEquals(expected, students.getQuartiles());
+        assertArrayEquals(expected, students.getQuartiles(BY_GRADE));
     }
 
     @Test
@@ -211,8 +211,21 @@ public class StudentsTest {
         students.addStudent(new Student("Kaapo2", 2, 99));
 
         double [] expected = new double []{25, 50, 87};
-        assertArrayEquals(expected, students.getQuartiles());
+        assertArrayEquals(expected, students.getQuartiles(BY_GRADE));
 
     }
+
+    @Test
+    public void testShouldReturnTheMedianOfStudentAges() {
+        students.addStudent(new Student("Timo22", 20, 11));
+        students.addStudent(new Student("Timo25", 30, 149));
+        students.addStudent(new Student("Timo24", 45, 150));
+        students.addStudent(new Student("Timo75", 50, 175));
+        students.addStudent(new Student("Kaapo2", 60, 199));
+
+        assertEquals(45, students.findMedian(students.getStudents(),BY_AGE));
+    }
+
+
 
 }
