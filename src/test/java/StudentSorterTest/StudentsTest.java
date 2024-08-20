@@ -157,6 +157,19 @@ public class StudentsTest {
     }
 
     @Test
+    public void testShouldFindFirstQuartileFromEvenLengthArray2() {
+        students.addStudent(new Student("Timo22", 22, 1));
+        students.addStudent(new Student("Timo48", 22, 48));
+        students.addStudent(new Student("Timo25", 22, 49));
+        students.addStudent(new Student("Timo24", 22, 50));
+        students.addStudent(new Student("Aapo2", 2, 52));
+        students.addStudent(new Student("Aapo2", 2, 99));
+
+        assertEquals(48,students.findFirstQuartile());
+
+    }
+
+    @Test
     public void testShouldFindThirdQuartileFromUnevenLengthArray() {
         students.addStudent(new Student("Timo22", 22, 1));
         students.addStudent(new Student("Timo25", 22, 49));
@@ -167,6 +180,14 @@ public class StudentsTest {
         assertEquals(87, students.findThirdQuartile());
     }
 
+    @Test
+    public void testShouldFindThirdQuartileFromEvenLengthArray() {
+        students.addStudent(new Student("Timo22", 22, 1));
+        students.addStudent(new Student("Timo25", 22, 49));
+        students.addStudent(new Student("Timo24", 22, 50));
+        students.addStudent(new Student("Timo75", 22, 75));
 
+        assertEquals(62.5, students.findThirdQuartile());
+    }
 
 }

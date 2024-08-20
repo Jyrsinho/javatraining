@@ -100,8 +100,16 @@ public class Students {
 
 
     public double findThirdQuartile() {
+        Student [] upperHalf = new Student [amountOfStudents/2];
 
-        return 87;
+        if (amountOfStudents % 2 == 1){
+            System.arraycopy(students, amountOfStudents/2 + 1, upperHalf, 0, upperHalf.length);
+        }
+        else {
+            System.arraycopy(students, amountOfStudents / 2, upperHalf, 0, upperHalf.length);
+        }
+
+        return findMedian(upperHalf);
     }
 
 
