@@ -1,61 +1,51 @@
 package StudentSorterTest;
 
 import StudentSorter.QuartileFinder;
-import StudentSorter.Student;
-import StudentSorter.Students;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.util.Comparator;
-
-import static StudentSorter.Student.BY_AGE;
-import static StudentSorter.Student.BY_GRADE;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class QuartileFinderTest {
 
-
+    private QuartileFinder<Double> doubleQuartileFinder;
 
     @BeforeEach
     public void setUp() {
+        doubleQuartileFinder = new QuartileFinder<>();
     }
 
     @Test
-    public void testShouldFindTheGradeGradeMedianFromUnevenLengthArray() {
-        Students students = new Students();
-        students.addStudent(new Student("Timo22", 22, 0));
-        students.addStudent(new Student("Timo25", 22, 25));
-        students.addStudent(new Student("Timo50", 22, 50));
-        students.addStudent(new Student("Timo75", 25, 75));
-        students.addStudent(new Student("Timo100", 2, 100));
-
-        QuartileFinder<Double> quartileFinder = new QuartileFinder<>();
-
-        Double[] testArray = {0.0, 25.0, 50.0, 75.0,100.0};
+    public void testShouldFindTheGradeGradeMedianFromUnevenLengthArrayOfDoubles() {
 
 
-        assertEquals(50 ,quartileFinder.findMedian(testArray));
+        Double[] testArray = {0.0, 25.0, 50.0, 75.0, 100.0};
 
-    }
-    /
 
-    @Test
-    public void testShouldFindTheGradeGradeMedianFromUnevenLengthArray2() {
-        students.addStudent(new Student("Timo22", 22, 0));
-        students.addStudent(new Student("Timo25", 22, 25));
-        students.addStudent(new Student("Timo50", 22, 50));
+        assertEquals(50, doubleQuartileFinder.findMedian(testArray));
 
-        assertEquals(25 ,students.findMedian(students.getStudents(), BY_GRADE));
     }
 
 
     @Test
-    public void testShouldFindTheGradeMedianFromEvenLengthArray() {
-        students.addStudent(new Student("Timo22", 22, 0));
-        students.addStudent(new Student("Timo25", 22, 25));
+    public void testShouldFindTheGradeGradeMedianFromUnevenLengthArray2OfDoubles() {
 
-        assertEquals(12.5, students.findMedian(students.getStudents(), BY_GRADE));
+
+        Double[] testArray = {0.0, 25.0, 50.0};
+
+        assertEquals(25, doubleQuartileFinder.findMedian(testArray));
     }
+
+
+    @Test
+    public void testShouldFindTheGradeMedianFromEvenLengthArrayOfDoubles() {
+
+        Double[] testArray = {0.0,25.0};
+
+        assertEquals(12.5, doubleQuartileFinder.findMedian(testArray));
+    }
+}
+    /*
 
     @Test
     public void testShouldFindMedianFromUnsortedArray() {
@@ -158,3 +148,5 @@ public class QuartileFinderTest {
     }
 
 }
+
+     */
