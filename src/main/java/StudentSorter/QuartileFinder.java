@@ -10,9 +10,9 @@ public class QuartileFinder<T extends Number > {
         }
 
 
-        public double[] getQuartiles(T[] array ) {
+        public Double[] getQuartiles(T[] array ) {
 
-        double[] quartiles = new double[3];
+        Double[] quartiles = new Double[3];
         quartiles[0] = findFirstQuartile(array);
         quartiles[1] = findMedian(array);
         quartiles[2] = findThirdQuartile(array);
