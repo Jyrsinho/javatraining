@@ -36,7 +36,7 @@ public class QuartileFinder<T extends Number > {
         sort(array);
         int n = array.length;
 
-        if (n % 2 == 1) return (double) array[n/2];
+        if (n % 2 == 1) return  array[n/2].doubleValue();
 
         else return  (array[n / 2].doubleValue() + array[n / 2 - 1].doubleValue()) / 2;
     }

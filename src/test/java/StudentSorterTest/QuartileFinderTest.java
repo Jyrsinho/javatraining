@@ -53,28 +53,30 @@ public class QuartileFinderTest {
         Integer[] testArray = {0,25};
         assertEquals(12.5, integerQuartileFinder.findMedian(testArray));
     }
+
+
+
+    @Test
+    public void testShouldFindMedianFromUnsortedArrayOfIntegers() {
+
+        Integer[] testArray = {0,25,99};
+
+        assertEquals(25 ,integerQuartileFinder.findMedian(testArray));
     }
+
+
+
+
+    @Test
+    public void testShouldFindFirstQuartileFromUnevenLengthArrayOfUnSortedIntegers() {
+
+        Integer[] testArray = {1,25,99,50,75};
+
+        assertEquals(13 ,integerQuartileFinder.findFirstQuartile(testArray));
+    }
+    }
+
     /*
-
-    @Test
-    public void testShouldFindMedianFromUnsortedArray() {
-        students.addStudent(new Student("Timo22", 22, 0));
-        students.addStudent(new Student("Timo25", 22, 25));
-        students.addStudent(new Student("Aapo2", 2, 99));
-        students.sort();
-        assertEquals(25 ,students.findMedian(students.getStudents(), BY_GRADE));
-    }
-
-    @Test
-    public void testShouldFindFirstQuartileFromUnevenLengthArray() {
-        students.addStudent(new Student("Timo22", 22, 1));
-        students.addStudent(new Student("Timo25", 22, 25));
-        students.addStudent(new Student("Aapo2", 2, 99));
-        students.addStudent(new Student("Timo24", 22, 50));
-        students.addStudent(new Student("Timo75", 22, 75));
-
-        assertEquals(13 ,students.findFirstQuartile(BY_GRADE));
-    }
 
     @Test
     public void testShouldFindFirstQuartileFromEvenLengthArray() {
