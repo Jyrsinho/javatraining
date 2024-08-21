@@ -19,31 +19,21 @@ public class QuartileFinderTest {
 
     @Test
     public void testShouldFindTheGradeGradeMedianFromUnevenLengthArrayOfDoubles() {
-
-
         Double[] testArray = {0.0, 25.0, 50.0, 75.0, 100.0};
-
-
         assertEquals(50, doubleQuartileFinder.findMedian(testArray));
-
     }
 
 
     @Test
     public void testShouldFindTheGradeGradeMedianFromUnevenLengthArray2OfDoubles() {
-
-
         Double[] testArray = {0.0, 25.0, 50.0};
-
         assertEquals(25, doubleQuartileFinder.findMedian(testArray));
     }
 
 
     @Test
     public void testShouldFindTheGradeMedianFromEvenLengthArrayOfDoubles() {
-
         Double[] testArray = {0.0,25.0};
-
         assertEquals(12.5, doubleQuartileFinder.findMedian(testArray));
     }
 
@@ -58,9 +48,7 @@ public class QuartileFinderTest {
 
     @Test
     public void testShouldFindMedianFromUnsortedArrayOfIntegers() {
-
         Integer[] testArray = {0,25,99};
-
         assertEquals(25 ,integerQuartileFinder.findMedian(testArray));
     }
 
@@ -69,49 +57,37 @@ public class QuartileFinderTest {
 
     @Test
     public void testShouldFindFirstQuartileFromUnevenLengthArrayOfUnSortedIntegers() {
-
         Integer[] testArray = {1,25,99,50,75};
-
         assertEquals(13 ,integerQuartileFinder.findFirstQuartile(testArray));
     }
+
+
+
+
+    @Test
+    public void testShouldFindFirstQuartileFromEvenLengthArrayOfDoubles() {
+        Double[] testArray = {1.0,49.0,99.0,50.0};
+        assertEquals(25, doubleQuartileFinder.findFirstQuartile(testArray));
+
     }
 
+
+
+    @Test
+    public void testShouldFindFirstQuartileFromEvenLengthArrayOfIntegers() {
+        Integer[] testArray = {1,48,49,50,52,99};
+        assertEquals(48, integerQuartileFinder.findFirstQuartile(testArray));
+    }
+
+
+    @Test
+    public void testShouldFindThirdQuartileFromUnevenLengthArrayOfIntegers() {
+        Integer [] testArray = {1,49,50,75,99};
+        assertEquals(87, integerQuartileFinder.findThirdQuartile(testArray));
+    }
+}
     /*
 
-    @Test
-    public void testShouldFindFirstQuartileFromEvenLengthArray() {
-        students.addStudent(new Student("Timo22", 22, 1));
-        students.addStudent(new Student("Timo25", 22, 49));
-        students.addStudent(new Student("Aapo2", 2, 99));
-        students.addStudent(new Student("Timo24", 22, 50));
-
-        assertEquals(25,students.findFirstQuartile(BY_GRADE));
-
-    }
-
-    @Test
-    public void testShouldFindFirstQuartileFromEvenLengthArray2() {
-        students.addStudent(new Student("Timo22", 22, 1));
-        students.addStudent(new Student("Timo48", 22, 48));
-        students.addStudent(new Student("Timo25", 22, 49));
-        students.addStudent(new Student("Timo24", 22, 50));
-        students.addStudent(new Student("Aapo2", 2, 52));
-        students.addStudent(new Student("Aapo2", 2, 99));
-
-        assertEquals(48,students.findFirstQuartile(BY_GRADE));
-
-    }
-
-    @Test
-    public void testShouldFindThirdQuartileFromUnevenLengthArray() {
-        students.addStudent(new Student("Timo22", 22, 1));
-        students.addStudent(new Student("Timo25", 22, 49));
-        students.addStudent(new Student("Timo24", 22, 50));
-        students.addStudent(new Student("Timo75", 22, 75));
-        students.addStudent(new Student("Aapo2", 2, 99));
-
-        assertEquals(87, students.findThirdQuartile(BY_GRADE));
-    }
 
     @Test
     public void testShouldFindThirdQuartileFromEvenLengthArray() {
