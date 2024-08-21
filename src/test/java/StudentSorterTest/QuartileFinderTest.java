@@ -9,10 +9,12 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class QuartileFinderTest {
 
     private QuartileFinder<Double> doubleQuartileFinder;
+    private QuartileFinder<Integer> integerQuartileFinder;
 
     @BeforeEach
     public void setUp() {
         doubleQuartileFinder = new QuartileFinder<>();
+        integerQuartileFinder = new QuartileFinder<>();
     }
 
     @Test
@@ -44,7 +46,14 @@ public class QuartileFinderTest {
 
         assertEquals(12.5, doubleQuartileFinder.findMedian(testArray));
     }
-}
+
+
+    @Test
+    public void testShouldFindTheGradeMedianFromEvenLengthArrayOfIntegers() {
+        Integer[] testArray = {0,25};
+        assertEquals(12.5, integerQuartileFinder.findMedian(testArray));
+    }
+    }
     /*
 
     @Test
