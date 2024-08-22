@@ -50,30 +50,40 @@ public class ArrayStringTest {
         });
         assertEquals("Index out of bounds", exception.getMessage());
     }
-}
-    /*
+
+
 
     @Test
     public void testShouldThrowIllegalArgumentExceptionWhenGivenIndexIsOutOfBounds() {
         char[] testArray = new char[]{'a','a','s','i'};
-        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> {
+        IndexOutOfBoundsException exception = assertThrows(IndexOutOfBoundsException.class, () -> {
             // Call a method that should throw IllegalArgumentException
             arrayString.substring(testArray,5,0);
         });
-        assertEquals("Substring requested is out of bounds", exception.getMessage());
+        assertEquals("Index out of bounds", exception.getMessage());
+    }
+
+
+    @Test
+    public void testShouldReplaceStringsWithOneCharacterChanging() {
+        char[] sourceArray = new char[]{'a','a','s','i',0};
+        char[] targetArray = new char[]{'s'};
+        char[] replaceTextArray = new char[]{'p'};
+        char[] expectedArray = new char[]{'a','a','p','i',0};
+
+
+        assertArrayEquals(expectedArray, arrayString.replaceString(sourceArray, targetArray, replaceTextArray) );
     }
 
     @Test
-    public void testShouldReplaceCharsWithOtherChars() {
-        char[] sourceArray = new char[]{'a','a','s','i'};
-        char[] targetArray = new char[]{'s'};
-        char[] replaceTextArray = new char[]{'p'};
-        char[] expectedArray = new char[]{'a','a','p','i'};
-
+    public void testShouldReplaceStringsWithTwoCharactersChanging() {
+        char[] sourceArray = new char[]{'a','a','s','i',0};
+        char[] targetArray = new char[]{'s', 'i'};
+        char[] replaceTextArray = new char[]{'p','a'};
+        char[] expectedArray = new char[]{'a','a','p','a',0};
 
         assertArrayEquals(expectedArray, arrayString.replaceString(sourceArray, targetArray, replaceTextArray) );
     }
 }
 
 
- */
