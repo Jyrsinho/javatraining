@@ -119,9 +119,8 @@ public class SalesMenTest {
 
 
     }
-}
 
-    /*
+
 
     @Test
     public void testShouldReturnMedianFromArrayContainingNegativeValuesForAbsentMonths1() {
@@ -132,4 +131,4 @@ public class SalesMenTest {
 
 }
 
-     */
+

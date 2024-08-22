@@ -63,7 +63,7 @@ public class Salesmen {
         int bestMedianholder = 0;
 
         for (int salesman = 0; salesman < sales.length; salesman++) {
-            // TODO CLEAN SALES ARRAY FROM NEGATIVE VALUES
+            // TODO CLEAN SALES ARRAY FROM NEGATIVE VALUE
             currentMedian = findMedian(sales[salesman]);
             if (currentMedian > bestMedian) {
                 bestMedian = currentMedian;
@@ -101,13 +101,15 @@ public class Salesmen {
         double median;
         Arrays.sort(sales);
 
+        int [] cleanedSales = removeNegativeValueSales(sales);
+
         // cases when the array has even number of elements
-        if (sales.length % 2 == 1) {
-            median = sales[sales.length / 2];
+        if (cleanedSales.length % 2 == 1) {
+            median = cleanedSales[cleanedSales.length / 2];
         // cases when the arrays has even number of elements
         } else{
-            double firstMedian = sales[sales.length / 2];
-            double secondMedian = sales[sales.length / 2 - 1];
+            double firstMedian = cleanedSales[sales.length / 2];
+            double secondMedian = cleanedSales[sales.length / 2 - 1];
             median = (firstMedian + secondMedian) / 2;
         }
 
