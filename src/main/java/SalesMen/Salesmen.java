@@ -36,7 +36,11 @@ public class Salesmen {
         return highestAverageSalesman;
         }
 
-
+    /**
+     * Counts the salesman's sales avg
+     * @param sales salesman's yearly sales in an array
+     * @return salesman's sales avg
+     */
     public static double countAverageSales(int []sales) {
         int sum = 0;
         int numberOfActiveMonths = 0;
@@ -59,6 +63,7 @@ public class Salesmen {
         int bestMedianholder = 0;
 
         for (int salesman = 0; salesman < sales.length; salesman++) {
+            // TODO CLEAN SALES ARRAY FROM NEGATIVE VALUES
             currentMedian = findMedian(sales[salesman]);
             if (currentMedian > bestMedian) {
                 bestMedian = currentMedian;
@@ -69,16 +74,27 @@ public class Salesmen {
     }
 
 
+    public static int [] removeNegativeValueSales(int []sales) {
+        int[] cleanSales = {1,2,3};
+
+        return cleanSales;
+
+
+    }
+
+
     public static double findMedian(int[]sales) {
         double median;
         Arrays.sort(sales);
 
-        if (sales.length%2 == 1) {
+        // cases when the array has even number of elements
+        if (sales.length % 2 == 1) {
             median = sales[sales.length / 2];
+        // cases when the arrays has even number of elements
         } else{
-            double firstMedian= sales[sales.length/2];
-            double secondMedian= sales[sales.length/2 - 1];
-            median = (firstMedian+secondMedian)/2;
+            double firstMedian = sales[sales.length / 2];
+            double secondMedian = sales[sales.length / 2 - 1];
+            median = (firstMedian + secondMedian) / 2;
         }
 
         return median;

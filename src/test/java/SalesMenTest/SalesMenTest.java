@@ -108,4 +108,26 @@ public class SalesMenTest {
 
     }
 
+    @Test
+    public void testShouldRemoveNegativeValuesFromArrayContainingNegativeValuesForAbsentMonths() {
+        int [] testSales = {-1,1,2,3,-1};
+        int [] cleanSales = removeNegativeValueSales(testSales);
+
+        assertEquals(3, cleanSales.length);
+
+
+    }
 }
+
+    /*
+
+    @Test
+    public void testShouldReturnMedianFromArrayContainingNegativeValuesForAbsentMonths1() {
+        int [] t = {-1, 1, 2, 3, -1, -1, -1};
+
+        assertEquals(2, findMedian(t));
+    }
+
+}
+
+     */
