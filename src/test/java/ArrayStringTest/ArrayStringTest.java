@@ -1,19 +1,34 @@
 package ArrayStringTest;
 
 import ArrayString.ArrayString;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 
 public class ArrayStringTest {
 
+    ArrayString arrayString;
+
+    @BeforeEach
+    void setUp() {
+        arrayString = new ArrayString();
+    }
+
     @Test
     public void testShouldReturnSubstring() {
-        ArrayString aS = new ArrayString();
 
         char[] testArray = new char[]{'a','a','s','i'};
         char[] expectedArray = new char[]{'a','s'};
-        assertArrayEquals(expectedArray, aS.substring(testArray, 1, 2) );
+        assertArrayEquals(expectedArray, arrayString.substring(testArray, 1, 2) );
 
     }
+
+    @Test
+    public void testShouldReturnSubstring2() {
+
+    char[] testArray = new char[]{'a','a','s','i'};
+    char[] expectedArray = new char[]{'a','a','s','i'};
+    assertArrayEquals(expectedArray, arrayString.substring(testArray, 0, 4) );
+}
 }
