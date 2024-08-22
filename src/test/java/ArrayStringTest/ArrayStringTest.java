@@ -31,4 +31,11 @@ public class ArrayStringTest {
     char[] expectedArray = new char[]{'a','a','s','i'};
     assertArrayEquals(expectedArray, arrayString.substring(testArray, 0, 4) );
 }
+
+    @Test
+    public void testShouldReturnEmptyArrayWhenGivenLengthIsZero() {
+        char[] testArray = new char[]{'a','a','s','i'};
+        char[] expectedArray = new char[]{};
+        assertArrayEquals(expectedArray, arrayString.substring(testArray, 0, 0) );
+    }
 }
