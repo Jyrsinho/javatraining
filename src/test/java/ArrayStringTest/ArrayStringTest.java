@@ -4,8 +4,7 @@ import ArrayString.ArrayString;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertArrayEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class ArrayStringTest {
 
@@ -47,6 +46,16 @@ public class ArrayStringTest {
             // Call a method that should throw IllegalArgumentException
             arrayString.substring(testArray,3,5);
         });
+        assertEquals("Substring requested is out of bounds", exception.getMessage());
+    }
 
+    @Test
+    public void testShouldThrowIllegalArgumentExceptionWhenGivenIndexIsOutOfBounds() {
+        char[] testArray = new char[]{'a','a','s','i'};
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> {
+            // Call a method that should throw IllegalArgumentException
+            arrayString.substring(testArray,5,0);
+        });
+        assertEquals("Substring requested is out of bounds", exception.getMessage());
     }
 }
