@@ -100,4 +100,12 @@ public class SalesMenTest {
         assertTrue(arrayIsSorted(t));
     }
 
+    @Test
+    public void testShouldReturnAverageSaleFromArrayContainingNegativeValuesForAbsentMonths() {
+        int[] sales = {-1,1,2,3,-1};
+
+        assertEquals(2, countAverageSales(sales));
+
+    }
+
 }
