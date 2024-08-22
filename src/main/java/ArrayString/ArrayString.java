@@ -6,17 +6,23 @@ public class ArrayString {
 
 
 
-    public char[] substring(char[]array, int start, int length){
-        if (start + length > array.length){
-            throw new IllegalArgumentException("Substring requested is out of bounds");
-        }
-        char[] result = new char[length];
-
-        for(int i = 0; i < length; i++){
-            result[i] = array[start+i];
+    public char[] substring(char[]oldArray, int start, int length){
+        if(start+ length > oldArray.length){
+            throw new IndexOutOfBoundsException("Index out of bounds");
         }
 
+        char[] newArrayString = new char[length+1];
 
-        return result;
+        for (int i = 0; i < length; i++) {
+            newArrayString[i] = oldArray[start];
+            start++;
+        }
+        newArrayString[length] = 0;
+        return newArrayString;
+    }
+
+    public char[] replaceString(char[] source, char[] target, char[] replaceText){
+
+        return source;
     }
 }
