@@ -39,12 +39,16 @@ public class Salesmen {
 
     public static double countAverageSales(int []sales) {
         int sum = 0;
+        int numberOfActiveMonths = 0;
 
         for (int sale : sales) {
-            sum += sale;
+            if (sale != -1) {
+                sum += sale;            //checks whether the sale-value is valid. -1 marks absent months
+                numberOfActiveMonths++;
+            }
         }
 
-        return (double) sum / sales.length;
+        return (double) sum / numberOfActiveMonths;
 
     }
 
