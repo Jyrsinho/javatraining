@@ -114,6 +114,8 @@ public class SalesMenTest {
         int [] cleanSales = removeNegativeValueSales(testSales);
 
         assertEquals(3, cleanSales.length);
+        assertEquals(1, cleanSales[0]);
+        assertEquals(3, cleanSales[2]);
 
 
     }

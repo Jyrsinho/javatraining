@@ -75,9 +75,23 @@ public class Salesmen {
 
 
     public static int [] removeNegativeValueSales(int []sales) {
-        int[] cleanSales = {1,2,3};
+        int lengthOfCleanArray = 0;
+        for (int sale : sales) {
+            if (sale >= 0) {
+                lengthOfCleanArray++;
+            }
+        }
 
-        return cleanSales;
+        int[] cleanedSales = new int[lengthOfCleanArray];
+        int indexToBeAddedIn = 0;
+        for (int i = 0; i < sales.length; i++) {
+            if (sales[i] >= 0) {
+                cleanedSales[indexToBeAddedIn] = sales[i];
+                indexToBeAddedIn++;
+            }
+        }
+
+        return cleanedSales;
 
 
     }
