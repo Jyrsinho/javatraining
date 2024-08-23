@@ -8,10 +8,14 @@ public class LinkedList {
         head = null;
     }
 
-    public void addNodeToHead(Node newNode) {
-        Node oldHead = this.head;
-        this.head = newNode;
-        this.head.setNextNode(oldHead);
+    public void addToHead(String data) {
+        Node newHead = new Node(data);
+        newHead.setNextNode(head);
 
+    }
+
+
+    public Node getHead() {
+        return head;
     }
 }
