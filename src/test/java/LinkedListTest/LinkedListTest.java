@@ -35,10 +35,19 @@ public class LinkedListTest {
 
         assertEquals("Hello2",second.getData());
         assertEquals("Hello1",third.getData());
-
     }
 
-    @Disabled
+
+    @Test
+    public void testShouldAddNewTailToEmptyLinkedList() {
+        linkedList.addToTail("Hello1");
+
+        assertEquals("Hello1",linkedList.getTail().getData());
+        assertEquals("Hello1",linkedList.getHead().getData());
+    }
+
+
+    @Test
     public void testAddNewTailToLinkedList() {
         linkedList.addToHead("Hello1"); // Hello1, Hello2
         linkedList.addToTail("Hello2");
@@ -49,20 +58,13 @@ public class LinkedListTest {
     }
 
     @Test
-    public void testShouldAddNewTailToEmptyLinkedList() {
+    public void testAddNewTailToLinkedList2() {
         linkedList.addToTail("Hello1");
-
-        assertEquals("Hello1",linkedList.getTail().getData());
-        assertEquals("Hello1",linkedList.getHead().getData());
+        linkedList.addToTail("Hello2");
+        linkedList.addToTail("Hello3");
+        assertEquals("Hello3",linkedList.getTail().getData());
     }
 
-    @Disabled
-    public void testShouldReturnSameNodeAsHeadAndTailIfNodeIsAddedToEmptyLinkedList() {
-        linkedList.addToHead("Hello1");
-
-        assertEquals("Hello1",linkedList.getHead().getData());
-        assertEquals("Hello1",linkedList.getTail().getData());
-    }
 
 }
 

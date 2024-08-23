@@ -7,7 +7,7 @@ public class LinkedList {
 
     public LinkedList() {
         head = null;
-        ;
+        tail = null;
     }
 
     /**
@@ -28,15 +28,19 @@ public class LinkedList {
      * @param data data payload of new Node to be added
      */
     public void addToTail(String data) {
-        Node tempTail = head;
-
-        if (tempTail == null) {
+        //if list is empty the new tail is the new head
+        if (head == null) {
             this.head = new Node(data);
             this.tail = this.head;
+        } else {
+            Node currentNode = head;
+            while (currentNode.getNextNode() != null) {
+                currentNode = currentNode.getNextNode();
+            }
+            Node newTail = new Node(data);
+            currentNode.setNextNode(newTail);
+            this.tail = newTail;
         }
-
-
-
     }
 
 
