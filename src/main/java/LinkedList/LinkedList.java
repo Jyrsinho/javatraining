@@ -10,7 +10,10 @@ public class LinkedList {
 
     public void addToHead(String data) {
         Node newHead = new Node(data);
-        newHead.setNextNode(head);
+        Node currentHead = head;
+        this.head = newHead;
+        if (currentHead != null) this.head.setNextNode(currentHead);
+
 
     }
 

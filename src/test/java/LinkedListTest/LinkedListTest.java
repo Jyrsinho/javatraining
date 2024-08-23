@@ -14,7 +14,7 @@ public class LinkedListTest {
 
         linkedList.addToHead("Hello1");
 
-        assertEquals("Hello1",linkedList.getHead());
+        assertEquals("Hello1",linkedList.getHead().getData());
     }
 
 }
