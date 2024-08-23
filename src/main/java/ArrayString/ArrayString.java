@@ -22,11 +22,7 @@ public class ArrayString {
     }
 
 
-    public int[] findSubStringIndexes(char[] source,  char[] target){
-        int[] indexes = new int[] {2,3};
 
-        return indexes;
-    }
 
 
     public char[] replaceString(char[] source, char[] target, char[] replaceText){

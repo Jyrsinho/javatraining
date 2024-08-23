@@ -65,14 +65,6 @@ public class ArrayStringTest {
     }
 
 
-    @Test
-    public void testShouldFindTheIndexesOfTargetTextInSourceArray() {
-        char[] testArray = new char[]{'a','a','s','i',0};
-        char[] target = new char[]{'s','i'};
-        int[] expectedArray = new int[]{2,3};
-        assertArrayEquals(expectedArray, arrayString.findSubStringIndexes(testArray, target));
-
-    }
 
     @Disabled
     public void testShouldReplaceStringsWithOneCharacterChanging() {
