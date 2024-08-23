@@ -22,17 +22,28 @@ public class ArrayString {
     }
 
 
+    public int[] findSubStringIndexes(char[] source,  char[] target){
+        int[] indexes = new int[target.length];
+
+        return indexes;
+    }
+
+
     public char[] replaceString(char[] source, char[] target, char[] replaceText){
+
         char [] newArrayString = new char[source.length - target.length + replaceText.length];
 
+        int[] targetIndexes = findSubStringIndexes(source, target);
 
+        int n = 0;
 
         for(int i = 0; i < source.length; i++){
-            if (source[i] == target[0]) {
-                newArrayString[i] = replaceText[0];
-            }else {
-                newArrayString[i] = source[i];
+            if (i == targetIndexes[n]) {
+                newArrayString[i] = replaceText[i];
+                n++;
             }
+            newArrayString[i] = source[i];
+
 
         }
 
