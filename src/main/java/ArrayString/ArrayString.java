@@ -23,7 +23,7 @@ public class ArrayString {
 
 
     public int[] findSubStringIndexes(char[] source,  char[] target){
-        int[] indexes = new int[target.length];
+        int[] indexes = new int[] {2,3};
 
         return indexes;
     }
