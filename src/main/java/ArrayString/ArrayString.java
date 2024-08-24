@@ -54,19 +54,19 @@ public class ArrayString {
         char[] substring;
         int newArrayIndex = 0;
         int sourceArrayIndex = 0;
-        int replaceTextIndex = 0;
+
 
         while (source[sourceArrayIndex] != 0){
             //check whether substring of sourcearray arraysAreEqual with targetarray we are looking for
             substring = substring(source, sourceArrayIndex, target.length-1);
             if (arraysAreEqual(substring, target)){
+                int replaceTextIndex = 0;
                 sourceArrayIndex += target.length-1;
                 //add characters from replaceText to newArrayString
                 while (replaceText[replaceTextIndex] != 0)    {
                     newArrayString[newArrayIndex] = replaceText[replaceTextIndex];
                     newArrayIndex++;
                     replaceTextIndex++;
-
                 }
             } else {
                 newArrayString[newArrayIndex] = source[sourceArrayIndex];
