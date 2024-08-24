@@ -2,7 +2,6 @@ package ArrayStringTest;
 
 import ArrayString.ArrayString;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
@@ -123,14 +122,16 @@ public class ArrayStringTest {
         assertArrayEquals(expectedArray, arrayString.replaceString(sourceArray, targetArray, replaceTextArray) );
     }
 
-    @Disabled
+    @Test
     public void testShouldHandleCasesWhereTargetArraysFirstInstanceAppearsWithoutRestOfTargetArraysElements() {
 
         char[] sourceArray = new char[]{'a','a','s','i','a',0};
         char[] targetArray = new char[]{'a','s',0};
         char[] replaceTextArray = new char[]{'p', 'e',0};
-
         char[] expectedArray = new char[]{'a','p','e','i','a',0};
+        System.out.println("SourceArray: " + Arrays.toString(sourceArray));
+        System.out.println("ExpectedArray: "+ Arrays.toString(expectedArray));
+        System.out.println("TestResult_" + Arrays.toString(arrayString.replaceString(sourceArray, targetArray, replaceTextArray)));
         assertArrayEquals(expectedArray, arrayString.replaceString(sourceArray, targetArray, replaceTextArray) );
     }
 }
