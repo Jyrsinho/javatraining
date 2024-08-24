@@ -161,6 +161,13 @@ public class ArrayStringTest {
         assertArrayEquals(expectedArray, arrayString.replaceString(sourceArray, targetArray, replaceTextArray) );
 
     }
+
+    @Test
+    public void testShouldReturnLargerArrayWithNullValues() {
+        char[] sourceArray = new char[]{'a','a','s','i','a',0};
+        char[] expectedArray = new char[]{'a','a','s','i','a',0,0,0};
+        assertArrayEquals(expectedArray, arrayString.copyAndIncreaseArraySize(sourceArray,2));
+    }
 }
 
 
