@@ -103,21 +103,21 @@ public class ArrayStringTest {
         assertArrayEquals(expectedArray, arrayString.replaceString(sourceArray, targetArray, replaceTextArray) );
     }
 
-    @Disabled
+    @Test
     public void testShouldReplaceStringsWithOneCharacterChangingToTwoCharacters2() {
         char[] sourceArray = new char[]{'a','a','s','i',0};
-        char[] targetArray = new char[]{'s'};
-        char[] replaceTextArray = new char[]{'p', 'p'};
+        char[] targetArray = new char[]{'s',0};
+        char[] replaceTextArray = new char[]{'p', 'p',0};
 
         char[] expectedArray = new char[]{'a','a','p','p','i',0};
         assertArrayEquals(expectedArray, arrayString.replaceString(sourceArray, targetArray, replaceTextArray) );
     }
 
-    @Disabled
+    @Test
     public void testShouldReplaceStringsWithTwoCharactersChanging() {
         char[] sourceArray = new char[]{'a','a','s','i',0};
-        char[] targetArray = new char[]{'s', 'i'};
-        char[] replaceTextArray = new char[]{'p','a'};
+        char[] targetArray = new char[]{'s', 'i',0};
+        char[] replaceTextArray = new char[]{'p','a',0};
 
         char[] expectedArray = new char[]{'a','a','p','a',0};
         assertArrayEquals(expectedArray, arrayString.replaceString(sourceArray, targetArray, replaceTextArray) );
@@ -127,8 +127,8 @@ public class ArrayStringTest {
     public void testShouldHandleCasesWhereTargetArraysFirstInstanceAppearsWithoutRestOfTargetArraysElements() {
 
         char[] sourceArray = new char[]{'a','a','s','i','a',0};
-        char[] targetArray = new char[]{'a','s',};
-        char[] replaceTextArray = new char[]{'p', 'e'};
+        char[] targetArray = new char[]{'a','s',0};
+        char[] replaceTextArray = new char[]{'p', 'e',0};
 
         char[] expectedArray = new char[]{'a','p','e','i','a',0};
         assertArrayEquals(expectedArray, arrayString.replaceString(sourceArray, targetArray, replaceTextArray) );
