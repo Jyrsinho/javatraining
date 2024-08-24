@@ -49,20 +49,23 @@ public class ArrayString {
 
         // this only applies if there is only one instance of target in the source
         // needs to be updated when there are several istances of target array in source array
-        char [] newArrayString = new char[source.length - target.length + replaceText.length+1];
+        char [] newArrayString = new char[source.length - target.length + replaceText.length];
 
         char[] substring;
         int newArrayIndex = 0;
         int sourceArrayIndex = 0;
+        int replaceTextIndex = 0;
 
-        for (int i = newArrayIndex; i < newArrayString.length; i++) {
+        while (source[sourceArrayIndex] != 0){
             //check whether substring of sourcearray arraysAreEqual with targetarray we are looking for
-            substring = substring(source, i, target.length);
+            substring = substring(source, sourceArrayIndex, target.length-1);
             if (arraysAreEqual(substring, target)){
                 //add characters from replaceText to newArrayString
-                for (char c : replaceText) {
-                    newArrayString[i] = c;
+                while (replaceText[replaceTextIndex] != 0)    {
+                    newArrayString[newArrayIndex] = replaceText[replaceTextIndex];
                     newArrayIndex++;
+                    replaceTextIndex++;
+                    sourceArrayIndex++;
                 }
             } else {
                 newArrayString[newArrayIndex] = source[sourceArrayIndex];
@@ -75,4 +78,5 @@ public class ArrayString {
 
         return newArrayString;
     }
+
 }

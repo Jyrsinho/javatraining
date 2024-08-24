@@ -5,6 +5,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
+import java.util.Arrays;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 public class ArrayStringTest {
@@ -74,12 +76,16 @@ public class ArrayStringTest {
     }
 
 
-    @Disabled
+    @Test
     public void testShouldReplaceStringsWithOneCharacterChanging() {
         char[] sourceArray = new char[]{'a','a','s','i',0};
         char[] targetArray = new char[]{'s',0};
         char[] replaceTextArray = new char[]{'p',0};
         char[] expectedArray = new char[]{'a','a','p','i',0};
+
+        System.out.println("SourceArray: " + Arrays.toString(sourceArray));
+        System.out.println("ExpectedArray: "+ Arrays.toString(expectedArray));
+        System.out.println("TestResult_" + Arrays.toString(arrayString.replaceString(sourceArray, targetArray, replaceTextArray)));
 
         assertArrayEquals(expectedArray, arrayString.replaceString(sourceArray, targetArray, replaceTextArray) );
     }
