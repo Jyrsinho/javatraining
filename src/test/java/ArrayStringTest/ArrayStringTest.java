@@ -134,6 +134,19 @@ public class ArrayStringTest {
         System.out.println("TestResult_" + Arrays.toString(arrayString.replaceString(sourceArray, targetArray, replaceTextArray)));
         assertArrayEquals(expectedArray, arrayString.replaceString(sourceArray, targetArray, replaceTextArray) );
     }
+
+    @Test
+    public void testShouldHandleCasesWhereReplaceTextIsShorterThanTargetArraysElements() {
+        char[] sourceArray = new char[]{'a','a','s','i','a',0};
+        char[] targetArray = new char[]{'a','a',0};
+        char[] replaceTextArray = new char[]{'b',0};
+        char[] expectedArray = new char[]{'b','s','i','a',0};
+
+        System.out.println("SourceArray: " + Arrays.toString(sourceArray));
+        System.out.println("ExpectedArray: "+ Arrays.toString(expectedArray));
+        System.out.println("TestResult_" + Arrays.toString(arrayString.replaceString(sourceArray, targetArray, replaceTextArray)));
+        assertArrayEquals(expectedArray, arrayString.replaceString(sourceArray, targetArray, replaceTextArray) );
+    }
 }
 
 
