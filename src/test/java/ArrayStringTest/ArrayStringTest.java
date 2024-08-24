@@ -107,8 +107,11 @@ public class ArrayStringTest {
         char[] sourceArray = new char[]{'a','a','s','i',0};
         char[] targetArray = new char[]{'s',0};
         char[] replaceTextArray = new char[]{'p', 'p',0};
-
         char[] expectedArray = new char[]{'a','a','p','p','i',0};
+
+        System.out.println("SourceArray: " + Arrays.toString(sourceArray));
+        System.out.println("ExpectedArray: "+ Arrays.toString(expectedArray));
+        System.out.println("TestResult_" + Arrays.toString(arrayString.replaceString(sourceArray, targetArray, replaceTextArray)));
         assertArrayEquals(expectedArray, arrayString.replaceString(sourceArray, targetArray, replaceTextArray) );
     }
 

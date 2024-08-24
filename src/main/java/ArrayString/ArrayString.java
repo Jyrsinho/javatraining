@@ -46,9 +46,11 @@ public class ArrayString {
 
     public char[] copyAndIncreaseArraySize(char[] oldArray, int spaceToAdd){
         char[] newArrayString = new char[oldArray.length + spaceToAdd];
+        int index = 0;
 
-        for(int i = 0; i < oldArray.length; i++){
-            newArrayString[i] = oldArray[i];
+        while(oldArray[index] != 0){
+            newArrayString[index] = oldArray[index];
+            index++;
         }
 
         return newArrayString;
@@ -58,8 +60,6 @@ public class ArrayString {
 
     public char[] replaceString(char[] source, char[] target, char[] replaceText){
 
-        // this only applies if there is only one instance of target in the source
-        // needs to be updated when there are several istances of target array in source array
         int spaceToAdd = replaceText.length - target.length ;
         char [] newArrayString = new char[source.length+spaceToAdd];
 
@@ -72,8 +72,8 @@ public class ArrayString {
             //check whether substring of sourcearray arraysAreEqual with targetarray we are looking for
             substring = substring(source, sourceArrayIndex, target.length-1);
             if (arraysAreEqual(substring, target)){
-                //TODO copy old newArrayString and increase it's size
-                //newArrayString = copyAndIncreaseArraySize(newArrayString, spaceToAdd);
+                // copy old newArrayString and increase it's size
+                newArrayString = copyAndIncreaseArraySize(newArrayString, spaceToAdd);
                 int replaceTextIndex = 0;
                 sourceArrayIndex += target.length-1;
                 //add characters from replaceText to newArrayString
