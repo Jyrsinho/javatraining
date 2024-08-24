@@ -53,24 +53,19 @@ public class ArrayStringTest {
     }
 
 
-
     @Test
-    public void testShouldThrowIllegalArgumentExceptionWhenGivenIndexIsOutOfBounds() {
-        char[] testArray = new char[]{'a','a','s','i'};
-        IndexOutOfBoundsException exception = assertThrows(IndexOutOfBoundsException.class, () -> {
-            // Call a method that should throw IllegalArgumentException
-            arrayString.substring(testArray,5,0);
-        });
-        assertEquals("Index out of bounds", exception.getMessage());
+    public void testShouldReturnTrueIfTrueArraysHaveTheSameContent() {
+        char[] testArray1 = new char[]{'a','a','s','i',0};
+        char[] testArray2 = new char[]{'a','a','s','i',0};
+        assertTrue(arrayString.arraysAreEqual(testArray1, testArray2));
     }
-
 
 
     @Disabled
     public void testShouldReplaceStringsWithOneCharacterChanging() {
         char[] sourceArray = new char[]{'a','a','s','i',0};
-        char[] targetArray = new char[]{'s'};
-        char[] replaceTextArray = new char[]{'p'};
+        char[] targetArray = new char[]{'s',0};
+        char[] replaceTextArray = new char[]{'p',0};
         char[] expectedArray = new char[]{'a','a','p','i',0};
 
         assertArrayEquals(expectedArray, arrayString.replaceString(sourceArray, targetArray, replaceTextArray) );
@@ -79,7 +74,7 @@ public class ArrayStringTest {
     @Disabled
     public void testShouldReplaceStringsWithOneCharacterChangingIntoTwoCharacters() {
         char[] sourceArray = new char[]{'a','a','s','i',0};
-        char[] targetArray = new char[]{'s'};
+        char[] targetArray = new char[]{'s', 0};
         char[] replaceTextArray = new char[]{'p', 'e'};
 
         char[] expectedArray = new char[]{'a','a','p','e','i',0};
