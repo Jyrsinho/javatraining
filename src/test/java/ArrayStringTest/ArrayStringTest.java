@@ -60,6 +60,19 @@ public class ArrayStringTest {
         assertTrue(arrayString.arraysAreEqual(testArray1, testArray2));
     }
 
+    @Test
+    public void testShouldReturnFalseIfFalseArraysDontHaveTheSameContent() {
+        char[] testArray1 = new char[]{'a','a','s','i',0};
+        char[] testArray2 = new char[]{'a','a','s','i','a',0};
+    }
+
+
+    @Test
+    public void testShouldReturnFalseIfFalseArraysDontHaveTheSameContent2() {
+        char[] testArray1 = new char[]{'a','a','s','i',0};
+        char[] testArray2 = new char[]{'a','a','s','a',0};
+    }
+
 
     @Disabled
     public void testShouldReplaceStringsWithOneCharacterChanging() {
