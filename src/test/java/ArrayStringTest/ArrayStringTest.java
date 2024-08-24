@@ -90,18 +90,21 @@ public class ArrayStringTest {
         assertArrayEquals(expectedArray, arrayString.replaceString(sourceArray, targetArray, replaceTextArray) );
     }
 
-    @Disabled
+    @Test
     public void testShouldReplaceStringsWithOneCharacterChangingIntoTwoCharacters() {
         char[] sourceArray = new char[]{'a','a','s','i',0};
         char[] targetArray = new char[]{'s', 0};
-        char[] replaceTextArray = new char[]{'p', 'e'};
-
+        char[] replaceTextArray = new char[]{'p', 'e',0};
         char[] expectedArray = new char[]{'a','a','p','e','i',0};
+        System.out.println("SourceArray: " + Arrays.toString(sourceArray));
+        System.out.println("ExpectedArray: "+ Arrays.toString(expectedArray));
+        System.out.println("TestResult_" + Arrays.toString(arrayString.replaceString(sourceArray, targetArray, replaceTextArray)));
+
         assertArrayEquals(expectedArray, arrayString.replaceString(sourceArray, targetArray, replaceTextArray) );
     }
 
     @Disabled
-    public void testShouldReplaceStringsWithOneCharacterChangingToTwoCharacters() {
+    public void testShouldReplaceStringsWithOneCharacterChangingToTwoCharacters2() {
         char[] sourceArray = new char[]{'a','a','s','i',0};
         char[] targetArray = new char[]{'s'};
         char[] replaceTextArray = new char[]{'p', 'p'};

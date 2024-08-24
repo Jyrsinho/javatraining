@@ -60,12 +60,13 @@ public class ArrayString {
             //check whether substring of sourcearray arraysAreEqual with targetarray we are looking for
             substring = substring(source, sourceArrayIndex, target.length-1);
             if (arraysAreEqual(substring, target)){
+                sourceArrayIndex++;
                 //add characters from replaceText to newArrayString
                 while (replaceText[replaceTextIndex] != 0)    {
                     newArrayString[newArrayIndex] = replaceText[replaceTextIndex];
                     newArrayIndex++;
                     replaceTextIndex++;
-                    sourceArrayIndex++;
+
                 }
             } else {
                 newArrayString[newArrayIndex] = source[sourceArrayIndex];
