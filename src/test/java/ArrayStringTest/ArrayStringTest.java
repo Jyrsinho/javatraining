@@ -210,6 +210,15 @@ public class ArrayStringTest {
         char[] actualArray = arrayString.append(array1,appended);
         assertArrayEquals(expectedArray, actualArray);
     }
+
+    @Test
+    public void testShouldGiveEightForArrayLengthAfterConcatenationOfTwoFourLongCharArrays() {
+        char[] array1 = new char[]{4, 'a', 'u', 't','o'};
+        char[] array2 = new char[]{4, 'p', 'a', 'l', 'o'};
+
+        char[] actualArray = arrayString.concatenate(array1,array2);
+        assertEquals(8, actualArray[0]);
+    }
 }
 
 
