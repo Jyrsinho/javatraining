@@ -239,8 +239,8 @@ public class ArrayStringTest {
 
     @Test
     public void testShouldReturnCharacterAFromArrayConsistingOnlyOfA() {
-        char[] array1 = new char[]{'a'};
-        char expected = arrayString.charAt(array1,0);
+        char[] array1 = new char[]{1,'a'};
+        char expected = arrayString.charAt(array1,1);
         assertEquals('a', expected);
     }
 }
