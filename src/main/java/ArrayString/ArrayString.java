@@ -8,10 +8,13 @@ public class ArrayString {
     public char[] append(char[] array,char a){
         int oldLength = array[0];
         int newLength = oldLength+1;
-        char[] newArray = new char[newLength];
+        char[] newArray = new char[newLength+1];
         newArray[0] = (char) (newLength);
 
-
+        for(int i = 1; i < array.length; i++){
+            newArray[i] = array[i];
+        }
+        newArray[newLength] = a;
 
         return newArray;
     }

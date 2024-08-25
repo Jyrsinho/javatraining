@@ -192,6 +192,24 @@ public class ArrayStringTest {
         char expected = expectedArray[0];
         assertEquals(1, expected);
     }
+
+    @Test
+    public void testShouldAppendCharacterToArrayString() {
+        char[] array1 = new char[]{3,'a','u','t'};
+        char appended = 'o';
+        char[] expectedArray = new char[]{4,'a','u','t','o'};
+        char[] actualArray = arrayString.append(array1,appended);
+        assertArrayEquals(expectedArray, actualArray);
+    }
+
+    @Test
+    public void testShouldAppendCharacterToArrayString2() {
+        char[] array1 = new char[]{0};
+        char appended = 'o';
+        char[] expectedArray = new char[]{1, 'o'};
+        char[] actualArray = arrayString.append(array1,appended);
+        assertArrayEquals(expectedArray, actualArray);
+    }
 }
 
 
