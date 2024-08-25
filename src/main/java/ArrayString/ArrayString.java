@@ -63,7 +63,6 @@ public class ArrayString {
         int spaceToAdd = replace.length - target.length ;
         char [] newArrayString = new char[source.length];
 
-
         char[] substring;
         int newArrayIndex = 0;
         int sourceArrayIndex = 0;
@@ -72,7 +71,6 @@ public class ArrayString {
             //check whether substring of sourcearray arraysAreEqual with targetarray we are looking for
             substring = substring(source, sourceArrayIndex, target.length-1);
             if (arraysAreEqual(substring, target)){
-                // copy old newArrayString and increase it's size
                 newArrayString = copyAndIncreaseArraySize(newArrayString, spaceToAdd);
                 int replaceTextIndex = 0;
                 sourceArrayIndex += target.length-1;

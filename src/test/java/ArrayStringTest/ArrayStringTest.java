@@ -171,6 +171,16 @@ public class ArrayStringTest {
         char[] expectedArray = new char[]{'a','a','s','i','a',0,0,0};
         assertArrayEquals(expectedArray, arrayString.copyAndIncreaseArraySize(sourceArray,2));
     }
+
+    @Test
+    public void testShouldReturnOneLongerArrayThanBeforeAppend() {
+        char[] array1 = new char[]{3, 'a', 'u', 't'};
+        char appended = 'o';
+
+        char[] expected = arrayString.append(array1, appended);
+        assertEquals(4, expected.length);
+
+    }
 }
 
 
