@@ -227,6 +227,14 @@ public class ArrayStringTest {
         char[] actualArray = arrayString.concatenate(array1,array2);
         assertEquals(0, actualArray[0]);
     }
-}
 
+    @Test
+    public void testShouldReturnConcatenatedStringAfterConcatenation() {
+        char[] array1 = new char[]{4, 'a', 'u', 't', 'o'};
+        char[] array2 = new char[]{4, 'p', 'a', 'l', 'o'};
+        char[] expectedArray = new char[]{8,'a', 'u', 't', 'o','p', 'a', 'l', 'o'};
+        char[] actualArray = arrayString.concatenate(array1,array2);
+        assertArrayEquals(expectedArray, actualArray);
+}
+}
 
