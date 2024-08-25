@@ -24,7 +24,22 @@ public class ArrayString {
         char[] newArray = new char[newLength+1];
         newArray[0] = (char) newLength;
 
+        int oldArrayIndex = 1;
+        int newArrayIndex = 1;
 
+        while (oldArrayIndex < array1[0]+1) {
+            newArray[newArrayIndex] = array1[oldArrayIndex];
+            oldArrayIndex++;
+            newArrayIndex++;
+        }
+
+        oldArrayIndex =1;
+
+        while (oldArrayIndex < array2[0]+1) {
+            newArray[newArrayIndex] = array2[oldArrayIndex];
+            oldArrayIndex++;
+            newArrayIndex++;
+        }
 
         return newArray;
     }
