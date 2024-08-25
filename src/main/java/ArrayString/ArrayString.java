@@ -19,6 +19,16 @@ public class ArrayString {
         return newArray;
     }
 
+    public char[] concatenate(char[] array1,char[] array2){
+        int newLength = array1[0] + array2[0];
+        char[] newArray = new char[newLength+1];
+        newArray[0] = (char) newLength;
+
+
+
+        return newArray;
+    }
+
 
 
     public char[] substring(char[]oldArray, int start, int length){

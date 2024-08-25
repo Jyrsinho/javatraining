@@ -219,6 +219,14 @@ public class ArrayStringTest {
         char[] actualArray = arrayString.concatenate(array1,array2);
         assertEquals(8, actualArray[0]);
     }
+
+    @Test
+    public void testShouldGive0ForLengthWhenConcatenatingTwoEmptyCharArrays() {
+        char[] array1 = new char[]{0};
+        char[] array2 = new char[]{0};
+        char[] actualArray = arrayString.concatenate(array1,array2);
+        assertEquals(0, actualArray[0]);
+    }
 }
 
 
