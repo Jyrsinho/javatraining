@@ -5,6 +5,17 @@ public class ArrayString {
     public ArrayString(){}
 
 
+    public char[] append(char[] array,char a){
+        int oldLength = array[0];
+        int newLength = oldLength+1;
+        char[] newArray = new char[newLength];
+        newArray[0] = (char) (newLength);
+
+
+
+        return newArray;
+    }
+
 
 
     public char[] substring(char[]oldArray, int start, int length){
