@@ -58,10 +58,10 @@ public class ArrayString {
 
 
 
-    public char[] replaceString(char[] source, char[] target, char[] replaceText){
+    public char[] replaceString(char[] source, char[] target, char[] replace){
 
-        int spaceToAdd = replaceText.length - target.length ;
-        char [] newArrayString = new char[source.length+spaceToAdd];
+        int spaceToAdd = replace.length - target.length ;
+        char [] newArrayString = new char[source.length];
 
 
         char[] substring;
@@ -76,9 +76,9 @@ public class ArrayString {
                 newArrayString = copyAndIncreaseArraySize(newArrayString, spaceToAdd);
                 int replaceTextIndex = 0;
                 sourceArrayIndex += target.length-1;
-                //add characters from replaceText to newArrayString
-                while (replaceText[replaceTextIndex] != 0)    {
-                    newArrayString[newArrayIndex] = replaceText[replaceTextIndex];
+                //add characters from replace to newArrayString
+                while (replace[replaceTextIndex] != 0)    {
+                    newArrayString[newArrayIndex] = replace[replaceTextIndex];
                     newArrayIndex++;
                     replaceTextIndex++;
                 }
