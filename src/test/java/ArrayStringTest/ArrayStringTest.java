@@ -236,5 +236,12 @@ public class ArrayStringTest {
         char[] actualArray = arrayString.concatenate(array1,array2);
         assertArrayEquals(expectedArray, actualArray);
 }
+
+    @Test
+    public void testShouldReturnCharacterAFromArrayConsistingOnlyOfA() {
+        char[] array1 = new char[]{'a'};
+        char expected = arrayString.charAt(array1,0);
+        assertEquals('a', expected);
+    }
 }
 
