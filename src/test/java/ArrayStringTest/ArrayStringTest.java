@@ -182,6 +182,16 @@ public class ArrayStringTest {
         assertEquals(4, expected);
 
     }
+
+    @Test
+    public void testShouldReturnOneLongerArrayThanBeforeAppend2() {
+        char[] array1 = new char[]{0};
+        char appended = 'o';
+
+        char[] expectedArray = arrayString.append(array1,appended);
+        char expected = expectedArray[0];
+        assertEquals(1, expected);
+    }
 }
 
 
