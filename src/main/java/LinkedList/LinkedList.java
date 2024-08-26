@@ -42,10 +42,13 @@ public class LinkedList {
     }
 
     /**
-     * removes the head of the LinkedList
+     * removes the head of the LinkedList returns the removed
+     * Node's String payload
      */
-    public void removeHead() {
-        this.head = this.head.getNextNode();
+    public String removeHead() {
+        Node removedHead = this.head;
+        this.head = removedHead.getNextNode();
+        return removedHead.getData();
 
     }
 

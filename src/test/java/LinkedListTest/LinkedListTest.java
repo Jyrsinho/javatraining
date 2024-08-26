@@ -68,8 +68,7 @@ public class LinkedListTest {
     public void testShouldRemoveTheHeadFromLinkedList() {
         linkedList.addToHead("Hello1");
         linkedList.addToHead("Hello2");
-        linkedList.removeHead();
-        assertEquals("Hello1",linkedList.getHead().getData());
+        assertEquals("Hello2",linkedList.removeHead());
     }
 
     @Test
