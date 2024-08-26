@@ -90,6 +90,13 @@ public class LinkedListTest {
 
     }
 
+    @Test
+    public void testShouldPrintLinkedListWithOneElement() {
+        linkedList.addToHead("Hello1");
+        String expected = "<head>: Hello1<tail>";
+        assertEquals(expected, linkedList.printList());
+    }
+
 
 
     // -----------------------------------------------------------------

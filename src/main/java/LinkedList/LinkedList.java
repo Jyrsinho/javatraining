@@ -54,7 +54,13 @@ public class LinkedList {
     }
 
     public String printList() {
-        return "<head>: <tail>";
+        StringBuilder sb = new StringBuilder();
+
+        sb.append("<head>: ");
+        if (head != null)sb.append(head.getData());
+        sb.append("<tail>");
+
+        return sb.toString();
     }
 
 
