@@ -109,6 +109,9 @@ public class LinkedListTest {
     @Test
     public void testShouldRemoveTheTailFromList() {
         linkedList.addToHead("Hello1");
+        linkedList.removeTail();
+        assertEquals(linkedList.removeTail(),"Hello1");
+
     }
 
     // -----------------------------------------------------------------

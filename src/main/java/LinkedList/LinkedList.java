@@ -51,6 +51,21 @@ public class LinkedList {
 
     }
 
+    public String removeTail() {
+        Node currentNode = this.head;
+
+        while (currentNode.getNextNode() != null) {
+            currentNode = currentNode.getNextNode();
+        }
+        currentNode.setNextNode(null);
+        return currentNode.getData();
+
+    }
+
+    /**
+     * prints out the Linked List's data payloads
+      * @return String containing Linked List's Nodes data.
+     */
     public String printList() {
         StringBuilder sb = new StringBuilder();
         sb.append("<head>: ");
