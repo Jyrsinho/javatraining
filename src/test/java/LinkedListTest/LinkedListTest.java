@@ -154,6 +154,11 @@ public class LinkedListTest {
         assertTrue(linkedList.contains("Hello1"));
     }
 
+    @Test
+    public void testShouldReturnFalseForContainsWhenLinkedListIsEmpty() {
+        assertFalse(linkedList.contains("Hello2"));
+    }
+
 
     @Test
     public void testShouldRemoveSpesificPieceOfDataFromList1(){
@@ -165,10 +170,9 @@ public class LinkedListTest {
         assertFalse(linkedList.contains("Hello2"));
     }
 
-    @Disabled
+    @Test
     public void testShouldRemoveSpesificPieceOfDataFromList2() {
         linkedList.addToHead("Hello1");
-        linkedList.remove("Hello1");
         assertEquals("Hello1", linkedList.remove("Hello1"));
         assertFalse(linkedList.contains("Hello1"));
     }
