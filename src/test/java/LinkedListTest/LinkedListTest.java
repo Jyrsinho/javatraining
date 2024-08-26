@@ -214,8 +214,8 @@ public class LinkedListTest {
 
     // -----------------------------------------------------------------
 
-    public String getTail(LinkedList linkedList) {
-        Node currentNode = linkedList.getHead();
+    public String getTail(LinkedList<String> linkedList) {
+        Node<String> currentNode = linkedList.getHead();
         while (currentNode.getNextNode() != null) {
             currentNode = currentNode.getNextNode();
         }
