@@ -3,11 +3,9 @@ package LinkedList;
 public class LinkedList {
 
     public Node head;
-    public Node tail;
 
     public LinkedList() {
         head = null;
-        tail = null;
     }
 
     /**
@@ -55,7 +53,6 @@ public class LinkedList {
 
     public String printList() {
         StringBuilder sb = new StringBuilder();
-
         sb.append("<head>: ");
 
         if (this.head != null){

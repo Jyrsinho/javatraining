@@ -106,7 +106,10 @@ public class LinkedListTest {
         assertEquals(expected, linkedList.printList());
     }
 
-
+    @Test
+    public void testShouldRemoveTheTailFromList() {
+        linkedList.addToHead("Hello1");
+    }
 
     // -----------------------------------------------------------------
 
