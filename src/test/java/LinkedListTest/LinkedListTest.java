@@ -7,6 +7,7 @@ import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 public class LinkedListTest {
 
@@ -62,6 +63,25 @@ public class LinkedListTest {
         linkedList.addToTail("Hello3");
         assertEquals("Hello3",getTail(linkedList));
     }
+
+    @Test
+    public void testShouldRemoveTheHeadFromLinkedList() {
+        linkedList.addToHead("Hello1");
+        linkedList.addToHead("Hello2");
+        linkedList.removeHead();
+        assertEquals("Hello1",linkedList.getHead().getData());
+    }
+
+    @Test
+    public void testShouldRemoveTheTailFromLinkedListWithOneElement() {
+        linkedList.addToHead("Hello1");
+        linkedList.removeHead();
+        assertNull(linkedList.getHead());
+    }
+
+
+
+    // -----------------------------------------------------------------
 
     public String getTail(LinkedList linkedList) {
         Node currentNode = linkedList.getHead();

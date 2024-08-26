@@ -41,6 +41,14 @@ public class LinkedList {
         }
     }
 
+    /**
+     * removes the head of the LinkedList
+     */
+    public void removeHead() {
+        this.head = this.head.getNextNode();
+
+    }
+
 
     public Node getHead() {
         return head;
