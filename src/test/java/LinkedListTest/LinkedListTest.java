@@ -42,7 +42,6 @@ public class LinkedListTest {
     public void testShouldAddNewTailToEmptyLinkedList() {
         linkedList.addToTail("Hello1");
 
-        assertEquals("Hello1",linkedList.getTail().getData());
         assertEquals("Hello1",linkedList.getHead().getData());
     }
 
@@ -52,7 +51,6 @@ public class LinkedListTest {
         linkedList.addToHead("Hello1"); // Hello1, Hello2
         linkedList.addToTail("Hello2");
 
-        assertEquals("Hello2",linkedList.getTail().getData());
         assertEquals("Hello2",linkedList.getHead().getNextNode().getData());
 
     }
@@ -62,7 +60,15 @@ public class LinkedListTest {
         linkedList.addToTail("Hello1");
         linkedList.addToTail("Hello2");
         linkedList.addToTail("Hello3");
-        assertEquals("Hello3",linkedList.getTail().getData());
+        assertEquals("Hello3",getTail(linkedList));
+    }
+
+    public String getTail(LinkedList linkedList) {
+        Node currentNode = linkedList.getHead();
+        while (currentNode.getNextNode() != null) {
+            currentNode = currentNode.getNextNode();
+        }
+        return currentNode.getData();
     }
 
 

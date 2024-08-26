@@ -29,17 +29,15 @@ public class LinkedList {
      */
     public void addToTail(String data) {
         //if list is empty the new tail is the new head
-        if (head == null) {
+        Node tail = this.head;
+
+        if (tail== null){
             this.head = new Node(data);
-            this.tail = this.head;
         } else {
-            Node currentNode = head;
-            while (currentNode.getNextNode() != null) {
-                currentNode = currentNode.getNextNode();
+            while (tail.getNextNode() != null) {
+                tail = tail.getNextNode();
             }
-            Node newTail = new Node(data);
-            currentNode.setNextNode(newTail);
-            this.tail = newTail;
+            tail.setNextNode(new Node (data));
         }
     }
 
@@ -48,7 +46,4 @@ public class LinkedList {
         return head;
     }
 
-    public Node getTail() {
-        return tail;
-    }
 }
