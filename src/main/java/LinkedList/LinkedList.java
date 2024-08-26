@@ -73,7 +73,17 @@ public class LinkedList {
      * @return true if data String is found in LinkedList, false if not
      */
     public boolean contains(String data) {
-        return false;
+        boolean contains = false;
+        Node currentNode = this.head;
+        while (currentNode != null) {
+            if (currentNode.getData().equals(data)) {
+                contains = true;
+                break;
+            }
+            currentNode = currentNode.getNextNode();
+        }
+
+        return contains;
     }
 
     /**

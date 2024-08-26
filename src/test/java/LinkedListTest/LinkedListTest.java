@@ -148,6 +148,12 @@ public class LinkedListTest {
         assertFalse(linkedList.contains("Hello2"));
     }
 
+    @Test
+    public void testShouldReturnTrueIfLLDoesContainData() {
+        linkedList.addToHead("Hello1");
+        assertTrue(linkedList.contains("Hello1"));
+    }
+
 
     @Disabled
     public void testShouldRemoveSpesificPieceOfDataFromList() {
