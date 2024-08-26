@@ -135,6 +135,14 @@ public class LinkedListTest {
         assertEquals(1, linkedList.getLength());
     }
 
+    @Test
+    public void testShouldReturThreeForLengthOfLinkedListWithThreeElements() {
+        linkedList.addToHead("Hello1");
+        linkedList.addToHead("Hello2");
+        linkedList.addToHead("Hello3");
+        assertEquals(3, linkedList.getLength());
+    }
+
     // -----------------------------------------------------------------
 
     public String getTail(LinkedList linkedList) {
