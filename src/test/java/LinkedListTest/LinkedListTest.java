@@ -107,8 +107,18 @@ public class LinkedListTest {
     }
 
     @Test
-    public void testShouldRemoveTheTailFromList() {
+    public void testShouldRemoveTheTailFromListWithOneElement() {
         linkedList.addToHead("Hello1");
+        linkedList.removeTail();
+        assertEquals(linkedList.removeTail(),"Hello1");
+
+    }
+
+    @Test
+    public void testShouldRemoveTheTailFromListWithThreeElements() {
+        linkedList.addToHead("Hello1");
+        linkedList.addToHead("Hello2");
+        linkedList.addToHead("Hello3");
         linkedList.removeTail();
         assertEquals(linkedList.removeTail(),"Hello1");
 
