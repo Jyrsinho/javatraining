@@ -97,6 +97,15 @@ public class LinkedListTest {
         assertEquals(expected, linkedList.printList());
     }
 
+    @Test
+    public void testShouldPrintLinkedListWithThreeElements() {
+        linkedList.addToHead("Hello1");
+        linkedList.addToHead("Hello2");
+        linkedList.addToHead("Hello3");
+        String expected = "<head>: Hello1, Hello2, Hello3<tail>";
+        assertEquals(expected, linkedList.printList());
+    }
+
 
 
     // -----------------------------------------------------------------
