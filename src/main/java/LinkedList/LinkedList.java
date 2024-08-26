@@ -51,6 +51,10 @@ public class LinkedList {
 
     }
 
+    /**
+     * removes the tail of the LinkedList - returns the removed
+     * Node's String payload
+     */
     public String removeTail() {
         Node currentNode = this.head;
 
@@ -61,6 +65,11 @@ public class LinkedList {
         return currentNode.getData();
 
     }
+
+    public int getLength() {
+        return 0;
+    }
+
 
     /**
      * prints out the Linked List's data payloads

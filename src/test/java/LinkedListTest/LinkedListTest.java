@@ -124,6 +124,11 @@ public class LinkedListTest {
 
     }
 
+    @Test
+    public void testShouldReturnZeroForLengthOfEmptyLinkedList() {
+        assertEquals(0, linkedList.getLength());
+    }
+
     // -----------------------------------------------------------------
 
     public String getTail(LinkedList linkedList) {
