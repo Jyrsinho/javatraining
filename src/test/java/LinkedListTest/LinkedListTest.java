@@ -129,6 +129,12 @@ public class LinkedListTest {
         assertEquals(0, linkedList.getLength());
     }
 
+    @Test
+    public void testShouldReturnOneForLengthOfLinkedListWithOneElement() {
+        linkedList.addToHead("Hello1");
+        assertEquals(1, linkedList.getLength());
+    }
+
     // -----------------------------------------------------------------
 
     public String getTail(LinkedList linkedList) {

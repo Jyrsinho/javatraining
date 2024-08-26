@@ -66,8 +66,21 @@ public class LinkedList {
 
     }
 
+    /**
+     * returns the amount of elements in LinkedList
+     * @return returns the amount of elements in LinkedList
+     */
     public int getLength() {
-        return 0;
+        Node currentNode = this.head;
+        if (currentNode == null) return 0;
+
+        int length = 0;
+        while (currentNode!= null) {
+            length++;
+            currentNode = currentNode.getNextNode();
+        }
+
+        return length;
     }
 
 
