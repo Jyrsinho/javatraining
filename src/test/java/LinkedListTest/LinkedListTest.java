@@ -78,6 +78,18 @@ public class LinkedListTest {
         assertNull(linkedList.getHead());
     }
 
+    @Test
+    public void testShouldReturnNullWhenTryingToRemoveHeadFromEmptyLinkedList() {
+        assertNull(linkedList.removeHead());
+    }
+
+    @Test
+    public void testShouldPrintEmptyLinkedListWithMarkersForTailAndHead() {
+        String expected = "<head>: <tail>";
+        assertEquals(expected, linkedList.printList());
+
+    }
+
 
 
     // -----------------------------------------------------------------
