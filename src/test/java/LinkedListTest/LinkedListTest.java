@@ -74,7 +74,7 @@ public class LinkedListTest {
     @Test
     public void testShouldRemoveTheTailFromLinkedListWithOneElement() {
         linkedList.addToHead("Hello1");
-        linkedList.removeHead();
+        assertEquals("Hello1",linkedList.removeHead());
         assertNull(linkedList.getHead());
     }
 
