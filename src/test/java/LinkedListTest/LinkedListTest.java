@@ -6,8 +6,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class LinkedListTest {
 
@@ -141,6 +140,20 @@ public class LinkedListTest {
         linkedList.addToHead("Hello2");
         linkedList.addToHead("Hello3");
         assertEquals(3, linkedList.getLength());
+    }
+
+    @Test
+    public void testShouldReturnFalseIfLLDoesNotContainData() {
+        linkedList.addToHead("Hello1");
+        assertFalse(linkedList.contains("Hello2"));
+    }
+
+
+    @Disabled
+    public void testShouldRemoveSpesificPieceOfDataFromList() {
+        linkedList.addToHead("Hello1");
+        linkedList.remove("Hello1");
+        assertFalse(linkedList.contains("Hello1"));
     }
 
     // -----------------------------------------------------------------

@@ -66,6 +66,24 @@ public class LinkedList {
 
     }
 
+
+    /**
+     * Checks whether LinkedList contains given data String
+     * @param data String to be looked for
+     * @return true if data String is found in LinkedList, false if not
+     */
+    public boolean contains(String data) {
+        return false;
+    }
+
+    /**
+     * Removes a spesific node containing given Data String
+     * @param data to be removed from Linked List
+     */
+    public void remove (String data) {
+
+    }
+
     /**
      * returns the amount of elements in LinkedList
      * @return returns the amount of elements in LinkedList
