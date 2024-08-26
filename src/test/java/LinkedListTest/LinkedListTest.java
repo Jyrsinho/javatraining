@@ -155,12 +155,25 @@ public class LinkedListTest {
     }
 
 
+    @Test
+    public void testShouldRemoveSpesificPieceOfDataFromList1(){
+        linkedList.addToHead("Hello1");
+        linkedList.addToHead("Hello2");
+        linkedList.addToHead("Hello3");
+        linkedList.addToHead("Hello4");
+        linkedList.remove("Hello2");
+        assertFalse(linkedList.contains("Hello2"));
+    }
+
     @Disabled
-    public void testShouldRemoveSpesificPieceOfDataFromList() {
+    public void testShouldRemoveSpesificPieceOfDataFromList2() {
         linkedList.addToHead("Hello1");
         linkedList.remove("Hello1");
+        assertEquals("Hello1", linkedList.remove("Hello1"));
         assertFalse(linkedList.contains("Hello1"));
     }
+
+
 
     // -----------------------------------------------------------------
 

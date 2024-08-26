@@ -89,9 +89,27 @@ public class LinkedList {
     /**
      * Removes a spesific node containing given Data String
      * @param data to be removed from Linked List
+     * @return data String that was removed from Linked List. Null if nothins is removed
      */
-    public void remove (String data) {
+    public String remove (String data) {
+        String removed= null;
 
+        if (this.head.getData().equals(data)) {
+            removeHead();
+        }
+
+        Node previousNode = this.head;
+        Node currentNode = this.head.getNextNode();
+
+        while (currentNode != null) {
+            if (currentNode.getData().equals(data)) {
+                removed = currentNode.getData();
+                previousNode.setNextNode(currentNode.getNextNode());
+            }
+            currentNode = currentNode.getNextNode();
+        }
+
+        return removed;
     }
 
     /**
