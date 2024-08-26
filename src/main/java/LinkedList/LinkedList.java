@@ -57,7 +57,16 @@ public class LinkedList {
         StringBuilder sb = new StringBuilder();
 
         sb.append("<head>: ");
-        if (head != null)sb.append(head.getData());
+
+        if (this.head != null){
+            Node currentNode = head;
+        while (currentNode.getNextNode() != null) {
+            sb.append(currentNode.getData());
+            sb.append(", ");
+            currentNode = currentNode.getNextNode();
+        }
+            sb.append(currentNode.getData());
+        }
         sb.append("<tail>");
 
         return sb.toString();
