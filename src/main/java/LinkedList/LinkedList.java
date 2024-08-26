@@ -53,6 +53,10 @@ public class LinkedList {
 
     }
 
+    public String printList() {
+        return "<head>: <tail>";
+    }
+
 
     public Node getHead() {
         return head;
