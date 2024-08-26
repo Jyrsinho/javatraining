@@ -1,8 +1,8 @@
 package LinkedList;
 
-public class LinkedList {
+public class LinkedList<T> {
 
-    public Node head;
+    public Node<T> head;
 
     public LinkedList() {
         head = null;
@@ -12,9 +12,9 @@ public class LinkedList {
      * adds new Node to the tail end of the LinkedList
      * @param data data payload of new Node to be added
      */
-    public void addToHead(String data) {
-        Node newHead = new Node(data);
-        Node currentHead = head;
+    public void addToHead(T data) {
+        Node<T> newHead = new Node(data);
+        Node<T> currentHead = head;
         this.head = newHead;
         if (currentHead != null) this.head.setNextNode(currentHead);
 
@@ -25,17 +25,17 @@ public class LinkedList {
      * adds new Node to the tail end of the LinkedList
      * @param data data payload of new Node to be added
      */
-    public void addToTail(String data) {
+    public void addToTail(T data) {
         //if list is empty the new tail is the new head
-        Node tail = this.head;
+        Node<T> tail = this.head;
 
         if (tail== null){
-            this.head = new Node(data);
+            this.head = new Node<T>(data);
         } else {
             while (tail.getNextNode() != null) {
                 tail = tail.getNextNode();
             }
-            tail.setNextNode(new Node (data));
+            tail.setNextNode(new Node<T> (data));
         }
     }
 
@@ -43,8 +43,8 @@ public class LinkedList {
      * removes the head of the LinkedList returns the removed
      * Node's String payload
      */
-    public String removeHead() {
-        Node removedHead = this.head;
+    public T removeHead() {
+        Node<T> removedHead = this.head;
         if (removedHead == null) return null;
         this.head = removedHead.getNextNode();
         return removedHead.getData();
@@ -55,8 +55,8 @@ public class LinkedList {
      * removes the tail of the LinkedList - returns the removed
      * Node's String payload
      */
-    public String removeTail() {
-        Node currentNode = this.head;
+    public T removeTail() {
+        Node<T> currentNode = this.head;
 
         while (currentNode.getNextNode() != null) {
             currentNode = currentNode.getNextNode();
@@ -72,9 +72,9 @@ public class LinkedList {
      * @param data String to be looked for
      * @return true if data String is found in LinkedList, false if not
      */
-    public boolean contains(String data) {
+    public boolean contains(T data) {
         boolean contains = false;
-        Node currentNode = this.head;
+        Node<T> currentNode = this.head;
         while (currentNode != null) {
             if (currentNode.getData().equals(data)) {
                 contains = true;
@@ -91,8 +91,8 @@ public class LinkedList {
      * @param data to be removed from Linked List
      * @return data String that was removed from Linked List. Null if nothins is removed
      */
-    public String remove (String data) {
-        String removed= null;
+    public T remove (T data) {
+        T removed= null;
 
         if (this.head == null) return null;
 
@@ -100,8 +100,8 @@ public class LinkedList {
             return removeHead();
         }
 
-        Node previousNode = this.head;
-        Node currentNode = this.head.getNextNode();
+        Node<T> previousNode = this.head;
+        Node<T> currentNode = this.head.getNextNode();
 
         while (currentNode != null) {
             if (currentNode.getData().equals(data)) {
@@ -119,7 +119,7 @@ public class LinkedList {
      * @return returns the amount of elements in LinkedList
      */
     public int getLength() {
-        Node currentNode = this.head;
+        Node<T> currentNode = this.head;
         if (currentNode == null) return 0;
 
         int length = 0;

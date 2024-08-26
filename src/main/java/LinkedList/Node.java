@@ -1,24 +1,24 @@
 package LinkedList;
 
-public class Node {
+public class Node<T> {
 
-    public String data;
-    private Node next;
+    public T data;
+    private Node<T> next;
 
-    public Node(String data) {
+    public Node(T data) {
         this.data = data;
         this.next = null;
     }
 
-    public void setNextNode(Node node) {
+    public void setNextNode(Node<T> node) {
         this.next = node;
     }
 
-    public Node getNextNode() {
+    public Node<T> getNextNode() {
         return this.next;
     }
 
-    public String getData() {
+    public T getData() {
         return this.data;
     }
 

@@ -3,14 +3,13 @@ package LinkedListTest;
 import LinkedList.LinkedList;
 import LinkedList.Node;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 public class LinkedListTest {
 
-    LinkedList linkedList;
+    LinkedList<String> linkedList;
 
     @BeforeEach
     public void setUp() {
@@ -220,7 +219,7 @@ public class LinkedListTest {
         while (currentNode.getNextNode() != null) {
             currentNode = currentNode.getNextNode();
         }
-        return currentNode.getData();
+        return (String) currentNode.getData();
     }
 
 

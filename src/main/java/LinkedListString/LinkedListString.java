@@ -1,10 +1,18 @@
 package LinkedListString;
 
+import LinkedList.Node;
+
 public class LinkedListString {
 
-    public Node head;
+    private Node head;
 
-    public LinkedListString() {
+    private LinkedListString() {
         head = null;
     }
-}
+
+    private void append(char c) {
+        Node newNode = new Node(c);
+
+        }
+    }
+
