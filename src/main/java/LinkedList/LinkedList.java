@@ -94,8 +94,10 @@ public class LinkedList {
     public String remove (String data) {
         String removed= null;
 
+        if (this.head == null) return null;
+
         if (this.head.getData().equals(data)) {
-            removeHead();
+            return removeHead();
         }
 
         Node previousNode = this.head;

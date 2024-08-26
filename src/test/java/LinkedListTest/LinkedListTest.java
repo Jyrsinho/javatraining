@@ -171,9 +171,43 @@ public class LinkedListTest {
     }
 
     @Test
-    public void testShouldRemoveSpesificPieceOfDataFromList2() {
+    public void testShouldRemoveSpesificPieceOfDataFromListContainingOneElement() {
         linkedList.addToHead("Hello1");
         assertEquals("Hello1", linkedList.remove("Hello1"));
+        assertFalse(linkedList.contains("Hello1"));
+    }
+
+    @Test
+    public void testShouldRemoveNothingWhenGivenDataIsNotInLinkedList() {
+        linkedList.addToHead("Hello1");
+        linkedList.addToHead("Hello2");
+        linkedList.addToHead("Hello3");
+        linkedList.addToHead("Hello4");
+        assertNull(linkedList.remove("Tomaatti"));
+    }
+
+    @Test
+    public void testShouldReturnNullWhenTryingToRemoveFromEmptyLinkedList() {
+        assertNull(linkedList.remove("Tomaatti"));
+    }
+
+    @Test
+    public void testShouldRemoveElementFromTheEndOfTheLinkedList() {
+        linkedList.addToHead("Hello1");
+        linkedList.addToHead("Hello2");
+        linkedList.addToHead("Hello3");
+        linkedList.addToHead("Hello4");
+        assertEquals("Hello4",linkedList.remove("Hello4"));
+        assertFalse(linkedList.contains("Hello4"));
+    }
+
+    @Test
+    public void testShouldRemoveElementFromTheBeginningOfTheLinkedList() {
+        linkedList.addToHead("Hello1");
+        linkedList.addToHead("Hello2");
+        linkedList.addToHead("Hello3");
+        linkedList.addToHead("Hello4");
+        assertEquals("Hello1",linkedList.remove("Hello1"));
         assertFalse(linkedList.contains("Hello1"));
     }
 
