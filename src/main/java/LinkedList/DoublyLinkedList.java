@@ -18,7 +18,7 @@ public class DoublyLinkedList<T> {
 
     }
 
-    public T getHead() {
-        return head.getData();
+    public Node<T> getHead() {
+        return head;
     }
 }

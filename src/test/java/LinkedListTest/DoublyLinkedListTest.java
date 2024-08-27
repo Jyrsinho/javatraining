@@ -18,6 +18,14 @@ public class DoublyLinkedListTest {
     @Test
     public void testAddHeadToEmptyList() {
         doublyLinkedList.addToHead('c');
-        assertEquals('c' ,doublyLinkedList.getHead());
+        assertEquals('c' ,doublyLinkedList.getHead().getData());
+    }
+
+    @Test
+    public void testAddHeadToListWithOneElement() {
+        doublyLinkedList.addToHead('c');
+        doublyLinkedList.addToHead('d');
+        assertEquals('d',doublyLinkedList.getHead().getData());
+        assertEquals('c',doublyLinkedList.getHead().getNextNode().getData());
     }
 }
