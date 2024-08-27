@@ -54,4 +54,38 @@ public class DoublyLinkedListTest {
         doublyLinkedList.addToTail('c');
         assertEquals('c',doublyLinkedList.getTail().getData());
     }
+
+    @Test
+    public void testShouldAddTheSameTailAndHeadWhenAddingTailToEmptyList() {
+        doublyLinkedList.addToTail('c');
+        assertEquals('c',doublyLinkedList.getTail().getData());
+        assertEquals('c',doublyLinkedList.getHead().getData());
+    }
+
+    @Test
+    public void testShouldAddTheTailToAListWithOneElementWithoutUpdatingTheHead() {
+        doublyLinkedList.addToHead('b');
+        doublyLinkedList.addToTail('c');
+        assertEquals('c',doublyLinkedList.getTail().getData());
+        assertEquals('b',doublyLinkedList.getHead().getData());
+    }
+
+    @Test
+    public void testShouldAddNewTailAndUpdateThePreviousValueOfTheNewTail() {
+        doublyLinkedList.addToHead('c');
+        doublyLinkedList.addToTail('d');
+        assertEquals('c', doublyLinkedList.getTail().getPrevNode().getData());
+        assertEquals('d', doublyLinkedList.getHead().getNextNode().getData());
+    }
+
+    @Test
+    public void testShouldAddNewTailToListWithTwoElementsAndUpdateTheNextAndPreviousValues() {
+        doublyLinkedList.addToTail('c');
+        doublyLinkedList.addToTail('d');
+        doublyLinkedList.addToTail('e');
+        assertEquals('e',doublyLinkedList.getTail().getData());
+        assertEquals('d',doublyLinkedList.getTail().getPrevNode().getData());
+        assertEquals('d',doublyLinkedList.getHead().getNextNode().getData());
+
+    }
 }

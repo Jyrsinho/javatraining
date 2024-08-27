@@ -26,7 +26,16 @@ public class DoublyLinkedList<T> {
     }
 
     public void addToTail(T data) {
+        Node<T> previousTail = tail;
         this.tail = new Node<>(data);
+
+        if (previousTail == null) {
+            this.head = this.tail;
+        }
+        else {
+            previousTail.setNextNode(tail);
+            tail.setPrevNode(previousTail);
+        }
     }
 
 
