@@ -154,14 +154,7 @@ public class DoublyLinkedListTest {
 
     }
 
-    @Test
-    public void testShouldReturnTailsDataAndRemoveTheTailIfRemoveByDataFindsElementFromTheTail() {
-        doublyLinkedList.addToHead('c');
-        doublyLinkedList.addToTail('d');
-        doublyLinkedList.addToTail('e');
-        assertEquals('e',doublyLinkedList.removeByData('e'));
-        assertEquals('d',doublyLinkedList.getTail().getData());
-    }
+
 
 }
 

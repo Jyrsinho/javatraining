@@ -75,7 +75,9 @@ public class DoublyLinkedList<T> {
     }
 
     public T removeByData(T data) {
+
         T removed = null;
+
 
         // if data is found in the head
         if (this.head.getData() == data) {
@@ -83,8 +85,7 @@ public class DoublyLinkedList<T> {
             removeHead();
         }
 
-        //if data is found in the tail
-        if (this.tail.getData() == data) {
+        if (this.tail != null && tail.getData() == data) {
             removed = this.tail.getData();
             removeTail();
         }
