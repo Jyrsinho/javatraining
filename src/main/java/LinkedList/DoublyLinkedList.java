@@ -47,8 +47,9 @@ public class DoublyLinkedList<T> {
 
         if (this.head != null) {
             this.head.setPrevNode(null);
-        } else {
-            this.tail = null;
+        }
+        if (removedHead == this.tail) {
+            removeTail();
         }
 
         return removedHead.getData();
@@ -56,6 +57,18 @@ public class DoublyLinkedList<T> {
 
     public T removeTail() {
         Node<T> removedTail = this.tail;
+        if (removedTail == null) {
+            return null;
+        }
+        this.tail = removedTail.getPrevNode();
+
+        if (this.tail != null) {
+            this.tail.setNextNode(null);
+        }
+        if (removedTail == this.head) {
+            removeHead();
+        }
+
         return removedTail.getData();
     }
 

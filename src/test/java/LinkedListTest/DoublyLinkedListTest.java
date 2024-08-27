@@ -125,5 +125,23 @@ public class DoublyLinkedListTest {
     public void testShouldReturnNullWhenTryingToRemoveTailFromEmptyList() {
         assertNull(doublyLinkedList.removeTail());
     }
+
+    @Test
+    public void testShouldRemoveTailFromListWithMultipleElements() {
+        doublyLinkedList.addToTail('c');
+        doublyLinkedList.addToTail('d');
+        doublyLinkedList.addToTail('e');
+        assertEquals('e',doublyLinkedList.removeTail());
+        assertEquals('d',doublyLinkedList.getTail().getData());
+        assertEquals('c',doublyLinkedList.getTail().getPrevNode().getData());
+    }
+
+    @Test
+    public void testShouldRemoveTailAndHeadFromListWithOneElement() {
+        doublyLinkedList.addToHead('c');
+        assertEquals('c',doublyLinkedList.removeTail());
+        assertNull(doublyLinkedList.getHead());
+        assertNull(doublyLinkedList.getTail());
+    }
 }
 
