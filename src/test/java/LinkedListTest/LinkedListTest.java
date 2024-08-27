@@ -13,7 +13,7 @@ public class LinkedListTest {
 
     @BeforeEach
     public void setUp() {
-        linkedList = new LinkedList();
+        linkedList = new LinkedList<String>();
     }
 
     @Test
@@ -28,9 +28,9 @@ public class LinkedListTest {
         linkedList.addToHead("Hello2");
         linkedList.addToHead("Hello3");
 
-        Node head = linkedList.getHead();
-        Node second = linkedList.getHead().getNextNode();
-        Node third = second.getNextNode();
+        Node<String> head = linkedList.getHead();
+        Node<String> second = linkedList.getHead().getNextNode();
+        Node<String> third = second.getNextNode();
 
         assertEquals("Hello2",second.getData());
         assertEquals("Hello1",third.getData());

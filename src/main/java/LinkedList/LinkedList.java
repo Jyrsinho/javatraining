@@ -13,7 +13,7 @@ public class LinkedList<T> {
      * @param data data payload of new Node to be added
      */
     public void addToHead(T data) {
-        Node<T> newHead = new Node(data);
+        Node<T> newHead = new Node<>(data);
         Node<T> currentHead = head;
         this.head = newHead;
         if (currentHead != null) this.head.setNextNode(currentHead);
@@ -141,7 +141,7 @@ public class LinkedList<T> {
         sb.append("<head>: ");
 
         if (this.head != null){
-            Node currentNode = head;
+            Node<T> currentNode = head;
         while (currentNode.getNextNode() != null) {
             sb.append(currentNode.getData());
             sb.append(", ");
@@ -155,7 +155,7 @@ public class LinkedList<T> {
     }
 
 
-    public Node getHead() {
+    public Node<T> getHead() {
         return head;
     }
 
