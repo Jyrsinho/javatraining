@@ -120,5 +120,10 @@ public class DoublyLinkedListTest {
         assertNull(doublyLinkedList.getHead());
         assertNull(doublyLinkedList.getTail());
     }
+
+    @Test
+    public void testShouldReturnNullWhenTryingToRemoveTailFromEmptyList() {
+        assertNull(doublyLinkedList.removeTail());
+    }
 }
 

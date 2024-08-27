@@ -54,6 +54,11 @@ public class DoublyLinkedList<T> {
         return removedHead.getData();
     }
 
+    public T removeTail() {
+        Node<T> removedTail = this.tail;
+        return removedTail.getData();
+    }
+
 
     public Node<T> getHead() {
         return head;
