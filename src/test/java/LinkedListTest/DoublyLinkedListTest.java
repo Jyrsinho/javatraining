@@ -48,4 +48,10 @@ public class DoublyLinkedListTest {
         assertEquals('d',doublyLinkedList.getHead().getNextNode().getData());
         assertEquals('d',doublyLinkedList.getTail().getPrevNode().getData());
     }
+
+    @Test
+    public void testShouldAddTailToEmptyList() {
+        doublyLinkedList.addToTail('c');
+        assertEquals('c',doublyLinkedList.getTail().getData());
+    }
 }

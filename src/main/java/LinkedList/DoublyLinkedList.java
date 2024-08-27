@@ -23,7 +23,10 @@ public class DoublyLinkedList<T> {
             head.setNextNode(previousHead);
             previousHead.setPrevNode(head);
         }
+    }
 
+    public void addToTail(T data) {
+        this.tail = new Node<>(data);
     }
 
 
