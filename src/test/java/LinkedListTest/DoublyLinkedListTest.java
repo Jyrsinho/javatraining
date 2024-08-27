@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 public class DoublyLinkedListTest {
 
@@ -91,7 +92,33 @@ public class DoublyLinkedListTest {
 
     @Test
     public void testShouldReturnNullWhenTryingToRemoveHeadOfAnEmptyList() {
-        assertEquals(null, doublyLinkedList.removeHead());
+        assertNull(doublyLinkedList.removeHead());
+    }
+
+    @Test
+    public void testShouldReturnNullWhenRemovingTheHeadFromListWithOneElement() {
+        doublyLinkedList.addToHead('c');
+        assertEquals('c',doublyLinkedList.removeHead());
+    }
+
+    @Test
+    public void testShouldRemoveHeadFromListWithMultipleElements() {
+        doublyLinkedList.addToTail('c');
+        doublyLinkedList.addToTail('d');
+        doublyLinkedList.addToTail('e');
+
+        assertEquals('c',doublyLinkedList.removeHead());
+        assertEquals('d',doublyLinkedList.getHead().getData());
+        assertEquals('e',doublyLinkedList.getHead().getNextNode().getData());
+
+    }
+
+    @Test
+    public void testShouldRemoveHeadAndTailWhenRemovingFromListWithOneElement() {
+        doublyLinkedList.addToHead('c');
+        assertEquals('c',doublyLinkedList.removeHead());
+        assertNull(doublyLinkedList.getHead());
+        assertNull(doublyLinkedList.getTail());
     }
 }
 
