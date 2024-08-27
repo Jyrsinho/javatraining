@@ -173,7 +173,7 @@ public class DoublyLinkedListTest {
         assertEquals(1, doublyLinkedList.getLength());
     }
 
-    @Disabled
+    @Test
     public void testShouldReturnTheLengthOfTheDoublyLinkedListWhenListHasMultipleElements() {
         doublyLinkedList.addToHead('c');
         doublyLinkedList.addToTail('d');

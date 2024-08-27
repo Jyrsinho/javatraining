@@ -116,8 +116,16 @@ public class DoublyLinkedList<T> {
         return tail;
     }
 
+
     public int getLength() {
         int length = 0;
+
+        Node<T> currentNode = head;
+        while (currentNode != null) {
+            length++;
+            currentNode = currentNode.getNextNode();
+        }
+
         return length;
     }
 
