@@ -38,6 +38,13 @@ public class DoublyLinkedList<T> {
         }
     }
 
+    public T removeHead() {
+        if (head == null) {
+            return null;
+        }
+        return null;
+    }
+
 
     public Node<T> getHead() {
         return head;

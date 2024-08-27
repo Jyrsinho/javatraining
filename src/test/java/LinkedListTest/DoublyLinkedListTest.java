@@ -88,4 +88,10 @@ public class DoublyLinkedListTest {
         assertEquals('d',doublyLinkedList.getHead().getNextNode().getData());
 
     }
+
+    @Test
+    public void testShouldReturnNullWhenTryingToRemoveHeadOfAnEmptyList() {
+        assertEquals(null, doublyLinkedList.removeHead());
+    }
 }
+
