@@ -39,18 +39,15 @@ public class DoublyLinkedList<T> {
     }
 
     public T removeHead() {
-        if (head == null) {
+        Node<T> removedHead = this.head;
+        if (removedHead == null) {
             return null;
         }
-        Node <T> newHead;
-        Node <T> removedHead = this.head;
+        this.head = removedHead.getNextNode();
 
-        if (head.getNextNode() != null) {
-            newHead = head.getNextNode();
-            this.head = newHead;
+        if (this.head != null) {
             this.head.setPrevNode(null);
         } else {
-            this.head = null;
             this.tail = null;
         }
 
