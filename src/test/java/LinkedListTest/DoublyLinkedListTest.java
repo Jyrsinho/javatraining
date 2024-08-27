@@ -2,6 +2,7 @@ package LinkedListTest;
 import LinkedList.Node;
 import LinkedList.DoublyLinkedList;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -19,6 +20,13 @@ public class DoublyLinkedListTest {
     public void testAddHeadToEmptyList() {
         doublyLinkedList.addToHead('c');
         assertEquals('c' ,doublyLinkedList.getHead().getData());
+    }
+
+    @Test
+    public void testShouldAddHeadAndTailToSameElementWhenAddingHeadToEmptyList() {
+        doublyLinkedList.addToHead('c');
+        assertEquals('c', doublyLinkedList.getHead().getData());
+        assertEquals('c', doublyLinkedList.getTail().getData());
     }
 
     @Test
