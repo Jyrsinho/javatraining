@@ -91,6 +91,25 @@ public class DoublyLinkedListTest {
     }
 
     @Test
+    public void testShouldReturnTheLengthOfTheDoublyLinkedListWhenListIsEmpty(){
+        assertEquals(0, doublyLinkedList.getLength());
+    }
+
+    @Test
+    public void testShouldReturnTheLengthOfTheDoublyLinkedListWhenListHasOneElement(){
+        doublyLinkedList.addToHead('c');
+        assertEquals(1, doublyLinkedList.getLength());
+    }
+
+    @Test
+    public void testShouldReturnTheLengthOfTheDoublyLinkedListWhenListHasMultipleElements() {
+        doublyLinkedList.addToHead('c');
+        doublyLinkedList.addToTail('d');
+        doublyLinkedList.addToTail('e');
+        assertEquals(3, doublyLinkedList.getLength());
+    }
+
+    @Test
     public void testShouldReturnNullWhenTryingToRemoveHeadOfAnEmptyList() {
         assertNull(doublyLinkedList.removeHead());
     }
@@ -163,22 +182,22 @@ public class DoublyLinkedListTest {
     }
 
     @Test
-    public void testShouldReturnTheLengthOfTheDoublyLinkedListWhenListIsEmpty(){
-        assertEquals(0, doublyLinkedList.getLength());
+    public void testShouldRemoveAllInstancesOfZFromLinkedList() {
+        doublyLinkedList.addToHead('z');
+        doublyLinkedList.addToTail('a');
+        doublyLinkedList.addToTail('z');
+        doublyLinkedList.addToTail('a');
+        doublyLinkedList.addToTail('z');
+        doublyLinkedList.removeByData('z');
+        assertEquals(2,doublyLinkedList.getLength());
     }
 
     @Test
-    public void testShouldReturnTheLengthOfTheDoublyLinkedListWhenListHasOneElement(){
+    public void testShouldRemoveByDataFromLinkedListWithSingleElement() {
         doublyLinkedList.addToHead('c');
-        assertEquals(1, doublyLinkedList.getLength());
+        assertEquals('c',doublyLinkedList.removeByData('c'));
     }
 
-    @Test
-    public void testShouldReturnTheLengthOfTheDoublyLinkedListWhenListHasMultipleElements() {
-        doublyLinkedList.addToHead('c');
-        doublyLinkedList.addToTail('d');
-        doublyLinkedList.addToTail('e');
-        assertEquals(3, doublyLinkedList.getLength());
-    }
+
 }
 

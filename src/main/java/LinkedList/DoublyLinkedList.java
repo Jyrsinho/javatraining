@@ -25,6 +25,7 @@ public class DoublyLinkedList<T> {
         }
     }
 
+
     public void addToTail(T data) {
         Node<T> previousTail = tail;
         this.tail = new Node<>(data);
@@ -39,6 +40,10 @@ public class DoublyLinkedList<T> {
     }
 
 
+    /**
+     * Remove head from linked list
+     * @return data of the head Node
+     */
     public T removeHead() {
         Node<T> removedHead = this.head;
         if (removedHead == null) {
@@ -57,6 +62,10 @@ public class DoublyLinkedList<T> {
     }
 
 
+    /**
+     * Remove tail from linked list
+     * @return data of the tail Node
+     */
     public T removeTail() {
         Node<T> removedTail = this.tail;
         if (removedTail == null) {
@@ -74,10 +83,15 @@ public class DoublyLinkedList<T> {
         return removedTail.getData();
     }
 
+
+    /**
+     * Removes Nodes from Linked List that have same data as is given to as parameter
+     * @param data to be searched
+     * @return removed Node's data
+     */
     public T removeByData(T data) {
 
         T removed = null;
-
 
         // if data is found in the head
         if (this.head.getData() == data) {
@@ -85,9 +99,8 @@ public class DoublyLinkedList<T> {
             removeHead();
         }
 
-        Node<T>currentNode = this.head.getNextNode();
-
         //if data is found in the middle of the Linked List
+        Node<T>currentNode = this.head.getNextNode();
         while (currentNode.getNextNode() != null) {
             if (currentNode.getData() == data) {
                 removed = currentNode.getData();
