@@ -14,14 +14,14 @@ public class DoublyLinkedList<T> {
 
 
     public void addToHead(T data) {
-        Node<T> currentHead = this.head;
-        // jos listalla ei ole alkupistetta
-        if (head == null) {
-            this.head = new Node<>(data);
+        Node<T> previousHead = head;
+        this.head = new Node<>(data);
+
+        if (previousHead == null) {
             this.tail = this.head;
         } else {
-            head.setNextNode(currentHead);
-            currentHead.setPrevNode(head);
+            head.setNextNode(previousHead);
+            previousHead.setPrevNode(head);
         }
 
     }

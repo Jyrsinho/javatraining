@@ -34,6 +34,18 @@ public class DoublyLinkedListTest {
         doublyLinkedList.addToHead('c');
         doublyLinkedList.addToHead('d');
         assertEquals('d',doublyLinkedList.getHead().getData());
-        assertEquals('c',doublyLinkedList.getHead().getNextNode().getData());
+        assertEquals('c',doublyLinkedList.getTail().getData());
+    }
+
+    @Test
+    public void testAddHeadToListWithThreeElements() {
+        doublyLinkedList.addToHead('c');
+        doublyLinkedList.addToHead('d');
+        doublyLinkedList.addToHead('e');
+
+        assertEquals('e',doublyLinkedList.getHead().getData());
+        assertEquals('c',doublyLinkedList.getTail().getData());
+        assertEquals('d',doublyLinkedList.getHead().getNextNode().getData());
+        assertEquals('d',doublyLinkedList.getTail().getPrevNode().getData());
     }
 }
