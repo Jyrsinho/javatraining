@@ -85,6 +85,19 @@ public class DoublyLinkedList<T> {
             removeHead();
         }
 
+        Node<T>currentNode = this.head.getNextNode();
+
+        //if data is found in the middle of the Linked List
+        while (currentNode.getNextNode() != null) {
+            if (currentNode.getData() == data) {
+                removed = currentNode.getData();
+                currentNode.getPrevNode().setNextNode(currentNode.getNextNode());
+                currentNode.getNextNode().setPrevNode(currentNode.getPrevNode());
+            }
+            currentNode = currentNode.getNextNode();
+        }
+
+        // if data is found in the tail
         if (this.tail != null && tail.getData() == data) {
             removed = this.tail.getData();
             removeTail();
@@ -101,6 +114,11 @@ public class DoublyLinkedList<T> {
 
     public Node<T> getTail() {
         return tail;
+    }
+
+    public int getLength() {
+        int length = 0;
+        return length;
     }
 
 

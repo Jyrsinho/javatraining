@@ -151,10 +151,34 @@ public class DoublyLinkedListTest {
         doublyLinkedList.addToTail('e');
         assertEquals('c',doublyLinkedList.removeByData('c'));
         assertEquals('d',doublyLinkedList.getHead().getData());
-
     }
 
+    @Test
+    public void testShouldRemoveElementFromMiddleOfTheListWithRemoveByDataMethod() {
+        doublyLinkedList.addToHead('c');
+        doublyLinkedList.addToTail('d');
+        doublyLinkedList.addToTail('e');
+        assertEquals('d',doublyLinkedList.removeByData('d'));
+        assertEquals('e',doublyLinkedList.getHead().getNextNode().getData());
+    }
 
+    @Test
+    public void testShouldReturnTheLengthOfTheDoublyLinkedListWhenListIsEmpty(){
+        assertEquals(0, doublyLinkedList.getLength());
+    }
 
+    @Test
+    public void testShouldReturnTheLengthOfTheDoublyLinkedListWhenListHasOneElement(){
+        doublyLinkedList.addToHead('c');
+        assertEquals(1, doublyLinkedList.getLength());
+    }
+
+    @Disabled
+    public void testShouldReturnTheLengthOfTheDoublyLinkedListWhenListHasMultipleElements() {
+        doublyLinkedList.addToHead('c');
+        doublyLinkedList.addToTail('d');
+        doublyLinkedList.addToTail('e');
+        assertEquals(3, doublyLinkedList.getLength());
+    }
 }
 
