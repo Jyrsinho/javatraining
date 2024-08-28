@@ -12,8 +12,16 @@ public class LinkedListString {
 
     public void append(char c) {
         Node<Character> newNode = new Node<>(c);
-        newNode.setNextNode(this.head);
-        this.head = newNode;
+        Node<Character> currentNode = this.head;
+
+        if (currentNode == null) {
+            this.head = newNode;
+        } else {
+            while (currentNode.getNextNode() != null) {
+                currentNode = currentNode.getNextNode();
+            }
+            currentNode.setNextNode(newNode);
+        }
 
     }
 
@@ -22,12 +30,23 @@ public class LinkedListString {
     }
 
     public void printString() {
-        Node currentNode = this.head;
+        Node<Character> currentNode = this.head;
         while (currentNode != null) {
             System.out.print(currentNode.getData());
             currentNode = currentNode.getNextNode();
         }
     }
 
+    public String getString() {
+        StringBuilder stringBuilder = new StringBuilder();
+        Node<Character> currentNode = this.head;
+        while (currentNode != null) {
+            stringBuilder.append(currentNode.getData());
+            currentNode = currentNode.getNextNode();
+        }
+        return stringBuilder.toString();
+
     }
+    }
+
 
