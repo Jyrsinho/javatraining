@@ -139,6 +139,42 @@ public class LinkedListStringTest {
         lsString.printString();
     }
 
+    @Test
+    public void testShouldReturnRemovedCharacterWhenRemovingOneElementFromListWithOneElement() {
+        lsString.append('c');
+        assertEquals('c', lsString.remove(0));
+    }
+
+    @Test
+    public void testShouldReturnRemovedCharacterWhenRemovingOneElementFromListWithMultipleElements() {
+        assertEquals('b',lsString1.remove(1)); // lsString1: a, b, c
+
+    }
+
+    @Test
+    public void testShouldRemoveListMiddleWhenCallingRemoveIndexOneAndListHasThreeElements() {
+        assertEquals('b', lsString1.remove(1)); // lsString: a,b,c
+    }
+
+    @Test
+    public void testShouldRemoveListEndWhenCallingRemoveIndexOneAndListHasThreeElements() {
+        assertEquals('c', lsString1.remove(2)); // lsString: a,b,c
+    }
+
+    @Test
+    public void testShouldRetainListIntegrityWhenRemovingFromTheMiddleOfTheList() {
+        assertEquals('b', lsString1.remove(1)); // lsString: a,b,c
+        assertEquals('c', lsString1.getHead().getNextNode().getData());
+        assertEquals('a', lsString1.getHead().getData());
+    }
+
+    @Test
+    public void testShouldRemoveFromTheEndOfTheList() {
+        assertEquals('c', lsString1.remove(2));
+        assertEquals('b', lsString1.getHead().getNextNode().getData());
+        assertEquals('a', lsString1.getHead().getData());
+    }
+
 
     public Character getTail (LinkedListString lsString) {
         Node<Character> current = lsString.getHead();

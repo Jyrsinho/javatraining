@@ -39,19 +39,49 @@ public class LinkedListString {
             this.append(currentNode.getData());
             currentNode = currentNode.getNextNode();
         }
+    }
 
+    public char remove(int targetIndex) {
+        char removedChar = 0;
+
+        if (targetIndex == 0) {
+            removedChar = this.head.getData();
+            if (this.head.getNextNode() != null) {
+                this.head = this.head.getNextNode();
+            }else {
+                this.head = null;
+            }
+            return removedChar;
+        }
+
+        int currentNodeIndex = 1;
+        Node<Character> previousNode = this.head;
+        Node<Character> currentNode= this.head.getNextNode();
+        removedChar = currentNode.getData();
+
+        while(currentNode != null && currentNodeIndex < targetIndex) {
+            previousNode = currentNode;
+            currentNode = currentNode.getNextNode();
+            currentNodeIndex++;
+            removedChar = currentNode.getData();
+        }
+        if (currentNode != null) {
+            previousNode.setNextNode(currentNode.getNextNode());
+        }
+
+        return removedChar;
     }
 
 
     /**
      * returns the character at Nth Node. Starting from zero
-     * @param index location of Node in the Linked List. Starting from zero
+     * @param targetIndex location of Node in the Linked List. Starting from zero
      */
-    public Character charAt(int index) {
+    public Character charAt(int targetIndex) {
         int currentNodeIndex = 0;
         Node<Character> currentNode = this.head;
 
-        while (currentNode != null && currentNodeIndex < index) {
+        while (currentNode != null && currentNodeIndex < targetIndex) {
             currentNode = currentNode.getNextNode();
             currentNodeIndex++;
         }
