@@ -22,6 +22,10 @@ public class LinkedListString {
             }
             currentNode.setNextNode(newNode);
         }
+    }
+
+    public void concatenate(LinkedListString lst1, LinkedListString lst2) {
+
 
     }
 

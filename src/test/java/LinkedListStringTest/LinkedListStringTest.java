@@ -11,10 +11,25 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 public class LinkedListStringTest {
 
     LinkedListString lsString;
+    LinkedListString lsString1;
+    LinkedListString lsString2;
+
 
     @BeforeEach
     void setUp() {
         lsString = new LinkedListString();
+        lsString1 = new LinkedListString();
+        lsString2 = new LinkedListString();
+
+        lsString1.append('a');
+        lsString1.append('b');
+        lsString1.append('c');
+
+        lsString2.append('d');
+
+
+
+
     }
 
     @Test
@@ -103,6 +118,16 @@ public class LinkedListStringTest {
     @Test
     public void testShouldReturnNullWhenAskingCharacterAtZeroInListWithZeroElements() {
         assertNull(lsString.charAt(0));
+    }
+
+    @Test
+    public void testShouldConcatenateTwoLSStringsWhenSecondHasOnlyOneElement() {
+        lsString.concatenate(lsString1, lsString2); //lsString1: a,b,c //lsString2: d
+        Character expected = 'a';
+        assertEquals(expected, lsString.getHead().getData());
+        assertEquals('d',getTail(lsString));
+
+
     }
 
 
