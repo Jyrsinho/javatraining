@@ -19,6 +19,7 @@ public class LinkedListStringTest {
         lsString.append('c');
         Character expected = 'c';
         assertEquals(expected, lsString.getHead().getData());
+        lsString.printString();
 
     }
 
