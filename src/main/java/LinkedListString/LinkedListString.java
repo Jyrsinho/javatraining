@@ -31,7 +31,18 @@ public class LinkedListString {
      * @param index location of Node in the Linked List. Starting from zero
      */
     public Character charAt(int index) {
-        return 'c';
+        int currentNodeIndex = 0;
+        Node<Character> currentNode = this.head;
+
+        while (currentNode != null && currentNodeIndex < index) {
+            currentNode = currentNode.getNextNode();
+            currentNodeIndex++;
+        }
+        if (currentNode == null) {
+            return null;
+        }
+
+        return currentNode.getData();
     }
 
 

@@ -63,10 +63,41 @@ public class LinkedListStringTest {
     }
 
     @Test
-    public void testShouldReturnHeadWhenAskingCharacterAt0() {
+    public void testShouldReturnHeadWhenAskingCharacterAt0InListWithSingleElement() {
         lsString.append('c');
         Character expected = 'c';
         assertEquals(expected, lsString.charAt(0));
+    }
+
+    @Test
+    public void testShouldReturnHeadWhenAskingCharacterAt0InListWithMultipleElements() {
+        lsString.append('d');
+        lsString.append('e');
+        lsString.append('f');
+        assertEquals('d', lsString.charAt(0));
+    }
+
+    @Test
+    public void testShouldReturnSecondElemetnWhenAskingCharacterAt1InListWithMultipleElements() {
+        lsString.append('c');
+        lsString.append('d');
+        lsString.append('e');
+
+        assertEquals('d', lsString.charAt(1));
+    }
+
+    @Test
+    public void testShouldReturnTailWhenAskingCharacterAt2InListWithThreeElements() {
+        lsString.append('c');
+        lsString.append('d');
+        lsString.append('e');
+        assertEquals('e', lsString.charAt(2));
+    }
+
+    @Test
+    public void testShouldReturnNullWhenAskingCharacterAt1InListWithSingleElement() {
+        lsString.append('c');
+        assertNull(lsString.charAt(1));
     }
 
 
