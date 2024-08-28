@@ -4,15 +4,20 @@ import LinkedList.Node;
 
 public class LinkedListString {
 
-    private Node head;
+    private Node<Character> head;
 
-    private LinkedListString() {
+    public LinkedListString() {
         head = null;
     }
 
-    private void append(char c) {
-        Node newNode = new Node(c);
+    public void append(char c) {
+        Node<Character> newNode = new Node<>(c);
 
-        }
+    }
+
+    public Node<Character> getHead() {
+        return head;
+    }
+
     }
 
