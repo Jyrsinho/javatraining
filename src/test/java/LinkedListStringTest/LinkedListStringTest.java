@@ -100,6 +100,11 @@ public class LinkedListStringTest {
         assertNull(lsString.charAt(1));
     }
 
+    @Test
+    public void testShouldReturnNullWhenAskingCharacterAtZeroInListWithZeroElements() {
+        assertNull(lsString.charAt(0));
+    }
+
 
     public Character getTail (LinkedListString lsString) {
         Node<Character> current = lsString.getHead();
