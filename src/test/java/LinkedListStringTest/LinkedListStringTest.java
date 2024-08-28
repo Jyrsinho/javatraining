@@ -60,8 +60,15 @@ public class LinkedListStringTest {
         lsString.append('R');
         lsString.append('I');
         assertEquals("JYRI", lsString.getString());
-
     }
+
+    @Test
+    public void testShouldReturnHeadWhenAskingCharacterAt0() {
+        lsString.append('c');
+        Character expected = 'c';
+        assertEquals(expected, lsString.charAt(0));
+    }
+
 
     public Character getTail (LinkedListString lsString) {
         Node<Character> current = lsString.getHead();

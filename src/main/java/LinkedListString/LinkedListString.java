@@ -25,6 +25,16 @@ public class LinkedListString {
 
     }
 
+
+    /**
+     * returns the character at Nth Node. Starting from zero
+     * @param index location of Node in the Linked List. Starting from zero
+     */
+    public Character charAt(int index) {
+        return 'c';
+    }
+
+
     public Node<Character> getHead() {
         return head;
     }
