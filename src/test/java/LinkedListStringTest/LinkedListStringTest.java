@@ -126,8 +126,17 @@ public class LinkedListStringTest {
         Character expected = 'a';
         assertEquals(expected, lsString.getHead().getData());
         assertEquals('d',getTail(lsString));
+        lsString.printString();
+    }
 
+    @Test
+    public void testShouldConcatenateTwoLSStringsWhenSecondHasOnlyOneElements() {
+        lsString2.append('e');
+        lsString2.append('f');
 
+        lsString.concatenate(lsString1, lsString2); //lsString1: a,b,c //lsString2: d,e,f
+        assertEquals('f',getTail(lsString));
+        lsString.printString();
     }
 
 

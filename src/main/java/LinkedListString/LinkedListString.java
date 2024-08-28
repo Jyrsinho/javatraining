@@ -26,6 +26,19 @@ public class LinkedListString {
 
     public void concatenate(LinkedListString lst1, LinkedListString lst2) {
 
+        Node<Character> currentNode = lst1.head;
+
+        while (currentNode != null) {
+            this.append(currentNode.getData());
+            currentNode = currentNode.getNextNode();
+        }
+
+        currentNode = lst2.head;
+
+        while (currentNode != null) {
+            this.append(currentNode.getData());
+            currentNode = currentNode.getNextNode();
+        }
 
     }
 
