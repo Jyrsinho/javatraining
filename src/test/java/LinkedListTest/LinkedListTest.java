@@ -211,12 +211,15 @@ public class LinkedListTest {
     }
 
     @Test
-    public void testShouldSwapHeadAndNext() {
+    public void testShouldPrintOutErrorIfThereIsNoGIvenDataInTheList() throws Exception {
         linkedList.addToHead("C");
         linkedList.addToHead("B");
-        linkedList.swap( "B","C" );
-        assertEquals("C",linkedList.getHead().getData());
-        assertEquals("B", linkedList.getHead().getNextNode().getData());
+
+        Exception exception = assertThrows(Exception.class, () -> {
+            linkedList.swap("A", "B");
+        });
+        assertEquals(exception.getMessage(),"The list does not contain given data");
+
     }
 
 

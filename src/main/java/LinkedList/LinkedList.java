@@ -1,5 +1,7 @@
 package LinkedList;
 
+import java.sql.SQLOutput;
+
 public class LinkedList<T> {
 
     public Node<T> head;
@@ -155,9 +157,55 @@ public class LinkedList<T> {
     }
 
 
-    public void swap(T data1, T data2) {
+    public void swap(T data1, T data2) throws Exception {
+
+        //find data1 and store the node containing data1 and previousNode
+        Node<T> currentNode1 = this.head;
+        Node<T> previousNode1 = null;
+        Node<T> currentNode2 = this.head;
+        Node<T> previousNode2 = null;
+
+        while (currentNode1 != null) {
+            if (currentNode1.getData() == data1) {
+                break;
+            }
+            previousNode1 = currentNode1;
+            currentNode1 = currentNode1.getNextNode();
+        }
+
+        //find data2 and store the node containing data2 and its previousNode
+        while (currentNode2 != null) {
+            if (currentNode2.getData() == data2) {
+                break;
+            }
+            previousNode2 = currentNode2;
+            currentNode2 = currentNode2.getNextNode();
+        }
+
+        if (currentNode1 == null || currentNode2 == null) {
+            throw new Exception("The list does not contain given data");
+        }
+
+        //swap data1 and data2 next pointers
+        if (currentNode1.getPrevNode() != head && currentNode1.getNextNode() != null) {
+
+        }
+
+        Node<T> temp = currentNode1.getNextNode();
+        currentNode1.setNextNode(currentNode2.getNextNode());
+        currentNode2.setNextNode(temp);
+
+        Node<T> tempPrevious = previousNode1.getNextNode();
+        previousNode1.setNextNode(previousNode2.getNextNode());
+        previousNode2.setNextNode(tempPrevious);
 
 
+
+
+
+
+        //swap data1 and data2 next pointers
+        //swap data1previous and dataprevious next pointers
     }
 
 
