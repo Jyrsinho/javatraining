@@ -134,29 +134,6 @@ public class LinkedList<T> {
     }
 
 
-    /**
-     * prints out the Linked List's data payloads
-      * @return String containing Linked List's Nodes data.
-     */
-    public String printList() {
-        StringBuilder sb = new StringBuilder();
-        sb.append("<head>: ");
-
-        if (this.head != null){
-            Node<T> currentNode = head;
-        while (currentNode.getNextNode() != null) {
-            sb.append(currentNode.getData());
-            sb.append(", ");
-            currentNode = currentNode.getNextNode();
-        }
-            sb.append(currentNode.getData());
-        }
-        sb.append("<tail>");
-
-        return sb.toString();
-    }
-
-
     public void swap(T data1, T data2) throws Exception {
 
         //find data1 and store the node containing data1 and previousNode
@@ -208,6 +185,33 @@ public class LinkedList<T> {
 
     }
 
+
+    /**
+     * prints out the Linked List's data payloads
+     * @return String containing Linked List's Nodes data.
+     */
+    public String printList() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("<head>: ");
+
+        if (this.head != null){
+            Node<T> currentNode = head;
+            while (currentNode.getNextNode() != null) {
+                sb.append(currentNode.getData());
+                sb.append(", ");
+                currentNode = currentNode.getNextNode();
+            }
+            sb.append(currentNode.getData());
+        }
+        sb.append("<tail>");
+
+        return sb.toString();
+    }
+
+    /**
+     * Returns the list as a String
+     * @return the list as a String
+     */
     public String getList() {
         StringBuilder sb = new StringBuilder();
         Node<T> currentNode = this.head;
@@ -216,6 +220,16 @@ public class LinkedList<T> {
             currentNode = currentNode.getNextNode();
         }
         return sb.toString();
+    }
+
+    /**
+     * Get the Nth last element from the list
+     * @param n the amount of steps from the tail of the list
+     * @return the element that is n steps from the tail of the list
+     */
+    public T getNthLastElement (int n) {
+
+        return this.head.getData();
     }
 
 

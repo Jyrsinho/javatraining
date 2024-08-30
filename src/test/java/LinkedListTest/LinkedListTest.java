@@ -297,6 +297,14 @@ public class LinkedListTest {
          assertEquals(exception.getMessage(),"The list does not contain given data");
      }
 
+     @Test
+     public void testShouldReturnTheTailWithGetNthLastElementParameter0()   {
+        linkedList.addToHead("A");
+        linkedList.addToHead("B");
+        linkedList.addToHead("C");
+        assertEquals("C", linkedList.getNthLastElement(0));
+     }
+
 
 
 
