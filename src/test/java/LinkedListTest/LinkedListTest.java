@@ -302,7 +302,21 @@ public class LinkedListTest {
         linkedList.addToHead("A");
         linkedList.addToHead("B");
         linkedList.addToHead("C");
-        assertEquals("C", linkedList.getNthLastElement(0));
+        assertEquals("A", linkedList.getNthLastElement(0));
+     }
+
+     @Test
+     public void testShouldReturnTheElementTwoStepsFromTailWithGetNthLastElementParameter2()   {
+         linkedList.addToHead("A");
+         linkedList.addToHead("B");
+         linkedList.addToHead("C");
+         assertEquals("C", linkedList.getNthLastElement(2));
+     }
+
+     @Test
+     public void testShouldReturnTheHeadWhenCallingGetNthLastWithParameterZeroListOfONe() {
+        linkedList.addToHead("A");
+        assertEquals("A", linkedList.getNthLastElement(0));
      }
 
 

@@ -224,12 +224,26 @@ public class LinkedList<T> {
 
     /**
      * Get the Nth last element from the list
-     * @param n the amount of steps from the tail of the list
+     * @param steps the amount of steps from the tail of the list
      * @return the element that is n steps from the tail of the list
      */
-    public T getNthLastElement (int n) {
+    public T getNthLastElement (int steps) {
+        Node<T> preceedingNode = this.head;
+        Node<T> currentNode = this.head;
 
-        return this.head.getData();
+        for (int i = 0; i < steps; i++) {
+            //Tässä pitää tsekata onko steps OUT OF BOUNDS
+            currentNode = currentNode.getNextNode();
+        }
+
+        while (currentNode.getNextNode() != null) {
+            preceedingNode = preceedingNode.getNextNode();
+            currentNode = currentNode.getNextNode();
+        }
+
+        return preceedingNode.getData();
+
+
     }
 
 
