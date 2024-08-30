@@ -263,7 +263,7 @@ public class LinkedListTest {
         assertEquals("ACBD",linkedList.getList());
      }
 
-     @Disabled
+     @Test
      public void testShouldSwapTwoElementsInAListWithTwoElements() throws Exception {
          linkedList.addToHead("A");
          linkedList.addToHead("B");
