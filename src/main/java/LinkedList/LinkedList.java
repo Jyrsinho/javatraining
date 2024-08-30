@@ -155,6 +155,12 @@ public class LinkedList<T> {
     }
 
 
+    public void swap(T data1, T data2) {
+
+
+    }
+
+
     public Node<T> getHead() {
         return head;
     }

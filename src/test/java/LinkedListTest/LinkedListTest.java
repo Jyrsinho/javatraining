@@ -210,6 +210,15 @@ public class LinkedListTest {
         assertFalse(linkedList.contains("Hello1"));
     }
 
+    @Test
+    public void testShouldSwapHeadAndNext() {
+        linkedList.addToHead("C");
+        linkedList.addToHead("B");
+        linkedList.swap( "B","C" );
+        assertEquals("C",linkedList.getHead().getData());
+        assertEquals("B", linkedList.getHead().getNextNode().getData());
+    }
+
 
 
     // -----------------------------------------------------------------
