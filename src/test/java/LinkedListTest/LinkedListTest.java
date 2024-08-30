@@ -271,9 +271,30 @@ public class LinkedListTest {
          assertEquals("AB", linkedList.getList());
      }
 
-     @Disabled
-     public void testShouldThrowExceptionWhenTryingToSwapWhenTheListIsEmpty() throws Exception {
+     @Test
+     public void testShouldSwapTwoElementsInTheTailEndOfTheList() throws Exception {
+        linkedList.addToHead("A");
+        linkedList.addToHead("B");
+        linkedList.addToHead("C");
+        linkedList.addToHead("D");
+        linkedList.swap("A","B");
+        assertEquals("DCAB",linkedList.getList());
+     }
 
+     @Test
+     public void testShouldSwapTwoElementsInTheHeadOfTheList() throws Exception {
+        linkedList.addToHead("A");
+        linkedList.addToHead("B");
+        linkedList.swap("A","B");
+        assertEquals("AB",linkedList.getList());
+     }
+
+     @Test
+     public void testShouldThrowExceptionWhenTryingToSwapWhenTheListIsEmpty() throws Exception {
+         Exception exception = assertThrows(Exception.class, () -> {
+             linkedList.swap("A", "B");
+         });
+         assertEquals(exception.getMessage(),"The list does not contain given data");
      }
 
 
