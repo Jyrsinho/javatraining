@@ -187,9 +187,6 @@ public class LinkedList<T> {
         }
 
         //swap data1 and data2 next pointers
-        if (currentNode1.getPrevNode() != head && currentNode1.getNextNode() != null) {
-
-        }
 
         Node<T> temp = currentNode1.getNextNode();
         currentNode1.setNextNode(currentNode2.getNextNode());
@@ -202,10 +199,18 @@ public class LinkedList<T> {
 
 
 
-
-
         //swap data1 and data2 next pointers
         //swap data1previous and dataprevious next pointers
+    }
+
+    public String getList() {
+        StringBuilder sb = new StringBuilder();
+        Node<T> currentNode = this.head;
+        while (currentNode != null) {
+            sb.append(currentNode.getData());
+            currentNode = currentNode.getNextNode();
+        }
+        return sb.toString();
     }
 
 

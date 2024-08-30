@@ -211,6 +211,14 @@ public class LinkedListTest {
     }
 
     @Test
+    public void testShouldReturnListAsAString() {
+        linkedList.addToHead("A");
+        linkedList.addToHead("B");
+        linkedList.addToHead("C");
+        assertEquals("CBA", linkedList.getList());
+    }
+
+    @Test
     public void testShouldPrintOutErrorIfThereIsNoGIvenDataInTheList() throws Exception {
         linkedList.addToHead("C");
         linkedList.addToHead("B");
@@ -219,6 +227,11 @@ public class LinkedListTest {
             linkedList.swap("A", "B");
         });
         assertEquals(exception.getMessage(),"The list does not contain given data");
+
+    }
+
+    @Test
+    public void testShouldSwapTwoElementsInTHeMiddleOFTheList() throws Exception {
 
     }
 
