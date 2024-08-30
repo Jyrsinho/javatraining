@@ -3,6 +3,7 @@ package LinkedListTest;
 import LinkedList.LinkedList;
 import LinkedList.Node;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -240,6 +241,41 @@ public class LinkedListTest {
         linkedList.swap("D","B");
         assertEquals("EBCDA",linkedList.getList());
     }
+
+    @Test
+    public void testShouldSwapTwoElementsNextToEachOtherInTheMiddleOfTheList() throws Exception {
+        linkedList.addToHead("A");
+        linkedList.addToHead("B");
+        linkedList.addToHead("C");
+        linkedList.addToHead("D");
+
+        linkedList.swap("B","C");
+        assertEquals("DBCA",linkedList.getList());
+    }
+
+     @Test
+     public void testShouldSwapTwoElementsWhenOneIsTheHeadAndOtherIsTheTail() throws Exception {
+        linkedList.addToHead("A");
+        linkedList.addToHead("B");
+        linkedList.addToHead("C");
+        linkedList.addToHead("D");
+        linkedList.swap("A","D");
+        assertEquals("ACBD",linkedList.getList());
+     }
+
+     @Disabled
+     public void testShouldSwapTwoElementsInAListWithTwoElements() throws Exception {
+         linkedList.addToHead("A");
+         linkedList.addToHead("B");
+         linkedList.swap("A", "B");
+         assertEquals("AB", linkedList.getList());
+     }
+
+     @Disabled
+     public void testShouldThrowExceptionWhenTryingToSwapWhenTheListIsEmpty() throws Exception {
+
+     }
+
 
 
 

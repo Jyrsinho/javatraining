@@ -186,21 +186,26 @@ public class LinkedList<T> {
             throw new Exception("The list does not contain given data");
         }
 
-        //swap data1 and data2 next pointers
+        //swap previous1 and previous2 next pointers
+        if (currentNode1 == head) {
+            head = currentNode2;
+        } else {
+            previousNode1.setNextNode(currentNode2);
+        }
 
+        if (currentNode2 == head) {
+            head = currentNode1;
+        } else {
+            previousNode2.setNextNode(currentNode1);
+        }
+
+
+        //swap data1 and data2 next pointers
         Node<T> temp = currentNode1.getNextNode();
         currentNode1.setNextNode(currentNode2.getNextNode());
         currentNode2.setNextNode(temp);
 
-        Node<T> tempPrevious = previousNode1.getNextNode();
-        previousNode1.setNextNode(previousNode2.getNextNode());
-        previousNode2.setNextNode(tempPrevious);
 
-
-
-
-        //swap data1 and data2 next pointers
-        //swap data1previous and dataprevious next pointers
     }
 
     public String getList() {
