@@ -232,7 +232,13 @@ public class LinkedListTest {
 
     @Test
     public void testShouldSwapTwoElementsInTHeMiddleOFTheList() throws Exception {
-
+        linkedList.addToHead("A");
+        linkedList.addToHead("B");
+        linkedList.addToHead("C");
+        linkedList.addToHead("D");
+        linkedList.addToHead("E");
+        linkedList.swap("D","B");
+        assertEquals("EBCDA",linkedList.getList());
     }
 
 
