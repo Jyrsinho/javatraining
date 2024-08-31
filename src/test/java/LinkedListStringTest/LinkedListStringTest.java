@@ -230,7 +230,7 @@ public class LinkedListStringTest {
     }
 
     @Test
-    public void testShouldRemoveAlCharactersItCanWhenGivenBiggerAmountToRemoveThanThereAreElementsInTheList() {
+    public void testShouldRemoveAllCharactersItCanWhenGivenBiggerAmountToRemoveThanThereAreElementsInTheList() {
         lsString1.removeChars(0,4);
         assertNull(lsString1.getHead());
 
