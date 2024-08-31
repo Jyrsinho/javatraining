@@ -86,29 +86,33 @@ public class LinkedListString {
 
         Node <Character> currentNode = this.head;
         Node <Character> previousNode = this.head;
-        Node <Character> nextNode;
-        int currentNodeIndex = 0;
+        Node <Character> nextNode= this.head;
 
-        while (currentNode != null && currentNodeIndex < startIndex) {
-            previousNode = currentNode;
-            currentNode = currentNode.getNextNode();
-            currentNodeIndex++;
-        }
-
-
-        //etsi next
-        nextNode = currentNode;
-        for (int i = 0; i < amountToRemove; i++) {
-            if (nextNode != null) {
-                nextNode = currentNode.getNextNode();
-                break;
+        // if removing starts from the head. Set the head to nextNode
+        if (startIndex == 0) {
+            for (int i = 0; i < amountToRemove; i++) {
+                nextNode = nextNode.getNextNode();
+                this.head = nextNode;
             }
+        // if removing starts from the middle of the list.
+        }else {
+            int currentNodeIndex = 0;
+            while (currentNode != null && currentNodeIndex < startIndex) {
+                previousNode = currentNode;
+                currentNode = currentNode.getNextNode();
+                currentNodeIndex++;
+            }
+            //etsi next
+            nextNode = currentNode;
+            for (int i = 0; i < amountToRemove; i++) {
+                if (nextNode != null) {
+                    nextNode = currentNode.getNextNode();
+                    break;
+                }
+            }
+            // set previous.next to nextNode
+            previousNode.setNextNode(nextNode);
         }
-
-        // set previous.next to nextNode
-        previousNode.setNextNode(nextNode);
-
-
     }
 
 

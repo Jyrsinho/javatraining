@@ -3,6 +3,7 @@ package LinkedListStringTest;
 import LinkedList.Node;
 import LinkedListString.LinkedListString;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -193,8 +194,18 @@ public class LinkedListStringTest {
         assertEquals("ac", lsString1.getString());
     }
 
-
     @Test
+    public void testShouldRemoveTwoFirstCharactersFromTheListOfFourElements() {
+        lsString.append('a');
+        lsString.append('b');
+        lsString.append('c');
+        lsString.append('d');
+        lsString.removeChars(0,2);
+        assertEquals("cd", lsString.getString());
+    }
+
+
+    @Disabled
     public void testShouldRemoveAllCharactersFromTheList2() {
 
         lsString1.removeChars(0,3);
