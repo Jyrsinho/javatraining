@@ -3,7 +3,6 @@ package LinkedListStringTest;
 import LinkedList.Node;
 import LinkedListString.LinkedListString;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -215,7 +214,7 @@ public class LinkedListStringTest {
     }
 
 
-    @Disabled
+    @Test
     public void testShouldRemoveAllCharactersFromTheList2() {
 
         lsString1.removeChars(0,3);
