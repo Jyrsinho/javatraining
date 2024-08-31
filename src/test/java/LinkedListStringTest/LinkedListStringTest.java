@@ -204,6 +204,16 @@ public class LinkedListStringTest {
         assertEquals("cd", lsString.getString());
     }
 
+    @Test
+    public void testShouldRemoveTwoLastCharactersFromTheListOfFourElements() {
+        lsString.append('a');
+        lsString.append('b');
+        lsString.append('c');
+        lsString.append('d');
+        lsString.removeChars(2,2);
+        assertEquals("ab", lsString.getString());
+    }
+
 
     @Disabled
     public void testShouldRemoveAllCharactersFromTheList2() {

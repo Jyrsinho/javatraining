@@ -94,7 +94,7 @@ public class LinkedListString {
                 nextNode = nextNode.getNextNode();
                 this.head = nextNode;
             }
-        // if removing starts from the middle of the list.
+        // if removing starts from the middle of the list. Find the current and previous nodes.
         }else {
             int currentNodeIndex = 0;
             while (currentNode != null && currentNodeIndex < startIndex) {
@@ -102,17 +102,16 @@ public class LinkedListString {
                 currentNode = currentNode.getNextNode();
                 currentNodeIndex++;
             }
-            //etsi next
+            //find the next node
+            int stepsTaken = 0;
             nextNode = currentNode;
-            for (int i = 0; i < amountToRemove; i++) {
-                if (nextNode != null) {
-                    nextNode = currentNode.getNextNode();
-                    break;
-                }
+            while (nextNode != null && stepsTaken < amountToRemove) {
+                nextNode = nextNode.getNextNode();
+                stepsTaken++;
             }
-            // set previous.next to nextNode
             previousNode.setNextNode(nextNode);
-        }
+
+        } // end of else statement
     }
 
 
