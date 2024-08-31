@@ -1,6 +1,5 @@
 package LinkedList;
 
-import java.sql.SQLOutput;
 
 public class LinkedList<T> {
 
@@ -32,12 +31,12 @@ public class LinkedList<T> {
         Node<T> tail = this.head;
 
         if (tail== null){
-            this.head = new Node<T>(data);
+            this.head = new Node<>(data);
         } else {
             while (tail.getNextNode() != null) {
                 tail = tail.getNextNode();
             }
-            tail.setNextNode(new Node<T> (data));
+            tail.setNextNode(new Node<>(data));
         }
     }
 

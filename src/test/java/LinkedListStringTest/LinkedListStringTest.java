@@ -10,16 +10,16 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 
 public class LinkedListStringTest {
 
-    LinkedListString lsString;
-    LinkedListString lsString1;
-    LinkedListString lsString2;
+    LinkedListString<Character> lsString;
+    LinkedListString<Character> lsString1;
+    LinkedListString<Character> lsString2;
 
 
     @BeforeEach
     void setUp() {
-        lsString = new LinkedListString();
-        lsString1 = new LinkedListString();
-        lsString2 = new LinkedListString();
+        lsString = new LinkedListString<Character>();
+        lsString1 = new LinkedListString<Character>();
+        lsString2 = new LinkedListString<Character>();
 
         lsString1.append('a');
         lsString1.append('b');
@@ -236,7 +236,15 @@ public class LinkedListStringTest {
 
     }
 
-    public Character getTail (LinkedListString lsString) {
+    @Test
+    public void testShouldReturnLLSLength1WhenGivenIntegerFour() {
+        String expected = "4";
+        assertEquals(expected, lsString5.getString());
+
+    }
+
+
+    public Character getTail (LinkedListString<Character> lsString) {
         Node<Character> current = lsString.getHead();
         while (current.getNextNode() != null) {
             current = current.getNextNode();
