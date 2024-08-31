@@ -90,7 +90,8 @@ public class LinkedListString {
 
         // if removing starts from the head. Set the head to nextNode
         if (startIndex == 0) {
-            for (int i = 0; i < amountToRemove; i++) {
+            int stepsTaken = 0;
+            while (nextNode != null && stepsTaken < amountToRemove) {
                 nextNode = nextNode.getNextNode();
                 this.head = nextNode;
             }

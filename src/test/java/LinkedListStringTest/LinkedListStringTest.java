@@ -222,6 +222,20 @@ public class LinkedListStringTest {
     }
 
 
+    @Test
+    public void testShouldDoNothingWhenGivenStartingIndexOutsideListsLenght() {
+        lsString1.removeChars(4,2);
+        assertEquals("abc", lsString1.getString());
+
+    }
+
+    @Test
+    public void testShouldRemoveAlCharactersItCanWhenGivenBiggerAmountToRemoveThanThereAreElementsInTheList() {
+        lsString1.removeChars(0,4);
+        assertNull(lsString1.getHead());
+
+    }
+
     public Character getTail (LinkedListString lsString) {
         Node<Character> current = lsString.getHead();
         while (current.getNextNode() != null) {
