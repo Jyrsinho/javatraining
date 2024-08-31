@@ -175,6 +175,32 @@ public class LinkedListStringTest {
         assertEquals('a', lsString1.getHead().getData());
     }
 
+    @Test
+    public void testShouldRemoveOneCharacterFromTheBeginning() {
+        lsString1.removeCharsFrom(0,1);
+        assertEquals('b', lsString1.getHead().getData());
+    }
+
+    @Test
+    public void testShouldRemoveAllCharactersFromTheList() {
+        lsString1.removeCharsFrom(0,3);
+        assertNull(lsString1.getHead());
+    }
+
+    @Test
+    public void testShouldRemoveOneCharacterFromTheMiddleOfThreeElementList() {
+        lsString1.removeChars(1,1);     //lsString1 == abc
+        assertEquals("ac", lsString1.getString());
+    }
+
+
+    @Test
+    public void testShouldRemoveAllCharactersFromTheList2() {
+
+        lsString1.removeChars(0,3);
+        assertNull(lsString1.getHead());
+    }
+
 
     public Character getTail (LinkedListString lsString) {
         Node<Character> current = lsString.getHead();

@@ -72,6 +72,45 @@ public class LinkedListString {
         return removedChar;
     }
 
+    public void removeCharsFrom(int startIndex, int amountToRemove) {
+        for (int i = startIndex+amountToRemove-1; i >= startIndex; i--) {
+            this.remove(i);
+        }
+    }
+
+
+    /**
+     * Exercise to see can you be more efficient removing whole chunks of
+     */
+    public void removeChars(int startIndex, int amountToRemove) {
+
+        Node <Character> currentNode = this.head;
+        Node <Character> previousNode = this.head;
+        Node <Character> nextNode;
+        int currentNodeIndex = 0;
+
+        while (currentNode != null && currentNodeIndex < startIndex) {
+            previousNode = currentNode;
+            currentNode = currentNode.getNextNode();
+            currentNodeIndex++;
+        }
+
+
+        //etsi next
+        nextNode = currentNode;
+        for (int i = 0; i < amountToRemove; i++) {
+            if (nextNode != null) {
+                nextNode = currentNode.getNextNode();
+                break;
+            }
+        }
+
+        // set previous.next to nextNode
+        previousNode.setNextNode(nextNode);
+
+
+    }
+
 
     /**
      * returns the character at Nth Node. Starting from zero
