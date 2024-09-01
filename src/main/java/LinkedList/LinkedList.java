@@ -268,6 +268,16 @@ public class LinkedList<T> {
     public LinkedList<Integer> sumOfLists (LinkedList<Integer> list1, LinkedList<Integer> list2) {
         LinkedList<Integer> sumList = new LinkedList<Integer>();
 
+        Node<Integer> current1 = list1.getHead();
+        Node<Integer> current2 = list2.getHead();
+        int digit;
+
+        while (current1 != null && current2 != null) {
+            digit = current1.getData() + current2.getData();
+            sumList.addToTail(digit);
+            current1 = current1.getNextNode();
+            current2 = current2.getNextNode();
+        }
         return sumList;
     }
 

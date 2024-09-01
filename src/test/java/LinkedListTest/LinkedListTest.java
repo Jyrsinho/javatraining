@@ -342,7 +342,7 @@ public class LinkedListTest {
     }
 
     @Test
-    public void testShouldSumUpTwoIntegerLists() {
+    public void testShouldSumUpTwoIntegerListsWithOneElement() {
         LinkedList<Integer> integerList1 = linkedList.intToList(3);
         LinkedList<Integer> integerList2 = linkedList.intToList(5);
 
@@ -350,6 +350,38 @@ public class LinkedListTest {
         String expected = "8";
         assertEquals(expected, sumList.getList());
     }
+
+    @Test
+    public void testShouldSumUpTwoIntegerListsWithThreeElements() {
+        LinkedList<Integer> integerList1 = linkedList.intToList(321);
+        LinkedList<Integer> integerList2 = linkedList.intToList(654);
+
+        LinkedList<Integer> sumList = linkedList.sumOfLists(integerList1, integerList2);
+        String expected = "975";
+        assertEquals(expected, sumList.getList());
+    }
+
+    @Test
+    public void testShouldSumUpTwoIntegerListsWithOneElementWhenSumIsMoreThanTen() {
+        LinkedList<Integer> integerList1 = linkedList.intToList(5);
+        LinkedList<Integer> integerList2 = linkedList.intToList(6);
+
+        LinkedList<Integer> sumList = linkedList.sumOfLists(integerList1, integerList2);
+        String expected = "11";
+        assertEquals(expected, sumList.getList());
+    }
+
+    @Test
+    public void testShouldSumUpTwoIntegerListsWithDifferentLengths() {
+        LinkedList<Integer> integerList1 = linkedList.intToList(50);
+        LinkedList<Integer> integerList2 = linkedList.intToList(102);
+
+        LinkedList<Integer> sumList = linkedList.sumOfLists(integerList1, integerList2);
+        String expected = "152";
+        assertEquals(expected, sumList.getList());
+    }
+
+
 
 
 
