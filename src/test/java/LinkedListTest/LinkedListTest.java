@@ -408,6 +408,16 @@ public class LinkedListTest {
         assertEquals(expected, sumList.getList());
     }
 
+    @Test
+    public void testShouldSumUpTwoIntegerListsWithAddedValuesHigherThanTen() {
+        LinkedList<Integer> integerList1 = linkedList.intToList(543);
+        LinkedList<Integer> integerList2 = linkedList.intToList(1678);
+
+        LinkedList<Integer> sumList = linkedList.sumOfLists(integerList1, integerList2);
+        String expected = "2221";
+        assertEquals(expected, sumList.getList());
+    }
+
 
 
 

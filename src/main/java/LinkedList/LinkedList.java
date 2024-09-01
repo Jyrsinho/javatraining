@@ -272,6 +272,7 @@ public class LinkedList<T> {
         int int1;
         int int2;
         int index = 0;
+        int reminder=0;
 
         while(list1.getNthLastElement(index) != null || list2.getNthLastElement(index) != null ) {
             if (list1.getNthLastElement(index) != null) {
@@ -284,10 +285,15 @@ public class LinkedList<T> {
                 int2 = list2.getNthLastElement(index);
             } else int2 = 0;
 
-            sumList.addToHead(int1 + int2);
+            int sum = int1 + int2;
+
+            sumList.addToHead(sum % 10 + reminder);
             index++;
+            if (sum >=10) reminder = 1;
+            else reminder = 0;
 
         }
+        if (reminder ==1) sumList.addToHead(1);
 
 
         return sumList;
