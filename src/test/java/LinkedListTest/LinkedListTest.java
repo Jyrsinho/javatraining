@@ -3,7 +3,6 @@ package LinkedListTest;
 import LinkedList.LinkedList;
 import LinkedList.Node;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -318,6 +317,29 @@ public class LinkedListTest {
         linkedList.addToHead("A");
         assertEquals("A", linkedList.getNthLastElement(0));
      }
+
+     @Test
+     public void testShouldCreateListRepresentationOfIntegerLessThanTen() {
+
+        LinkedList<Integer> integerList = linkedList.intToList(4);
+        assertEquals(4, integerList.getHead().getData());
+
+     }
+
+     @Test
+     public void testShouldCreateListRepresentationOfIntegerInThousands() {
+         LinkedList<Integer> integerList = linkedList.intToList(1210);
+         assertEquals("1210", integerList.getList());
+         assertEquals(integerList.getHead().getData(), 1);
+         assertEquals(integerList.getHead().getNextNode().getData(),2);
+    }
+
+    @Test
+    public void testShouldCreateListRepresentationOfIntegerZero() {
+        LinkedList<Integer> integerList = linkedList.intToList(0);
+        assertEquals("0", integerList.getList());
+        assertEquals(integerList.getHead().getData(), 0);
+    }
 
 
 

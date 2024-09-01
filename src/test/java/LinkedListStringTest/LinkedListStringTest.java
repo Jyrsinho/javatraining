@@ -236,12 +236,7 @@ public class LinkedListStringTest {
 
     }
 
-    @Test
-    public void testShouldReturnLLSLength1WhenGivenIntegerFour() {
-        String expected = "4";
-        assertEquals(expected, lsString5.getString());
 
-    }
 
 
     public Character getTail (LinkedListString<Character> lsString) {

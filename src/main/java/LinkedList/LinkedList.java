@@ -9,6 +9,7 @@ public class LinkedList<T> {
         head = null;
     }
 
+
     /**
      * adds new Node to the tail end of the LinkedList
      * @param data data payload of new Node to be added
@@ -241,8 +242,26 @@ public class LinkedList<T> {
         }
 
         return preceedingNode.getData();
+    }
 
 
+    public LinkedList<Integer> intToList (int x) {
+        LinkedList<Integer> digitList = new LinkedList<Integer>();
+
+        if (x == 0) {
+            digitList.addToHead(0);
+            return digitList;
+        }
+
+        int digit;
+
+        while (x > 0) {
+            digit = x % 10;
+            x = x / 10;
+            digitList.addToHead(digit);
+        }
+
+        return digitList;
     }
 
 
