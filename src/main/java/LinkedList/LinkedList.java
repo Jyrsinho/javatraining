@@ -269,34 +269,27 @@ public class LinkedList<T> {
     public LinkedList<Integer> sumOfLists (LinkedList<Integer> list1, LinkedList<Integer> list2) {
         LinkedList<Integer> sumList = new LinkedList<Integer>();
 
-        int int1;
-        int int2;
-        int index = 0;
-        int reminder=0;
+        Node<Integer> currentNode1 = list1.head;
+        int list1Sum = 0;
+        Node<Integer> currentNode2 = list2.head;
+        int list2Sum = 0;
 
-        while(list1.getNthLastElement(index) != null || list2.getNthLastElement(index) != null ) {
-            if (list1.getNthLastElement(index) != null) {
-                int1 = list1.getNthLastElement(index);
-            } else {
-                int1 = 0;
-            }
-
-            if (list2.getNthLastElement(index)!= null) {
-                int2 = list2.getNthLastElement(index);
-            } else int2 = 0;
-
-            int sum = int1 + int2;
-
-            sumList.addToHead(sum % 10 + reminder);
-            index++;
-            if (sum >=10) reminder = 1;
-            else reminder = 0;
-
+        while (currentNode1 != null) {
+            int intToAdd = currentNode1.getData();
+            list1Sum = list1Sum *10 + intToAdd;
+            currentNode1 = currentNode1.getNextNode();
         }
-        if (reminder ==1) sumList.addToHead(1);
 
+        while (currentNode2 != null) {
+            int intToAdd = currentNode2.getData();
+            list2Sum = list2Sum *10 + intToAdd;
+            currentNode2 = currentNode2.getNextNode();
+        }
 
-        return sumList;
+        int sum = list1Sum + list2Sum;
+        LinkedList<Integer> listOfSum = intToList(sum);
+        return listOfSum;
+
     }
 
 
