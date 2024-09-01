@@ -270,20 +270,36 @@ public class LinkedList<T> {
 
         Node<Integer> current1 = list1.getHead();
         Node<Integer> current2 = list2.getHead();
+        int int1 = current1.getData();
+        int int2 = current2.getData();
         int digit;
 
         while (current1 != null && current2 != null) {
-            digit = current1.getData() + current2.getData();
+            digit = int1 + int2;
             sumList.addToTail(digit);
             current1 = current1.getNextNode();
             current2 = current2.getNextNode();
         }
+
         return sumList;
     }
 
 
     public Node<T> getHead() {
         return head;
+    }
+
+
+    public Node<T> getTail() {
+        Node<T> currentNode = this.head;
+        if (currentNode == null) {
+            return null;
+        }
+
+        while (currentNode.getNextNode() != null) {
+            currentNode = currentNode.getNextNode();
+        }
+        return currentNode;
     }
 
 }

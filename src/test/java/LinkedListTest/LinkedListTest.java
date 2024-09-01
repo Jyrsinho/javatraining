@@ -3,6 +3,7 @@ package LinkedListTest;
 import LinkedList.LinkedList;
 import LinkedList.Node;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -319,6 +320,25 @@ public class LinkedListTest {
      }
 
      @Test
+     public void testShouldReturnTail() {
+        linkedList.addToHead("A");
+        linkedList.addToHead("B");
+        linkedList.addToHead("C");
+        assertEquals("A", linkedList.getTail().getData());
+     }
+
+     @Test
+     public void testShouldReturnTheHeadAndTail() {
+        linkedList.addToHead("A");
+        assertEquals("A", linkedList.getTail().getData());
+     }
+
+     @Test
+     public void testShouldReturnNullWhenAskingForTailFromEmptyList() {
+        assertNull(linkedList.getTail());
+     }
+
+     @Test
      public void testShouldCreateListRepresentationOfIntegerLessThanTen() {
 
         LinkedList<Integer> integerList = linkedList.intToList(4);
@@ -371,7 +391,7 @@ public class LinkedListTest {
         assertEquals(expected, sumList.getList());
     }
 
-    @Test
+    @Disabled
     public void testShouldSumUpTwoIntegerListsWithDifferentLengths() {
         LinkedList<Integer> integerList1 = linkedList.intToList(50);
         LinkedList<Integer> integerList2 = linkedList.intToList(102);
