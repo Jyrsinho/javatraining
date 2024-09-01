@@ -270,11 +270,13 @@ public class LinkedList<T> {
 
         Node<Integer> current1 = list1.getHead();
         Node<Integer> current2 = list2.getHead();
-        int int1 = current1.getData();
-        int int2 = current2.getData();
+        int int1;
+        int int2;
         int digit;
 
         while (current1 != null && current2 != null) {
+            int1 = current1.getData();
+            int2 = current2.getData();
             digit = int1 + int2;
             sumList.addToTail(digit);
             current1 = current1.getNextNode();

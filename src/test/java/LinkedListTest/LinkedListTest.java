@@ -3,7 +3,6 @@ package LinkedListTest;
 import LinkedList.LinkedList;
 import LinkedList.Node;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -391,7 +390,7 @@ public class LinkedListTest {
         assertEquals(expected, sumList.getList());
     }
 
-    @Disabled
+    @Test
     public void testShouldSumUpTwoIntegerListsWithDifferentLengths() {
         LinkedList<Integer> integerList1 = linkedList.intToList(50);
         LinkedList<Integer> integerList2 = linkedList.intToList(102);
