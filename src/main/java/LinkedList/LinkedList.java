@@ -265,6 +265,13 @@ public class LinkedList<T> {
     }
 
 
+    public LinkedList<Integer> sumOfLists (LinkedList<Integer> list1, LinkedList<Integer> list2) {
+        LinkedList<Integer> sumList = new LinkedList<Integer>();
+
+        return sumList;
+    }
+
+
     public Node<T> getHead() {
         return head;
     }

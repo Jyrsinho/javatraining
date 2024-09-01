@@ -341,6 +341,16 @@ public class LinkedListTest {
         assertEquals(integerList.getHead().getData(), 0);
     }
 
+    @Test
+    public void testShouldSumUpTwoIntegerLists() {
+        LinkedList<Integer> integerList1 = linkedList.intToList(3);
+        LinkedList<Integer> integerList2 = linkedList.intToList(5);
+
+        LinkedList<Integer> sumList = linkedList.sumOfLists(integerList1, integerList2);
+        String expected = "8";
+        assertEquals(expected, sumList.getList());
+    }
+
 
 
 
