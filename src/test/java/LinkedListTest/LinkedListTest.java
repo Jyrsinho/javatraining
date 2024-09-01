@@ -313,9 +313,17 @@ public class LinkedListTest {
      }
 
      @Test
-     public void testShouldReturnTheHeadWhenCallingGetNthLastWithParameterZeroListOfONe() {
+     public void testShouldReturnTheHeadWhenCallingGetNthLastWithParameterZeroListOfOne() {
         linkedList.addToHead("A");
         assertEquals("A", linkedList.getNthLastElement(0));
+     }
+
+     @Test
+     public void testShouldReturnNullWhenCallingGetNthLastWithParameterHigherThanListLentgt() {
+        linkedList.addToHead("A");
+        linkedList.addToHead("B");
+         assertNull(linkedList.getNthLastElement(2));
+
      }
 
      @Test

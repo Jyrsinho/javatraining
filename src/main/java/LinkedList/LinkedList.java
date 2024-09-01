@@ -233,6 +233,7 @@ public class LinkedList<T> {
 
         for (int i = 0; i < steps; i++) {
             //Tässä pitää tsekata onko steps OUT OF BOUNDS
+            if (currentNode.getNextNode() == null) return null;
             currentNode = currentNode.getNextNode();
         }
 
@@ -268,20 +269,26 @@ public class LinkedList<T> {
     public LinkedList<Integer> sumOfLists (LinkedList<Integer> list1, LinkedList<Integer> list2) {
         LinkedList<Integer> sumList = new LinkedList<Integer>();
 
-        Node<Integer> current1 = list1.getHead();
-        Node<Integer> current2 = list2.getHead();
         int int1;
         int int2;
-        int digit;
+        int index = 0;
 
-        while (current1 != null && current2 != null) {
-            int1 = current1.getData();
-            int2 = current2.getData();
-            digit = int1 + int2;
-            sumList.addToTail(digit);
-            current1 = current1.getNextNode();
-            current2 = current2.getNextNode();
+        while(list1.getNthLastElement(index) != null || list2.getNthLastElement(index) != null ) {
+            if (list1.getNthLastElement(index) != null) {
+                int1 = list1.getNthLastElement(index);
+            } else {
+                int1 = 0;
+            }
+
+            if (list2.getNthLastElement(index)!= null) {
+                int2 = list2.getNthLastElement(index);
+            } else int2 = 0;
+
+            sumList.addToHead(int1 + int2);
+            index++;
+
         }
+
 
         return sumList;
     }
