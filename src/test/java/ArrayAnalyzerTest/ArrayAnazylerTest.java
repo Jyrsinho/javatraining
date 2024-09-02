@@ -88,6 +88,15 @@ public class ArrayAnazylerTest {
         assertEquals(7, arrayAnalyzer.findMode());
     }
 
+    @Test
+    public void testShouldReturnIndexOfIntegerSevenFromArrayWithBinarySearch() {
+        //             0  1  2  3  4  5  6  7  8
+        int[] array = {1 ,2, 3, 4, 5, 6, 7, 8, 9};
+        ArrayAnalyzer arrayAnalyzer = new ArrayAnalyzer(array);
+        assertEquals(6, arrayAnalyzer.findIndexOf(7));
+
+    }
+
 
 
 

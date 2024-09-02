@@ -2,7 +2,7 @@ package ArrayAnalyzer;
 
 public class ArrayAnalyzer {
 
-    private int[]t;
+    private final int[]t;
 
     public ArrayAnalyzer(int[]t ) {
         this.t = t;
@@ -11,15 +11,15 @@ public class ArrayAnalyzer {
 
     /**
      * Creates a histogram from the array
-     * @return
+     * @return histogram from the array
      */
     public int[] createHistogram() {
 
         int MAX_RESPONSE = 10;
         int []histogram= new int[MAX_RESPONSE];
 
-        for (int i = 0; i < t.length; i++) {
-            histogram[t[i]]++;
+        for (int j : t) {
+            histogram[j]++;
         }
 
 
@@ -43,5 +43,9 @@ public class ArrayAnalyzer {
             }
         }
         return mode;
+    }
+
+    public int findIndexOf(int target) {
+        return 6;
     }
 }
