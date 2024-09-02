@@ -254,17 +254,22 @@ public class LinkedList<T> {
     public T getMiddle() {
         Node<T> tailSeeker = this.head;
         Node<T> middleSeeker = this.head;
-        int count = 1;
+        int count = 0;
 
         while (tailSeeker!= null) {
-            if (count % 2 == 0) {
+            if (count % 2 == 1) {
                 middleSeeker = middleSeeker.getNextNode();
             }
             tailSeeker = tailSeeker.getNextNode();
             count++;
         }
 
-        return middleSeeker.getData();
+        if (count < 3) return null;
+
+        if (middleSeeker  == head) {
+            return null;
+        } else return middleSeeker.getData();
+
     }
 
 

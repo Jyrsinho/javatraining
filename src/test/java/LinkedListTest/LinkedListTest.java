@@ -442,6 +442,29 @@ public class LinkedListTest {
         assertEquals('C', linkedListChar.getMiddle());
     }
 
+    @Test
+    public void testShouldReturnRighWeightedMiddleFromListWithFourElements() {
+        linkedListChar.addToHead('A');
+        linkedListChar.addToHead('B');
+        linkedListChar.addToHead('C');
+        linkedListChar.addToHead('D');
+        assertEquals('B', linkedListChar.getMiddle());
+    }
+
+    @Test
+    public void testShouldReturnNullWhenLinkedListHasLessThanThreeElements (){
+        linkedListChar.addToHead('A');
+        linkedListChar.addToHead('B');
+        assertNull(linkedListChar.getMiddle());
+    }
+
+    @Test
+    public void testShouldReturnNullWhenLinkedListHasNoElements (){
+        assertNull(linkedListChar.getMiddle());
+    }
+
+
+
 
 
 
