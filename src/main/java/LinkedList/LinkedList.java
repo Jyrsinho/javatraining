@@ -245,6 +245,14 @@ public class LinkedList<T> {
         return preceedingNode.getData();
     }
 
+    public T getMiddle() {
+        Node<T> currentNode = this.head;
+
+
+
+        return currentNode.getNextNode().getData();
+    }
+
 
     public LinkedList<Integer> intToList (int x) {
         LinkedList<Integer> digitList = new LinkedList<Integer>();

@@ -10,11 +10,16 @@ import static org.junit.jupiter.api.Assertions.*;
 public class LinkedListTest {
 
     LinkedList<String> linkedList;
+    LinkedList<Character> linkedListChar;
 
     @BeforeEach
     public void setUp() {
+
         linkedList = new LinkedList<String>();
+        linkedListChar = new LinkedList<Character>();
+
     }
+
 
     @Test
     public void testShouldAddNewHeadToLinkedList() {
@@ -417,6 +422,16 @@ public class LinkedListTest {
         String expected = "2221";
         assertEquals(expected, sumList.getList());
     }
+
+
+    @Test
+    public void testShouldReturnMiddleNodeThreeOftheListWithFiveElements() {
+        linkedListChar.addToHead('C');
+        linkedListChar.addToHead('B');
+        linkedListChar.addToHead('A');
+        assertEquals('B', linkedListChar.getMiddle());
+    }
+
 
 
 
