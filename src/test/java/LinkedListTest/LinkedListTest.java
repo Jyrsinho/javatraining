@@ -425,15 +425,22 @@ public class LinkedListTest {
 
 
     @Test
-    public void testShouldReturnMiddleNodeThreeOftheListWithFiveElements() {
+    public void testShouldReturnMiddleNodeTwoOftheListWithThreeElements() {
         linkedListChar.addToHead('C');
         linkedListChar.addToHead('B');
         linkedListChar.addToHead('A');
         assertEquals('B', linkedListChar.getMiddle());
     }
 
-
-
+    @Test
+    public void testShouldReturnMiddleNodeThreeOftheListWithFiveElements() {
+        linkedListChar.addToHead('E');
+        linkedListChar.addToHead('D');
+        linkedListChar.addToHead('C');
+        linkedListChar.addToHead('B');
+        linkedListChar.addToHead('A');
+        assertEquals('C', linkedListChar.getMiddle());
+    }
 
 
 
