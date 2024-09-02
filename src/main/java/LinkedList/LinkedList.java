@@ -245,12 +245,26 @@ public class LinkedList<T> {
         return preceedingNode.getData();
     }
 
+    /**
+     * Returns the middle Node of the Linked List. If list length is even it returns the
+     * right-weighted middle
+     * @return the middle Node of the Linked List. If list length is even it returns the
+     * right-weighted middle
+     */
     public T getMiddle() {
-        Node<T> currentNode = this.head;
+        Node<T> tailSeeker = this.head;
+        Node<T> middleSeeker = this.head;
+        int count = 1;
 
+        while (tailSeeker!= null) {
+            if (count % 2 == 0) {
+                middleSeeker = middleSeeker.getNextNode();
+            }
+            tailSeeker = tailSeeker.getNextNode();
+            count++;
+        }
 
-
-        return currentNode.getNextNode().getData();
+        return middleSeeker.getData();
     }
 
 
