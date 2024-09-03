@@ -24,6 +24,16 @@ public class QueueTest {
         assertEquals(3, queue.getSize());
         assertEquals("a", queue.peek());
 
+    }
 
+    @Test
+    public void testShouldRemoveNodeFromQueue() {
+        Queue<String> queue = new Queue<>();
+        queue.enqueue("a");
+        queue.enqueue("b");
+        queue.enqueue("c");
+
+        assertEquals("a", queue.dequeue());
+        assertEquals("b", queue.peek());
     }
 }

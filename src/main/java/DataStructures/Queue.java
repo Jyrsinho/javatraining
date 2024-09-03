@@ -26,8 +26,8 @@ public class Queue<T> {
     }
 
 
-    public void dequeue(T value) {
-
+    public T dequeue() {
+        return null;
     }
 
 
