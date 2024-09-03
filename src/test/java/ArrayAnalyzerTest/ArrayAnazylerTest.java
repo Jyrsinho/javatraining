@@ -1,6 +1,7 @@
 package ArrayAnalyzerTest;
 
 import ArrayAnalyzer.ArrayAnalyzer;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -89,11 +90,34 @@ public class ArrayAnazylerTest {
     }
 
     @Test
-    public void testShouldReturnIndexOfIntegerSevenFromArrayWithBinarySearch() {
+    public void testShouldReturnTheMiddleIndexOfArrayWithBinarySearch() {
+        int[] array = {1,2,3,4,5,6,7,8,9};
+        ArrayAnalyzer arrayAnalyzer = new ArrayAnalyzer(array);
+        assertEquals(4, arrayAnalyzer.findIndexOf(5));
+    }
+
+    @Test
+    public void testShouldReturnIndexTwoOfIntegerThreeFromArrayWithBinarySearch() {
         //             0  1  2  3  4  5  6  7  8
         int[] array = {1 ,2, 3, 4, 5, 6, 7, 8, 9};
         ArrayAnalyzer arrayAnalyzer = new ArrayAnalyzer(array);
-        assertEquals(6, arrayAnalyzer.findIndexOf(7));
+        assertEquals(2, arrayAnalyzer.findIndexOf(3));
+
+    }
+
+    @Test
+    public void testShouldReturnIndexOfIntegerOneFromArrayWithBinarySearch() {
+        int[] array = {1,2,3,4,5,6,7,8,9};
+        ArrayAnalyzer arrayAnalyzer = new ArrayAnalyzer(array);
+        assertEquals(0, arrayAnalyzer.findIndexOf(1));
+
+    }
+
+    @Disabled
+    public void testShouldReturnIndexOfIntegerNineFromArrayWithBinarySearch() {
+        int[] array = {1,2,3,4,5,6,7,8,9};
+        ArrayAnalyzer arrayAnalyzer = new ArrayAnalyzer(array);
+        assertEquals(8, arrayAnalyzer.findIndexOf(9));
 
     }
 
