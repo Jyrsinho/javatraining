@@ -1,6 +1,6 @@
 package LinkedListString;
 
-import LinkedList.Node;
+import DataStructures.Node;
 
 public class LinkedListString<T> {
 

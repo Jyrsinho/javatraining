@@ -1,6 +1,6 @@
 package LinkedListStringTest;
 
-import LinkedList.Node;
+import DataStructures.Node;
 import LinkedListString.LinkedListString;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
