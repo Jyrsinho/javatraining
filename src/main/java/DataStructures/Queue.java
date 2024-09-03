@@ -4,14 +4,29 @@ public class Queue<T> {
 
     LinkedList<T> queue;
     int size;
+    static final int DEFAULT_MAX_SIZE = Integer.MAX_VALUE;
+    public int maxSize;
+
 
     public Queue() {
         queue = new LinkedList<>();
-        size = 0;
+        this.size = 0;
+        this.maxSize = DEFAULT_MAX_SIZE;
+
+    }
+
+    public Queue(int maxSize) {
+        queue = new LinkedList<>();
+        this.size = 0;
+        this.maxSize = maxSize;
     }
 
 
-    public void enqueue(T value) {
+    public void enqueue(T value) throws Exception {
+        if (this.size == maxSize) {
+            throw new Exception("Queue is full");
+        }
+
         Node<T> newNode = new Node<>(value);
         if (size == 0) {
             queue.head = newNode;
@@ -23,11 +38,21 @@ public class Queue<T> {
             current.setNextNode(newNode);
         }
         size++;
+
     }
 
 
     public T dequeue() {
-        return null;
+        if (size == 0) {
+            return null;
+        }
+
+        Node <T>previousHead = queue.head;
+        queue.head = queue.head.getNextNode();
+        size --;
+
+        return previousHead.getData();
+
     }
 
 
