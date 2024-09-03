@@ -51,14 +51,14 @@ public class ArrayAnalyzer {
         int index = -1;
         int middle;
 
-        while (end >= 0 && start <= end) {
+        while (start < end) {
             middle = Math.floorDiv(start + end , 2);
             if (t[middle] == target) {
                 index = middle;
                 break;
             }
             else if (t[middle] > target) {
-                end = middle - 1;
+                end = middle;
             } else {
                 start = middle + 1;
             }
