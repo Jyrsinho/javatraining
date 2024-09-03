@@ -46,13 +46,13 @@ public class ArrayAnalyzer {
     }
 
     public int findIndexOf(int target) {
-        int beginning = 0;
-        int end = t.length - 1;
+        int start = 0;
+        int end = t.length;
         int index = -1;
         int middle;
 
-        while (end >= 0 && beginning <= end) {
-            middle = (beginning + end) / 2;
+        while (end >= 0 && start <= end) {
+            middle = Math.floorDiv(start + end , 2);
             if (t[middle] == target) {
                 index = middle;
                 break;
@@ -60,7 +60,7 @@ public class ArrayAnalyzer {
             else if (t[middle] > target) {
                 end = middle - 1;
             } else {
-                beginning = middle + 1;
+                start = middle + 1;
             }
         }
 
