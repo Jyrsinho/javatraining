@@ -120,6 +120,13 @@ public class ArrayAnazylerTest {
 
     }
 
+    @Test
+    public void testShouldReturnNegativeNumberWhenArrayDoesNotContainTarget() {
+        int[] array = {1,2,3,4,6,7,8,9};
+        ArrayAnalyzer arrayAnalyzer = new ArrayAnalyzer(array);
+        assertEquals(-1, arrayAnalyzer.findIndexOf(5));
+    }
+
 
 
 
