@@ -31,11 +31,7 @@ public class Queue<T> {
         if (size == 0) {
             queue.head = newNode;
         } else {
-            Node<T> current = queue.head;
-            while (current.getNextNode() != null) {
-                current = current.getNextNode();
-            }
-            current.setNextNode(newNode);
+           queue.addToTail(value);
         }
         size++;
 
