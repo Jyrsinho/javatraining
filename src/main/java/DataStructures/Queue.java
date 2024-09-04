@@ -57,5 +57,13 @@ public class Queue<T> {
         return size;
     }
 
+    public boolean isEmpty() {
+        return (size == 0);
+    }
+
+    public boolean hasSpace() {
+        return (size < maxSize);
+    }
+
 
 }

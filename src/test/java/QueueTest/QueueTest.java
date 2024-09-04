@@ -56,4 +56,23 @@ public class QueueTest {
         Queue<String> queue = new Queue<>();
         assertNull(queue.dequeue());
     }
+
+    @Test
+    public void testShouldReturnTrueWhenListIsEmpty() throws Exception {
+        Queue<String> queue = new Queue<>();
+        assertTrue(queue.isEmpty());
+        queue.enqueue("A");
+        assertFalse(queue.isEmpty());
+
+    }
+
+    @Test
+    public void testShouldReturnTrueWhenListHasSpace() throws Exception {
+        Queue<String> queue = new Queue<>(3);
+        queue.enqueue("A");
+        queue.enqueue("B");
+        assertTrue(queue.hasSpace());
+        queue.enqueue("C");
+        assertFalse(queue.hasSpace());
+    }
 }
