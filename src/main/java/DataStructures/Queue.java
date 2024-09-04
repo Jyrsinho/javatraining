@@ -23,7 +23,7 @@ public class Queue<T> {
 
 
     public void enqueue(T value) throws Exception {
-        if (this.size == maxSize) {
+        if (!hasSpace()) {
             throw new Exception("Queue is full");
         }
 
@@ -39,7 +39,7 @@ public class Queue<T> {
 
 
     public T dequeue() {
-        if (size == 0) {
+        if (isEmpty()) {
             return null;
         }
         size --;
