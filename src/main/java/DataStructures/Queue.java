@@ -1,5 +1,7 @@
 package DataStructures;
 
+import java.util.NoSuchElementException;
+
 public class Queue<T> {
 
     LinkedList<T> queue;
@@ -49,6 +51,9 @@ public class Queue<T> {
 
 
     public T peek() {
+        if (isEmpty()) {
+            throw new NoSuchElementException("Queue is empty");
+        }
         return queue.head.getData();
     }
 
