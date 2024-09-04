@@ -42,12 +42,8 @@ public class Queue<T> {
         if (size == 0) {
             return null;
         }
-
-        Node <T>previousHead = queue.head;
-        queue.head = queue.head.getNextNode();
         size --;
-
-        return previousHead.getData();
+        return queue.removeHead();
 
     }
 
