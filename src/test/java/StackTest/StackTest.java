@@ -52,6 +52,7 @@ public class StackTest {
         stack.push(2);
         assertEquals(2, stack.pop());
         assertEquals(1, stack.peek());
+        assertEquals(1, stack.getSize());
     }
 
     @Test

@@ -32,6 +32,7 @@ public class Stack<T> {
         if (this.isEmpty()) {
             throw new NoSuchElementException("Stack underflow");
         }
+        this.size -= 1;
         return stack.removeHead();
     }
 
