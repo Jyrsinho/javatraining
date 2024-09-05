@@ -1,5 +1,7 @@
 package DataStructures;
 
+import java.util.NoSuchElementException;
+
 public class Stack<T> {
 
     private LinkedList<T> stack;
@@ -27,16 +29,16 @@ public class Stack<T> {
     }
 
     public T pop() {
-        if (this.top == null) {
-            throw new Error("Stack underflow");
+        if (this.size == 0) {
+            throw new NoSuchElementException("Stack underflow");
         }
         return stack.removeHead();
     }
 
 
     public T peek() {
-        if (this.top == null) {
-            throw new Error("Stack empty");
+        if (size == 0) {
+            throw new NoSuchElementException("Stack empty");
         }
         return stack.getHead().getData();
     }
