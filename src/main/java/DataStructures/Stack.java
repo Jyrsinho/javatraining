@@ -21,7 +21,7 @@ public class Stack<T> {
     }
 
     public void push(T value) {
-        if (size == maxSize) {
+        if (!hasSpace()) {
             throw new StackOverflowError();
         }
         stack.addToHead(value);
@@ -29,7 +29,7 @@ public class Stack<T> {
     }
 
     public T pop() {
-        if (this.size == 0) {
+        if (this.isEmpty()) {
             throw new NoSuchElementException("Stack underflow");
         }
         return stack.removeHead();
@@ -37,7 +37,7 @@ public class Stack<T> {
 
 
     public T peek() {
-        if (size == 0) {
+        if (this.isEmpty()) {
             throw new NoSuchElementException("Stack empty");
         }
         return stack.getHead().getData();
@@ -45,5 +45,13 @@ public class Stack<T> {
 
     public int getSize() {
         return size;
+    }
+
+    public boolean isEmpty() {
+        return size == 0;
+    }
+
+    public boolean hasSpace() {
+        return size < maxSize;
     }
 }
