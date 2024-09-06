@@ -27,4 +27,11 @@ public class HashMapTest {
         int hash = hashMap.hash(testKey);
         assertTrue(hash < hashMap.getSize() && hash >= 0);
     }
+
+    @Test
+    public void testAdding() {
+        hashMap.add("Auto", "Volvo");
+
+
+    }
 }
