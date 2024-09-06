@@ -20,4 +20,11 @@ public class HashMapTest {
         int hash = hashMap.hash(testKey);
         assertTrue(hash < hashMap.getSize() && hash >= 0);
     }
+
+    @Test
+    public void testShouldReturnIndexSuitableForArray2() {
+        String testKey = "auto";
+        int hash = hashMap.hash(testKey);
+        assertTrue(hash < hashMap.getSize() && hash >= 0);
+    }
 }

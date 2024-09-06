@@ -11,7 +11,13 @@ public class HashMap {
 
     public int hash(String key) {
 
-        return 10;
+        int sum = 0;
+
+        for (int i = 0; i < key.length(); i++) {
+            sum += key.charAt(i);
+        }
+        return sum % hashmap.length;
+
     }
 
     public int getSize() {
