@@ -33,6 +33,16 @@ public class HashMap {
 
     }
 
+    public int getAmountOfKeyValuePairs() {
+        int amountOfKeyValuePairs = 0;
+        for (String[] strings : hashmap) {
+            if (strings[0] != null) {
+                amountOfKeyValuePairs++;
+            }
+        }
+        return amountOfKeyValuePairs;
+    }
+
 
     public int getSize() {
         return hashmap.length;
