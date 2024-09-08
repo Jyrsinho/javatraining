@@ -25,7 +25,6 @@ public class HashMap {
 
         hashmap[index][0] = key;
         hashmap[index][1] = value;
-
     }
 
 
