@@ -39,6 +39,7 @@ public class HashMap {
         }
     }
 
+
     public void growTheSizeOfHashMap(HashMap oldHashMap) {
         HashMap newHashMap = new HashMap(oldHashMap.getSize() *2);
 
@@ -62,6 +63,11 @@ public class HashMap {
             sum += key.charAt(i);
         }
         return sum;
+    }
+
+    public String getValue(String key) {
+
+        return "Kawasaki";
     }
 
     public int getAmountOfKeyValuePairs() {

@@ -73,7 +73,13 @@ public class HashMapTest {
         hashMap5.add("Auto", "Volvo");
         hashMap5.add("Auto", "Volvo");
         assertEquals(20, hashMap5.getSize());
+    }
 
-
+    @Test
+    public void testShouldReturnValueFromHashMap() {
+        hashMap.add("Auto", "Volvo");
+        hashMap.add("Mopo", "Kawasaki");
+        hashMap.add("Polkupyora", "Cannondale");
+        assertEquals("Kawasaki", hashMap.getValue("Mopo"));
     }
 }
