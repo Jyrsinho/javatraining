@@ -76,10 +76,19 @@ public class HashMapTest {
     }
 
     @Test
-    public void testShouldReturnValueFromHashMap() {
+    public void testShouldReturnValueFromHashMap1() {
+        HashMap hashMap10 = new HashMap(10);
+        hashMap10.add("Auto", "Volvo");
+        hashMap10.add("Mopo", "Kawasaki");
+        hashMap10.add("Polkupyora", "Cannondale");
+        assertEquals("Kawasaki", hashMap10.getValue("Mopo"));
+    }
+
+    @Test
+    public void testShouldReturnValueFromHashMap2() {
         hashMap.add("Auto", "Volvo");
         hashMap.add("Mopo", "Kawasaki");
         hashMap.add("Polkupyora", "Cannondale");
-        assertEquals("Kawasaki", hashMap.getValue("Mopo"));
+        assertEquals("Polkypyora", hashMap.getValue("Cannondale"));
     }
 }

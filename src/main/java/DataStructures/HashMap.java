@@ -65,9 +65,13 @@ public class HashMap {
         return sum;
     }
 
+
     public String getValue(String key) {
 
-        return "Kawasaki";
+        int hash = hash(key);
+        int index = findIndexForHash(hash);
+        return hashmap[index][1];
+
     }
 
     public int getAmountOfKeyValuePairs() {
