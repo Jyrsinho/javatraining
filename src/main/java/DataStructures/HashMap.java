@@ -15,11 +15,18 @@ public class HashMap {
      * @param value to be added
      */
     public void add(String key, String value) {
-        int indexToBeAddedIn = hash(key);
+        int index = findIndexForKey(key);
 
-        hashmap[indexToBeAddedIn][0] = key;
-        hashmap[indexToBeAddedIn][1] = value;
+        if (hashmap[index][0] == null) {
+            hashmap[index][0] = key;
+            hashmap[index][1] = value;
+        } else index ++
+    }
 
+
+
+    public int findIndexForHash(int hash) {
+        return hash % hashmap.length;
     }
 
 
@@ -29,8 +36,7 @@ public class HashMap {
         for (int i = 0; i < key.length(); i++) {
             sum += key.charAt(i);
         }
-        return sum % hashmap.length;
-
+        return sum;
     }
 
     public int getAmountOfKeyValuePairs() {

@@ -18,15 +18,15 @@ public class HashMapTest {
     @Test
     public void testShouldReturnIndexSuitableForArray() {
         String testKey = "anneli";
-        int hash = hashMap.hash(testKey);
-        assertTrue(hash < hashMap.getSize() && hash >= 0);
+        int index = hashMap.findIndexForKey(testKey);
+        assertTrue(index < hashMap.getSize() && index >= 0);
     }
 
     @Test
     public void testShouldReturnIndexSuitableForArray2() {
         String testKey = "auto";
-        int hash = hashMap.hash(testKey);
-        assertTrue(hash < hashMap.getSize() && hash >= 0);
+        int index = hashMap.findIndexForKey(testKey);
+        assertTrue(index < hashMap.getSize() && index >= 0);
     }
 
     @Test
