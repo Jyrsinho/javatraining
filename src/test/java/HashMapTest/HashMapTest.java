@@ -56,8 +56,23 @@ public class HashMapTest {
     }
 
     @Test
-    public void testShouldAddMoreSpaceToHashMapWhen75PercentOccupied() {
-        HashMap hashmap5 = new HashMap(5);
+    public void testShouldDoubleTheSizeOfHashMapWhen75PercentOccupied() {
+        HashMap hashMap5 = new HashMap(5);
+        assertEquals(5, hashMap5.getSize());
+        hashMap5.add("Auto", "Volvo");
+        hashMap5.add("Auto", "Volvo");
+        hashMap5.add("Auto", "Volvo");
+        hashMap5.add("Auto", "Volvo");
+        assertEquals(10, hashMap5.getSize());
+        hashMap5.add("Auto", "Volvo");
+        hashMap5.add("Auto", "Volvo");
+        hashMap5.add("Auto", "Volvo");
+        hashMap5.add("Auto", "Volvo");
+        hashMap5.add("Auto", "Volvo");
+        hashMap5.add("Auto", "Volvo");
+        hashMap5.add("Auto", "Volvo");
+        hashMap5.add("Auto", "Volvo");
+        assertEquals(20, hashMap5.getSize());
 
 
     }

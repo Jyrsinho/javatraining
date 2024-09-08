@@ -4,6 +4,7 @@ public class HashMap {
 
     private String[][] hashmap;
     private int keyValuePairs;
+    private final double RATIO_OF_FULNESS = 0.7;
 
     public HashMap(int size) {
         this.hashmap = new String[size][2];
@@ -28,9 +29,26 @@ public class HashMap {
         hashmap[index][0] = key;
         hashmap[index][1] = value;
         keyValuePairs++;
+
+        checkAvailability();
     }
 
+    public void checkAvailability() {
+        if ((double) keyValuePairs / hashmap.length > RATIO_OF_FULNESS) {
+            growTheSizeOfHashMap(this);
+        }
+    }
 
+    public void growTheSizeOfHashMap(HashMap oldHashMap) {
+        HashMap newHashMap = new HashMap(oldHashMap.getSize() *2);
+
+        for (int i = 0; i < oldHashMap.hashmap.length; i++) {
+            for (int j = 0; j < oldHashMap.hashmap[i].length; j++) {
+                newHashMap.hashmap[i][j] = oldHashMap.hashmap[i][j];
+            }
+        }
+        this.hashmap = newHashMap.hashmap;
+    }
 
     public int findIndexForHash(int hash) {
         return hash % hashmap.length;
