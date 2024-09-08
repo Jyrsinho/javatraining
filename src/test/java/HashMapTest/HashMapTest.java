@@ -12,7 +12,7 @@ public class HashMapTest {
 
     @BeforeEach
     void setUp() {
-        hashMap = new HashMap(5);
+        hashMap = new HashMap(3);
     }
 
     @Test
@@ -45,5 +45,20 @@ public class HashMapTest {
     hashMap.add("Auto", "Volvo");
     hashMap.add("Auto", "Volvo");
     assertEquals(2, hashMap.getAmountOfKeyValuePairs());
+    }
+
+    @Test
+    public void testShouldHandleAddingThreeKeyValuePairsToHashMapWithThreeSlots() {
+        hashMap.add("Auto", "Volvo");
+        hashMap.add("Auto", "Volvo");
+        hashMap.add("Auto", "Volvo");
+        assertEquals(3, hashMap.getAmountOfKeyValuePairs());
+    }
+
+    @Test
+    public void testShouldAddMoreSpaceToHashMapWhen75PercentOccupied() {
+        HashMap hashmap5 = new HashMap(5);
+
+
     }
 }

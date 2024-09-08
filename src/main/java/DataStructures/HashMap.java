@@ -2,10 +2,12 @@ package DataStructures;
 
 public class HashMap {
 
-    public String[][] hashmap;
+    private String[][] hashmap;
+    private int keyValuePairs;
 
     public HashMap(int size) {
         this.hashmap = new String[size][2];
+        this.keyValuePairs = 0;
     }
 
 
@@ -25,6 +27,7 @@ public class HashMap {
 
         hashmap[index][0] = key;
         hashmap[index][1] = value;
+        keyValuePairs++;
     }
 
 
@@ -44,13 +47,7 @@ public class HashMap {
     }
 
     public int getAmountOfKeyValuePairs() {
-        int amountOfKeyValuePairs = 0;
-        for (String[] strings : hashmap) {
-            if (strings[0] != null) {
-                amountOfKeyValuePairs++;
-            }
-        }
-        return amountOfKeyValuePairs;
+        return keyValuePairs;
     }
 
 
