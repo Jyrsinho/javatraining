@@ -15,12 +15,17 @@ public class HashMap {
      * @param value to be added
      */
     public void add(String key, String value) {
-        int index = findIndexForKey(key);
+        int hash = hash(key);
+        int index = findIndexForHash(hash);
 
-        if (hashmap[index][0] == null) {
-            hashmap[index][0] = key;
-            hashmap[index][1] = value;
-        } else index ++
+        while (hashmap[index][0] != null) {
+            index ++;
+            if (index == hashmap.length) index = 0;
+        }
+
+        hashmap[index][0] = key;
+        hashmap[index][1] = value;
+
     }
 
 
