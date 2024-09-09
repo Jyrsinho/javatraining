@@ -68,7 +68,7 @@ public class HandTest {
             }
             Assertions.fail("Expected TooManyElementsException to be thrown");
         } catch (TooManyElementsException e) {
-            Assertions.assertEquals("Cannot add more than 5 cards to the hand.", e.getMessage());
+            Assertions.assertEquals("Cannot assing more than 5 cards to the hand.", e.getMessage());
         }
     }
 

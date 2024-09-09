@@ -32,26 +32,26 @@ public class HashMapTest {
     }
 
     @Test
-    public void testShouldAddAmountOfKeyValuePairsInHashMap() {
+    public void testShouldAssingAmountOfKeyValuePairsInHashMap() {
         assertEquals(0, hashMap.getAmountOfKeyValuePairs());
-        hashMap.add("Auto", "Volvo");
+        hashMap.assing("Auto", "Volvo");
         assertEquals(1, hashMap.getAmountOfKeyValuePairs());
-        hashMap.add("Mopo", "Kawasaki");
+        hashMap.assing("Mopo", "Kawasaki");
         assertEquals(2, hashMap.getAmountOfKeyValuePairs());
     }
 
     @Test
-    public void testShouldAddAmountOfKeyValuePairsInHashMapEvenWhenElementsHaveSameHash() {
-    hashMap.add("Auto", "Volvo");
-    hashMap.add("Auto", "Volvo");
+    public void testShouldAssingAmountOfKeyValuePairsInHashMapEvenWhenElementsHaveSameHash() {
+    hashMap.assing("Auto", "Volvo");
+    hashMap.assing("Auto", "Volvo");
     assertEquals(2, hashMap.getAmountOfKeyValuePairs());
     }
 
     @Test
     public void testShouldHandleAddingThreeKeyValuePairsToHashMapWithThreeSlots() {
-        hashMap.add("Auto", "Volvo");
-        hashMap.add("Auto", "Volvo");
-        hashMap.add("Auto", "Volvo");
+        hashMap.assing("Auto", "Volvo");
+        hashMap.assing("Auto", "Volvo");
+        hashMap.assing("Auto", "Volvo");
         assertEquals(3, hashMap.getAmountOfKeyValuePairs());
     }
 
@@ -59,36 +59,36 @@ public class HashMapTest {
     public void testShouldDoubleTheSizeOfHashMapWhen75PercentOccupied() {
         HashMap hashMap5 = new HashMap(5);
         assertEquals(5, hashMap5.getSize());
-        hashMap5.add("Auto", "Volvo");
-        hashMap5.add("Auto", "Volvo");
-        hashMap5.add("Auto", "Volvo");
-        hashMap5.add("Auto", "Volvo");
+        hashMap5.assing("Auto", "Volvo");
+        hashMap5.assing("Auto", "Volvo");
+        hashMap5.assing("Auto", "Volvo");
+        hashMap5.assing("Auto", "Volvo");
         assertEquals(10, hashMap5.getSize());
-        hashMap5.add("Auto", "Volvo");
-        hashMap5.add("Auto", "Volvo");
-        hashMap5.add("Auto", "Volvo");
-        hashMap5.add("Auto", "Volvo");
-        hashMap5.add("Auto", "Volvo");
-        hashMap5.add("Auto", "Volvo");
-        hashMap5.add("Auto", "Volvo");
-        hashMap5.add("Auto", "Volvo");
+        hashMap5.assing("Auto", "Volvo");
+        hashMap5.assing("Auto", "Volvo");
+        hashMap5.assing("Auto", "Volvo");
+        hashMap5.assing("Auto", "Volvo");
+        hashMap5.assing("Auto", "Volvo");
+        hashMap5.assing("Auto", "Volvo");
+        hashMap5.assing("Auto", "Volvo");
+        hashMap5.assing("Auto", "Volvo");
         assertEquals(20, hashMap5.getSize());
     }
 
     @Test
     public void testShouldReturnValueFromHashMap1() {
         HashMap hashMap10 = new HashMap(10);
-        hashMap10.add("Auto", "Volvo");
-        hashMap10.add("Mopo", "Kawasaki");
-        hashMap10.add("Polkupyora", "Cannondale");
+        hashMap10.assing("Auto", "Volvo");
+        hashMap10.assing("Mopo", "Kawasaki");
+        hashMap10.assing("Polkupyora", "Cannondale");
         assertEquals("Kawasaki", hashMap10.getValue("Mopo"));
     }
 
     @Test
-    public void testShouldReturnValueFromHashMap2() {
-        hashMap.add("Auto", "Volvo");
-        hashMap.add("Mopo", "Kawasaki");
-        hashMap.add("Polkupyora", "Cannondale");
-        assertEquals("Polkypyora", hashMap.getValue("Cannondale"));
+    public void testShouldReturnValueFromHashMapThatsSizeHasBeenAlteredAfterAddingTheKeyValuePair() {
+        hashMap.assing("Auto", "Volvo");
+        hashMap.assing("Mopo", "Kawasaki");
+        hashMap.assing("Polkupyora", "Cannondale");
+        assertEquals("Cannondale", hashMap.getValue("Polkupyora"));
     }
 }

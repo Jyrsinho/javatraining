@@ -118,7 +118,7 @@ public class ArrayString {
                 newArrayString = copyAndIncreaseArraySize(newArrayString, spaceToAdd);
                 int replaceTextIndex = 0;
                 sourceArrayIndex += target.length-1;
-                //add characters from replace to newArrayString
+                //assing characters from replace to newArrayString
                 while (replace[replaceTextIndex] != 0)    {
                     newArrayString[newArrayIndex] = replace[replaceTextIndex];
                     newArrayIndex++;

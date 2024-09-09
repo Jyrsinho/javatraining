@@ -72,7 +72,7 @@ public class Hand implements Iterable<Card> {
      */
     public void addCardToHand(Card card) throws TooManyElementsException {
         if (getHandLength() >= MAX_CARDS) {
-            throw new TooManyElementsException("Cannot add more than "+ MAX_CARDS + " cards to the hand.");
+            throw new TooManyElementsException("Cannot assing more than "+ MAX_CARDS + " cards to the hand.");
         }
         cardArrayHand.add(card);
     }

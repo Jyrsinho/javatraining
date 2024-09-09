@@ -17,9 +17,9 @@ public class HashMap {
      * @param key to be added
      * @param value to be added
      */
-    public void add(String key, String value) {
-        int hash = hash(key);
-        int index = findIndexForHash(hash);
+    public void assing(String key, String value) {
+        int hashCode = hash(key);
+        int index = findIndexForHash(hashCode);
 
         while (hashmap[index][0] != null) {
             index ++;
@@ -44,12 +44,13 @@ public class HashMap {
         HashMap newHashMap = new HashMap(oldHashMap.getSize() *2);
 
         for (int i = 0; i < oldHashMap.hashmap.length; i++) {
-            for (int j = 0; j < oldHashMap.hashmap[i].length; j++) {
-                newHashMap.hashmap[i][j] = oldHashMap.hashmap[i][j];
+            if (oldHashMap.hashmap[i][0] != null) {
+                newHashMap.assing(oldHashMap.hashmap[i][0], oldHashMap.hashmap[i][1]);
             }
-        }
+            }
         this.hashmap = newHashMap.hashmap;
-    }
+        }
+
 
     public int findIndexForHash(int hash) {
         return hash % hashmap.length;
@@ -58,18 +59,18 @@ public class HashMap {
 
     public int hash(String key) {
 
-        int sum = 0;
+        int hashCode = 0;
         for (int i = 0; i < key.length(); i++) {
-            sum += key.charAt(i);
+            hashCode += key.charAt(i);
         }
-        return sum;
+        return hashCode;
     }
 
 
     public String getValue(String key) {
 
-        int hash = hash(key);
-        int index = findIndexForHash(hash);
+        int hashCode = hash(key);
+        int index = findIndexForHash(hashCode);
         return hashmap[index][1];
 
     }
@@ -104,13 +105,14 @@ public class HashMap {
     public static void main(String[] args) {
 
         HashMap testHashMap = new HashMap(5);
-        testHashMap.add("auto", "volvo");
+        testHashMap.assing("auto", "volvo");
 
         System.out.println(testHashMap.toString());
 
-        testHashMap.add("auto", "volvo");
+        testHashMap.assing("auto", "volvo");
         System.out.println(testHashMap.toString());
 
+        System.out.println(testHashMap.hash("Jyri"));
 
     }
 }
