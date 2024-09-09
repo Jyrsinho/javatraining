@@ -81,7 +81,7 @@ public class HashMapTest {
         hashMap10.assing("Auto", "Volvo");
         hashMap10.assing("Mopo", "Kawasaki");
         hashMap10.assing("Polkupyora", "Cannondale");
-        assertEquals("Kawasaki", hashMap10.getValue("Mopo"));
+        assertEquals("Kawasaki", hashMap10.retrieve("Mopo"));
     }
 
     @Test
@@ -89,6 +89,6 @@ public class HashMapTest {
         hashMap.assing("Auto", "Volvo");
         hashMap.assing("Mopo", "Kawasaki");
         hashMap.assing("Polkupyora", "Cannondale");
-        assertEquals("Cannondale", hashMap.getValue("Polkupyora"));
+        assertEquals("Cannondale", hashMap.retrieve("Polkupyora"));
     }
 }

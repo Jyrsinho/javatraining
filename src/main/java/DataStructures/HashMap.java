@@ -67,7 +67,7 @@ public class HashMap {
     }
 
 
-    public String getValue(String key) {
+    public String retrieve(String key) {
 
         int hashCode = hash(key);
         int index = findIndexForHash(hashCode);
