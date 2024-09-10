@@ -1,6 +1,8 @@
 package HashMap;
 
 
+import java.util.Objects;
+
 public class HashMap<T> {
 
     private LinkedList<T>[] hashmap;
@@ -51,13 +53,9 @@ public class HashMap<T> {
 
 
 
-    public int hash(String key) {
+    public int hash(T key) {
 
-        int hashCode = 0;
-        for (int i = 0; i < key.length(); i++) {
-            hashCode += key.charAt(i);
-        }
-        return hashCode % hashmap.length;
+        return Objects.hash(key) % hashmap.length;
     }
 
 

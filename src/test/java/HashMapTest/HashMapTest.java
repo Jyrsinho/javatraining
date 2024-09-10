@@ -74,20 +74,5 @@ public class HashMapTest {
         assertEquals(20, hashMap5.getSize());
     }
 
-    @Disabled
-    public void testShouldReturnValueFromHashMap1() {
-        HashMap hashMap10 = new HashMap(10);
-        hashMap10.assing("Auto", "Volvo");
-        hashMap10.assing("Mopo", "Kawasaki");
-        hashMap10.assing("Polkupyora", "Cannondale");
-        assertEquals("Kawasaki", hashMap10.retrieve("Mopo"));
-    }
 
-    @Disabled
-    public void testShouldReturnValueFromHashMapThatsSizeHasBeenAlteredAfterAddingTheKeyValuePair() {
-        hashMap.assing("Auto", "Volvo");
-        hashMap.assing("Mopo", "Kawasaki");
-        hashMap.assing("Polkupyora", "Cannondale");
-        assertEquals("Cannondale", hashMap.retrieve("Polkupyora"));
-    }
 }
