@@ -2,9 +2,9 @@ package HashMap;
 
 
 
-public class LinkedList<T> {
+public class LinkedList<T, V> {
 
-    public Node<T> head;
+    public Node<T, V> head;
 
     public LinkedList() {
         head = null;
@@ -16,9 +16,9 @@ public class LinkedList<T> {
      * @param key value to be added to new head node
      * @param value to be added to new head node
      */
-    public void addToHead(T key, T value) {
-        Node<T> newHead = new Node<>(key, value);
-        Node<T> currentHead = head;
+    public void addToHead(T key, V value) {
+        Node<T, V> newHead = new Node<>(key, value);
+        Node<T, V> currentHead = head;
         this.head = newHead;
         if (currentHead != null) this.head.setNextNode(currentHead);
 
@@ -30,8 +30,8 @@ public class LinkedList<T> {
      * removes the head of the LinkedList returns the removed
      * Node's String payload
      */
-    public T removeHead() {
-        Node<T> removedHead = this.head;
+    public V removeHead() {
+        Node<T, V> removedHead = this.head;
         if (removedHead == null) return null;
         this.head = removedHead.getNextNode();
         return removedHead.getValue();
@@ -47,7 +47,7 @@ public class LinkedList<T> {
      */
     public boolean contains(T key) {
         boolean contains = false;
-        Node<T> currentNode = this.head;
+        Node<T, V> currentNode = this.head;
         while (currentNode != null) {
             if (currentNode.getKey().equals(key)) {
                 contains = true;
@@ -64,8 +64,8 @@ public class LinkedList<T> {
      * @param key of key-value pair to be removed from Linked List
      * @return key  that was removed from Linked List. Null if nothins is removed
      */
-    public T remove (T key) {
-        T removed= null;
+    public V remove (T key) {
+        V removed= null;
 
         if (this.head == null) return null;
 
@@ -73,12 +73,12 @@ public class LinkedList<T> {
             return removeHead();
         }
 
-        Node<T> previousNode = this.head;
-        Node<T> currentNode = this.head.getNextNode();
+        Node<T, V> previousNode = this.head;
+        Node<T, V> currentNode = this.head.getNextNode();
 
         while (currentNode != null) {
             if (currentNode.getKey().equals(key)) {
-                removed = currentNode.getKey();
+                removed = currentNode.getValue();
                 previousNode.setNextNode(currentNode.getNextNode());
             }
             currentNode = currentNode.getNextNode();
@@ -92,7 +92,7 @@ public class LinkedList<T> {
      * @return returns the amount of elements in LinkedList
      */
     public int getLength() {
-        Node<T> currentNode = this.head;
+        Node<T, V> currentNode = this.head;
         if (currentNode == null) return 0;
 
         int length = 0;
@@ -115,7 +115,7 @@ public class LinkedList<T> {
         sb.append("<head>: ");
 
         if (this.head != null){
-            Node<T> currentNode = head;
+            Node<T, V> currentNode = head;
             while (currentNode.getNextNode() != null) {
                 sb.append(currentNode.getKey());
                 sb.append(", ");
@@ -134,7 +134,7 @@ public class LinkedList<T> {
      */
     public String getList() {
         StringBuilder sb = new StringBuilder();
-        Node<T> currentNode = this.head;
+        Node<T, V> currentNode = this.head;
         while (currentNode != null) {
             sb.append(currentNode.getKey());
             sb.append(", ");
@@ -145,13 +145,13 @@ public class LinkedList<T> {
     }
 
 
-    public Node<T> getHead() {
+    public Node<T, V> getHead() {
         return head;
     }
 
 
-    public Node<T> getTail() {
-        Node<T> currentNode = this.head;
+    public Node<T, V> getTail() {
+        Node<T, V> currentNode = this.head;
         if (currentNode == null) {
             return null;
         }

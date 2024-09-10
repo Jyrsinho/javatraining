@@ -3,16 +3,16 @@ package HashMap;
 
 import java.util.Objects;
 
-public class HashMap<T> {
+public class HashMap<T, V> {
 
-    private LinkedList<T>[] hashmap;
-    private int keyValuePairs;
+    private LinkedList<T, V>[] hashmap;
+    private int amountOfKeyValuePairs;
     private final double RATIO_OF_FULLNESS = 0.7;
 
 
     public HashMap(int size) {
         this.hashmap = new LinkedList[size];
-        this.keyValuePairs = 0;
+        this.amountOfKeyValuePairs = 0;
     }
 
 
@@ -21,11 +21,11 @@ public class HashMap<T> {
      * @param key to be added
      * @param value to be added
      */
-    public void assing(T key, T  value) {
+    public void assing(T key, V  value) {
         int index = hash(key);
 
         if (hashmap[index] != null) {
-            hashmap[index].addToHead((T) key, (T) value);
+            hashmap[index].addToHead(key, value);
         }
 
 
@@ -33,14 +33,14 @@ public class HashMap<T> {
     }
 
     public void checkAvailability() {
-        if ((double) keyValuePairs / hashmap.length > RATIO_OF_FULLNESS) {
+        if ((double) amountOfKeyValuePairs / hashmap.length > RATIO_OF_FULLNESS) {
             growTheSizeOfHashMap(this);
         }
     }
 
 
-    public void growTheSizeOfHashMap(HashMap<T> oldHashMap) {
-        HashMap<T> newHashMap = new HashMap(oldHashMap.getSize() *2);
+    public void growTheSizeOfHashMap(HashMap<T, V> oldHashMap) {
+        HashMap<T, V> newHashMap = new HashMap(oldHashMap.getSize() *2);
 
         for (int i = 0; i < oldHashMap.hashmap.length; i++) {
             if (oldHashMap.hashmap[i] != null) {
@@ -62,7 +62,7 @@ public class HashMap<T> {
 
 
     public int getAmountOfKeyValuePairs() {
-        return keyValuePairs;
+        return amountOfKeyValuePairs;
     }
 
 
