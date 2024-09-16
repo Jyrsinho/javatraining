@@ -15,6 +15,11 @@ public class TriangleAnalyzer {
 
 
         public String analyze() {
+
+        if (lengthA == 0 || lengthB == 0 || lengthC == 0) {
+            return "not a triangle";
+        }
+
         int[] sides = new int[] {lengthA, lengthB, lengthC};
         int amountOfEqualSides = countEqualSides(sides);
 
