@@ -15,13 +15,13 @@ public class TriangleAnalyzer {
 
 
         public String analyze() {
-        int[] sides = new int[lengthA + lengthB + lengthC];
+        int[] sides = new int[] {lengthA, lengthB, lengthC};
         int amountOfEqualSides = countEqualSides(sides);
 
             return switch (amountOfEqualSides) {
                 case 0 -> "scalene";
                 case 1 -> "isosceles";
-                case 2 -> "equilateral";
+                case 3 -> "equilateral";
                 default -> "not a triangle";
             };
     }
@@ -31,12 +31,13 @@ public class TriangleAnalyzer {
            int count= 0;
 
             for (int i = 0; i < 2; i++) {
-                if (sides[i] == sides[i + 1]) {
-                    count++ ;
+                for (int j = i+1; j < sides.length; j++) {
+                    if (sides[i] == sides[j]) {
+                        count++;
+                    }
                 }
-            }
-
-           return count;
+                }
+            return count;
         }
 
 

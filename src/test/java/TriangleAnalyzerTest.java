@@ -1,6 +1,5 @@
 import Triangles.TriangleAnalyzer;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -23,9 +22,9 @@ public class TriangleAnalyzerTest {
     }
 
     @Test
-    public void testShouldReturnTwoForEquilateralTriangle() {
+    public void testShouldReturnThreeForEquilateralTriangle() {
         int[] sides = {3, 3, 3};
-        assertEquals(2, triangleAnalyzer.countEqualSides(sides));
+        assertEquals(3, triangleAnalyzer.countEqualSides(sides));
     }
 
     @Test
@@ -47,17 +46,20 @@ public class TriangleAnalyzerTest {
     }
 
     @Test
-    public void testShouldReturnTwoForIsoscelesTriangle() {}
-
-    @Disabled
     public void testShouldReturnEquilateralWhenAllSidesAreOfEqualLength() {
         TriangleAnalyzer triangleAnalyzer = new TriangleAnalyzer(3,3,3);
         assertEquals("equilateral", triangleAnalyzer.analyze());
     }
 
-    @Disabled
+    @Test
     public void testShouldReturnscaleneWhenNoTwoSidesAreEqual() {
         TriangleAnalyzer triangleAnalyzer = new TriangleAnalyzer(3,2,1);
         assertEquals("scalene", triangleAnalyzer.analyze());
+    }
+
+    @Test
+    public void testShouldReturnIsoscelesWhenTwoSidesAreEqual() {
+        TriangleAnalyzer triangleAnalyzer = new TriangleAnalyzer(3,2,2);
+        assertEquals("isosceles", triangleAnalyzer.analyze());
     }
 }
