@@ -62,4 +62,10 @@ public class TriangleAnalyzerTest {
         TriangleAnalyzer triangleAnalyzer = new TriangleAnalyzer(3,2,2);
         assertEquals("isosceles", triangleAnalyzer.analyze());
     }
+
+    @Test
+    public void testShouldReturnNotATriangleWhenGiveZeroZeroZero() {
+        TriangleAnalyzer triangleAnalyzer = new TriangleAnalyzer(0,0,0);
+        assertEquals("not a triangle", triangleAnalyzer.analyze());
+    }
 }
