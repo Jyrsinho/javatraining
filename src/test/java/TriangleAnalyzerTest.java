@@ -23,10 +23,31 @@ public class TriangleAnalyzerTest {
     }
 
     @Test
-    public void testShouldReturnOneForIsoscelesTriangle() {
-        int[] sides = {3, 3, 4};
+    public void testShouldReturnTwoForEquilateralTriangle() {
+        int[] sides = {3, 3, 3};
+        assertEquals(2, triangleAnalyzer.countEqualSides(sides));
+    }
+
+    @Test
+    public void testShouldReturnOneForIsoscelesTriangle1() {
+        int[] sides = {2, 3, 3};
         assertEquals(1, triangleAnalyzer.countEqualSides(sides));
     }
+
+    @Test
+    public void testShouldReturnOneForIsoscelesTriangle2() {
+        int[] sides = {3, 3, 2};
+        assertEquals(1, triangleAnalyzer.countEqualSides(sides));
+    }
+
+    @Test
+    public void testShouldReturnOneForIsoscelesTriangle3() {
+        int[] sides = {3, 2, 3};
+        assertEquals(1, triangleAnalyzer.countEqualSides(sides));
+    }
+
+    @Test
+    public void testShouldReturnTwoForIsoscelesTriangle() {}
 
     @Disabled
     public void testShouldReturnEquilateralWhenAllSidesAreOfEqualLength() {

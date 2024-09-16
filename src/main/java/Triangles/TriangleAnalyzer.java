@@ -28,11 +28,17 @@ public class TriangleAnalyzer {
 
         public int countEqualSides(int[] sides) {
 
-            return 0;
+           int count= 0;
+
+            for (int i = 0; i < 2; i++) {
+                if (sides[i] == sides[i + 1]) {
+                    count++ ;
+                }
+            }
+
+           return count;
         }
 
 
-        public static void main(String[] args) {
-        TriangleAnalyzer analyzer = new TriangleAnalyzer(10, 10, 10);
-        }
+
 }
