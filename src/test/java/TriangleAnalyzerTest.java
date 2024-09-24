@@ -68,4 +68,10 @@ public class TriangleAnalyzerTest {
         TriangleAnalyzer triangleAnalyzer = new TriangleAnalyzer(0,0,0);
         assertEquals("not a triangle", triangleAnalyzer.analyze());
     }
+
+    @Test
+    public void testShouldReturnNotATriangleWhenGivenANegativeSide() {
+        TriangleAnalyzer triangleAnalyzer = new TriangleAnalyzer(-3,3,3);
+        assertEquals("not a triangle", triangleAnalyzer.analyze());
+    }
 }
