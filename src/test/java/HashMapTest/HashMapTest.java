@@ -135,14 +135,12 @@ public class HashMapTest {
         hashMap3.assign("testKey4", "testValue4");
         assertEquals("testValue4", hashMap3.getValue("testKey4"));
         assertEquals("testValue3", hashMap3.getValue("testKey3"));
-        //assertEquals("testValue2", hashMap3.getValue("testKey2"));
-        //assertEquals("testValue1", hashMap3.getValue("testKey1"));
+        assertEquals("testValue2", hashMap3.getValue("testKey2"));
+        assertEquals("testValue1", hashMap3.getValue("testKey1"));
     }
 
 
     /*
-     *   TODO - FOR COLLISION HANDLING LET'S DO TWO CLASSES THIS ONE DOES OPEN ADRESSING AND LLHASHMAP USES SEPARATE CHAINING WITH LINKED LISTS
-     *  TODO COLLISION HANDLING - open addressing, where a collision triggers a probing sequence to find where to store the value for a given key.
      *   TODO COLLISION HANDLING - separate chaining, where each array index points to a different data structure
      *
      */
