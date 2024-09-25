@@ -108,6 +108,14 @@ public class HashMapTest {
         assertEquals(2, getAmountOfValuesInHashMap(hashMap.getHashMap()));
     }
 
+    @Test
+    public void testShouldAddThreeValuesWithsameHashToHashMap() {
+        hashMap.assign("testKey1", "testValue1");
+        hashMap.assign("testKey1", "testValue2");
+        hashMap.assign("testKey1", "testValue3");
+        assertEquals(3, getAmountOfValuesInHashMap(hashMap.getHashMap()));
+    }
+
 
     /*
      *   TODO - FOR COLLISION HANDLING LET'S DO TWO CLASSES THIS ONE DOES OPEN ADRESSING AND LLHASHMAP USES SEPARATE CHAINING WITH LINKED LISTS

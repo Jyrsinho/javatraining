@@ -31,7 +31,11 @@ public class MyHashMap {
      */
     public void assign(String key, String value) {
         int index = hash(key);
-        hashmap[index] = value;
+        while (hashmap[index] != null) {
+            index = (index + 1) % hashmap.length;
+        }
+            hashmap[index] = value;
+
     }
 
     public String getValue(String key) {
