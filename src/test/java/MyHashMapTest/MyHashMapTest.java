@@ -1,4 +1,4 @@
-package HashMapTest;
+package MyHashMapTest;
 
 import MyHashMap.MyHashMap;
 import org.junit.jupiter.api.BeforeEach;
@@ -9,7 +9,7 @@ import java.util.NoSuchElementException;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-public class HashMapTest {
+public class MyHashMapTest {
 
     MyHashMap hashMap;
 
