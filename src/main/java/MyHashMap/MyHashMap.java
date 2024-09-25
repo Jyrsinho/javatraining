@@ -1,14 +1,16 @@
 package MyHashMap;
 
-import java.util.HashMap;
 import java.util.NoSuchElementException;
 
 public class MyHashMap {
 
-    private String[] hashmap;
+    private String[][] hashmap;
+    private final double LOAD_TRESHOLD = 0.7;
+    private int amountOfElements;
 
     public MyHashMap(int size) {
-        this.hashmap = new String[size];
+        this.hashmap = new String[size][2];
+        this.amountOfElements = 0;
     }
 
     /**
@@ -31,30 +33,50 @@ public class MyHashMap {
      */
     public void assign(String key, String value) {
         int index = hash(key);
-        while (hashmap[index] != null) {
+        while (hashmap[index][0] != null) {
             index = (index + 1) % hashmap.length;
         }
-            hashmap[index] = value;
-
+        hashmap[index][0] = key;
+        hashmap[index][1] = value;
+        amountOfElements++;
+        if ((double) amountOfElements / hashmap.length>= LOAD_TRESHOLD) {
+            growHashMap();
+        }
     }
+
+    public void growHashMap() {
+        int currentHashMapSize = hashmap.length;
+        MyHashMap newHashMap = new MyHashMap(currentHashMapSize * 2);
+
+        for (int i = 0; i < hashmap.length; i++) {
+            if (hashmap[i][0] != null) {
+                newHashMap.assign(hashmap[i][0], hashmap[i][1]);
+            }
+        }
+        this.hashmap = newHashMap.hashmap;
+    }
+
+
 
     public String getValue(String key) {
         int index = hash(key);
-        if (hashmap[index] == null) {
+        if (hashmap[index][0] == null) {
             throw new NoSuchElementException("No such key in hashmap");
         }
-            return hashmap[index];
+            return hashmap[index][1];
     }
+
 
     public String remove(String key) {
         int index = hash(key);
 
-        if (hashmap[index] == null) {
+        if (hashmap[index][0] == null) {
             throw new NoSuchElementException("No such key in hashmap");
         }
 
-        String deleted = hashmap[index];
-        hashmap[index] = null;
+        String deleted = hashmap[index][1];
+        hashmap[index][0] = null;
+        hashmap[index][1] = null;
 
         return deleted;
 
@@ -64,10 +86,9 @@ public class MyHashMap {
         return this.hashmap.length;
     }
 
-    public String[] getHashMap() {
+    public String[][] getHashMap() {
         return this.hashmap;
     }
 
-    HashMap<String, Integer> myHashMap = new HashMap<>();
 
 }
