@@ -42,7 +42,7 @@ public class MyLLHashMap<T> {
     }
 
     public String getValue(String key) {
-        String value = "key not found";
+        String value = "No such key in hashmap";
         int index = hash(key);
 
         MyHMNode currentNode = LLhashmap[index].getHead();

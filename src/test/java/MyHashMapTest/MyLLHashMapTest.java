@@ -85,7 +85,14 @@ public class MyLLHashMapTest {
         hashMap.assign("bac", "testValue2");
         hashMap.assign("cba", "testValue3");
         assertEquals("testValue1", hashMap.getValue("abc"));
+    }
 
+    @Test
+    public void testShouldReturnNoSuchKeyInHashmapMessageWhenGettingValueWithKeyThatDoesNotExistInTheHashmap() {
+        hashMap.assign("testKey", "testValue");
+        hashMap.assign("testKey2", "testValue2");
+
+        assertEquals("No such key in hashmap", hashMap.getValue("testKey4"));
     }
 
 

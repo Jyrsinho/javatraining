@@ -140,10 +140,7 @@ public class MyHashMapTest {
     }
 
 
-    /*
-     *   TODO COLLISION HANDLING - separate chaining, where each array index points to a different data structure
-     *
-     */
+
 
     public int getAmountOfValuesInHashMap(String[][] hashMap) {
         int valuesInHashMap = 0;
