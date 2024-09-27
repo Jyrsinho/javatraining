@@ -2,8 +2,8 @@ package MyHashMap;
 
 public class MyHMNode {
 
-    public String key;
-    public String value;
+    private String key;
+    private String value;
     private MyHMNode next;
 
     public MyHMNode(String key, String value) {
@@ -23,5 +23,13 @@ public class MyHMNode {
     public void setKeyValue(String key, String value) {
         this.key = key;
         this.value = value;
+    }
+
+    public String getKey() {
+        return this.key;
+    }
+
+    public String getValue() {
+        return this.value;
     }
 }

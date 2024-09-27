@@ -1,7 +1,7 @@
 package MyHashMap;
 
 public class HMLinkedList {
-    public MyHMNode head;
+    private MyHMNode head;
 
     public HMLinkedList() {
         this.head = null;
@@ -44,6 +44,10 @@ public class HMLinkedList {
             return;
         }
         this.head = removedHead.getNextNode();
+    }
+
+    public MyHMNode getHead() {
+        return this.head;
     }
 }
 

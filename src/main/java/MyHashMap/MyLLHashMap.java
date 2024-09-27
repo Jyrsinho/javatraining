@@ -15,15 +15,6 @@ public class MyLLHashMap<T> {
     }
 
     /**
-     * utility method that takes all the indices of hashmap array and fills them with empty linkedlists.
-     */
-    public void fillHashMapWithEmptyLinkedLists() {
-        for (int i = 0; i < LLhashmap.length; i++) {
-            LLhashmap[i] = new HMLinkedList();
-        }
-    }
-
-    /**
      * returns the index for a key
      * @param key to be hashed
      * @return the hashed index for key's value to be added in
@@ -50,12 +41,30 @@ public class MyLLHashMap<T> {
 
     }
 
+    public String getValue(String key) {
+        String value;
+        int index = hash(key);
+
+        value = this.LLhashmap[index].getHead().getValue();
+        return value;
+    }
+
     public int getSize() {
         return size;
     }
 
     public HMLinkedList[] getHashmap () {
         return this.LLhashmap;
+    }
+
+
+    /**
+     * utility method that takes all the indices of hashmap array and fills them with empty linkedlists.
+     */
+    public void fillHashMapWithEmptyLinkedLists() {
+        for (int i = 0; i < LLhashmap.length; i++) {
+            LLhashmap[i] = new HMLinkedList();
+        }
     }
 
 
