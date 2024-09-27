@@ -2,13 +2,25 @@ package MyHashMap;
 
 public class MyLLHashMap<T> {
 
-    private HMLinkedList [] LLhashmap;
+    private HMLinkedList[] LLhashmap;
     private final double LOAD_FACTOR = 0.7;
     private int size;
 
     public MyLLHashMap(int size) {
         this.LLhashmap = new HMLinkedList[size];
         this.size = 0;
+
+        fillHashMapWithEmptyLinkedLists();
+
+    }
+
+    /**
+     * utility method that takes all the indices of hashmap array and fills them with empty linkedlists.
+     */
+    public void fillHashMapWithEmptyLinkedLists() {
+        for (int i = 0; i < LLhashmap.length; i++) {
+            LLhashmap[i] = new HMLinkedList();
+        }
     }
 
     /**
@@ -24,11 +36,26 @@ public class MyLLHashMap<T> {
         return hashSum % LLhashmap.length;
     }
 
+    /**
+     * add key - value -pairs to the hashmap
+     * @param key to be added
+     * @param value to be added
+     */
     public void assign(String key, String value) {
         int index = hash(key);
 
+        LLhashmap[index].addToHead(key, value);
 
+        size++;
 
+    }
+
+    public int getSize() {
+        return size;
+    }
+
+    public HMLinkedList[] getHashmap () {
+        return this.LLhashmap;
     }
 
 
