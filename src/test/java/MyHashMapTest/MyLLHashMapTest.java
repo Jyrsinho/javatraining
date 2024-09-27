@@ -46,9 +46,46 @@ public class MyLLHashMapTest {
     }
 
     @Test
-    public void testShouldGetValueFromHashmap() {
+    public void testShouldGetValueFromHashmapWithOneKeyValuePair() {
         hashMap.assign("testKey", "testValue");
         assertEquals("testValue" ,hashMap.getValue("testKey"));
+    }
+
+    @Test
+    public void testShouldGetValueFromHashmapWithMultipleKeyValuePairs() {
+        hashMap.assign("testKey", "testValue");
+        hashMap.assign("testKey2", "testValue2");
+        hashMap.assign("testKey3", "testValue3");
+        assertEquals("testValue3" ,hashMap.getValue("testKey3"));
+    }
+
+
+    @Test
+    public void testShouldGetValueFromLLHeadFromHashMapWithMultipleKeyValuePairsInSameIndex1() {
+        hashMap.assign("abc", "testValue1");
+        hashMap.assign("bac", "testValue2");
+        hashMap.assign("cba", "testValue3");
+        assertEquals("testValue3" ,hashMap.getValue("cba"));
+    }
+
+
+    @Test
+    public void testShouldGetValueFromLLTailFromHashMapWithMultipleKeyValuePairsInSameIndex1() {
+        hashMap.assign("abc", "testValue1");
+        hashMap.assign("bac", "testValue2");
+        hashMap.assign("cba", "testValue3");
+        assertEquals("testValue1" ,hashMap.getValue("abc"));
+
+    }
+
+
+    @Test
+    public void testShouldGetValueFromLLMiddleFromHashMapWithMultipleKeyValuePairsInSameIndex2() {
+        hashMap.assign("abc", "testValue1");
+        hashMap.assign("bac", "testValue2");
+        hashMap.assign("cba", "testValue3");
+        assertEquals("testValue1", hashMap.getValue("abc"));
+
     }
 
 

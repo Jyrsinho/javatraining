@@ -42,10 +42,17 @@ public class MyLLHashMap<T> {
     }
 
     public String getValue(String key) {
-        String value;
+        String value = "key not found";
         int index = hash(key);
 
-        value = this.LLhashmap[index].getHead().getValue();
+        MyHMNode currentNode = LLhashmap[index].getHead();
+        while (currentNode != null) {
+            if (currentNode.getKey().equals(key)) {
+                value = currentNode.getValue();
+            }
+            currentNode = currentNode.getNextNode();
+        }
+
         return value;
     }
 
