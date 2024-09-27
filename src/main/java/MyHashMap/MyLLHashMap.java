@@ -34,10 +34,23 @@ public class MyLLHashMap<T> {
      */
     public void assign(String key, String value) {
         int index = hash(key);
-
         LLhashmap[index].addToHead(key, value);
-
         size++;
+    }
+
+    public String remove(String key) {
+        String value = "No such key in hashmpap";
+        int index = hash(key);
+
+        MyHMNode currentNode = LLhashmap[index].getHead();
+        while (currentNode != null) {
+            if (currentNode.getKey().equals(key)) {
+                value = currentNode.getValue();
+            }
+            currentNode = currentNode.getNextNode();
+        }
+        size--;
+        return value;
 
     }
 

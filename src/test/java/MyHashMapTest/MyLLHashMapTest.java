@@ -95,6 +95,22 @@ public class MyLLHashMapTest {
         assertEquals("No such key in hashmap", hashMap.getValue("testKey4"));
     }
 
+    @Test
+    public void testShouldReturnRemovedValueFromHashmapWhenRemovingValuesFromHashmap() {
+        hashMap.assign("testKey", "testValue");
+        assertEquals("testValue", hashMap.remove("testKey"));
+    }
+
+    @Test
+    public void testShouldDiminishTheSizeOfHashmapWhenRemovingValueFromHashmap() {
+        hashMap.assign("testKey", "testValue");
+        hashMap.assign("testKey2", "testValue2");
+        hashMap.remove("testKey");
+        assertEquals(1, hashMap.getSize());
+    }
+
+    //TODO: Test are we breaking the integrity of the list when removing values from the middle of the linkedlist.
+
 
     // This should count the number of LinkedLists within a hashmap array that have a value
     public int getAmountOfElements(HMLinkedList[] hashMap) {
