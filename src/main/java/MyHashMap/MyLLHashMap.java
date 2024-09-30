@@ -54,8 +54,7 @@ public class MyLLHashMap<T> {
                 }
             }
         }
-
-
+        this.LLhashmap = newHashmap.getHashmap();
     }
 
 
