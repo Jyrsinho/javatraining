@@ -43,6 +43,18 @@ public class MyLLHashMap<T> {
     }
 
     public void growHashMap() {
+        MyLLHashMap<String> newHashmap = new MyLLHashMap<String>(size * 2 );
+        newHashmap.fillHashMapWithEmptyLinkedLists();
+        for (int i = 0; i < LLhashmap.length; i++) {
+            if (LLhashmap[i] != null) {
+                MyHMNode currenNode = LLhashmap[i].getHead();
+                while (currenNode != null) {
+                    newHashmap.assign(currenNode.getKey(), currenNode.getValue());
+                    currenNode = currenNode.getNextNode();
+                }
+            }
+        }
+
 
     }
 
