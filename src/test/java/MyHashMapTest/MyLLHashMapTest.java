@@ -129,6 +129,16 @@ public class MyLLHashMapTest {
         assertEquals("testValue2" ,hashMap.getValue("testKey2"));
     }
 
+    @Test
+    public void testShouldReturnFinalValueInSameLinkedListWhenRemovingFirsValueKeyValuePair() {
+            hashMap.assign("abc", "testValue1");
+            hashMap.assign("bac", "testValue2");
+            hashMap.assign("cba", "testValue3");
+            hashMap.remove("abc");
+            assertEquals("testValue3", hashMap.getValue("cba"));
+        }
+
+
     //TODO: Test are we breaking the integrity of the list when removing values from the middle of the linkedlist.
 
 
