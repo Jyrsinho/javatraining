@@ -39,13 +39,6 @@ public class MyLLHashMapTest {
     }
 
     @Test
-    public void testShouldAssignValuesToHashmapWithSameHashValues() {
-        hashMap.assign("testKey", "testValue");
-        hashMap.assign("testKey", "testValue");
-        assertEquals(2, getAmountOfElements(hashMap.getHashmap()));
-    }
-
-    @Test
     public void testShouldGetValueFromHashmapWithOneKeyValuePair() {
         hashMap.assign("testKey", "testValue");
         assertEquals("testValue" ,hashMap.getValue("testKey"));

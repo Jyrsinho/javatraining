@@ -37,16 +37,24 @@ public class MyLLHashMap<T> {
         HMLinkedList list = LLhashmap[index];
 
         MyHMNode currentNode = list.getHead();
+        if (currentNode == null) {
+            list.addToHead(key, value);
+            size++;
+        }
         while (currentNode != null) {
             if (currentNode.getKey().equals(key)) {
                 currentNode.setKeyValue(key, value);
                 break;
             }
+            if (currentNode.getNextNode() == null) {
+                currentNode.setNextNode(new MyHMNode(key, value));
+                size++;
+                break;
+            }
             currentNode = currentNode.getNextNode();
         }
-        list.addToTail(key, value);
 
-        size++;
+
         if ( size / (double) LLhashmap.length > LOAD_FACTOR) {
             growHashMap();
         }
