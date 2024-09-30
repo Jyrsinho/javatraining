@@ -138,6 +138,13 @@ public class MyLLHashMapTest {
             assertEquals("testValue3", hashMap.getValue("cba"));
         }
 
+    @Test
+    public void testShouldAssingNewValueForKey() {
+        hashMap.assign("testKey", "testValue");
+        hashMap.assign("testKey", "testValue2");
+        assertEquals("testValue2" ,hashMap.getValue("testKey"));
+    }
+
 
     //TODO: Test are we breaking the integrity of the list when removing values from the middle of the linkedlist.
 
