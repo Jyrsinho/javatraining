@@ -109,6 +109,15 @@ public class MyLLHashMapTest {
         assertEquals(1, hashMap.getSize());
     }
 
+    @Test
+    public void testShouldGrowTheHashMapWhenLoadFactorBoundaryHasBeenCrossed() {
+        MyLLHashMap<String> hashMap = new MyLLHashMap<String>(3);
+        hashMap.assign("testKey", "testValue");
+        hashMap.assign("testKey2", "testValue2");
+        hashMap.assign("testKey3", "testValue3");
+        assertEquals(6, hashMap.getHashmap().length);
+    }
+
     //TODO: Test are we breaking the integrity of the list when removing values from the middle of the linkedlist.
 
 

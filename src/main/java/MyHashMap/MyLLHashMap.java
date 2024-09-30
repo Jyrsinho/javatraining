@@ -36,7 +36,17 @@ public class MyLLHashMap<T> {
         int index = hash(key);
         LLhashmap[index].addToHead(key, value);
         size++;
+
+        if ( size / (double) LLhashmap.length > LOAD_FACTOR) {
+            growHashMap();
+        }
     }
+
+    public void growHashMap() {
+
+    }
+
+
 
     public String remove(String key) {
         String value = "No such key in hashmpap";
