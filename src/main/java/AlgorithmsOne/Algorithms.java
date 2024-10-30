@@ -40,11 +40,57 @@ public class Algorithms {
     public static boolean twoOfTheSame(String s) {
         int n = s.length();
         if (n < 2) return false;
-
         int a = 0;
         int b = 1;
 
-        return true;
+        while (b < n) {
+            if (s.charAt(a) == s.charAt(b)) {
+                return true;
+            }
+            a++;
+            b++;
+        }
+        return false;
     }
+
+    /*
+
+    0. Jos taulukon alkioiden määrä on 0. Palautetaan -1.
+    1. Lasketaan kaikki taulukon alkiot yhteen
+    2. Jaetaan taulukon alkioiden summa alkioiden määrällä ja tallennetaan se muuttujaan avg
+    3. Alustetaan muuttuja amountOfLargerElements nollaksi.
+    4. Verrataan jokaista taulukon alkiota yksi kerrallaan muuttujaan avg.
+        4.1 jos verrattava alkio on suurempi kuin avg lisätään muuttujan amountOfLargerElements arvoa yhdellä
+    5. palautetaan amountOfLargerElements
+
+    Suoritusaika kasvaa lineaarisesti. Jokainen alkio lisää taulukossa tuo yhden operaation lisää kun lasketaan
+    taulukon alkioiden summaa. Samoin jokainen lisätty alkio tuo yhden vertailuoperaation lisää askeleeseen 4.
+
+     */
+
+    public static int largerThanAvg(int[] t) {
+        if (t.length == 0) return -1;
+        int sum = 0;
+        int avg = 0;
+        int amountOfLargerElements = 0;
+
+        for (int element : t) {
+            sum += element;
+        }
+
+        avg = sum / t.length;
+
+        for (int element : t) {
+            if (element > avg) {
+                amountOfLargerElements++;
+            }
+        }
+
+        return amountOfLargerElements;
+    }
+
+
+
+
 
 }

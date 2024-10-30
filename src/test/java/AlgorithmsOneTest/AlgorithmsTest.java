@@ -2,8 +2,7 @@ package AlgorithmsOneTest;
 
 import org.junit.jupiter.api.Test;
 
-import static AlgorithmsOne.Algorithms.modulo;
-import static AlgorithmsOne.Algorithms.twoOfTheSame;
+import static AlgorithmsOne.Algorithms.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class AlgorithmsTest {
@@ -70,4 +69,45 @@ public class AlgorithmsTest {
         assertEquals(twoOfTheSame(s), expected);
     }
 
+    @Test
+    public void testTwoOfTheSameShouldReturnFalseForABC() {
+        String s = "abc";
+        boolean expected = false;
+        assertEquals(twoOfTheSame(s), expected);
+    }
+
+    @Test
+    public void testTwoOfTheSameShouldReturnTrueForABDD() {
+        String s = "abdd";
+        boolean expected = true;
+        assertEquals(twoOfTheSame(s), expected);
+    }
+
+    @Test
+    public void testLargerThanAvgShouldReturnNegativeOneForEmptyArray() {
+        int[] t = {};
+        int expected = -1;
+        assertEquals(largerThanAvg(t), expected);
+    }
+
+    @Test
+    public void testLargerThanAvgShouldReturnZeroForArrayWithOneElement() {
+        int[] t = {1};
+        int expected = 0;
+        assertEquals(largerThanAvg(t), expected);
+    }
+
+    @Test
+    public void testLargerThanAvgShouldReturnOneForArrayWithTwoElements() {
+        int[] t = {1, 2};
+        int expected = 1;
+        assertEquals(largerThanAvg(t), expected);
+    }
+
+    @Test
+    public void testLargerThanAvgShouldReturnTwo(){
+        int[] t = {1, 2, 3, 5, 5};
+        int expected = 2;
+        assertEquals(largerThanAvg(t), expected);
+    }
 }
