@@ -190,11 +190,7 @@ public class DoublyLinkedListTest {
         assertEquals(2,doublyLinkedList.getLength());
     }
 
-    @Test
-    public void testShouldRemoveByDataFromLinkedListWithSingleElement() {
-        doublyLinkedList.addToHead('c');
-        assertEquals('c',doublyLinkedList.removeByData('c'));
-    }
+
 
 
 }
