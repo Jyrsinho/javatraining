@@ -90,6 +90,24 @@ public class Algorithms {
     }
 
 
+    /*
+        (b) Taulukossa on lukuja suuruusjärjestyksessä (samansuuruiset luvut peräkkäin).
+        Suunnittele algoritmi, joka pakkaa taulukon siten, että kutakin eri lukua jää
+        taulukkoon vain yksi kappale. Arvioi, miten suoritusaika riippuu taulukon koosta.
+
+        1. otetaan taulukko t, joka sisältää kokonaislukuja suuruusjärjestyksessä
+        2. asetetaan muuttujan i arvoksi 0 ja muuttujan j arvoksi 1
+        3, niin kauan kuin muuttujan j arvo on vähemmän kuin taulukon t alkioiden määrä:
+            3.1 jos taulukon t indeksissä i oleva luku on sama kuin taulukon t indeksissä j oleva luku:
+                3.1.1 poistetaan taulukon t indeksissä i oleva luku taulukosta.
+            3.2 kasvatetaan muuttujien i ja j arvoa yhdellä.
+        4. palautetaan taulukko t.
+     */
+
+    public static int [] compressIntArray(int[] t) {
+
+        return t;
+    }
 
 
 

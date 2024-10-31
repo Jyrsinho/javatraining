@@ -110,4 +110,11 @@ public class AlgorithmsTest {
         int expected = 2;
         assertEquals(largerThanAvg(t), expected);
     }
+
+    @Test
+    public void testShouldReturSameArrayWhenItContainsNoDuplicates() {
+        int [] t = {1, 2, 3, 5,};
+        int[] expected = t;
+        assertEquals(compressIntArray(t), expected);
+    }
 }
