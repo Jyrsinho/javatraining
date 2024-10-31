@@ -2,6 +2,9 @@ package AlgorithmsOneTest;
 
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+
 import static AlgorithmsOne.Algorithms.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -112,9 +115,23 @@ public class AlgorithmsTest {
     }
 
     @Test
-    public void testShouldReturSameArrayWhenItContainsNoDuplicates() {
+    public void testShouldReturSameArrayAsArrayListWhenItContainsNoDuplicates() {
         int [] t = {1, 2, 3, 5,};
-        int[] expected = t;
+        ArrayList<Integer> expected = new ArrayList<>(Arrays.asList(1,2,3,5));
+        assertEquals(expected, compressIntArray(t));
+    }
+
+    @Test
+    public void testShouldRemoveOneDuplicate() {
+        int [] t = {1,1};
+        ArrayList<Integer> expected = new ArrayList<>(Arrays.asList(1));
+        assertEquals(compressIntArray(t), expected);
+    }
+
+    @Test
+    public void testShouldRemoveManyDuplicates() {
+        int[] t = {1, 1, 1, 1, 1};
+        ArrayList<Integer> expected = new ArrayList<>(Arrays.asList(1));
         assertEquals(compressIntArray(t), expected);
     }
 }

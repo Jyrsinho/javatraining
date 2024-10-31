@@ -1,5 +1,7 @@
 package AlgorithmsOne;
 
+import java.util.ArrayList;
+
 public class Algorithms {
 
 
@@ -95,18 +97,42 @@ public class Algorithms {
         Suunnittele algoritmi, joka pakkaa taulukon siten, että kutakin eri lukua jää
         taulukkoon vain yksi kappale. Arvioi, miten suoritusaika riippuu taulukon koosta.
 
-        1. otetaan taulukko t, joka sisältää kokonaislukuja suuruusjärjestyksessä
-        2. asetetaan muuttujan i arvoksi 0 ja muuttujan j arvoksi 1
-        3, niin kauan kuin muuttujan j arvo on vähemmän kuin taulukon t alkioiden määrä:
-            3.1 jos taulukon t indeksissä i oleva luku on sama kuin taulukon t indeksissä j oleva luku:
-                3.1.1 poistetaan taulukon t indeksissä i oleva luku taulukosta.
-            3.2 kasvatetaan muuttujien i ja j arvoa yhdellä.
-        4. palautetaan taulukko t.
+       1. Otetaan taulukko tVanha, joka sisältää suuruusjärjestykseen järjestettyjä kokonaislukuja.
+       2. Luodaan uusi taulukko tUusi.
+       3. Asetetaan taulukon tVanha ensimmäinen alkio taulukon tUusi ensimmäiseksi alkioksi.
+       4. Luodaan muuttuja i ja asetetaan sen arvoksi 0.
+       5. Luodaan muuttuja j ja asetetaan sen arvoksi 1.
+       6. Niin kauan kuin j on vähemmän kuin taulukon t1 alkioiden määrä:
+            6.1 Jos taulukon tVanha indeksissä j on eri arvo kuin taulukon tUusi indeksissä i:
+                6.1.1 Lisätään arvo taulukon tVanha indeksistä j taulukon tUusi indeksiin i+1
+                6.1.2 Lisätään muuttujien i ja j arvoa yhdellä.
+            6.2 Jos taulukon tVanha indeksissä j on sama arvo kuin taulukon tUusi indeksissä i:
+                6.2.1 Lisätään muuttujan j arvoa yhdellä.
+        7. Palautetaan taulukko tUusi.
+
+        Algoritmin suoritusaika kasvaa lineaarisesti alkioiden lisääntyessä. Jokainen uusi alkio tuo yhden vertailuoperaation
+        lisää algoritmiin.
      */
+    public static ArrayList<Integer> compressIntArray(int [] t) {
 
-    public static int [] compressIntArray(int[] t) {
+        ArrayList<Integer> arrayNew = new ArrayList<>();
+        arrayNew.add(t[0]);
+        int i = 0;
+        int j = 1;
 
-        return t;
+        while (j < t.length) {
+            if (t[j] != arrayNew.get(i)) {
+                arrayNew.add(t[j]);
+                i++;
+                j++;
+            }
+            else {
+                j++;
+            }
+        }
+
+        return arrayNew;
+
     }
 
 
