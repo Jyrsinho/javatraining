@@ -18,13 +18,13 @@ public class Algorithms {
             return -1;
         }
         while (a >= b) {
-            a = a-b;
+            a = a - b;
         }
         return a;
     }
 
 
-   // algoritmi, joka tutkii, onko merkkijonossa jossain kohtaa kaksi samaa merkkiä peräkkäin.
+    // algoritmi, joka tutkii, onko merkkijonossa jossain kohtaa kaksi samaa merkkiä peräkkäin.
     /*
         1. otetaan merkkijono s
         2. asetetaan muuttuja n merkitsemään merkkien kokonaismäärää merkkijonossa s.
@@ -113,7 +113,7 @@ public class Algorithms {
         Algoritmin suoritusaika kasvaa lineaarisesti alkioiden lisääntyessä. Jokainen uusi alkio tuo yhden vertailuoperaation
         lisää algoritmiin.
      */
-    public static ArrayList<Integer> compressIntArray(int [] t) {
+    public static ArrayList<Integer> compressIntArray(int[] t) {
 
         ArrayList<Integer> arrayNew = new ArrayList<>();
         arrayNew.add(t[0]);
@@ -125,8 +125,7 @@ public class Algorithms {
                 arrayNew.add(t[j]);
                 i++;
                 j++;
-            }
-            else {
+            } else {
                 j++;
             }
         }
@@ -136,5 +135,18 @@ public class Algorithms {
     }
 
 
+    public static int laskeSummaRekursiivisesti(int[] t, int n) {
+
+        if (n <= 1) return t[0];
+        else return t[n-1] + laskeSummaRekursiivisesti(t, n - 1);
+
+    }
+
+
+    public static int etsiSuurinRekursiivisesti(int[] t, int n) {
+
+        return 5;
+    }
 
 }
+

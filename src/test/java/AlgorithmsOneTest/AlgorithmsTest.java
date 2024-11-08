@@ -134,4 +134,53 @@ public class AlgorithmsTest {
         ArrayList<Integer> expected = new ArrayList<>(Arrays.asList(1));
         assertEquals(compressIntArray(t), expected);
     }
+
+    @Test
+    public void testShouldRemoveManyDifferentDuplicates() {
+        int[] t = {1, 1, 1, 1, 1, 2, 2, 2, 2,3,3};
+        ArrayList<Integer> expected = new ArrayList<>(Arrays.asList(1,2,3));
+        assertEquals(compressIntArray(t), expected);
+    }
+
+    @Test
+    public void testRecursiveSumShouldReturnThreeForArrayWithNumberThree() {
+        int [] t = {3};
+        int expected = 3;
+        assertEquals(expected, laskeSummaRekursiivisesti(t,1));
+    }
+
+    @Test
+    public void testRecursiveSumShouldReturnFourForArrayWithNumberFour() {
+        int [] t = {4};
+        int expected = 4;
+        assertEquals( expected, laskeSummaRekursiivisesti(t,1));
+    }
+
+    @Test
+    public void testRecursiveSumShouldReturnFourForArrayWithNumbersThreeAndOne() {
+        int [] t = {3, 1};
+        int expected = 4;
+        assertEquals(expected, laskeSummaRekursiivisesti(t,2));
+    }
+
+    @Test
+    public void testRecursiveSumShouldReturnTenForArrayWithNumbersThreeTwoAndFive() {
+        int [] t = {3, 2, 5};
+        int expected = 10;
+        assertEquals(expected, laskeSummaRekursiivisesti(t,3));
+    }
+
+    @Test
+    public void testRecursiveSumShouldReturnTenForArrayWithNumbersThreeTwoThreeAndTwo() {
+        int [] t = {3, 2, 3, 2 };
+        int expected = 10;
+        assertEquals(expected, laskeSummaRekursiivisesti(t,4));
+    }
+
+    @Test
+    public void testRecursiveBiggestiShouldReturnFiveFromArrayWithOnlyFive() {
+        int [] t = {5};
+        int expected = 5;
+        assertEquals(expected, etsiSuurinRekursiivisesti(t,5));
+    }
 }
