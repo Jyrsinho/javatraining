@@ -143,9 +143,26 @@ public class Algorithms {
     }
 
 
+
     public static int etsiSuurinRekursiivisesti(int[] t, int n) {
 
-        return 5;
+        if (n == 1) return t[0];
+
+        else return Math.max(t[n-1], etsiSuurinRekursiivisesti(t, n - 1));
+
+
+    }
+
+    /*
+    Palautetaan parametrina annetun alkion indeksi.
+    Palautetaan -1 jos alkiota ei löydy.
+     */
+    public static int etsiAlkio(int[] t, int n, int alkio) {
+
+        if (n == 0) return -1;
+        if (t[n-1] == alkio) return n - 1;
+
+        else return etsiAlkio(t, n - 1, alkio);
     }
 
 }

@@ -181,6 +181,56 @@ public class AlgorithmsTest {
     public void testRecursiveBiggestiShouldReturnFiveFromArrayWithOnlyFive() {
         int [] t = {5};
         int expected = 5;
-        assertEquals(expected, etsiSuurinRekursiivisesti(t,5));
+        assertEquals(expected, etsiSuurinRekursiivisesti(t,1));
+    }
+
+    @Test
+    public void testRecursiveBiggestShouldReturnThreeFromArrayWithOnlyThree() {
+        int [] t = {3};
+        int expected = 3;
+        assertEquals(expected, etsiSuurinRekursiivisesti(t,1));
+    }
+
+    @Test
+    public void testRecursiveBiggestShouldReturnFourFromArrayWithFourThreeAndTwo() {
+        int [] t = {4, 3, 2};
+        int expected = 4;
+        assertEquals(expected, etsiSuurinRekursiivisesti(t,3));
+    }
+
+    @Test
+    public void testRecursiveBiggestShouldReturnSevenFromArrayOfTwoThreeAndSeven() {
+        int [] t = {2, 3, 7};
+        int expected = 7;
+        assertEquals(expected, etsiSuurinRekursiivisesti(t,3));
+    }
+
+    @Test
+    public void testEtsiAlkioShouldReturnNegativeOneForEmptyArray() {
+
+        int [] t = {};
+        int expected = -1;
+        assertEquals(expected, etsiAlkio(t, 0, 1));
+    }
+
+    @Test
+    public void testEtsiAlkioShouldReturnZeroForArrayWithOnlySearchedElement() {
+        int [] t = {1};
+        int expected = 0;
+        assertEquals(expected, etsiAlkio(t, 1, 1));
+    }
+
+    @Test
+    public void testEtsiAlkioShouldReturnTwoForArrayWithSearchedElementInIndexTwo() {
+        int [] t = {1, 2, 3};
+        int expected = 2;
+        assertEquals(expected, etsiAlkio(t, 3, 3));
+    }
+
+    @Test
+    public void testEtsiAlkioShouldReturnZeroForArrayWithMultipleElementsAndTargetInIndexZero() {
+        int [] t = {1,2,3};
+        int expected = 0;
+        assertEquals(expected, etsiAlkio(t, 3, 1));
     }
 }
