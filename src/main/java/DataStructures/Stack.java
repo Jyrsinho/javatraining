@@ -26,6 +26,7 @@ public class Stack<T> {
         }
         stack.addToHead(value);
         size += 1;
+
     }
 
     public T pop() {
@@ -43,6 +44,28 @@ public class Stack<T> {
         }
         return stack.getHead().getData();
     }
+
+
+    public boolean isThere(T value) {
+        boolean found = false;
+        Stack<T> helperStack = new Stack<>();
+
+        while (!this.isEmpty() ){
+            T candidate = pop();
+            helperStack.push(candidate);
+            if (candidate.equals(value)) {
+                found = true;
+                break;
+            }
+        }
+
+        while (!helperStack.isEmpty()) {
+            this.push(helperStack.pop());
+        }
+
+        return found;
+    }
+
 
     public int getSize() {
         return size;
