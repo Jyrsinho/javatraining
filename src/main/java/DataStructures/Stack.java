@@ -84,7 +84,6 @@ public class Stack<T> {
             this.push(helperStack2.pop());
         }
 
-
     }
 
 
@@ -99,4 +98,5 @@ public class Stack<T> {
     public boolean hasSpace() {
         return size < maxSize;
     }
+
 }

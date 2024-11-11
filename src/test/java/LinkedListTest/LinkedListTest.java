@@ -463,6 +463,16 @@ public class LinkedListTest {
         assertNull(linkedListChar.getMiddle());
     }
 
+    @Test
+    public void testShouldMoveFirstElementToLastElement() {
+        linkedListChar.addToHead('A');
+        linkedListChar.addToHead('B');
+        linkedListChar.addToHead('C');
+        linkedListChar.addToHead('D');
+        linkedListChar.firstToLast();
+
+        assertEquals(linkedListChar.getTail().getData(), 'D');
+    }
 
 
 

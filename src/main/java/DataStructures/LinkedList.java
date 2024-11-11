@@ -319,6 +319,11 @@ public class LinkedList<T> {
 
     }
 
+    public void firstToLast() {
+
+
+    }
+
 
     public Node<T> getHead() {
         return head;
