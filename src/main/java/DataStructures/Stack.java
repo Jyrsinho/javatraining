@@ -68,6 +68,23 @@ public class Stack<T> {
 
     public void rotate(int steps) {
 
+        // store the stack's top element to a variable
+        T rotated = this.pop();
+        Stack<T> helperStack2 = new Stack<>();
+
+
+        // push the following rotated elements to separate helper stack
+        for (int i = 0; i < steps; i++) {
+            helperStack2.push(this.pop());
+        }
+
+        this.push(rotated);
+
+        while (!helperStack2.isEmpty()) {
+            this.push(helperStack2.pop());
+        }
+
+
     }
 
 

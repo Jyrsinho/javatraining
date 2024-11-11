@@ -1,6 +1,7 @@
 package StackTest;
 
 import DataStructures.Stack;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.NoSuchElementException;
@@ -8,6 +9,18 @@ import java.util.NoSuchElementException;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class StackTest {
+
+    Stack<Character> abcdStack;
+
+    @BeforeEach
+    public void setUp() {
+        abcdStack = new Stack<>();
+        abcdStack.push('d');
+        abcdStack.push('c');
+        abcdStack.push('b');
+        abcdStack.push('a');
+
+    }
 
     @Test
     public void testShouldPushElementsToStack() {
@@ -95,15 +108,37 @@ public class StackTest {
 
     @Test
     public void testShouldRotateTheStacksTwoTopElements() {
-        Stack<String> stack = new Stack<>();
-        stack.push("D");
-        stack.push("C");
-        stack.push("B");
-        stack.push("A");
 
-        stack.rotate(1);
-        assertEquals("B", stack.pop());
-        assertEquals("A", stack.pop());
+        abcdStack.rotate(1);
+        assertEquals('b', abcdStack.pop());
+        assertEquals('a', abcdStack.pop());
+    }
 
+    @Test
+    public void testShouldRotateTheStacksThreeTopElements() {
+
+        abcdStack.rotate(2);
+        assertEquals('b', abcdStack.pop());
+        assertEquals('c', abcdStack.pop());
+        assertEquals('a', abcdStack.pop());
+
+    }
+
+    @Test
+    public void testShouldRotateTheStacksFourTopElements() {
+        abcdStack.rotate(3);
+        assertEquals('b', abcdStack.pop());
+        assertEquals('c', abcdStack.pop());
+        assertEquals('d', abcdStack.pop());
+        assertEquals('a', abcdStack.pop());
+    }
+
+    @Test
+    public void testShouldNotRotate() {
+        abcdStack.rotate(0);
+        assertEquals('a', abcdStack.pop());
+        assertEquals('b', abcdStack.pop());
+        assertEquals('c', abcdStack.pop());
+        assertEquals('d', abcdStack.pop());
     }
 }
