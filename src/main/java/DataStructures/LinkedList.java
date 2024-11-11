@@ -333,6 +333,28 @@ public class LinkedList<T> {
 
         currentNode.setNextNode(oldHead);
         oldHead.setNextNode(null);
+    }
+
+
+    public void lastToFirst() {
+
+        if (this.head.getNextNode() == null) return;
+
+        // store the Node next to the head
+        Node <T> nextToTheHead = this.head.getNextNode();
+
+        // find the tail and one before it
+        Node <T> newTail = this.head;
+        Node<T> oldTail = this.head.getNextNode();
+        while (oldTail.getNextNode() != null) {
+            newTail = newTail.getNextNode();
+            oldTail = oldTail.getNextNode();
+        }
+
+        // set the previous next to last Node as last node and set the old Tail as new Head.
+        newTail.setNextNode(null);
+        this.head = oldTail;
+        oldTail.setNextNode(nextToTheHead);
 
     }
 

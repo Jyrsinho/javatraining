@@ -491,6 +491,35 @@ public class LinkedListTest {
 
     }
 
+    @Test
+    public void testLastToFirstShouldMOveLastToFirst() {
+        linkedListChar.addToHead('C');
+        linkedListChar.addToHead('B');
+        linkedListChar.addToHead('A');
+
+        linkedListChar.lastToFirst();
+        assertEquals(linkedListChar.getHead().getData(), 'C');
+        assertEquals(linkedListChar.getTail().getData(), 'B');
+
+    }
+
+    @Test
+    public void testShouldSwapFirstAndLastWhenLLOnlyHasTwoElements() {
+        linkedListChar.addToHead('B');
+        linkedListChar.addToHead('A');
+
+        linkedListChar.lastToFirst();
+        assertEquals(linkedListChar.getHead().getData(), 'B');
+
+    }
+
+    @Test
+    public void testLastToFistShouldDoNothingIfLLWithOneElement() {
+        linkedListChar.addToHead('A');
+        linkedListChar.lastToFirst();
+        assertEquals(linkedListChar.getHead().getData(), 'A');
+    }
+
 
 
 
