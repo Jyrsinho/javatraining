@@ -474,6 +474,23 @@ public class LinkedListTest {
         assertEquals(linkedListChar.getTail().getData(), 'D');
     }
 
+    @Test
+    public void testFirstToLastShouldDoNothingIfFirstElementIsAlreadyLast() {
+        linkedListChar.addToHead('A');
+        linkedListChar.firstToLast();
+        assertEquals(linkedListChar.getTail().getData(), 'A');
+    }
+
+    @Test
+    public void testFirsToLastShouldChangeThePositionsWithLinkedListWithTwoElements() {
+        linkedListChar.addToHead('B');
+        linkedListChar.addToHead('A');
+
+        linkedListChar.firstToLast();
+        assertEquals(linkedListChar.getTail().getData(), 'A');
+
+    }
+
 
 
 

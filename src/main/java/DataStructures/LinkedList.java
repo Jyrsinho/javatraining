@@ -320,7 +320,19 @@ public class LinkedList<T> {
     }
 
     public void firstToLast() {
+        Node <T> oldHead = this.head;
 
+        if (this.head.getNextNode() != null) {
+            this.head = this.head.getNextNode();
+        }
+        Node<T> currentNode = this.head;
+
+        while (currentNode.getNextNode() != null) {
+            currentNode = currentNode.getNextNode();
+        }
+
+        currentNode.setNextNode(oldHead);
+        oldHead.setNextNode(null);
 
     }
 
