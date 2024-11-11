@@ -92,4 +92,18 @@ public class StackTest {
         assertEquals(3, stack.peek());
 
     }
+
+    @Test
+    public void testShouldRotateTheStacksTwoTopElements() {
+        Stack<String> stack = new Stack<>();
+        stack.push("D");
+        stack.push("C");
+        stack.push("B");
+        stack.push("A");
+
+        stack.rotate(1);
+        assertEquals("B", stack.pop());
+        assertEquals("A", stack.pop());
+
+    }
 }

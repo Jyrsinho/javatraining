@@ -233,4 +233,5 @@ public class AlgorithmsTest {
         int expected = 0;
         assertEquals(expected, etsiAlkio(t, 3, 1));
     }
+
 }

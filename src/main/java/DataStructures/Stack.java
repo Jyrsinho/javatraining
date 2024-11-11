@@ -66,6 +66,10 @@ public class Stack<T> {
         return found;
     }
 
+    public void rotate(int steps) {
+
+    }
+
 
     public int getSize() {
         return size;
