@@ -4,9 +4,21 @@ public class ArrayAnalyzer {
 
     private final int[]t;
 
+
+
+    public ArrayAnalyzer() {
+        this.t = new int[10];
+    }
+
+    /**
+     * Constructor that gets the array to be analyzed as a parameter
+     * @param t array to be analyzed
+     */
     public ArrayAnalyzer(int[]t ) {
         this.t = t;
     }
+
+
 
 
     /**
@@ -25,7 +37,6 @@ public class ArrayAnalyzer {
 
         return histogram;
     }
-
 
 
 
@@ -65,5 +76,11 @@ public class ArrayAnalyzer {
         }
 
         return index;
+    }
+
+
+    public static void main(String[] args) {
+
+
     }
 }
