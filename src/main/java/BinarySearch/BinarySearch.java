@@ -1,9 +1,16 @@
-package BinarySearch;
 
+
+package BinarySearch;
 import java.util.Arrays;
 import java.util.Random;
 
 
+/**
+ * Class for exercising binarysearch
+ * @author Jyri Huhtala
+ * @version 1.0
+ * @since 2024-11-18
+ */
 public class BinarySearch {
 
 
@@ -41,7 +48,8 @@ public class BinarySearch {
      *
      * @param t array to be searched
      * @return Result object that contains the index of the searched integer and
-     * the amount of comparisons.
+     * the amount of comparisons. If the array does not contain the target. Result object
+     * returns a negative value for index.
      */
     public  Result binarySearch(int[] t, int target) {
         // Create new Result object to store the index of the searched integer and the number of comparisons
@@ -87,11 +95,11 @@ public class BinarySearch {
     }
 
     /**
-     * Metodi, joka luo satunnaisia kokonaislukuja sisältävän taulukon
-     * @param size Taulukon koko
-     * @param min Pienin mahdollinen arvo
-     * @param max Suurin mahdollinen arvo
-     * @return Taulukko, joka sisältää satunnaisia kokonaislukuja
+     * Mathod that creates an array containing random integers.
+     * @param size of the array
+     * @param min smallest possible value
+     * @param max largest possible value
+     * @return array that contains random itegers
      */
     public static int[] generateSortedRandomArray(int size, int min, int max) {
         Random random = new Random();
@@ -116,14 +124,6 @@ public class BinarySearch {
 
     public static void main(String[] args) {
 
-        /*
-        Luo satunnaisia kokonaislukuja sisältävä taulukko (esim. Random-luokan metodeilla) ja järjestä se käyttäen
-        jotakin valmista järjestysrutiinia (esim. Array.Sort). Generoitavat kokonaisluvut kannattaa valita joltakin
-        suhteellisen suppealta väliltä, esim. 0-50.
-Testeissä kannattaa käyttää sekä pieniä että suuria taulukoita. Pienet (noin 10 alkiota) voi tulostaa näytölle.
-Suurista taulukoista (esim 100 alkioita) kannattaa tulostaa vain esim. taulukon koko.
-Testitulostuksiin tuloksena tieto haettavan alkion löytymisestä ja vertailuoperaatioiden lukumäärä.
-         */
 
         BinarySearch binarySearch = new BinarySearch();
         System.out.println("Luodaan 10-alkioinen satunnainen järjestetty taulukko nollasta kymmeneen:");
@@ -134,6 +134,22 @@ Testitulostuksiin tuloksena tieto haettavan alkion löytymisestä ja vertailuope
         Result result = binarySearch.binarySearch(randomArray, 2);
         System.out.println("Luku 2 löytyi taulukosta indexistä:" +result.getIndex() + " Hakuun käytettiin " + result.getNumberOfComparisons() + " vertailua.");
 
+        System.out.println();
+
+        System.out.println("Luodaan 100 alkioinen satunnainen järjestetty taulukko nollasta sataan.");;
+        randomArray = generateSortedRandomArray(100, 0, 100);
+        System.out.println("Taulukon koko on: " +randomArray.length);
+        System.out.println("Etsitään taulukosta lukua 2");
+        result = binarySearch.binarySearch(randomArray, 2);
+        System.out.println("Luku 2 löytyi taulukosta indexistä:" +result.getIndex() + " Hakuun käytettiin " + result.getNumberOfComparisons() + " vertailua.");
+
+        System.out.println();
+        System.out.println("Luodaan 10 000 alkioinen satunnainen järjestetty taulukko nollasta 10 000:een.");;
+        randomArray = generateSortedRandomArray(10000, 0, 10000);
+        System.out.println("Taulukon koko on: " +randomArray.length);
+        System.out.println("Etsitään taulukosta lukua 2");
+        result = binarySearch.binarySearch(randomArray, 2);
+        System.out.println("Luku 2 löytyi taulukosta indexistä:" +result.getIndex() + " Hakuun käytettiin " + result.getNumberOfComparisons() + " vertailua.");
 
     }
 
