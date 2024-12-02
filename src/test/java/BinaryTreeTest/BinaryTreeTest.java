@@ -32,11 +32,31 @@ public BinaryTree binaryTree;
     }
 
     @Test
+    public void testShouldAddNodeSameSizeASRootToTreesLeftBranch() {
+        binaryTree.addNode(5);
+        binaryTree.addNode(5);
+        TreeNode leftNode = binaryTree.root.left;
+        assertEquals(5 , leftNode.key);
+    }
+
+    @Test
     public void testShouldAddNodeBiggerThanRootToTreesRightBranch() {
         binaryTree.addNode(5);
         binaryTree.addNode(8);
         TreeNode rightNode = binaryTree.root.right;
         assertEquals(8 , rightNode.key);
+    }
+
+    @Test
+    public void testShouldAdTwoNodesSmallerThanRootToTheLeftBranch() {
+        binaryTree.addNode(5);
+        binaryTree.addNode(3);
+        binaryTree.addNode(2);
+        TreeNode leftNode = binaryTree.root.left;
+        TreeNode leftMostNode = binaryTree.root.left.left;
+
+        assertEquals(3, leftNode.key);
+        assertEquals(2 , leftMostNode.key);
     }
 
 

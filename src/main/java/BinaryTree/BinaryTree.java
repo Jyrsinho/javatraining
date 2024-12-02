@@ -15,12 +15,34 @@ public class BinaryTree {
         if (root == null) {
             root = new TreeNode(key);
         }
-        if (key < root.key) {
-            root.left = new TreeNode(key);
+        else {
+            addHelper(key, root);
         }
-        if (key > root.key) {
-            root.right = new TreeNode(key);
+    }
+
+    /**
+     * Helper function to recursively travel the BinaryTree to a place where new TreeNode should be added.
+     * @param key keyvalue of the TreeNode to be added
+     * @param root comparable TreeNode
+     */
+    public void addHelper(int key, TreeNode root) {
+        if (key <= root.key) {
+            if (root.left == null) {
+                root.left = new TreeNode(key);
+            }
+            else {
+                addHelper(key, root.left);
+            }
+        }else if (key > root.key) {
+            if (root.right == null) {
+                root.right = new TreeNode(key);
+            }
+            else {
+                addHelper(key, root.right);
+            }
         }
+
+
     }
 
     /**
