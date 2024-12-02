@@ -71,8 +71,9 @@ public class BinaryTree {
      * @return ArrayList with values of the BinaryTree in Order
      */
     public ArrayList<Integer> getInOrderArray() {
+        // create an arraylist to store the key values of the Binary Tree's Nodes
         ArrayList<Integer> inOrderList = new ArrayList<>();
-
+        // calls helper function to recursively go through the BinaryTree in Order.
         inOrderHelper(root, inOrderList);
 
         return inOrderList;
@@ -87,12 +88,15 @@ public class BinaryTree {
      * @param inOrderList the list to which the node's key is added
      */
     public void inOrderHelper(TreeNode node, ArrayList<Integer> inOrderList) {
+        // move left in the BinaryTree until we find the leftmost Node
         if (node.left != null) {
             inOrderHelper(node.left, inOrderList);
         }
 
+        // Add Node's key value to the arraylist
         inOrderList.add(node.key);
 
+        // move right in the BinaryTree until we find the rightmost Node
         if (node.right != null) {
             inOrderHelper(node.right, inOrderList);
         }

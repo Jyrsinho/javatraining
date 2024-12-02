@@ -14,9 +14,23 @@ public class BinaryTreeTest {
 
 public BinaryTree binaryTree;
 
+public BinaryTree binaryTree10;
+
     @BeforeEach
     public void setUp() {
         binaryTree = new BinaryTree();
+        binaryTree10 = new BinaryTree();
+
+        binaryTree10.addNode(5);
+        binaryTree10.addNode(2);
+        binaryTree10.addNode(7);
+        binaryTree10.addNode(3);
+        binaryTree10.addNode(6);
+        binaryTree10.addNode(4);
+        binaryTree10.addNode(8);
+        binaryTree10.addNode(9);
+        binaryTree10.addNode(1);
+
     }
 
     @Test
@@ -87,6 +101,13 @@ public BinaryTree binaryTree;
 
         ArrayList<Integer> testInOrder = binaryTree.getInOrderArray();
         assertArrayEquals(new Integer[]{2,3,5}, testInOrder.toArray());
+    }
+
+    @Test
+    public void testShouldReturnInOrderArrayOfTenNodesAddedInRandomOrder() {
+        ArrayList<Integer> testInOrder = binaryTree10.getInOrderArray();
+        assertArrayEquals(new Integer[]{1,2,3,4,5,6,7,8,9}, testInOrder.toArray());
+
     }
 
 
