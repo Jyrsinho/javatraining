@@ -15,9 +15,13 @@ public class BinaryTreeTest {
 public BinaryTree binaryTree;
 public BinaryTree duplicateTree;
 public BinaryTree binaryTree10;
+public ArrayList<Integer> testList;
 
     @BeforeEach
     public void setUp() {
+
+        testList = new ArrayList<>();
+
         binaryTree = new BinaryTree();
         binaryTree10 = new BinaryTree();
         duplicateTree = new BinaryTree();
@@ -97,7 +101,7 @@ public BinaryTree binaryTree10;
     @Test
     public void testgetInOrderArrayShouldReturnOnlyNodeOfTreeAsAnArray() {
         binaryTree.addNode(5);
-        ArrayList<Integer> testInOrder = binaryTree.getInOrderArray();
+        ArrayList<Integer> testInOrder = binaryTree.getInOrderList();
         assertArrayEquals(new Integer[]{5}, testInOrder.toArray());
     }
 
@@ -107,44 +111,63 @@ public BinaryTree binaryTree10;
         binaryTree.addNode(3);
         binaryTree.addNode(2);
 
-        ArrayList<Integer> testInOrder = binaryTree.getInOrderArray();
-        assertArrayEquals(new Integer[]{2,3,5}, testInOrder.toArray());
+        testList = binaryTree.getInOrderList();
+        assertArrayEquals(new Integer[]{2,3,5}, testList.toArray());
     }
 
     @Test
     public void testgetInOrderArrayShouldReturnInOrderArrayOfTenNodesAddedInRandomOrder() {
-        ArrayList<Integer> testInOrder = binaryTree10.getInOrderArray();
-        assertArrayEquals(new Integer[]{1,2,3,4,5,6,7,8,9}, testInOrder.toArray());
+        testList = binaryTree10.getInOrderList();
+        assertArrayEquals(new Integer[]{1,2,3,4,5,6,7,8,9}, testList.toArray());
 
     }
 
     @Test
     public void testgetInOrderArrayShouldReturnInOrderArrayOfFromBinaryTreeWithDuplicates() {
 
-        ArrayList<Integer> testInOrder = duplicateTree.getInOrderArray();
-        assertArrayEquals(new Integer[]{2,3,3,5,5}, testInOrder.toArray());
+        testList = duplicateTree.getInOrderList();
+        assertArrayEquals(new Integer[]{2,3,3,5,5}, testList.toArray());
 
     }
 
     @Test
     public void testgetPreOrderArrayShouldReturnOnlyNodeOfTreeAsAnArray() {
         binaryTree.addNode(5);
-        ArrayList<Integer> testPreOrder = binaryTree.getPreOrderArray();
-        assertArrayEquals(new Integer[]{5}, testPreOrder.toArray());
+        testList = binaryTree.getPreOrderList();
+        assertArrayEquals(new Integer[]{5}, testList.toArray());
     }
 
 
     @Test
     public void testgetPreOrderArrayShouldReturnPreOrderArrayOfTenNodesAddedInRandomOrder() {
-        ArrayList<Integer> testInOrder = binaryTree10.getPreOrderArray();
-        assertArrayEquals(new Integer[]{5,2,1,3,4,7,6,8,9}, testInOrder.toArray());
+        testList = binaryTree10.getPreOrderList();
+        assertArrayEquals(new Integer[]{5,2,1,3,4,7,6,8,9}, testList.toArray());
 
     }
 
     @Test
     public void testGetPreOrderArrayShouldReturnPreOrderArrayOfFromBinaryTreeWithDuplicates() {
-        ArrayList<Integer> testInOrder = duplicateTree.getPreOrderArray();
-        assertArrayEquals(new Integer[]{5,3,2,3,5}, testInOrder.toArray());
+        testList = duplicateTree.getPreOrderList();
+        assertArrayEquals(new Integer[]{5,3,2,3,5}, testList.toArray());
+    }
+
+    @Test
+    public void gestGetPostOrderArrayShouldReturnOnlyNodeOfTreeAsAnArray() {
+        binaryTree.addNode(5);
+        testList = binaryTree.getPostOrderList();
+        assertArrayEquals(new Integer[]{5}, testList.toArray());
+    }
+
+    @Test
+    public void testgetPostOrderArrayShouldReturnPostOrderArrayOfTenNodesAddedInRandomOrder() {
+        testList = binaryTree10.getPostOrderList();
+        assertArrayEquals(new Integer[]{1, 4, 3, 2, 6, 9, 8, 7, 5}, testList.toArray());
+    }
+
+    @Test
+    public void testGetPostOrderArrayShouldReturnPostOrderArrayOfFromBinaryTreeWithDuplicates() {
+        testList = duplicateTree.getPostOrderList();
+        assertArrayEquals(new Integer[]{3,2,5,3,5}, testList.toArray());
     }
 
 

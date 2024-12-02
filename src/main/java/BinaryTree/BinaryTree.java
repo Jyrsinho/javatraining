@@ -70,7 +70,7 @@ public class BinaryTree {
      * Returns an ArrayList with values of the BinaryTree in Order
      * @return ArrayList with values of the BinaryTree in Order
      */
-    public ArrayList<Integer> getInOrderArray() {
+    public ArrayList<Integer> getInOrderList() {
         // create an arraylist to store the key values of the Binary Tree's Nodes
         ArrayList<Integer> inOrderList = new ArrayList<>();
         // calls helper function to recursively go through the BinaryTree in Order.
@@ -107,7 +107,7 @@ public class BinaryTree {
      * Returns an ArrayList with values of the BinaryTree in PreOrder
      * @return ArrayList with values of the BinaryTree in PreOrder
      */
-    public ArrayList<Integer> getPreOrderArray() {
+    public ArrayList<Integer> getPreOrderList() {
         // create an arraylist to store the key values of the Binary Tree's Nodes
         ArrayList<Integer> preOrderList = new ArrayList<>();
         // calls helper function to recursively go through the BinaryTree in PreOrder.
@@ -118,7 +118,7 @@ public class BinaryTree {
     }
 
     /**
-     * Recursively performs in-order traversal of the BinaryTree,
+     * Recursively performs pre-order traversal of the BinaryTree,
      * adding each node's key to the provided ArrayList.
      *
      * @param node the current node being visited during the traversal
@@ -140,4 +140,39 @@ public class BinaryTree {
         }
     }
 
+
+    /**
+     * Returns an ArrayList with values of the BinaryTree in Post Order
+     * @return ArrayList with values of the BinaryTree in Post Order
+     */
+    public ArrayList<Integer> getPostOrderList() {
+        // create an arraylist to store the key values of the Binary Tree's Nodes
+        ArrayList<Integer> postOrderList = new ArrayList<>();
+        // calls helper function to recursively go through the BinaryTree in Order.
+        postOrderHelper(root, postOrderList);
+
+        return postOrderList;
+    }
+
+
+    /**
+     * Recursively performs post-order traversal of the BinaryTree,
+     * adding each node's key to the provided ArrayList.
+     *
+     * @param node the current node being visited during the traversal
+     * @param postOrderList the list to which the node's key is added
+     */
+    public void postOrderHelper(TreeNode node, ArrayList<Integer> postOrderList) {
+        // move left in the BinaryTree until we find the leftmost Node
+        if (node.left != null) {
+            postOrderHelper(node.left, postOrderList);
+        }
+
+        // move right in the BinaryTree until we find the rightmost Node
+        if (node.right != null) {
+            postOrderHelper(node.right, postOrderList);
+        }
+
+        postOrderList.add(node.key);
+    }
 }
