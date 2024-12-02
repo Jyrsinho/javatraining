@@ -102,4 +102,42 @@ public class BinaryTree {
         }
     }
 
+
+    /**
+     * Returns an ArrayList with values of the BinaryTree in PreOrder
+     * @return ArrayList with values of the BinaryTree in PreOrder
+     */
+    public ArrayList<Integer> getPreOrderArray() {
+        // create an arraylist to store the key values of the Binary Tree's Nodes
+        ArrayList<Integer> preOrderList = new ArrayList<>();
+        // calls helper function to recursively go through the BinaryTree in PreOrder.
+        preOrderHelper(root, preOrderList);
+
+        return preOrderList;
+
+    }
+
+    /**
+     * Recursively performs in-order traversal of the BinaryTree,
+     * adding each node's key to the provided ArrayList.
+     *
+     * @param node the current node being visited during the traversal
+     * @param preOrderList the list to which the node's key is added
+     */
+    public void preOrderHelper(TreeNode node, ArrayList<Integer> preOrderList) {
+        // Add Node's key value to the arraylist
+        preOrderList.add(node.key);
+
+        // move left in the BinaryTree until we find the leftmost Node
+        if (node.left != null) {
+            preOrderHelper(node.left, preOrderList);
+        }
+
+
+        // move right in the BinaryTree until we find the rightmost Node
+        if (node.right != null) {
+            preOrderHelper(node.right, preOrderList);
+        }
+    }
+
 }
