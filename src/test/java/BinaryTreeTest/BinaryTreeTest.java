@@ -110,6 +110,18 @@ public BinaryTree binaryTree10;
 
     }
 
+    @Test
+    public void testShouldReturnInOrderArrayOfFromBinaryTreeWithDuplicates() {
+        binaryTree.addNode(5);
+        binaryTree.addNode(3);
+        binaryTree.addNode(2);
+        binaryTree.addNode(5);
+        binaryTree.addNode(3);
+        ArrayList<Integer> testInOrder = binaryTree.getInOrderArray();
+        assertArrayEquals(new Integer[]{2,3,3,5,5}, testInOrder.toArray());
+
+    }
+
 
 // --------------------------------------------------------------------------------------------------------------------
 
