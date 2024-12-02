@@ -3,9 +3,11 @@ package BinaryTreeTest;
 import BinaryTree.BinaryTree;
 import BinaryTree.TreeNode;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
+
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class BinaryTreeTest {
@@ -59,11 +61,61 @@ public BinaryTree binaryTree;
         assertEquals(2 , leftMostNode.key);
     }
 
+    @Test
+    public void testShouldAddThreeNodesLargerThanRootToTheRightBranch() {
+        binaryTree.addNode(5);
+        binaryTree.addNode(8);
+        binaryTree.addNode(10);
+        binaryTree.addNode(12);
+        TreeNode rightmostNode = GetRightMostNode(binaryTree.root);
+        assertEquals(12 , rightmostNode.key);
+    }
 
-    @Disabled
+
+    @Test
     public void testShouldReturnOnlyNodeOfTreeAsAnArray() {
         binaryTree.addNode(5);
+        ArrayList<Integer> testInOrder = binaryTree.getInOrderArray();
+        assertArrayEquals(new Integer[]{5}, testInOrder.toArray());
+    }
 
+    @Test
+    public void testShouldReturnInOrderArrayOfThreeNodesAddedinDescendingOrder() {
+        binaryTree.addNode(5);
+        binaryTree.addNode(3);
+        binaryTree.addNode(2);
+
+        ArrayList<Integer> testInOrder = binaryTree.getInOrderArray();
+        assertArrayEquals(new Integer[]{2,3,5}, testInOrder.toArray());
+    }
+
+
+// --------------------------------------------------------------------------------------------------------------------
+
+    /**
+     * Returns the leftmost Node in the BinaryTree
+     * @param root root of the tree
+     * @return the leftmost Node in the BinaryTree
+     */
+    public static TreeNode GetLeftMostNode(TreeNode root) {
+        TreeNode currentNode = root;
+        while (currentNode.left != null) {
+            currentNode = currentNode.left;
+        }
+        return currentNode;
+    }
+
+    /**
+     * Returns the rightmost Node in the BinaryTree
+     * @param root of the tree
+     * @return the rightmost Node in the BinaryTree
+     */
+    public static TreeNode GetRightMostNode(TreeNode root) {
+        TreeNode currentNode = root;
+        while (currentNode.right != null) {
+            currentNode = currentNode.right;
+        }
+        return currentNode;
     }
 
 }
