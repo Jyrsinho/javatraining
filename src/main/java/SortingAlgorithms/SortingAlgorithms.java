@@ -49,24 +49,20 @@ public class SortingAlgorithms {
 
         int sortedLimit = array.length - 1;
 
+        // Do the while loop as long as the sorted area of the array does not cover the whole array
         while (sortedLimit > 0) {
-            for (int i = 0, j = i + 1; i < sortedLimit; i++, j++) {
-                if (ascending) {
-                if (array[i] > array[j]) {
-                    int temp = array[i];
-                    array[i] = array[j];
-                    array[j] = temp;
-                }
-                }
-                else {
-                    if (array[i] < array[j]) {
-                        int temp = array[i];
-                        array[i] = array[j];
-                        array[j] = temp;
-                    }
-                }
-                }
 
+            for (int i = 0; i < sortedLimit; i++) {
+                // Compare element in the indexes i and i+1. If we are sorting to ascending order then change
+                // element's positions when element in position i is greater than element in position i+1.
+                // Reverse the condition when going for descending orde
+                if (ascending && array[i] > array[i+1] || (!ascending && array[i] < array[i+1])) {
+                    int temp = array[i];
+                    array[i] = array[i+1];
+                    array[i+1] = temp;
+                }
+                }
+            // Update the sorted area to cover one more element from the end of the array
             sortedLimit -= 1;
         }
 
@@ -76,9 +72,30 @@ public class SortingAlgorithms {
     /**
      * Sorts the given array using Selection sort.
      * @param array to be sorted
+     * @param ascending if true, array will be sorted in ascending order, if false will be sorted in descending order.
      * @return array sorted
      */
-    public int[] selectionSort(int[] array) {
+    public int[] insertionSort(int[] array, boolean ascending) {
+
+        // for loop goes over all the cards from index 1 to the end of the array
+        for (int i = 1; i < array.length; i++) {
+            int j = i - 1;
+            // while loop compares i:th element in the array against all the elements in the left and swaps their place
+            // if the comparison condition is met
+            while (j >= 0) {
+                if (array[i] < array[j] && ascending) {
+                    int temp = array[i];
+                    array[i] = array[j];
+                    array[j] = temp;
+                    j--;
+                    i--;
+                }
+                else {
+                     break;
+                }
+            } // end of while loop
+        } //end of for loop
+
         return array;
     }
 
