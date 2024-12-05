@@ -81,9 +81,9 @@ public class SortingAlgorithms {
         for (int i = 1; i < array.length; i++) {
             int j = i - 1;
             // while loop compares i:th element in the array against all the elements in the left and swaps their place
-            // if the comparison condition is met
+            // if the comparison conditions are met
             while (j >= 0) {
-                if (array[i] < array[j] && ascending) {
+                if (array[i] < array[j] && ascending || array[i] > array[j] && !ascending) {
                     int temp = array[i];
                     array[i] = array[j];
                     array[j] = temp;
