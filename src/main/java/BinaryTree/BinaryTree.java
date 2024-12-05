@@ -25,7 +25,6 @@ public class BinaryTree {
     }
 
 
-
     /**
      * Adds a new node with the given key to the BinaryTree.
      * If the tree is empty, the new node becomes the root. Otherwise,
@@ -36,38 +35,62 @@ public class BinaryTree {
     public void addNode(int key) {
         if (root == null) {
             root = new TreeNode(key);
-        }
-        else {
+        } else {
             addHelper(key, root);
         }
     }
 
     /**
      * Helper function to recursively travel the BinaryTree to a place where new TreeNode should be added.
-     * @param key keyvalue of the TreeNode to be added
+     *
+     * @param key  keyvalue of the TreeNode to be added
      * @param root comparable TreeNode
      */
     public void addHelper(int key, TreeNode root) {
         if (key <= root.key) {
             if (root.left == null) {
                 root.left = new TreeNode(key);
-            }
-            else {
+            } else {
                 addHelper(key, root.left);
             }
-        }else if (key > root.key) {
+        } else if (key > root.key) {
             if (root.right == null) {
                 root.right = new TreeNode(key);
-            }
-            else {
+            } else {
                 addHelper(key, root.right);
             }
+        }
+    }
+
+    /**
+     * Prints the Binary Tree In Order
+     */
+    public void printBinaryTree(String order) {
+        ArrayList<Integer> printList = new ArrayList<>();
+
+        switch (order) {
+            case "preorder":
+                printList = getPreOrderList();
+                break;
+            case "inorder":
+                printList = getInOrderList();
+                break;
+            case "postorder":
+                printList = getPostOrderList();
+                break;
+            default:
+                break;
+        }
+
+        for (Integer i : printList) {
+            System.out.print(i + ", ");
         }
     }
 
 
     /**
      * Returns an ArrayList with values of the BinaryTree in Order
+     *
      * @return ArrayList with values of the BinaryTree in Order
      */
     public ArrayList<Integer> getInOrderList() {
@@ -84,7 +107,7 @@ public class BinaryTree {
      * Recursively performs in-order traversal of the BinaryTree,
      * adding each node's key to the provided ArrayList.
      *
-     * @param node the current node being visited during the traversal
+     * @param node        the current node being visited during the traversal
      * @param inOrderList the list to which the node's key is added
      */
     public void inOrderHelper(TreeNode node, ArrayList<Integer> inOrderList) {
@@ -105,6 +128,7 @@ public class BinaryTree {
 
     /**
      * Returns an ArrayList with values of the BinaryTree in PreOrder
+     *
      * @return ArrayList with values of the BinaryTree in PreOrder
      */
     public ArrayList<Integer> getPreOrderList() {
@@ -121,7 +145,7 @@ public class BinaryTree {
      * Recursively performs pre-order traversal of the BinaryTree,
      * adding each node's key to the provided ArrayList.
      *
-     * @param node the current node being visited during the traversal
+     * @param node         the current node being visited during the traversal
      * @param preOrderList the list to which the node's key is added
      */
     public void preOrderHelper(TreeNode node, ArrayList<Integer> preOrderList) {
@@ -143,6 +167,7 @@ public class BinaryTree {
 
     /**
      * Returns an ArrayList with values of the BinaryTree in Post Order
+     *
      * @return ArrayList with values of the BinaryTree in Post Order
      */
     public ArrayList<Integer> getPostOrderList() {
@@ -159,7 +184,7 @@ public class BinaryTree {
      * Recursively performs post-order traversal of the BinaryTree,
      * adding each node's key to the provided ArrayList.
      *
-     * @param node the current node being visited during the traversal
+     * @param node          the current node being visited during the traversal
      * @param postOrderList the list to which the node's key is added
      */
     public void postOrderHelper(TreeNode node, ArrayList<Integer> postOrderList) {
@@ -174,5 +199,46 @@ public class BinaryTree {
         }
 
         postOrderList.add(node.key);
+    }
+
+
+    /**
+     * Class for Nodes of the Binary Tree
+     */
+    public static class TreeNode {
+
+        public int key;
+        public TreeNode left;
+        public TreeNode right;
+
+        public TreeNode(int key) {
+            this.key = key;
+            left = null;
+            right = null;
+        }
+    }
+
+    public static void main(String[] args) {
+        BinaryTree binaryTree = new BinaryTree();
+        System.out.println("Intialiazed empty Binary Tree");
+        System.out.println();
+
+        int [] values = {5,3,2,4,7,6,9,10,1,8} ;
+        for (int value : values) {
+            System.out.println("Added to the BinaryTree Node with value: " + value);
+            binaryTree.addNode(value);
+        }
+
+        System.out.println();
+        System.out.println("Printing Binary Tree InOrder: ");
+        binaryTree.printBinaryTree("inorder");
+        System.out.println();
+
+        System.out.println("Printing Binary Tree  PostOrder: ");
+        binaryTree.printBinaryTree("postorder");
+        System.out.println();
+
+        System.out.println("Printing Binary Tree PreOrder: ");
+        binaryTree.printBinaryTree("preorder");
     }
 }
