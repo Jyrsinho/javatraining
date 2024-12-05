@@ -36,6 +36,28 @@ public class SortingAlgorithms {
         return randomArray;
     }
 
+    /**
+     * Sorts the given array using selection sort
+     * @param array to be sorted
+     * @param ascending if true, array will be sorted in ascending order, if false will be sorted in descending order.
+     * @return sorted array
+     */
+    public int[] selectionSort(int[] array, boolean ascending) {
+
+        for (int i = 0; i < array.length; i++) {
+            int minIndex = i;
+            for (int j = i + 1; j < array.length; j++) {
+                if (array[j] < array[minIndex] && ascending || array[j] > array[minIndex] && !ascending) {
+                    minIndex = j;
+                }
+            } //end of inner for loop
+            int temp = array[i];
+            array[i] = array[minIndex];
+            array[minIndex] = temp;
+        } // end of outer for loop
+
+        return array;
+    }
 
     /**
      * Sorts the given array using bubble sort.
@@ -117,6 +139,7 @@ public class SortingAlgorithms {
         System.out.println();
 
         System.out.println("Created new unsorted random integer array of size  " + arraySize + " with min value of " + min + " and max value of " + max +": ");
+        testArray = sortingAlgorithms.createRandomIntegerArray(arraySize, min, max);
         printArray(testArray);
         System.out.println();
         System.out.println("Sorted the array with Insertion Sort in ascending order: ");

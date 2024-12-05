@@ -129,6 +129,49 @@ public class SortingAlgorithmsTest {
         assertArrayEquals(expected, result);
     }
 
+    @Test
+    public void testSelectionSortShouldReturnAnIntegerArray() {
+        int[] testAlgorithm = {0};
+        int []expected = {0};
+        int[] result = sortingAlgorithms.selectionSort(testAlgorithm, true);
+        assertArrayEquals(expected, result);
+
+    }
+
+    @Test
+    public void testSelectionSortShouldSortArrayOfTwoIntegers() {
+        int[] testAlgorithm = {2,1};
+        int []expected = {1,2};
+        int []result = sortingAlgorithms.selectionSort(testAlgorithm,true);
+        assertArrayEquals(expected, result);
+    }
+
+    @Test
+    public void testSelectionSortShouldSortArrayOfFiveIntegersToAscendingOrder() {
+        int[] testAlgorithm = {2,1,3,4,5};
+        int []expected = {1,2,3,4,5};
+        int[] result = sortingAlgorithms.selectionSort(testAlgorithm, true);
+        assertArrayEquals(expected, result);
+    }
+
+    @Test
+    public void testSelectionSortShouldSortArrayOfFiveIntegersToDescendingOrder() {
+        int[] testAlgorithm = {2,1,3,4,5};
+        int []expected = {5,4,3,2,1};
+        int[] result = sortingAlgorithms.selectionSort(testAlgorithm, false);
+        assertArrayEquals(expected, result);
+    }
+
+    @Test
+    public void testSelectionSortShouldReturnAlreadySortedArrayUnchanged() {
+        int[] testAlgorithm = {5,4,3,2,1};
+        int []expected = {5,4,3,2,1};
+        int[] result = sortingAlgorithms.selectionSort(testAlgorithm, false);
+        assertArrayEquals(expected, result);
+    }
+
+
+
 
 
 }
