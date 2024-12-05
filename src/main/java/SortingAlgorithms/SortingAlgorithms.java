@@ -114,6 +114,16 @@ public class SortingAlgorithms {
         System.out.println();
         System.out.println("Sorted the array with Bubble Sort in descending order: ");
         printArray(sortingAlgorithms.bubbleSort(testArray, false));
+        System.out.println();
+
+        System.out.println("Created new unsorted random integer array of size  " + arraySize + " with min value of " + min + " and max value of " + max +": ");
+        printArray(testArray);
+        System.out.println();
+        System.out.println("Sorted the array with Insertion Sort in ascending order: ");
+        printArray(sortingAlgorithms.insertionSort(testArray, true));
+        System.out.println();
+        System.out.println("Sorted the array with Insertion Sort in descending order: ");
+        printArray(sortingAlgorithms.insertionSort(testArray, false));
 
     }
 
