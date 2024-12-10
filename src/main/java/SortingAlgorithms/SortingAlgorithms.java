@@ -1,5 +1,6 @@
 package SortingAlgorithms;
 
+import java.util.Arrays;
 import java.util.Random;
 
 /**
@@ -65,44 +66,55 @@ public class SortingAlgorithms {
      * @return sorted array
      */
     public int[] mergeSort(int[] array) {
+        // Base Case and edge case handling
+        if (array == null || array.length <= 1) {
+            return array;
+        }
 
-        return array;
+        int midpoint = array.length / 2;
+
+        // Sort Left side of the array
+        int[] leftArray = mergeSort(Arrays.copyOfRange(array, 0, midpoint));
+        // Sort Right side of the array
+        int [] rightArray = mergeSort(Arrays.copyOfRange(array, midpoint , array.length));
+        // Merge two arrays
+        return merge(leftArray, rightArray);
 
     }
 
     /**
      * Helper function for mergesort. Merges the given two arrays into new array in ascending order.
-     * @param array1 array to be merged
-     * @param array2 array to be merged
+     * @param leftArray array to be merged
+     * @param rightArray array to be merged
      */
-    public int [] merge(int[] array1, int[] array2) {
+    public int [] merge(int[] leftArray, int[] rightArray) {
 
-        int []mergedArray = new int[array1.length + array2.length];
+        int []mergedArray = new int[leftArray.length + rightArray.length];
 
         int mergedArrayIndex = 0;
         int array1Index = 0;
         int array2Index = 0;
 
-        while (array1Index < array1.length && array2Index < array2.length) {
-            if (array1[array1Index] < array2[array2Index]) {
-                mergedArray[mergedArrayIndex] = array1[array1Index];
+        while (array1Index < leftArray.length && array2Index < rightArray.length) {
+            if (leftArray[array1Index] < rightArray[array2Index]) {
+                mergedArray[mergedArrayIndex] = leftArray[array1Index];
                 array1Index++;
             }
             else {
-                mergedArray[mergedArrayIndex] = array2[array2Index];
+                mergedArray[mergedArrayIndex] = rightArray[array2Index];
                 array2Index++;
             }
             mergedArrayIndex++;
         }
 
-        while (array1Index < array1.length) {
-            mergedArray[mergedArrayIndex] = array1[array1Index];
+        while (array1Index < leftArray.length) {
+            mergedArray[mergedArrayIndex] = leftArray[array1Index];
             array1Index++;
             mergedArrayIndex++;
         }
 
-        while (array2Index < array2.length) {
-            mergedArray[mergedArrayIndex] = array2[array2Index];
+        while (array2Index < rightArray.length) {
+            mergedArray[mergedArrayIndex] = rightArray[array2Index];
             array2Index++;
             mergedArrayIndex++;
         }
