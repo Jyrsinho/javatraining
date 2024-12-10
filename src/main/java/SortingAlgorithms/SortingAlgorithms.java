@@ -60,6 +60,29 @@ public class SortingAlgorithms {
     }
 
     /**
+     * Sorts the given array using merge sort
+     * @param array to be sorted
+     * @return sorted array
+     */
+    public int[] mergeSort(int[] array) {
+
+        return array;
+
+    }
+
+    /**
+     * Helper function for mergesort. Merges the given two arrays into new array in ascending order.
+     * @param array1 array to be merged
+     * @param array2 array to be merged
+     */
+    public int [] merge(int[] array1, int[] array2) {
+
+        int []mergedArray = new int[array1.length + array2.length];
+
+        return mergedArray;
+    }
+
+    /**
      * Sorts the given array using bubble sort.
      * @param array to be sorted
      * @param ascending if true, array will be sorted in ascending order, if false will be sorted in descending order.
@@ -147,6 +170,19 @@ public class SortingAlgorithms {
         System.out.println();
         System.out.println("Sorted the array with Insertion Sort in descending order: ");
         printArray(sortingAlgorithms.insertionSort(testArray, false));
+
+        System.out.println("Created new unsorted random integer array of size  " + arraySize + " with min value of " + min + " and max value of " + max +": ");
+        testArray = sortingAlgorithms.createRandomIntegerArray(arraySize, min, max);
+        printArray(testArray);
+        System.out.println();
+        System.out.println("Sorted the array with Selection Sort in ascending order: ");
+        printArray(sortingAlgorithms.selectionSort(testArray, true));
+        System.out.println();
+        System.out.println("Sorted the array with Selection Sort in descending order: ");
+        printArray(sortingAlgorithms.selectionSort(testArray, false));
+        System.out.println();
+
+
 
     }
 

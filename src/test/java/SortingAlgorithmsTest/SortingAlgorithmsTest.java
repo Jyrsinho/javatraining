@@ -19,8 +19,8 @@ public class SortingAlgorithmsTest {
     @Test
     public void testCreateRandomIntArrayShouldCreateArrayWithGivenSize() {
         int size = 20;
-        int[] testAlgorithm = sortingAlgorithms.createRandomIntegerArray(size, 0, 100);
-        assertEquals(20, testAlgorithm.length);
+        int[] testArray = sortingAlgorithms.createRandomIntegerArray(size, 0, 100);
+        assertEquals(20, testArray.length);
 
     }
 
@@ -167,6 +167,14 @@ public class SortingAlgorithmsTest {
         int[] testAlgorithm = {5,4,3,2,1};
         int []expected = {5,4,3,2,1};
         int[] result = sortingAlgorithms.selectionSort(testAlgorithm, false);
+        assertArrayEquals(expected, result);
+    }
+
+    @Test
+    public void testMergeSortShouldReturnAnIntegerArray() {
+        int[] testArray = {0};
+        int []expected = {0};
+        int[] result = sortingAlgorithms.mergeSort(testArray);
         assertArrayEquals(expected, result);
     }
 
