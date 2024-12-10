@@ -63,9 +63,10 @@ public class SortingAlgorithms {
     /**
      * Sorts the given array using merge sort
      * @param array to be sorted
+     * @param ascending if true sorted into an ascending order, if false sorted into descending order
      * @return sorted array
      */
-    public int[] mergeSort(int[] array) {
+    public int[] mergeSort(int[] array, boolean ascending) {
         // Base Case and edge case handling
         if (array == null || array.length <= 1) {
             return array;
@@ -74,11 +75,11 @@ public class SortingAlgorithms {
         int midpoint = array.length / 2;
 
         // Sort Left side of the array
-        int[] leftArray = mergeSort(Arrays.copyOfRange(array, 0, midpoint));
+        int[] leftArray = mergeSort(Arrays.copyOfRange(array, 0, midpoint), ascending);
         // Sort Right side of the array
-        int [] rightArray = mergeSort(Arrays.copyOfRange(array, midpoint , array.length));
+        int [] rightArray = mergeSort(Arrays.copyOfRange(array, midpoint , array.length), ascending);
         // Merge two arrays
-        return merge(leftArray, rightArray);
+        return merge(leftArray, rightArray, ascending);
 
     }
 
@@ -87,35 +88,37 @@ public class SortingAlgorithms {
      * @param leftArray array to be merged
      * @param rightArray array to be merged
      */
-    public int [] merge(int[] leftArray, int[] rightArray) {
+    public int [] merge(int[] leftArray, int[] rightArray, boolean ascending) {
 
         int []mergedArray = new int[leftArray.length + rightArray.length];
 
         int mergedArrayIndex = 0;
-        int array1Index = 0;
-        int array2Index = 0;
+        int leftArrayIndex = 0;
+        int rightArrayIndex = 0;
 
-        while (array1Index < leftArray.length && array2Index < rightArray.length) {
-            if (leftArray[array1Index] < rightArray[array2Index]) {
-                mergedArray[mergedArrayIndex] = leftArray[array1Index];
-                array1Index++;
+        while (leftArrayIndex < leftArray.length && rightArrayIndex < rightArray.length) {
+    //TODO Fiksaa tämä ehtolause.
+             if (ascending && leftArray[leftArrayIndex] < rightArray[rightArrayIndex]  || !ascending && leftArray[leftArrayIndex] > rightArray[rightArrayIndex] ) {
+                mergedArray[mergedArrayIndex] = leftArray[leftArrayIndex];
+                leftArrayIndex++;
             }
+
             else {
-                mergedArray[mergedArrayIndex] = rightArray[array2Index];
-                array2Index++;
+                mergedArray[mergedArrayIndex] = rightArray[rightArrayIndex];
+                rightArrayIndex++;
             }
             mergedArrayIndex++;
         }
 
-        while (array1Index < leftArray.length) {
-            mergedArray[mergedArrayIndex] = leftArray[array1Index];
-            array1Index++;
+        while (leftArrayIndex < leftArray.length) {
+            mergedArray[mergedArrayIndex] = leftArray[leftArrayIndex];
+            leftArrayIndex++;
             mergedArrayIndex++;
         }
 
-        while (array2Index < rightArray.length) {
-            mergedArray[mergedArrayIndex] = rightArray[array2Index];
-            array2Index++;
+        while (rightArrayIndex < rightArray.length) {
+            mergedArray[mergedArrayIndex] = rightArray[rightArrayIndex];
+            rightArrayIndex++;
             mergedArrayIndex++;
         }
 
@@ -201,6 +204,7 @@ public class SortingAlgorithms {
         printArray(sortingAlgorithms.bubbleSort(testArray, false));
         System.out.println();
 
+
         System.out.println("Created new unsorted random integer array of size  " + arraySize + " with min value of " + min + " and max value of " + max +": ");
         testArray = sortingAlgorithms.createRandomIntegerArray(arraySize, min, max);
         printArray(testArray);
@@ -210,6 +214,15 @@ public class SortingAlgorithms {
         System.out.println();
         System.out.println("Sorted the array with Insertion Sort in descending order: ");
         printArray(sortingAlgorithms.insertionSort(testArray, false));
+        System.out.println();
+
+        System.out.println("Created new unsorted random integer array of size  " + arraySize + " with min value of " + min + " and max value of " + max +": ");
+        testArray = sortingAlgorithms.createRandomIntegerArray(arraySize, min, max);
+        printArray(testArray);
+        System.out.println();
+        System.out.println("Sorted the array with Merge Sort in ascending order: ");
+        printArray(sortingAlgorithms.mergeSort(testArray, true));
+        System.out.println();
 
         System.out.println("Created new unsorted random integer array of size  " + arraySize + " with min value of " + min + " and max value of " + max +": ");
         testArray = sortingAlgorithms.createRandomIntegerArray(arraySize, min, max);

@@ -174,7 +174,7 @@ public class SortingAlgorithmsTest {
     public void testMergeSortShouldReturnAnIntegerArray() {
         int[] testArray = {0};
         int []expected = {0};
-        int[] result = sortingAlgorithms.mergeSort(testArray);
+        int[] result = sortingAlgorithms.mergeSort(testArray, true);
         assertArrayEquals(expected, result);
     }
 
@@ -183,7 +183,7 @@ public class SortingAlgorithmsTest {
         int[] testArray1 = {0};
         int[] testArray2 = {1};
         int []expected = {0,1};
-        int[] result = sortingAlgorithms.merge(testArray1, testArray2);
+        int[] result = sortingAlgorithms.merge(testArray1, testArray2, true);
         assertArrayEquals(expected, result);
     }
 
@@ -192,7 +192,7 @@ public class SortingAlgorithmsTest {
         int[] testArray1 = {0,2,4};
         int[] testArray2 = {1,3,5};
         int []expected = {0,1,2,3,4,5};
-        int[] result = sortingAlgorithms.merge(testArray1, testArray2);
+        int[] result = sortingAlgorithms.merge(testArray1, testArray2, true);
         assertArrayEquals(expected, result);
     }
 
@@ -201,7 +201,7 @@ public class SortingAlgorithmsTest {
         int[] testArray1 = {0,2,3};
         int[] testArray2 = {1,4};
         int []expected = {0,1,2,3,4};
-        int[] result = sortingAlgorithms.merge(testArray1, testArray2);
+        int[] result = sortingAlgorithms.merge(testArray1, testArray2, true);
         assertArrayEquals(expected, result);
     }
 
@@ -210,7 +210,7 @@ public class SortingAlgorithmsTest {
         int[] testArray1 = {0,1,2,3,4};
         int[] testArray2 = {5,6,7,8,9};
         int []expected = {0,1,2,3,4,5,6,7,8,9};
-        int[] result = sortingAlgorithms.merge(testArray1, testArray2);
+        int[] result = sortingAlgorithms.merge(testArray1, testArray2, true);
         assertArrayEquals(expected, result);
     }
 
@@ -218,7 +218,7 @@ public class SortingAlgorithmsTest {
     public void mergeSortShouldSortArrayOfTwoIntegersIntoAscendingOrder() {
         int[] testArray1 = {2,1};
         int [] expected = {1,2};
-        int[] result = sortingAlgorithms.mergeSort(testArray1);
+        int[] result = sortingAlgorithms.mergeSort(testArray1,true);
         assertArrayEquals(expected, result);
     }
 
@@ -226,7 +226,7 @@ public class SortingAlgorithmsTest {
     public void mergeSortShouldSortArrayOfFiveIntegersToAscendingOrder() {
         int[] testArray1 = {2,1,3,4,5};
         int[] expected = {1,2,3,4,5};
-        int[] result = sortingAlgorithms.mergeSort(testArray1);
+        int[] result = sortingAlgorithms.mergeSort(testArray1, true);
         assertArrayEquals(expected, result);
 
     }
@@ -235,8 +235,17 @@ public class SortingAlgorithmsTest {
     public void mergeSortShouldReturnSortedAlgorithmUnchanged() {
         int[] testArray1 = {0,1,2,3,4,5};
         int []expected = {0,1,2,3,4,5};
-        int[] result = sortingAlgorithms.mergeSort(testArray1);
+        int[] result = sortingAlgorithms.mergeSort(testArray1, true);
         assertArrayEquals(expected, result);
+    }
+
+    @Test
+    public void mergeSortShouldSortArrayOfFiveIntegersToDescendingOrder() {
+        int[] testArray1 = {3,2,5,1,4};
+        int[] expected = {5,4,3,2,1};
+        int[] result = sortingAlgorithms.mergeSort(testArray1, false);
+        assertArrayEquals(expected, result);
+
     }
 
 
