@@ -178,6 +178,32 @@ public class SortingAlgorithmsTest {
         assertArrayEquals(expected, result);
     }
 
+    @Test
+    public void testMergeShouldCombineTwoArraysOfOneElementIntoSortedArray() {
+        int[] testArray1 = {0};
+        int[] testArray2 = {1};
+        int []expected = {0,1};
+        int[] result = sortingAlgorithms.merge(testArray1, testArray2);
+        assertArrayEquals(expected, result);
+    }
+
+    @Test
+    public void testMergeShouldSortTwoArraysOfThreeElementsIntoSortedArray() {
+        int[] testArray1 = {0,2,4};
+        int[] testArray2 = {1,3,5};
+        int []expected = {0,1,2,3,4,5};
+        int[] result = sortingAlgorithms.merge(testArray1, testArray2);
+        assertArrayEquals(expected, result);
+    }
+
+    @Test
+    public void testMergeShouldSortArrayOfThreeElementsAndAnArrayOfTwoElementsIntoSortedArray() {
+        int[] testArray1 = {0,2,3};
+        int[] testArray2 = {1,4};
+        int []expected = {0,1,2,3,4};
+        int[] result = sortingAlgorithms.merge(testArray1, testArray2);
+        assertArrayEquals(expected, result);
+    }
 
 
 

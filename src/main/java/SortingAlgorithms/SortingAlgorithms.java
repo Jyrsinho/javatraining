@@ -79,6 +79,27 @@ public class SortingAlgorithms {
 
         int []mergedArray = new int[array1.length + array2.length];
 
+        int mergedArrayIndex = 0;
+        int array1Index = 0;
+        int array2Index = 0;
+
+        while (mergedArrayIndex < mergedArray.length) {
+            if (array1Index >= array1.length) {
+                mergedArray[mergedArrayIndex] = array2[array2Index];
+            }
+            else if (array2Index >= array2.length) {
+                mergedArray[mergedArrayIndex] = array1[array1Index];
+            }
+            else if (array1[array1Index] <= array2[array2Index]  ) {
+                mergedArray[mergedArrayIndex] = array1[array1Index];
+                array1Index++;
+            } else {
+                mergedArray[mergedArrayIndex] = array2[array2Index];
+                array2Index++;
+            }
+            mergedArrayIndex++;
+        }
+
         return mergedArray;
     }
 
