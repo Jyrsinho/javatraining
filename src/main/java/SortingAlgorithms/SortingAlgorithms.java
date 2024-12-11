@@ -97,7 +97,6 @@ public class SortingAlgorithms {
         int rightArrayIndex = 0;
 
         while (leftArrayIndex < leftArray.length && rightArrayIndex < rightArray.length) {
-    //TODO Fiksaa tämä ehtolause.
              if (ascending && leftArray[leftArrayIndex] < rightArray[rightArrayIndex]  || !ascending && leftArray[leftArrayIndex] > rightArray[rightArrayIndex] ) {
                 mergedArray[mergedArrayIndex] = leftArray[leftArrayIndex];
                 leftArrayIndex++;
@@ -157,6 +156,8 @@ public class SortingAlgorithms {
         return array;
     }
 
+    //TODO: QUICK SORT
+
     /**
      * Sorts the given array using Selection sort.
      * @param array to be sorted
@@ -185,6 +186,55 @@ public class SortingAlgorithms {
         } //end of for loop
 
         return array;
+    }
+
+
+    /**
+     * Sorts the given array using Quick sort.
+     * @param array to be sorted
+     * @return array sorted
+     */
+    public int[] quickSort (int[] array) {
+        return array;
+    }
+
+
+    /**
+     * Prints out the exectution time of given algorithm with array of given size
+     */
+    public void printExecutionTime(int arraysize, String method) {
+
+        int[] array = createRandomIntegerArray(arraysize, 0, arraysize);
+        // Record start time
+        long startTime = System.nanoTime();
+
+        // Call the function to measure
+        switch (method) {
+            case "mergesort":
+                mergeSort(array, true);
+                break;
+                case "bubblesort":
+                    bubbleSort(array, true);
+                    break;
+                    case "insertionsort":
+                        insertionSort(array, true);
+                        break;
+                        case "selectionsort":
+                            selectionSort(array, true);
+                            break;
+                        default:
+                            System.out.println("invalid sort method: " + method);
+                            break;
+        }
+
+        // Record end time
+        long endTime = System.nanoTime();
+
+        // Calculate execution time in nanoseconds
+        long executionTime = endTime - startTime;
+        System.out.println("Execution time: " + (executionTime / 1_000_000) + " milliseconds");
+
+
     }
 
     public static void main (String[] args) {
@@ -223,6 +273,9 @@ public class SortingAlgorithms {
         System.out.println("Sorted the array with Merge Sort in ascending order: ");
         printArray(sortingAlgorithms.mergeSort(testArray, true));
         System.out.println();
+        System.out.println("Sorted the array with Merge Sort in descending order: ");
+        printArray(sortingAlgorithms.mergeSort(testArray, false));
+        System.out.println();
 
         System.out.println("Created new unsorted random integer array of size  " + arraySize + " with min value of " + min + " and max value of " + max +": ");
         testArray = sortingAlgorithms.createRandomIntegerArray(arraySize, min, max);
@@ -234,8 +287,26 @@ public class SortingAlgorithms {
         System.out.println("Sorted the array with Selection Sort in descending order: ");
         printArray(sortingAlgorithms.selectionSort(testArray, false));
         System.out.println();
+        System.out.println("------------------------------------------------------------------");
 
+        System.out.println("Lets compare the execution times:");
+        System.out.println();
+        int arraysize = 10000;
+        System.out.println("Execution time of Mergesort for array of "+arraysize+" elements: ");
+        sortingAlgorithms.printExecutionTime(arraysize, "mergesort");
+        System.out.println();
 
+        System.out.println("Execution time of Selection Sort for array of "+arraysize+" elements: ");
+        sortingAlgorithms.printExecutionTime(arraysize, "selectionsort");
+        System.out.println();
+
+        System.out.println("Execution time of Insertion Sort for array of "+arraysize+" elements: ");
+        sortingAlgorithms.printExecutionTime(arraysize, "insertionsort");
+        System.out.println();
+
+        System.out.println("Execution time of Bubble Sort for array of "+arraysize+" elements: ");
+        sortingAlgorithms.printExecutionTime(arraysize, "bubblesort");
+        System.out.println();
 
     }
 

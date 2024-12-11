@@ -206,7 +206,7 @@ public class SortingAlgorithmsTest {
     }
 
     @Test
-    public void mergeShouldMergeTwoArraysOfFiveWhereFirstContainsSmallerElementsThanSecondArray() {
+    public void testmergeShouldMergeTwoArraysOfFiveWhereFirstContainsSmallerElementsThanSecondArray() {
         int[] testArray1 = {0,1,2,3,4};
         int[] testArray2 = {5,6,7,8,9};
         int []expected = {0,1,2,3,4,5,6,7,8,9};
@@ -215,7 +215,7 @@ public class SortingAlgorithmsTest {
     }
 
     @Test
-    public void mergeSortShouldSortArrayOfTwoIntegersIntoAscendingOrder() {
+    public void testmergeSortShouldSortArrayOfTwoIntegersIntoAscendingOrder() {
         int[] testArray1 = {2,1};
         int [] expected = {1,2};
         int[] result = sortingAlgorithms.mergeSort(testArray1,true);
@@ -223,7 +223,7 @@ public class SortingAlgorithmsTest {
     }
 
     @Test
-    public void mergeSortShouldSortArrayOfFiveIntegersToAscendingOrder() {
+    public void testmergeSortShouldSortArrayOfFiveIntegersToAscendingOrder() {
         int[] testArray1 = {2,1,3,4,5};
         int[] expected = {1,2,3,4,5};
         int[] result = sortingAlgorithms.mergeSort(testArray1, true);
@@ -232,7 +232,7 @@ public class SortingAlgorithmsTest {
     }
 
     @Test
-    public void mergeSortShouldReturnSortedAlgorithmUnchanged() {
+    public void testmergeSortShouldReturnSortedAlgorithmUnchanged() {
         int[] testArray1 = {0,1,2,3,4,5};
         int []expected = {0,1,2,3,4,5};
         int[] result = sortingAlgorithms.mergeSort(testArray1, true);
@@ -240,13 +240,21 @@ public class SortingAlgorithmsTest {
     }
 
     @Test
-    public void mergeSortShouldSortArrayOfFiveIntegersToDescendingOrder() {
+    public void testmergeSortShouldSortArrayOfFiveIntegersToDescendingOrder() {
         int[] testArray1 = {3,2,5,1,4};
         int[] expected = {5,4,3,2,1};
         int[] result = sortingAlgorithms.mergeSort(testArray1, false);
         assertArrayEquals(expected, result);
 
     }
+
+   @Test
+    public void testQuickSortShouldReturnAnIntegerArray() {
+        int[] testArray1 = {0};
+        int []expected = {0};
+        int[] result = sortingAlgorithms.quickSort(testArray1);
+        assertArrayEquals(expected, result);
+   }
 
 
 
