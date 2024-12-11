@@ -256,6 +256,17 @@ public class SortingAlgorithmsTest {
         assertArrayEquals(expected, result);
    }
 
+   @Test
+    public void testFindMedianOfThreeShouldGiveTheIndexOfMedianOfThree() {
+        int[] testArray1 = {0,1,5}; //
+       int expected = 1;
+       int result = sortingAlgorithms.findMedianOfThree(testArray1);
+       assertEquals(expected, result);
+   }
+
+   @Test
+
+
 
 
 

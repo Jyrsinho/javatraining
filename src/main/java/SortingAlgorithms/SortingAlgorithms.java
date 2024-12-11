@@ -190,12 +190,48 @@ public class SortingAlgorithms {
 
 
     /**
-     * Sorts the given array using Quick sort.
+     * Sorts the given array using Quicksort.
      * @param array to be sorted
      * @return array sorted
      */
     public int[] quickSort (int[] array) {
+        if (array.length <= 1) {
+            return array;
+        }
+
+        int pivotIndex = findMedianOfThree(array);
+        int pivotValue = array[pivotIndex];
+
         return array;
+    }
+
+    /**
+     * Organizes array in relation to pivot value. Values smaller than pivot go left side of the array and
+     * values larger than array go to the right side of the array
+     * @param array to be sorted
+     * @param left
+     * @param right
+     * @return
+     */
+    public int[] partition (int[] array, int left, int right) {
+
+        return array;
+    }
+
+    /**
+     * Finds the index from an array that contains the index of the median of first, middle and last element in an array.
+     * @return the index from an array that contains the index of the median of first, middle and last element in an array.
+     */
+    public int findMedianOfThree(int [] array) {
+        int [] values = new int[3];
+        values[0] = array[0];
+        values[1] = array[array.length/2];
+        values[2] = array[array.length - 1];
+
+        int [] sortedvalues = selectionSort(values, false);
+
+        return sortedvalues[1];
+
     }
 
 
