@@ -13,21 +13,43 @@ public class StringAnalyzer {
      * @param string to be analyzed
      * @return how many words there are in a given string
      */
-    public int wordsInString (String string) {
+    public static int wordsInString (String string) {
         if (string.isEmpty()) {
             return 0;
         }
 
-        int wordsInString = 1;
+        int count = 0;
+        boolean isWord = false;
 
         for (int i = 0; i < string.length(); i++) {
-            if (string.charAt(i) == ' ' && string.charAt(i + 1) != ' ') {
-                wordsInString++;
+            if (string.charAt(i) != ' ') {
+                isWord = true;
+            }
+            if (string.charAt(i) == ' ' && isWord) {
+                count++;
+                isWord = false;
             }
         }
+        if (isWord) {
+            count++;
+        }
 
-        return wordsInString;
+
+        return count;
 
     }
 
+
+    public static void main(String[] args) {
+        String testString = "Kissa ui";
+        System.out.printf("Merkkijonossa -"+ testString + "- on " + wordsInString(testString) +" sanaa.");
+        System.out.println();
+
+        testString = "      Kissa ui    kovaa";
+        System.out.printf("Merkkijonossa -"+ testString + "- on " + wordsInString(testString) +" merkkiä.");
+        System.out.println();
+
+        testString = "Kissa ui kovaa       ";
+        System.out.printf("Merkkijonossa -"+ testString + "- on " + wordsInString(testString) +" merkkiä.");
+    }
 }
