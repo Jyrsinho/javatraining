@@ -199,8 +199,6 @@ public class SortingAlgorithms {
             return array;
         }
 
-        int pivotIndex = findMedianOfThree(array);
-        int pivotValue = array[pivotIndex];
 
         return array;
     }
@@ -213,9 +211,12 @@ public class SortingAlgorithms {
      * @param right
      * @return
      */
-    public int[] partition (int[] array, int left, int right) {
+    public int partition (int[] array, int left, int right) {
 
-        return array;
+        int pivotIndex = findMedianOfThree(array);
+        int pivotValue = array[pivotIndex];
+
+        return pivotIndex;
     }
 
     /**
