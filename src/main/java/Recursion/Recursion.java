@@ -11,7 +11,7 @@ public class Recursion {
                 return n;
             }
 
-            return n + recursiveFibonacci(n - 1);
+            return recursiveFibonacci(n - 1) + recursiveFibonacci(n - 2);
         }
 
 }

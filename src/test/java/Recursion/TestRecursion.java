@@ -20,4 +20,39 @@ public class TestRecursion {
         int result = recursiveFibonacci(1);
         assertEquals(expected, result);
     }
+
+    @Test
+    public void testRecursiveFibonacciShouldReturnOneForFibonacciOfTwo() {
+        int expected = 1;
+        int result = recursiveFibonacci(2);
+        assertEquals(expected, result);
+    }
+
+    @Test
+    public void testRecursiveFibonacciShouldReturnOneForFibonacciOfThree() {
+        int expected = 2;
+        int result = recursiveFibonacci(3);
+        assertEquals(expected, result);
+    }
+
+    @Test
+    public void testRecursiveFibonacciShouldReturnTwoForFibonacciOfFour() {
+        int expected = 3;
+        int result = recursiveFibonacci(4);
+        assertEquals(expected, result);
+    }
+
+    @Test
+    public void testRecursiveFibonacciShouldReturnFibonacciOfFive() {
+        int expected = 5;
+        int result = recursiveFibonacci(5);
+        assertEquals(expected, result);
+    }
+
+    @Test
+    public void testRecursiveFibonacciShouldReturnFibonacciOfTen() {
+        int expected = 55;
+        int result = recursiveFibonacci(10);
+        assertEquals(expected, result);
+    }
 }
