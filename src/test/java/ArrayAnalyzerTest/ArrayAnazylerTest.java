@@ -1,12 +1,20 @@
 package ArrayAnalyzerTest;
 
 import ArrayAnalyzer.ArrayAnalyzer;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class ArrayAnazylerTest {
 
+    ArrayAnalyzer arrayAnalyzer;
+
+    @BeforeEach
+    public void setUp() {
+        arrayAnalyzer = new ArrayAnalyzer();
+    }
 
 
     @Test
@@ -128,7 +136,38 @@ public class ArrayAnazylerTest {
     }
 
 
+    @Test
+    public void testSortArrayByParityShouldReturnEmptyArrayWhenGivenEmptyArray() {
+        int[] testArray = {};
+        int [] expected = {};
+        int [] result = arrayAnalyzer.sortArrayByParity(testArray);
+        assertArrayEquals(expected, result);
 
+    }
+
+    @Test
+    public void testSortArrayByParityShouldReturnArrayZeroOneUnchanged() {
+        int[] testArray = {0,1};
+        int [] expected = {0,1};
+        int [] result = arrayAnalyzer.sortArrayByParity(testArray);
+        assertArrayEquals(expected, result);
+    }
+
+    @Test
+    public void testSortArrayByParityShouldReturnArrayOneZeroSorted() {
+        int[] testArray = {1,0};
+        int [] expected = {0,1};
+        int [] result = arrayAnalyzer.sortArrayByParity(testArray);
+        assertArrayEquals(expected, result);
+    }
+
+    @Test
+    public void testSortArrayByParitShouldSortUnsortedArrayOfFourElements() {
+        int[] testArray = {1,3,5,2,4,6};
+        int [] expected = {2,1,4,3,6,5};
+        int [] result = arrayAnalyzer.sortArrayByParity(testArray);
+        assertArrayEquals(expected, result);
+    }
 
 
 
