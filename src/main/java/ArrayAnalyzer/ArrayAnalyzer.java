@@ -99,7 +99,6 @@ public class ArrayAnalyzer {
                 oddIndex += 2 ;
             }
         }
-
         return sorted;
     }
 

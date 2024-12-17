@@ -162,14 +162,20 @@ public class ArrayAnazylerTest {
     }
 
     @Test
-    public void testSortArrayByParitShouldSortUnsortedArrayOfFourElements() {
+    public void testSortArrayByParitShouldSortUnsortedArrayOfSixElements() {
         int[] testArray = {1,3,5,2,4,6};
         int [] expected = {2,1,4,3,6,5};
         int [] result = arrayAnalyzer.sortArrayByParity(testArray);
         assertArrayEquals(expected, result);
     }
 
-
+    @Test
+    public void testSortArrayByParityShouldSortUnsortedArrayOfSixElements() {
+        int[] testArray = {1,4,3,6,5,8};
+        int [] expected = {4,1,6,3,8,5};
+        int [] result = arrayAnalyzer.sortArrayByParity(testArray);
+        assertArrayEquals(expected, result);
+    }
 
 
 
