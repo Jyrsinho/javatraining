@@ -164,19 +164,43 @@ public class ArrayAnazylerTest {
     @Test
     public void testSortArrayByParitShouldSortUnsortedArrayOfSixElements() {
         int[] testArray = {1,3,5,2,4,6};
-        int [] expected = {2,1,4,3,6,5};
+        int [] expected = {6,1,4,3,2,5};
         int [] result = arrayAnalyzer.sortArrayByParity(testArray);
+        printArray(result);
         assertArrayEquals(expected, result);
     }
 
     @Test
     public void testSortArrayByParityShouldSortUnsortedArrayOfSixElements() {
         int[] testArray = {1,4,3,6,5,8};
-        int [] expected = {4,1,6,3,8,5};
+        int [] expected = {8,5,6,3,4,1};
         int [] result = arrayAnalyzer.sortArrayByParity(testArray);
+        printArray(result);
         assertArrayEquals(expected, result);
     }
 
+    @Test
+    public void testSortArrayByParityShouldSortUnsortedArrayOfFourElements() {
+        int[] testArray = {4,2,5,7};
+        int [] expected = {4,7,2,5};
+        int [] result = arrayAnalyzer.sortArrayByParity(testArray);
+        printArray(result);
+        assertArrayEquals(expected, result);
+    }
 
+    @Test
+    public void testSortArrayByParityShouldSortUnsortedArrayOfFourElementsOddsInTheBeginning() {
+        int[] testArray = {5,7,4,2};
+        int [] expected = {2,5,4,7};
+        int [] result = arrayAnalyzer.sortArrayByParity(testArray);
+        printArray(result);
+        assertArrayEquals(expected, result);
+    }
+
+    public void printArray(int [] array) {
+        for (int integer: array) {
+            System.out.print(integer + " ");
+        }
+    }
 
 }

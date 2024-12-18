@@ -85,23 +85,20 @@ public class ArrayAnalyzer {
      * @return array where uneven indexes have uneven numbers and even indexes have even numbers
      */
     public int[] sortArrayByParity(int[] nums) {
-        int [] sorted = new int[nums.length];
-        int evenIndex = 0;
-        int oddIndex = 1;
 
         for (int i = 0; i < nums.length; i++) {
-            if (nums[i] % 2 == 0) {
-            sorted[evenIndex] = nums[i];
-            evenIndex += 2 ;
-            }
-            else {
-                sorted[oddIndex] = nums[i];
-                oddIndex += 2 ;
+            if (i + nums[i] % 2 != 0) {
+                for (int j = i + 1; j < nums.length; j++) {
+                    if ((i + nums[j]) % 2 == 0) {
+                        int temp = nums[i];
+                        nums[i] = nums[j];
+                        nums[j] = temp;
+                    }
+                }
             }
         }
-        return sorted;
-    }
-
+        return nums;
+        }
 
 
     public static void main(String[] args) {
