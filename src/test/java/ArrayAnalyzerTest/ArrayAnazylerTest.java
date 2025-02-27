@@ -197,6 +197,32 @@ public class ArrayAnazylerTest {
         assertArrayEquals(expected, result);
     }
 
+    @Test
+    public void testTurnIntoBinaryShouldReturnBinaryRepresentationOfAnArrayOfIntegers() {
+        int[] testArray = {1,1};
+        String[] expected = {"00000001", "00000001"};
+        String[] result = arrayAnalyzer.turnIntoBinary(testArray);
+        
+    }
+
+    @Test
+    public void testFindKOrShouldReturnZeroForEmptyArray() {
+        int[] testArray = {};
+        int k = 1;
+        int expected = 0;
+        int result = arrayAnalyzer.findKOr(testArray, k);
+        assertEquals(expected, result);
+    }
+
+    @Test
+    public void testFindKOrShouldReturnOneForArrayOfTwoOnesAndKOne() {
+        int[] testArray = {1,1};
+        int k = 1;
+        int expected = 1;
+        int result = arrayAnalyzer.findKOr(testArray, k);
+        assertEquals(expected, result);
+    }
+
     public void printArray(int [] array) {
         for (int integer: array) {
             System.out.print(integer + " ");

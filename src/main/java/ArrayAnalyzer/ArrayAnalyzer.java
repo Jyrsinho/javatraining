@@ -1,5 +1,7 @@
 package ArrayAnalyzer;
 
+import static java.lang.Long.toBinaryString;
+
 public class ArrayAnalyzer {
 
     private final int[]t;
@@ -99,6 +101,41 @@ public class ArrayAnalyzer {
         }
         return nums;
         }
+
+
+    /**
+     * You are given an integer array nums, and an integer k.
+     * Let's introduce K-or operation by extending the standard bitwise OR.
+     * In K-or, a bit position in the result is set to 1 if at least k
+     * numbers in nums have a 1 in that position.
+     * @param nums array to be analyzed
+     * @param k how many numbers are needed to be one in order to make function count them as ones in result
+     * @return resulting binary number as integer
+     */
+    public int findKOr(int[] nums, int k) {
+        String[] binaryArray = turnIntoBinary(nums);
+
+        return 0;
+
+    }
+
+    /**
+     * turns array of integers into a string array that holds the 8bit binary representations of the integers
+     * @param nums array of integers
+     * @return string array holding 8bit binary representations of the integers in the original array
+     */
+    public String[] turnIntoBinary(int[] nums) {
+
+        String[] binaryArray = new String[nums.length];
+
+        // turn all the integers in the array into binary strings
+        for (int i = 0; i < nums.length; i++) {
+            binaryArray[i] = toBinaryString(nums[i]);
+        }
+
+        return binaryArray;
+
+    }
 
 
     public static void main(String[] args) {
