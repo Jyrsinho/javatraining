@@ -6,8 +6,12 @@ public class EventDrivenCalculator {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         EventBroker eventBroker = new EventBroker();
+        CalculationValidator validator = new CalculationValidator();
         Calculator calculator = new Calculator();
+        ResultDisplayer resultDisplayer = new ResultDisplayer();
+        eventBroker.addListener(validator);
         eventBroker.addListener(calculator);
+        eventBroker.addListener(resultDisplayer);
 
         while (true) {
             System.out.print("Syötä luku 1: ");
@@ -19,7 +23,7 @@ public class EventDrivenCalculator {
 
             // Luo tapahtuma ja välitä se käsittelijälle
             CalculationEvent event = new CalculationEvent(operaattori, luku1, luku2);
-            dispatcher.dispatchEvent(event);
+            eventBroker.dispatchEvent(event);
         }
     }
 }
