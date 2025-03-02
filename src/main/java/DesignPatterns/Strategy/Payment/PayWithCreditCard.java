@@ -1,4 +1,4 @@
-package DesignPatterns.Strategy;
+package DesignPatterns.Strategy.Payment;
 
 public class PayWithCreditCard implements PaymentStrategy {
 
