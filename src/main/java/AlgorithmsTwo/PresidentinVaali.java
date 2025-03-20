@@ -33,8 +33,14 @@ public class PresidentinVaali {
 
     public void suoritaPresidentinVaali(){
         suoritaAantenLaskenta();
-        Ehdokas ensimmaisenKierrokseVoittaja = ensimmaisenKierroksenVoittaja();
-
+        Ehdokas ensimmaisenKierroksenVoittaja = ensimmaisenKierroksenVoittaja();
+        if (ensimmaisenKierroksenVoittaja.getClass().getSimpleName() != "ErikoisEhdokas") {
+            System.out.println("Onnea presidentti " +ensimmaisenKierroksenVoittaja.nimi);
+        }else {
+            System.out.println("Mennään toiselle kierrokselle");
+            ArrayList<Ehdokas> toiselleKierrokselleMenijat = toiselleKierrokselleMenijat();
+            //tulostaToiselleKierrokselleMenijat(toiselleKierrokselleMenijat);
+        }
     }
 
 
@@ -81,7 +87,9 @@ public class PresidentinVaali {
     public Ehdokas ensimmaisenKierroksenVoittaja() {
         //TODO
         for (Ehdokas ehdokas: tulosLista){
-
+            if ((double) ehdokas.aanimaara / kokonaisAaniMaara > 0.5){
+                return ehdokas;
+            }
         }
         return new ErikoisEhdokas("",0, "Ei suoraa voittajaa");
     }

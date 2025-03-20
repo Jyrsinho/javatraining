@@ -3,7 +3,6 @@ package AlgorithmsTwoTest;
 import AlgorithmsTwo.Ehdokas;
 import AlgorithmsTwo.PresidentinVaali;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -114,8 +113,8 @@ public class PresidentinVaaliTest {
    }
 
 
-   @Disabled
-    public void testShouldReturnSuoraVoittajaWhenThereIsOne() {
+   @Test
+    public void testShouldReturnSuoraVoittajaWhenEhdokasHasMoreThan50PercentOfTheVOte() {
         String testiSyote = """
                 5700 Abraham Ahkera\s
                 200 Kalle Kekki\s
@@ -123,10 +122,21 @@ public class PresidentinVaaliTest {
                 """;
        PresidentinVaali presidentinVaali1 = new PresidentinVaali(testiSyote);
        presidentinVaali1.suoritaAantenLaskenta();
-       assertEquals("Abrahan Ahkera" ,presidentinVaali1.ensimmaisenKierroksenVoittaja().nimi);
-
+       assertEquals("Abraham Ahkera" ,presidentinVaali1.ensimmaisenKierroksenVoittaja().nimi);
    }
 
+   @Test
+    public void testShouldReturnErikoisEhdokasWhenTwoCandidatesBothHaveHalfOfTheVotes() {
+        String testiSyote = """
+                500 Abraham Ahkera\s
+                500 Kalle Kekki
+                """;
+       PresidentinVaali presidentinVaali1 = new PresidentinVaali(testiSyote);
+       presidentinVaali1.suoritaAantenLaskenta();
+       String expected ="ErikoisEhdokas";
+       String actual = presidentinVaali1.ensimmaisenKierroksenVoittaja().getClass().getSimpleName();
+       assertEquals(expected, actual);
+   }
 
 
 
