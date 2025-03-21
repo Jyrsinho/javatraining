@@ -11,25 +11,12 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class PresidentinVaaliTest {
 
-    /*
-    Tässä on esimerkki syötteestä:
-572733 Abraham Ahkera
-0 Ei Saanut Ääntä Edes Itseltään!
-2912229 Kaisa Kansansuosikki
-41 Kelju K. Kojootti
-48622 Oskari Oikea-Reunanen
-572733 Pirkko Poliitikko
-572633 Reetta Vasen-Reunanen
-572733 T. Tasaääninen
-572733 Toisinajattelija Välilyöntinen
-     */
 
     PresidentinVaali presidentinVaali;
     String testiSyote;
 
     @BeforeEach
     public void setUp() {
-        presidentinVaali = new PresidentinVaali();
         testiSyote = "572733 Abraham Ahkera\n" +
                 "0 Ei Saanut Ääntä Edes Itseltään!\n" +
                 "2912229 Kaisa Kansansuosikki\n" +
@@ -39,6 +26,7 @@ public class PresidentinVaaliTest {
                 "572633 Reetta Vasen-Reunanen\n" +
                 "572733 T. Tasaääninen\n" +
                 "572733 Toisinajattelija Välilyöntinen";
+        presidentinVaali = new PresidentinVaali(testiSyote);
 
     }
     @Test
@@ -154,6 +142,20 @@ public class PresidentinVaaliTest {
         assertEquals("Kalle Kekki" ,testiToiselleKierrokselleMenijat.get(1).nimi );
         assertEquals("Timo Timola" ,testiToiselleKierrokselleMenijat.get(2).nimi );
 
+    }
+
+    @Test
+    public void testShouldReturnSeveralCandidates() {
+        presidentinVaali.suoritaAantenLaskenta();
+        ArrayList<Ehdokas> testiToiselleKierrokselleMenijat = presidentinVaali.toiselleKierrokselleMenijat();
+        for (Ehdokas ehdokas: testiToiselleKierrokselleMenijat) {
+            System.out.println(ehdokas.nimi);
+        }
+        assertEquals("Abraham Ahkera" ,testiToiselleKierrokselleMenijat.get(0).nimi );
+        assertEquals("Kaisa Kansansuosikki" ,testiToiselleKierrokselleMenijat.get(1).nimi );
+        assertEquals("Pirkko Poliitikko", testiToiselleKierrokselleMenijat.get(2).nimi);
+        assertEquals("T. Tasaääninen", testiToiselleKierrokselleMenijat.get(3).nimi);
+        assertEquals("Toisinajattelija Välilyöntinen", testiToiselleKierrokselleMenijat.get(4).nimi);
 
     }
 

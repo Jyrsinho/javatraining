@@ -104,15 +104,20 @@ public class PresidentinVaali {
 
         int enemmanAaniaSaaneita = 0;
 
-        //käydään läpi jokainen ehdokas
-
-        // verrataan ehdokasta jokaiseen toiseen ehdokkaaseen
-
-        // jos verrattavalla ehdokkaalla on enemman aania kuin ehdokkaalla lisataan enemmanAaniaSaaneita
-
-        // jos sisemman loopin lopussa enemmanAaniaSaaneita on =< 1 lisataan ehdokas toiselle kierrokselle menijoihin
-
-        return toiselleKierrokselleMenijat();
+        for (int i = 0; i < tulosLista.size(); i++) {
+            Ehdokas ehdokas = tulosLista.get(i);
+            for (int j = 0; j < tulosLista.size(); j++) {
+                Ehdokas verrattavaEhdokas = tulosLista.get(j);
+                if (verrattavaEhdokas.aanimaara > ehdokas.aanimaara) {
+                    enemmanAaniaSaaneita++;
+                }
+            }
+            if (enemmanAaniaSaaneita <= 1){
+                toiselleKierrokselleMenijat.add(ehdokas);
+            }
+            enemmanAaniaSaaneita = 0;
+        }
+        return toiselleKierrokselleMenijat;
     }
 
     public void paivitaEhdokkaanAanimaaraKokonaisAaniMaaraan(int ehdokkaanAanimaara) {
