@@ -5,6 +5,8 @@ import AlgorithmsTwo.PresidentinVaali;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class PresidentinVaaliTest {
@@ -138,7 +140,22 @@ public class PresidentinVaaliTest {
        assertEquals(expected, actual);
    }
 
+    @Test
+    public  void TestShouldReturnArrayOfEhdokkaatWhenNoEhdokasHasMoreThanfiftypercentOfVotes() {
+        String testiSyote = """
+                500 Abraham Ahkera\s
+                500 Kalle Kekki\s
+                500 Timo Timola\s
+                """;
+        PresidentinVaali presidentinVaali1 = new PresidentinVaali(testiSyote);
+        presidentinVaali1.suoritaAantenLaskenta();
+        ArrayList<Ehdokas> testiToiselleKierrokselleMenijat = presidentinVaali1.toiselleKierrokselleMenijat();
+        assertEquals("Abraham Ahkera" ,testiToiselleKierrokselleMenijat.get(0).nimi );
+        assertEquals("Kalle Kekki" ,testiToiselleKierrokselleMenijat.get(1).nimi );
+        assertEquals("Timo Timola" ,testiToiselleKierrokselleMenijat.get(2).nimi );
 
+
+    }
 
 
 

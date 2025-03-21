@@ -94,7 +94,26 @@ public class PresidentinVaali {
         return new ErikoisEhdokas("",0, "Ei suoraa voittajaa");
     }
 
+    /**
+     * Hakee vaalituloksesta toiselle kierrokselle menijat Ehdokas pääsee toiselle kierrokselle
+     * jos ja vain jos korkeintaan yksi ehdokas sai enemmän ääniä kuin hän.
+     * @return ArrayList toiselle kierrokselle menevat ehdokkaat
+     */
+    public ArrayList<Ehdokas> toiselleKierrokselleMenijat() {
+        ArrayList<Ehdokas> toiselleKierrokselleMenijat = new ArrayList<>();
 
+        int enemmanAaniaSaaneita = 0;
+
+        //käydään läpi jokainen ehdokas
+
+        // verrataan ehdokasta jokaiseen toiseen ehdokkaaseen
+
+        // jos verrattavalla ehdokkaalla on enemman aania kuin ehdokkaalla lisataan enemmanAaniaSaaneita
+
+        // jos sisemman loopin lopussa enemmanAaniaSaaneita on =< 1 lisataan ehdokas toiselle kierrokselle menijoihin
+
+        return toiselleKierrokselleMenijat();
+    }
 
     public void paivitaEhdokkaanAanimaaraKokonaisAaniMaaraan(int ehdokkaanAanimaara) {
         kokonaisAaniMaara += ehdokkaanAanimaara;
