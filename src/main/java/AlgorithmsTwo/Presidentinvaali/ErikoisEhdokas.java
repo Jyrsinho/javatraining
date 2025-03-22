@@ -1,4 +1,4 @@
-package AlgorithmsTwo;
+package AlgorithmsTwo.Presidentinvaali;
 
 public class ErikoisEhdokas extends Ehdokas{
     String erikoistapaus;

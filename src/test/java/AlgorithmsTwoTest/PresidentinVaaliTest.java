@@ -1,7 +1,7 @@
 package AlgorithmsTwoTest;
 
-import AlgorithmsTwo.Ehdokas;
-import AlgorithmsTwo.PresidentinVaali;
+import AlgorithmsTwo.Presidentinvaali.Ehdokas;
+import AlgorithmsTwo.Presidentinvaali.PresidentinVaali;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -157,6 +157,13 @@ public class PresidentinVaaliTest {
         assertEquals("T. Tasaääninen", testiToiselleKierrokselleMenijat.get(3).nimi);
         assertEquals("Toisinajattelija Välilyöntinen", testiToiselleKierrokselleMenijat.get(4).nimi);
 
+    }
+
+    @Test
+    public void testSyote500499() {
+        PresidentinVaali testiVaali = new PresidentinVaali("500 voittaja \n 499 haviaja");
+        testiVaali.suoritaAantenLaskenta();
+        assertEquals("voittaja", testiVaali.ensimmaisenKierroksenVoittaja().nimi);
     }
 
 

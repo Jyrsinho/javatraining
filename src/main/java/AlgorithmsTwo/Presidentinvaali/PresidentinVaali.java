@@ -1,4 +1,4 @@
-package AlgorithmsTwo;
+package AlgorithmsTwo.Presidentinvaali;
 
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -15,6 +15,8 @@ import java.util.Scanner;
  * jos ja vain jos korkeintaan yksi ehdokas sai enemmän ääniä kuin hän.
  */
 public class PresidentinVaali {
+
+
 
     private String input;
     private int kokonaisAaniMaara;
@@ -34,12 +36,14 @@ public class PresidentinVaali {
     public void suoritaPresidentinVaali(){
         suoritaAantenLaskenta();
         Ehdokas ensimmaisenKierroksenVoittaja = ensimmaisenKierroksenVoittaja();
-        if (ensimmaisenKierroksenVoittaja.getClass().getSimpleName() != "ErikoisEhdokas") {
-            System.out.println("Onnea presidentti " +ensimmaisenKierroksenVoittaja.nimi);
+        if (!ensimmaisenKierroksenVoittaja.getClass().getSimpleName().equals("ErikoisEhdokas")) {
+            System.out.println("Onnea presidentti " +ensimmaisenKierroksenVoittaja.nimi + "!");
         }else {
-            System.out.println("Mennään toiselle kierrokselle");
             ArrayList<Ehdokas> toiselleKierrokselleMenijat = toiselleKierrokselleMenijat();
-            //tulostaToiselleKierrokselleMenijat(toiselleKierrokselleMenijat);
+            System.out.println("Toiselle kierrokselle:");
+            for (Ehdokas ehdokas: toiselleKierrokselleMenijat) {
+                System.out.println(ehdokas.nimi);
+            }
         }
     }
 
@@ -87,11 +91,11 @@ public class PresidentinVaali {
     public Ehdokas ensimmaisenKierroksenVoittaja() {
         //TODO
         for (Ehdokas ehdokas: tulosLista){
-            if ((double) ehdokas.aanimaara / kokonaisAaniMaara > 0.5){
+            if ((double)ehdokas.aanimaara / (double)kokonaisAaniMaara > 0.5){
                 return ehdokas;
             }
         }
-        return new ErikoisEhdokas("",0, "Ei suoraa voittajaa");
+        return new ErikoisEhdokas("Ei suoraa voittajaa",0, "Ei suoraa voittajaa");
     }
 
     /**
@@ -124,10 +128,29 @@ public class PresidentinVaali {
         kokonaisAaniMaara += ehdokkaanAanimaara;
     }
 
+
     public int getKokonaisAaniMaara() {
         return kokonaisAaniMaara;
     }
 
 
+    public static void main(String[] args) {
+
+        Scanner syote = new Scanner(System.in);
+        StringBuilder tulosSyote = new StringBuilder();
+
+        while (syote.hasNextLine()) {
+            String line = syote.nextLine();
+            if (line.isEmpty()) {
+                break;
+            }
+            tulosSyote.append(line).append("\n");
+        }
+
+        PresidentinVaali presidentinVaali = new PresidentinVaali(tulosSyote.toString().trim());
+        presidentinVaali.suoritaPresidentinVaali();
+
+        syote.close();
+    }
 }
 
