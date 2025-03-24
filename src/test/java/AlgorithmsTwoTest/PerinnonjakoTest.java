@@ -1,8 +1,10 @@
 package AlgorithmsTwoTest;
 
+import AlgorithmsTwo.Perinnonjako.Perija;
 import AlgorithmsTwo.Perinnonjako.Perinnonjako;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
+
+import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -42,7 +44,7 @@ public class PerinnonjakoTest {
         assertEquals("Klaara", perinnonjako.getVainaja().getNimi());
     }
 
-    @Disabled
+    @Test
     public void testShouldParseSingleFamilyMemberFromInput() {
         String input = """
                 4 7825349
@@ -50,10 +52,10 @@ public class PerinnonjakoTest {
                 """;
         Perinnonjako perinnonjako = new Perinnonjako(input);
         perinnonjako.parsePerinnonJako();
-        assertEquals("Klaara", perinnonjako.getJakoonOsallistuvat().getFirst().getNimi());
+        assertEquals("Klaara", perinnonjako.getSukulaiset().getFirst().getNimi());
     }
 
-    @Disabled
+    @Test
     public void testShouldParseSingleFamilyMembersIDFromInput() {
         String input = """
                 4 7825349
@@ -61,10 +63,10 @@ public class PerinnonjakoTest {
                 """;
         Perinnonjako perinnonjako = new Perinnonjako(input);
         perinnonjako.parsePerinnonJako();
-        assertEquals(1, perinnonjako.getJakoonOsallistuvat().get(0).getId());
+        assertEquals(1, perinnonjako.getSukulaiset().get(0).getId());
     }
 
-    @Disabled
+    @Test
     public void testShouldParseSingleFamilyMembersElossaStatusFromInput() {
         String input = """
                 4 7825349
@@ -72,17 +74,154 @@ public class PerinnonjakoTest {
                 """;
         Perinnonjako perinnonjako = new Perinnonjako(input);
         perinnonjako.parsePerinnonJako();
-        assertEquals(false, perinnonjako.getJakoonOsallistuvat().get(0).onElossa());
+        assertEquals(false, perinnonjako.getSukulaiset().get(0).onElossa());
     }
 
+    @Test
+    public void testShouldParseTwoFamilyMembersFromInput() {
+        String input = """
+                3 2000
+                -1 Klaara 0 0
+                -2 Saara 0 0
+                """;
+        Perinnonjako perinnonjako = new Perinnonjako(input);
+        perinnonjako.parsePerinnonJako();
+        assertEquals("Saara", perinnonjako.getSukulaiset().get(1).getNimi());
+    }
 
+    @Test
+    public void testShouldParseSeveralFamilyMembersFromInput() {
+        String input = """
+                3 2000
+                -1 Klaara 0 0
+                -2 Saara 0 0
+                3 Taneli 0 0
+                4 Heikki 0 0
+                """;
+        Perinnonjako perinnonjako = new Perinnonjako(input);
+        perinnonjako.parsePerinnonJako();
+        assertEquals("Heikki", perinnonjako.getSukulaiset().get(3).getNimi());
+    }
 
-    @Disabled
-    public void testShouldParseSumOfInheritanceFromInput() {
+    @Test
+    public void testShouldFindHenkiloFromGivenID() {
+        String input = """
+                3 2000
+                -1 Klaara 0 0
+                -2 Saara 0 0
+                """;
+        Perinnonjako perinnonjako = new Perinnonjako(input);
+        perinnonjako.parsePerinnonJako();
+        String expected = "Saara";
+        Perija actual = perinnonjako.etsiHenkiloIdPerusteella(2);
+        assertEquals(expected, actual.getNimi());
+    }
+
+    @Test
+    public void testShouldAddChildToDeceased() {
+        String input = """
+                1 2000
+                -1 Klaara 0 0
+                2 Saara 0 1
+                """;
+        Perinnonjako perinnonjako = new Perinnonjako(input);
+        perinnonjako.parsePerinnonJako();
+        assertEquals("Saara", perinnonjako.getVainaja().getPerijat().get(0).getNimi());
+    }
+
+    @Test
+    public void testShouldAddChildrenChildrenToDeceased() {
+        String input = """
+               1 2000
+               -1 Klaara 0 0
+               2 Saara 0 1
+               3 Timo 0 2
+               """;
+        Perinnonjako perinnonjako = new Perinnonjako(input);
+        perinnonjako.parsePerinnonJako();
+        assertEquals("Timo", perinnonjako.getVainaja().getPerijat().get(0).getPerijat().get(0).getNimi());
+
+    }
+
+    @Test
+    public void testShouldGiveAllTheMoneyToOnlyChild() {
+        String input = """
+                1 2000
+                -1 Klaara 0 0
+                2 Saara 0 1
+                """;
+        Perinnonjako perinnonjako = new Perinnonjako(input);
+        perinnonjako.suoritaPerinnonjako();
+        Perija saara = perinnonjako.etsiHenkiloIdPerusteella(2);
+        assertEquals(2000, saara.getPerintoaSaatu());
+    }
+
+    @Test
+    public void testShouldGiveHalfOfMoneyToFirstAndHalfToSecondChild() {
+        String input = """
+                1 2000
+                -1 Klaara 0 0
+                2 Saara 0 1
+                3 Jaana 0 1
+                """;
+        Perinnonjako perinnonjako = new Perinnonjako(input);
+        perinnonjako.suoritaPerinnonjako();
+        Perija saara = perinnonjako.etsiHenkiloIdPerusteella(2);
+        Perija jaana = perinnonjako.etsiHenkiloIdPerusteella(3);
+        assertEquals(1000, saara.getPerintoaSaatu());
+        assertEquals(1000, jaana.getPerintoaSaatu());
+        assertEquals(0, perinnonjako.getValtionOsuus());
+    }
+
+    @Test
+    public void testShouldGiveHalfOfMoneyToFirstAndHalfToSecondChildAndWhatsLeftToState() {
+        String input = """
+                1 2001
+                -1 Klaara 0 0
+                2 Saara 0 1
+                3 Jaana 0 1
+                """;
+        Perinnonjako perinnonjako = new Perinnonjako(input);
+        perinnonjako.suoritaPerinnonjako();
+        Perija saara = perinnonjako.etsiHenkiloIdPerusteella(2);
+        Perija jaana = perinnonjako.etsiHenkiloIdPerusteella(3);
+        assertEquals(1000, saara.getPerintoaSaatu());
+        assertEquals(1000, jaana.getPerintoaSaatu());
+        assertEquals(1, perinnonjako.getValtionOsuus());
+    }
+
+    @Test
+    public void testShouldGiveAllTheInheritanceToStateIfNoLivingOffspring() {
+        String input = """
+                   1 2001
+                -1 Klaara 0 0
+                -2 Saara 0 1
+                -3 Jaana 0 1
+                """;
+        Perinnonjako perinnonjako = new Perinnonjako(input);
+        perinnonjako.suoritaPerinnonjako();
+        assertEquals(2001, perinnonjako.getValtionOsuus());
 
     }
 
     public Perinnonjako luoTestCase(String input) {
          return new Perinnonjako(input);
+    }
+
+    @Test
+    public void testShouldAddChildrenToTheListOfHeirs() {
+        String input = """
+                   1 2001
+                -1 Klaara 0 0
+                2 Saara 0 1
+                3 Jaana 0 1
+                """;
+        Perinnonjako perinnonjako = new Perinnonjako(input);
+        perinnonjako.suoritaPerinnonjako();
+        ArrayList<Perija> perijat = perinnonjako.getPerijat();
+        assertEquals(3, perijat.size());
+        assertEquals("Saara", perijat.get(0).getNimi());
+        assertEquals("Jaana", perijat.get(1).getNimi());
+        assertEquals("Valtio", perijat.get(2).getNimi());
     }
 }
