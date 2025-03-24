@@ -42,22 +42,30 @@ public class Perinnonjako {
     }
 
     public void jaaPerinto() {
-        // TODO Tämän voisi refaktoroida muotoon getPerijat
         ArrayList<Perija> vainajanLapset = this.vainaja.getPerijat();
+        ArrayList<Perija> vainajanElavatLapset = new ArrayList<>();
+
+        for (Perija perija: vainajanLapset) {
+            if (perija.onElossa()) {
+                vainajanElavatLapset.add(perija);
+            }
+        }
 
         int perintoOsuus = perinnonMaara / vainajanLapset.size();
 
-        for (Perija lapsi: vainajanLapset) {
-            lapsi.vastaanOtaPerinto(perintoOsuus);
-            if (lapsi.onElossa()) {
-                perinnonMaara -= perintoOsuus;
-                perijat.add(lapsi);
+        if (vainajanElavatLapset.isEmpty()) {
+            valtionOsuus = perinnonMaara;
+            perijat.add(new Perija("Valtio", true, 99));
+        } else {
+
+            for (Perija lapsi : vainajanElavatLapset) {
+                lapsi.vastaanOtaPerinto(perintoOsuus);
+                if (lapsi.onElossa()) {
+                    perinnonMaara -= perintoOsuus;
+                    perijat.add(lapsi);
+                }
             }
         }
-            if (perinnonMaara > 0) {
-                valtionOsuus = perinnonMaara;
-                perijat.add(new Perija("Valtio", true, 99));
-            }
     }
 
 
@@ -111,7 +119,7 @@ public class Perinnonjako {
                 return h;
             }
         }
-        return new HenkiloEiOlemassa("Ei olemassa", false, -1);
+        return new PerijaEiOlemassa("Ei olemassa", false, -1);
     }
 
 

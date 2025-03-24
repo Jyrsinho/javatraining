@@ -170,7 +170,7 @@ public class PerinnonjakoTest {
         Perija jaana = perinnonjako.etsiHenkiloIdPerusteella(3);
         assertEquals(1000, saara.getPerintoaSaatu());
         assertEquals(1000, jaana.getPerintoaSaatu());
-        assertEquals(0, perinnonjako.getValtionOsuus());
+        assertEquals(0, perinnonjako.getPerinnonMaara());
     }
 
     @Test
@@ -187,7 +187,7 @@ public class PerinnonjakoTest {
         Perija jaana = perinnonjako.etsiHenkiloIdPerusteella(3);
         assertEquals(1000, saara.getPerintoaSaatu());
         assertEquals(1000, jaana.getPerintoaSaatu());
-        assertEquals(1, perinnonjako.getValtionOsuus());
+        assertEquals(1, perinnonjako.getPerinnonMaara());
     }
 
     @Test
@@ -219,9 +219,23 @@ public class PerinnonjakoTest {
         Perinnonjako perinnonjako = new Perinnonjako(input);
         perinnonjako.suoritaPerinnonjako();
         ArrayList<Perija> perijat = perinnonjako.getPerijat();
-        assertEquals(3, perijat.size());
+        assertEquals(2, perijat.size());
         assertEquals("Saara", perijat.get(0).getNimi());
         assertEquals("Jaana", perijat.get(1).getNimi());
-        assertEquals("Valtio", perijat.get(2).getNimi());
+    }
+
+    @Test
+    public void testShouldNotAddDeadChildrenToTheListOfHeirs() {
+        String input = """
+                   1 2001
+                -1 Klaara 0 0
+                -2 Saara 0 1
+                -3 Jaana 0 1
+                """;
+        Perinnonjako perinnonjako = new Perinnonjako(input);
+        perinnonjako.suoritaPerinnonjako();
+        ArrayList<Perija> perijat = perinnonjako.getPerijat();
+        assertEquals(1, perijat.size());
+        assertEquals("Valtio", perijat.get(0).getNimi());
     }
 }
