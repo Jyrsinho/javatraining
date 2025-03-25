@@ -138,7 +138,7 @@ public class PerinnonjakoTest {
                 """;
         Perinnonjako perinnonjako = new Perinnonjako(input);
         perinnonjako.parsePerinnonJako();
-        assertEquals("Saara", perinnonjako.getVainaja().getPerijat().get(0).getNimi());
+        assertEquals("Saara", perinnonjako.getVainaja().getLapset().get(0).getNimi());
     }
 
     @Test
@@ -151,7 +151,7 @@ public class PerinnonjakoTest {
                """;
         Perinnonjako perinnonjako = new Perinnonjako(input);
         perinnonjako.parsePerinnonJako();
-        assertEquals("Timo", perinnonjako.getVainaja().getPerijat().get(0).getPerijat().get(0).getNimi());
+        assertEquals("Timo", perinnonjako.getVainaja().getLapset().get(0).getLapset().get(0).getNimi());
 
     }
 

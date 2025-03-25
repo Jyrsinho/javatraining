@@ -6,7 +6,7 @@ public class Perija {
     private String nimi;
     private boolean elossa;
     private int id;
-    private ArrayList<Perija> perijat;
+    private ArrayList<Perija> lapset;
     int perintoaSaatu;
 
 
@@ -14,7 +14,7 @@ public class Perija {
         this.nimi = nimi;
         this.elossa = elossa;
         this.id = id;
-        this.perijat = new ArrayList<Perija>();
+        this.lapset = new ArrayList<Perija>();
         this.perintoaSaatu = 0;
 
     }
@@ -24,7 +24,7 @@ public class Perija {
     }
 
     public void lisaaPerija(Perija lapsi) {
-        perijat.add(lapsi);
+        lapset.add(lapsi);
     }
 
     public String getNimi() {
@@ -43,8 +43,8 @@ public class Perija {
         return perintoaSaatu;
     }
 
-    public ArrayList<Perija> getPerijat() {
-        return perijat;
+    public ArrayList<Perija> getLapset() {
+        return lapset;
     }
 
 }
