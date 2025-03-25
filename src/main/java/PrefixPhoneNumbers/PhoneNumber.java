@@ -41,7 +41,7 @@ public class PhoneNumber implements Comparable<PhoneNumber>, PrefixChecker<Phone
 
     }
 
-    //TODO fix this to compare length of the phoneNumber not lexicographical values
+
     @Override
     public int compareTo(PhoneNumber o) {
         //comparison based on the length of the strings

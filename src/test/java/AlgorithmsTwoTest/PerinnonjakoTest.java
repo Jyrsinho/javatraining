@@ -22,6 +22,18 @@ public class PerinnonjakoTest {
     }
 
     @Test
+    public void testShouldParseAmountOfInHeritanceFromInputWhenNoLineBreaks(){
+        String input =  """
+                4 1000 -1 Klaara 0 0
+                """;
+        Perinnonjako perinnonjako = new Perinnonjako(input);
+        perinnonjako.parsePerinnonJako();
+        assertEquals(1000 ,perinnonjako.getPerinnonMaara());
+    }
+
+
+
+    @Test
     public void testShouldParseDeceasedIdFromInput(){
         String input =  """
                 4 1000

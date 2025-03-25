@@ -2,7 +2,6 @@ package AlgorithmsTwoTest;
 
 import AlgorithmsTwo.Perinnonjako.Perinnonjako;
 import AlgorithmsTwo.Perinnonjako.PerintojenJakaja;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -12,18 +11,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class PerintojenJakajaTest {
 
 
-    @Test
-    public void testShouldCleanTheInputsTail() {
-
-    }
 
     @Test
-    public testShouldCreateArrayListOfTwoDifferentPerinnonJako() {
-
-    }
-
-
-    @Disabled
     public void testShouldCreateAnInstanceOfPerinnonjako() {
         String input = """
                 1 3000
@@ -31,13 +20,12 @@ public class PerintojenJakajaTest {
                 2 Heikki 1 0 0
                 """;
         PerintojenJakaja perintojenJakaja = new PerintojenJakaja(input);
-        perintojenJakaja.kasitteleSyote();
         int perinnonJakojenMaara = perintojenJakaja.getPerinnonjaot().size();
         assertEquals(1, perinnonJakojenMaara);
 
     }
 
-    @Disabled
+    @Test
     public void testShouldCreateTwoInstancesOfPerinnonjako() {
         String input = """
                 4 7825349
@@ -53,12 +41,11 @@ public class PerintojenJakajaTest {
                 2 syöte_loppui_ennen_tätä_kohtaa 1 0 0 0
                 """;
         PerintojenJakaja perintojenJakaja = new PerintojenJakaja(input);
-        perintojenJakaja.kasitteleSyote();
         int perinnonJakojenMaara = perintojenJakaja.getPerinnonjaot().size();
         assertEquals(2, perinnonJakojenMaara);
     }
 
-    @Disabled
+    @Test
     public void testShouldAddCorrectDeceased() {
         String input = """
                 4 7825349

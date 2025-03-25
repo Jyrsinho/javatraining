@@ -139,7 +139,6 @@ public class MyLLHashMapTest {
     }
 
 
-    //TODO: Test are we breaking the integrity of the list when removing values from the middle of the linkedlist.
 
 
     // This should count the number of LinkedLists within a hashmap array that have a value

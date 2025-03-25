@@ -63,7 +63,6 @@ public class Salesmen {
         int bestMedianholder = 0;
 
         for (int salesman = 0; salesman < sales.length; salesman++) {
-            // TODO CLEAN SALES ARRAY FROM NEGATIVE VALUE
             currentMedian = findMedian(sales[salesman]);
             if (currentMedian > bestMedian) {
                 bestMedian = currentMedian;

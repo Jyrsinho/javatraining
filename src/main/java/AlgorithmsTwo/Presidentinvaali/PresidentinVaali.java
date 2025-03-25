@@ -89,7 +89,6 @@ public class PresidentinVaali {
      * @return
      */
     public Ehdokas ensimmaisenKierroksenVoittaja() {
-        //TODO
         for (Ehdokas ehdokas: tulosLista){
             if ((double)ehdokas.aanimaara / (double)kokonaisAaniMaara > 0.5){
                 return ehdokas;

@@ -36,10 +36,10 @@ public class Perinnonjako {
      */
     public void parsePerinnonJako() {
         Scanner scanner = new Scanner(input);
-        String vainajanTiedot = scanner.nextLine();
-        parsePerinnonTiedot(vainajanTiedot);
+        parsePerinnonTiedot(scanner);
         parseSukulaistenTiedot(scanner);
     }
+
 
     public void jaaPerinto() {
         ArrayList<Perija> vainajanLapset = this.vainaja.getPerijat();
@@ -69,8 +69,7 @@ public class Perinnonjako {
     }
 
 
-    public void parsePerinnonTiedot(String vainajanTiedot) {
-        Scanner scanner = new Scanner(vainajanTiedot);
+    public void parsePerinnonTiedot(Scanner scanner) {
         this.vainajanID = scanner.nextInt();
         this.perinnonMaara = scanner.nextInt();
     }

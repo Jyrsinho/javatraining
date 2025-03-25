@@ -156,7 +156,6 @@ public class SortingAlgorithms {
         return array;
     }
 
-    //TODO: QUICK SORT
 
     /**
      * Sorts the given array using Selection sort.

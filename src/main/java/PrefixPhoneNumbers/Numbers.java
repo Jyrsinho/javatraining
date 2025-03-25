@@ -1,11 +1,8 @@
 package PrefixPhoneNumbers;
 
-//TODO Turn this class into a generic class that can evaluate "String typed phonenumbers and int typed numbers
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
-import java.util.List;
 
 public class Numbers <T extends Comparable<T> & PrefixChecker<T>> {
 
