@@ -58,9 +58,10 @@ public class PerintojenJakaja {
             for (Perija perija: perinnonjako.perijat) {
                 System.out.println(perija.getNimi() + " saa " + perija.getPerintoaSaatu());
             }
-            System.out.println("Valtio saa "+ perinnonjako.getValtionOsuus());
+            if (perinnonjako.getValtionOsuus()>0) {
+                System.out.println("Valtio saa " + perinnonjako.getValtionOsuus());
+            }
             System.out.println("Jakamatta jaa " + perinnonjako.getPerinnonMaara());
-            System.out.println();
         }
     }
 

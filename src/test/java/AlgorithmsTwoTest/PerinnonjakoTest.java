@@ -247,7 +247,12 @@ public class PerinnonjakoTest {
         Perinnonjako perinnonjako = new Perinnonjako(input);
         perinnonjako.suoritaPerinnonjako();
         ArrayList<Perija> perijat = perinnonjako.getPerijat();
-        assertEquals(1, perijat.size());
-        assertEquals("Valtio", perijat.get(0).getNimi());
+        assertEquals(0, perijat.size());
+        assertEquals(2001,perinnonjako.getValtionOsuus());
+    }
+
+    @Test
+    public void testShouldGiveMoneyToGrandChildrenIfChildIsDead() {
+        //TODO
     }
 }
