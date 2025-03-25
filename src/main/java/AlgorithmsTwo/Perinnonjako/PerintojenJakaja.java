@@ -1,8 +1,8 @@
 package AlgorithmsTwo.Perinnonjako;
 
 import java.util.ArrayList;
-import java.util.Objects;
-import java.util.Scanner;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class PerintojenJakaja {
 
@@ -22,35 +22,83 @@ public class PerintojenJakaja {
      */
     public void jaaPerinnot() {
         kasitteleSyote();
+        suoritaPerinnonJaot();
         tulostaPerinnonJaot();
 
     }
 
-    private void kasitteleSyote() {
-        Scanner sc = new Scanner(input);
+    public void kasitteleSyote() {
 
-        //jos syotteessa on perakkain 3 kokonaislukua, joista kolmas on 0, Perinnonjako loppuu.
-        // jos syotteessa on perakkain 4 kokonaislukua Syote loppuu.
+        String perintojenJakoSyoteIlmanHantaa = siivoaSyotteenHantaPois();
+        ArrayList<String> perinnonJakoSyotteet = erottelePerinnonJaot(perintojenJakoSyoteIlmanHantaa);
 
+        for (String perinnonJakoSyote: perinnonJakoSyotteet) {
+            Perinnonjako perinnonjako = new Perinnonjako(perinnonJakoSyote);
+            perinnonjaot.add(perinnonjako);
+        }
+
+    }
+
+    private String siivoaSyotteenHantaPois() {
+        String limiterOsa;
+        String regexSyotteenLoppu = "\\d+\\s\\d+\\s0\\s0";
+        Pattern loppuPattern = Pattern.compile(regexSyotteenLoppu);
+        Matcher loppuMatcher = loppuPattern.matcher(input);
+
+        if (loppuMatcher.find()){
+            String match = loppuMatcher.group();
+            limiterOsa = match;
+        } else limiterOsa = "";
+
+        String[] alkuJaLoppu = input.split(regexSyotteenLoppu);
         StringBuilder sb = new StringBuilder();
-        int perakkaisiaKokonaisLukuja = 0;
+        sb.append(alkuJaLoppu[0]).append(limiterOsa);
 
-        while (sc.hasNext()) {
-            String merkkiJono = sc.next();
-            if (onKokonaisLuku(merkkiJono)){
-                perakkaisiaKokonaisLukuja++;
-            } else {
-                perakkaisiaKokonaisLukuja = 0;
+
+        return sb.toString();
+    }
+
+
+    private ArrayList<String> erottelePerinnonJaot(String perinnonJaot) {
+        ArrayList<String> perinnonJakoSyotteet = new ArrayList<>();
+
+        // Regex pattern to detect "three consecutive integers"
+        String regex = "\\d+\\s\\d+\\s0+";
+
+        // Compile pattern
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher = pattern.matcher(perinnonJaot);
+
+        int lastIndex = 0;
+
+        // Find matches
+        while (matcher.find()) {
+            // Extract substring up to the match
+            String substring = perinnonJaot.substring(lastIndex, matcher.start()).trim();
+            if (!substring.isEmpty()) {
+                perinnonJakoSyotteet.add(substring);
             }
-            if (perakkaisiaKokonaisLukuja == 3 && Objects.equals(merkkiJono, "0")) {
-                Perinnonjako perinnonjako = new Perinnonjako(sb.toString());
-                perinnonjaot.add(perinnonjako);
-                sb.delete(0, sb.length());
-            }
-            if (perakkaisiaKokonaisLukuja== 4 && Objects.equals(merkkiJono, "0")) {
-                break;
-            }
-            sb.append(merkkiJono);
+            lastIndex = matcher.start(); // Include the match in the next part
+        }
+
+        // Add the remaining part
+        if (lastIndex < perinnonJaot.length()) {
+            perinnonJakoSyotteet.add(perinnonJaot.substring(lastIndex).trim());
+        }
+
+        return perinnonJakoSyotteet;
+    }
+
+
+    private void luoUusiPerinnonJako(String syote) {
+        Perinnonjako perinnonjako = new Perinnonjako(syote);
+        perinnonjaot.add(perinnonjako);
+    }
+
+
+    private void suoritaPerinnonJaot() {
+        for (Perinnonjako perinnonjako: perinnonjaot) {
+            perinnonjako.suoritaPerinnonjako();
         }
     }
 
