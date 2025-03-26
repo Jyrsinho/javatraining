@@ -1,6 +1,8 @@
 package AlgorithmsTwo.Perinnonjako;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Scanner;
 
 public class PerintojenJakaja {
@@ -44,15 +46,11 @@ public class PerintojenJakaja {
     }
 
     private void tulostaPerinnonJaot() {
-        /*
-        Esimerkkituloste:
-                            Amalia saa 1956337
-                            Cecilia saa 3912674
-                            Daniel saa 1956337
-                            Jakamatta jää 1
-                            Valtio saa 9
-                            Jakamatta jää 0
-         */
+
+        for (Perinnonjako perinnonjako : perinnonjaot) {
+            // lajitellaan jokaisen perinnonjaon perijalista numerojarjestykseen ID:n perusteella
+            Collections.sort(perinnonjako.perijat, Comparator.comparingInt(p -> p.getId()));
+        }
 
         for (Perinnonjako perinnonjako : perinnonjaot) {
             for (Perija perija: perinnonjako.perijat) {
@@ -61,7 +59,7 @@ public class PerintojenJakaja {
             if (perinnonjako.getValtionOsuus()>0) {
                 System.out.println("Valtio saa " + perinnonjako.getValtionOsuus());
             }
-            System.out.println("Jakamatta jaa " + perinnonjako.getPerinnonMaara());
+            System.out.println("Jakamatta jää " + perinnonjako.getPerinnonMaara());
         }
     }
 
