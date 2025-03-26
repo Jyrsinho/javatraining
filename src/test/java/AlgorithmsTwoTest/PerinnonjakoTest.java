@@ -254,5 +254,22 @@ public class PerinnonjakoTest {
     @Test
     public void testShouldGiveMoneyToGrandChildrenIfChildIsDead() {
         //TODO
+        String input = """
+                1 2000
+                -1 Klaara 0 0
+                -2 Saara 0 1
+                3 Jaana 0 1
+                4 Timo 2 0
+                5 Heikki 2 0
+                """;
+        Perinnonjako perinnonjako = new Perinnonjako(input);
+        perinnonjako.suoritaPerinnonjako();
+        ArrayList<Perija> perijat = perinnonjako.getPerijat();
+        for (Perija perija: perijat) {
+            System.out.println(perija.getPerintoaSaatu());
+        }
+        assertEquals(3, perijat.size());
+        assertEquals(500 ,perijat.getLast().getPerintoaSaatu());
+
     }
 }

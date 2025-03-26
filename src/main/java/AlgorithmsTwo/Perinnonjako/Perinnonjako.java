@@ -40,30 +40,28 @@ public class Perinnonjako {
         parseSukulaistenTiedot(scanner);
     }
 
-
+    /**
+     * Jos perittävällä on jälkeläisiä elossa, perintö jaetaan heille. Jokainen lapsi joka elää tai
+     * jolla on elossa olevia jälkeläisiä saa yhtä suuren osan. Kuolleen lapsen osa jaetaan samalla tavalla
+     * hänen jälkeläisilleen.
+     */
     public void jaaPerinto() {
-        ArrayList<Perija> vainajanLapset = this.vainaja.getLapset();
-        ArrayList<Perija> vainajanElavatLapset = new ArrayList<>();
+        /*ArrayList<Perija> laillisetPerijat = vainaja.laillisetPerijat();
 
-        for (Perija perija: vainajanLapset) {
-            if (perija.onElossa()) {
-                vainajanElavatLapset.add(perija);
-            }
-        }
-
-        if (vainajanElavatLapset.isEmpty()) {
+        if (laillisetPerijat.isEmpty()) {
             valtionOsuus = perinnonMaara;
             perinnonMaara = 0;
-        } else {
-            int perintoOsuus = perinnonMaara / vainajanLapset.size();
-            for (Perija lapsi : vainajanElavatLapset) {
-                lapsi.vastaanOtaPerinto(perintoOsuus);
-                if (lapsi.onElossa()) {
-                    perinnonMaara -= perintoOsuus;
-                    perijat.add(lapsi);
-                }
-            }
         }
+
+        int perintoOsuus = perinnonMaara / laillisetPerijat.size();
+
+        for (Perija lapsi: laillisetPerijat){
+            lapsi.peri(perintoOsuus);
+            perinnonMaara -= perintoOsuus;
+        }
+
+         */
+
     }
 
 
@@ -105,7 +103,7 @@ public class Perinnonjako {
         Perija vanhempi = etsiHenkiloIdPerusteella(vanhemmanId);
         Perija lapsi = etsiHenkiloIdPerusteella(lapsenId);
         if (!vanhempi.getClass().getSimpleName().equals("HenkiloEiOlemassa")) {
-            vanhempi.lisaaPerija(lapsi);
+            vanhempi.lisaaLapsi(lapsi);
         }
     }
 

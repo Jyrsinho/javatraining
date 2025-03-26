@@ -23,9 +23,29 @@ public class Perija {
         perintoaSaatu += perinto;
     }
 
-    public void lisaaPerija(Perija lapsi) {
+    public void lisaaLapsi(Perija lapsi) {
         lapset.add(lapsi);
     }
+
+    /**
+     * Palauttaa true jos Perija on itse elossa tai hänellä on eläviä jälkeläisiä
+     */
+    public boolean onLaillinenPerija() {
+
+        if (this.onElossa()) {
+            return true;
+        }
+
+        for (Perija lapsi: this.lapset) {
+            if (lapsi.onLaillinenPerija()) {
+                return true;
+            }
+        }
+
+        return false;
+
+    }
+
 
     public String getNimi() {
         return nimi;
