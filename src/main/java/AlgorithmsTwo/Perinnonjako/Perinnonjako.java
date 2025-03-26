@@ -55,13 +55,10 @@ public class Perinnonjako {
             int perintoOsuus = perinnonMaara / laillisetPerijat.size();
 
             for (Perija perija : laillisetPerijat) {
-                perija.peri(perijat, perintoOsuus);
-                perinnonMaara -= perintoOsuus;
+                perinnonMaara = perija.peri(perinnonMaara, perijat, perintoOsuus);
             }
         }
-
     }
-
 
 
     public void parsePerinnonTiedot(Scanner scanner) {

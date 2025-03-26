@@ -61,19 +61,23 @@ public class Perija {
      * Jos vainaja on elossa hän perii annetun summan muussa tapauksessa hänen jälkeläisensä alenevassa polvessa
      * perivät hänen osuutensa
      * @param perintoSumma summa, joka peritään
+     * @return perinnonMaara palauttaa jaljella olevan perinnonMaaran
      */
-    public void peri(ArrayList<Perija> perijat, int perintoSumma) {
+    public int peri(int perinnonMaara,ArrayList <Perija> perijat, int perintoSumma) {
+
         if (this.onElossa()) {
             perintoaSaatu += perintoSumma;
+            perinnonMaara -= perintoSumma;
             perijat.add(this);
         }else {
             perintoSumma = perintoSumma / this.laillisetPerijat().size();
             for (Perija lapsi: this.laillisetPerijat()) {
-                lapsi.peri(perijat, perintoSumma);
+                perinnonMaara = lapsi.peri(perinnonMaara, perijat, perintoSumma);
             }
         }
-
+        return perinnonMaara;
     }
+
 
 
     public String getNimi() {
