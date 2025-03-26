@@ -29,12 +29,13 @@ public class Perija {
 
 
     /**
-     * Tekee listan Perijan omista perijoista, jotka voivat peria hänet
+     * Tekee listan Perijan omista perijoista, jotka voivat peria hänet. Tähän lasketaan vainajan elossa olevat lapset
+     * sekä vainajan kuolleet lapset, joilla on elossa olevia lapsia jne.
      */
-    public ArrayList<Perija> laillisetPerijat() {
+    public ArrayList<Perija> perivatJalkelaiset() {
         ArrayList<Perija> laillisetPerijat = new ArrayList<Perija>();
         for (Perija lapsi: this.lapset) {
-            if (lapsi.onLaillinenPerija()){
+            if (lapsi.onValidiPerija()){
                 laillisetPerijat.add(lapsi);
             }
         }
@@ -44,13 +45,13 @@ public class Perija {
     /**
      * Palauttaa true jos Perija on itse elossa tai hänellä on eläviä jälkeläisiä
      */
-    public boolean onLaillinenPerija() {
+    public boolean onValidiPerija() {
 
         if (this.onElossa()) {
             return true;
         }
         for (Perija lapsi: this.lapset) {
-            if (lapsi.onLaillinenPerija()) {
+            if (lapsi.onValidiPerija()) {
                 return true;
             }
         }
@@ -70,8 +71,8 @@ public class Perija {
             perinnonMaara -= perintoSumma;
             perijat.add(this);
         }else {
-            perintoSumma = perintoSumma / this.laillisetPerijat().size();
-            for (Perija lapsi: this.laillisetPerijat()) {
+            perintoSumma = perintoSumma / this.perivatJalkelaiset().size();
+            for (Perija lapsi: this.perivatJalkelaiset()) {
                 perinnonMaara = lapsi.peri(perinnonMaara, perijat, perintoSumma);
             }
         }

@@ -10,7 +10,7 @@ public class PerijaTest {
     public void testShouldReturnFalseForLaillinenPerijaWhenPerijaIsdead() {
         Perija perija1  = new Perija("Sami", false, 0);
         boolean expected = false;
-        boolean actual = perija1.onLaillinenPerija();
+        boolean actual = perija1.onValidiPerija();
         assertEquals(expected, actual);
     }
 
@@ -20,7 +20,7 @@ public class PerijaTest {
         Perija lapsi = new Perija("Lapsi", true, 1);
         vanhempi.lisaaLapsi(lapsi);
         boolean expected = true;
-        boolean actual = vanhempi.onLaillinenPerija();
+        boolean actual = vanhempi.onValidiPerija();
         assertEquals(expected, actual);
     }
 
@@ -32,7 +32,7 @@ public class PerijaTest {
         vanhempi.lisaaLapsi(lapsi);
         lapsi.lisaaLapsi(lapsenlapsi);
         boolean expected = true;
-        boolean actual = vanhempi.onLaillinenPerija();
+        boolean actual = vanhempi.onValidiPerija();
         assertEquals(expected, actual);
     }
 
@@ -44,7 +44,7 @@ public class PerijaTest {
         vanhempi.lisaaLapsi(lapsi);
         lapsi.lisaaLapsi(lapsenlapsi);
         boolean expected = false;
-        boolean actual = vanhempi.onLaillinenPerija();
+        boolean actual = vanhempi.onValidiPerija();
         assertEquals(expected, actual);
     }
 }

@@ -11,31 +11,30 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class PerinnonjakoTest {
 
     @Test
-    public void testShouldParseAmountOfInHeritanceFromInput(){
-        String input =  """
+    public void testShouldParseAmountOfInHeritanceFromInput() {
+        String input = """
                 4 1000
                 -1 Klaara 0 0
                 """;
         Perinnonjako perinnonjako = new Perinnonjako(input);
         perinnonjako.parsePerinnonJako();
-        assertEquals(1000 ,perinnonjako.getPerinnonMaara());
+        assertEquals(1000, perinnonjako.getPerinnonMaara());
     }
 
     @Test
-    public void testShouldParseAmountOfInHeritanceFromInputWhenNoLineBreaks(){
-        String input =  """
+    public void testShouldParseAmountOfInHeritanceFromInputWhenNoLineBreaks() {
+        String input = """
                 4 1000 -1 Klaara 0 0
                 """;
         Perinnonjako perinnonjako = new Perinnonjako(input);
         perinnonjako.parsePerinnonJako();
-        assertEquals(1000 ,perinnonjako.getPerinnonMaara());
+        assertEquals(1000, perinnonjako.getPerinnonMaara());
     }
 
 
-
     @Test
-    public void testShouldParseDeceasedIdFromInput(){
-        String input =  """
+    public void testShouldParseDeceasedIdFromInput() {
+        String input = """
                 4 1000
                 -1 Klaara 0 0
                 """;
@@ -45,7 +44,7 @@ public class PerinnonjakoTest {
     }
 
     @Test
-    public void testShouldParseDeceasedFromInput(){
+    public void testShouldParseDeceasedFromInput() {
         String input = """
                 4 1000
                 -4 Klaara 0 0
@@ -144,11 +143,11 @@ public class PerinnonjakoTest {
     @Test
     public void testShouldAddChildrenChildrenToDeceased() {
         String input = """
-               1 2000
-               -1 Klaara 0 0
-               2 Saara 0 1
-               3 Timo 0 2
-               """;
+                1 2000
+                -1 Klaara 0 0
+                2 Saara 0 1
+                3 Timo 0 2
+                """;
         Perinnonjako perinnonjako = new Perinnonjako(input);
         perinnonjako.parsePerinnonJako();
         assertEquals("Timo", perinnonjako.getVainaja().getLapset().get(0).getLapset().get(0).getNimi());
@@ -217,7 +216,7 @@ public class PerinnonjakoTest {
     }
 
     public Perinnonjako luoTestCase(String input) {
-         return new Perinnonjako(input);
+        return new Perinnonjako(input);
     }
 
     @Test
@@ -248,7 +247,7 @@ public class PerinnonjakoTest {
         perinnonjako.suoritaPerinnonjako();
         ArrayList<Perija> perijat = perinnonjako.getPerijat();
         assertEquals(0, perijat.size());
-        assertEquals(2001,perinnonjako.getValtionOsuus());
+        assertEquals(2001, perinnonjako.getValtionOsuus());
     }
 
     @Test
@@ -265,12 +264,12 @@ public class PerinnonjakoTest {
         Perinnonjako perinnonjako = new Perinnonjako(input);
         perinnonjako.suoritaPerinnonjako();
         ArrayList<Perija> perijat = perinnonjako.getPerijat();
-        for (Perija perija: perijat) {
+        for (Perija perija : perijat) {
             System.out.println(perija.getNimi());
             System.out.println(perija.getPerintoaSaatu());
         }
         assertEquals(3, perijat.size());
-        assertEquals(500 , perijat.getFirst().getPerintoaSaatu());
+        assertEquals(500, perijat.getFirst().getPerintoaSaatu());
 
     }
 
@@ -287,11 +286,76 @@ public class PerinnonjakoTest {
         Perinnonjako perinnonjako = new Perinnonjako(input);
         perinnonjako.suoritaPerinnonjako();
         ArrayList<Perija> perijat = perinnonjako.getPerijat();
-        for (Perija perija: perijat) {
+        for (Perija perija : perijat) {
             System.out.println(perija.getNimi());
             System.out.println(perija.getPerintoaSaatu());
         }
         assertEquals(1, perinnonjako.getPerinnonMaara());
 
+    }
+
+    @Test
+    public void testShouldGetVainajasParents() {
+        String input = """
+                3 10
+                1 Klaara 0 0
+                2 Saara 0 0
+                -3 Jaana 2 1
+                -4 Timo 3 0
+                -5 Heikki 3 0
+                """;
+    Perinnonjako perinnonjako = new Perinnonjako(input);
+    perinnonjako.parsePerinnonJako();
+    Perija vainaja = perinnonjako.getVainaja();
+    ArrayList<Perija> vainajanVanhemmat = perinnonjako.etsiVanhemmat(vainaja);
+    assertEquals(2, vainajanVanhemmat.size());
+    assertEquals("Klaara",vainajanVanhemmat.getFirst().getNimi());
+    assertEquals("Saara",vainajanVanhemmat.get(1).getNimi());
+
+}
+
+
+    @Test
+    public void testShouldGiveInHeritanceToParentsWhenNoLivingOffSpring() {
+        String input = """
+                3 10
+                1 Klaara 0 0
+                2 Saara 0 0
+                -3 Jaana 2 1
+                -4 Timo 3 0
+                -5 Heikki 3 0
+                """;
+        Perinnonjako perinnonjako = new Perinnonjako(input);
+        perinnonjako.suoritaPerinnonjako();
+        ArrayList<Perija> perijat = perinnonjako.getPerijat();
+        for (Perija perija: perijat) {
+            System.out.println(perija.getNimi());
+            System.out.println(perija.getPerintoaSaatu());
+        }
+        assertEquals("Klaara",perijat.getFirst().getNimi());
+        assertEquals("Saara",perijat.get(1).getNimi());
+    }
+
+    @Test
+    public void testShouldGiveInHeritanceToParentsChildrensChildrenWhenTheyAreOnlyLivingRelatives() {
+        String input = """
+                3 10
+                -1 Klaara 0 0
+                -2 Saara 0 0
+                -3 Jaana 2 1
+                -4 Timo 3 0
+                -5 Heikki 3 0
+                -6 Janina 2 0
+                7 Samina 6 0
+                
+                """;
+        Perinnonjako perinnonjako = new Perinnonjako(input);
+        perinnonjako.suoritaPerinnonjako();
+        ArrayList<Perija> perijat = perinnonjako.getPerijat();
+        for (Perija perija: perijat) {
+            System.out.println(perija.getNimi());
+            System.out.println(perija.getPerintoaSaatu());
+        }
+        assertEquals("Samina",perijat.getFirst().getNimi());
     }
 }

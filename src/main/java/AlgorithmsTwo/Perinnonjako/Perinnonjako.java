@@ -7,13 +7,17 @@ import java.util.Scanner;
  * Käsittelee yhden perinnönjaon kerrallaan
  */
 public class Perinnonjako {
-    private final String input;
+    private String input;
     private int perinnonMaara;
     private int vainajanID;
     private int valtionOsuus;
     private Perija vainaja;
     ArrayList<Perija> sukulaiset;
     ArrayList<Perija> perijat;
+
+    public Perinnonjako() {
+
+    }
 
 
 
@@ -46,18 +50,62 @@ public class Perinnonjako {
      * hänen jälkeläisilleen.
      */
     public void jaaPerinto() {
-        ArrayList<Perija> laillisetPerijat = vainaja.laillisetPerijat();
-
-        if (laillisetPerijat.isEmpty()) {
-            valtionOsuus = perinnonMaara;
-            perinnonMaara = 0;
+        ArrayList<Perija> elossaTaiPerillisia = vainaja.perivatJalkelaiset();
+        // jos ei ole suoria jalkelaisia annetaan perinto vanhemmille
+        if (elossaTaiPerillisia.isEmpty()) {
+            jaaPerintoVanhemmille();
         } else {
-            int perintoOsuus = perinnonMaara / laillisetPerijat.size();
+            int perintoOsuus = perinnonMaara / elossaTaiPerillisia.size();
 
-            for (Perija perija : laillisetPerijat) {
+            for (Perija perija : elossaTaiPerillisia) {
                 perinnonMaara = perija.peri(perinnonMaara, perijat, perintoOsuus);
             }
         }
+        // ollaan yritetty antaa perinto lapsille ja vanhemmille, mutta perijat lista on yhä tyhjä. Joten annetaan
+        // perintö valtiolle
+        if (perijat.isEmpty()){
+            jaaPerintoValtiolle();
+        }
+    }
+
+    private void jaaPerintoVanhemmille() {
+        ArrayList<Perija> vainajanVanhemmat = etsiVanhemmat(vainaja);
+        ArrayList<Perija> validitPerijatVanhemmista = new ArrayList<>();
+
+        for (Perija vanhempi: vainajanVanhemmat) {
+            if (vanhempi.onValidiPerija()) {
+                validitPerijatVanhemmista.add(vanhempi);
+            }
+        }
+
+
+        if (!validitPerijatVanhemmista.isEmpty()) {
+            int perintoOsuus = perinnonMaara / validitPerijatVanhemmista.size();
+            for (Perija perija : validitPerijatVanhemmista) {
+                perija.peri(perinnonMaara, perijat, perintoOsuus);
+            }
+        }
+
+    }
+
+    /**
+     * Etsitaan henkilon vanhemmat. Jos vanhempia ei löydy, palautetaan -tyhja lista.
+     * @param henkilo jonka vanhempia etsitaan
+     */
+    public ArrayList<Perija> etsiVanhemmat(Perija henkilo) {
+        ArrayList<Perija> vanhemmat = new ArrayList<>();
+        for (Perija ehdokas : sukulaiset) {
+            if (ehdokas.getLapset().contains(henkilo)){
+             vanhemmat.add(ehdokas);
+            }
+        }
+        return vanhemmat;
+    }
+
+
+    private void jaaPerintoValtiolle() {
+        valtionOsuus = perinnonMaara;
+        perinnonMaara = 0;
     }
 
 
@@ -118,7 +166,6 @@ public class Perinnonjako {
         return vainaja;
     }
 
-
     public ArrayList<Perija> getSukulaiset() {
         return sukulaiset;
     }
@@ -131,7 +178,6 @@ public class Perinnonjako {
         return vainajanID;
     }
 
-
     public int getValtionOsuus() {
         return valtionOsuus;
     }
@@ -139,7 +185,6 @@ public class Perinnonjako {
     public ArrayList<Perija> getPerijat() {
         return perijat;
     }
-
 
     public static void main(String[] args) {
 
