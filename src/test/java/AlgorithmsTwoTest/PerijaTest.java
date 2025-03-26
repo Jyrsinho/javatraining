@@ -35,4 +35,16 @@ public class PerijaTest {
         boolean actual = vanhempi.onLaillinenPerija();
         assertEquals(expected, actual);
     }
+
+    @Test
+    public void testShouldReturnFalseForLaillinenPerijaWhenAllTheOffspringIsDead() {
+        Perija vanhempi = new Perija("Vanhempi", false, 0);
+        Perija lapsi = new Perija("Lapsi", false, 1);
+        Perija lapsenlapsi = new Perija("Lapsenlapsi", false, 2);
+        vanhempi.lisaaLapsi(lapsi);
+        lapsi.lisaaLapsi(lapsenlapsi);
+        boolean expected = false;
+        boolean actual = vanhempi.onLaillinenPerija();
+        assertEquals(expected, actual);
+    }
 }

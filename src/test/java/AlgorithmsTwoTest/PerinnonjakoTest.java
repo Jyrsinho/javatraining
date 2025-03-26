@@ -266,10 +266,32 @@ public class PerinnonjakoTest {
         perinnonjako.suoritaPerinnonjako();
         ArrayList<Perija> perijat = perinnonjako.getPerijat();
         for (Perija perija: perijat) {
+            System.out.println(perija.getNimi());
             System.out.println(perija.getPerintoaSaatu());
         }
         assertEquals(3, perijat.size());
-        assertEquals(500 ,perijat.getLast().getPerintoaSaatu());
+        assertEquals(500 , perijat.getFirst().getPerintoaSaatu());
+
+    }
+
+    @Test
+    public void testShouldLeaveOneMoneyUndividedWhenSumEvenOneLivingHeirAndSecondDeadWithTwoChildre() {
+        String input = """
+                1 10
+                -1 Klaara 0 0
+                -2 Saara 0 1
+                3 Jaana 0 1
+                4 Timo 2 0
+                5 Heikki 2 0
+                """;
+        Perinnonjako perinnonjako = new Perinnonjako(input);
+        perinnonjako.suoritaPerinnonjako();
+        ArrayList<Perija> perijat = perinnonjako.getPerijat();
+        for (Perija perija: perijat) {
+            System.out.println(perija.getNimi());
+            System.out.println(perija.getPerintoaSaatu());
+        }
+        assertEquals(1, perinnonjako.getPerinnonMaara());
 
     }
 }

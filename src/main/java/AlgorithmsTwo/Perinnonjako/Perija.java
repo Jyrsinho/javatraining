@@ -3,10 +3,10 @@ package AlgorithmsTwo.Perinnonjako;
 import java.util.ArrayList;
 
 public class Perija {
-    private String nimi;
-    private boolean elossa;
-    private int id;
-    private ArrayList<Perija> lapset;
+    private final String nimi;
+    private final boolean elossa;
+    private final int id;
+    private final ArrayList<Perija> lapset;
     int perintoaSaatu;
 
 
@@ -27,6 +27,20 @@ public class Perija {
         lapset.add(lapsi);
     }
 
+
+    /**
+     * Tekee listan Perijan omista perijoista, jotka voivat peria hänet
+     */
+    public ArrayList<Perija> laillisetPerijat() {
+        ArrayList<Perija> laillisetPerijat = new ArrayList<Perija>();
+        for (Perija lapsi: this.lapset) {
+            if (lapsi.onLaillinenPerija()){
+                laillisetPerijat.add(lapsi);
+            }
+        }
+        return laillisetPerijat;
+    }
+
     /**
      * Palauttaa true jos Perija on itse elossa tai hänellä on eläviä jälkeläisiä
      */
@@ -35,14 +49,29 @@ public class Perija {
         if (this.onElossa()) {
             return true;
         }
-
         for (Perija lapsi: this.lapset) {
             if (lapsi.onLaillinenPerija()) {
                 return true;
             }
         }
-
         return false;
+    }
+
+    /**
+     * Jos vainaja on elossa hän perii annetun summan muussa tapauksessa hänen jälkeläisensä alenevassa polvessa
+     * perivät hänen osuutensa
+     * @param perintoSumma summa, joka peritään
+     */
+    public void peri(ArrayList<Perija> perijat, int perintoSumma) {
+        if (this.onElossa()) {
+            perintoaSaatu += perintoSumma;
+            perijat.add(this);
+        }else {
+            perintoSumma = perintoSumma / this.laillisetPerijat().size();
+            for (Perija lapsi: this.laillisetPerijat()) {
+                lapsi.peri(perijat, perintoSumma);
+            }
+        }
 
     }
 

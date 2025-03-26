@@ -46,23 +46,22 @@ public class Perinnonjako {
      * hänen jälkeläisilleen.
      */
     public void jaaPerinto() {
-        /*ArrayList<Perija> laillisetPerijat = vainaja.laillisetPerijat();
+        ArrayList<Perija> laillisetPerijat = vainaja.laillisetPerijat();
 
         if (laillisetPerijat.isEmpty()) {
             valtionOsuus = perinnonMaara;
             perinnonMaara = 0;
+        } else {
+            int perintoOsuus = perinnonMaara / laillisetPerijat.size();
+
+            for (Perija perija : laillisetPerijat) {
+                perija.peri(perijat, perintoOsuus);
+                perinnonMaara -= perintoOsuus;
+            }
         }
-
-        int perintoOsuus = perinnonMaara / laillisetPerijat.size();
-
-        for (Perija lapsi: laillisetPerijat){
-            lapsi.peri(perintoOsuus);
-            perinnonMaara -= perintoOsuus;
-        }
-
-         */
 
     }
+
 
 
     public void parsePerinnonTiedot(Scanner scanner) {
