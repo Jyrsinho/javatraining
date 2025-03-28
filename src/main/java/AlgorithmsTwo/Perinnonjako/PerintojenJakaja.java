@@ -32,15 +32,14 @@ public class PerintojenJakaja {
 
 
     public void luoPerinnonJaot(ArrayList<String> perinnonjakoSyotteet) {
-        for (String perinnonjakoSyote: perinnonjakoSyotteet) {
+        for (String perinnonjakoSyote : perinnonjakoSyotteet) {
             perinnonjaot.add(new Perinnonjako(perinnonjakoSyote));
         }
     }
 
 
-
     private void suoritaPerinnonJaot() {
-        for (Perinnonjako perinnonjako: perinnonjaot) {
+        for (Perinnonjako perinnonjako : perinnonjaot) {
             perinnonjako.suoritaPerinnonjako();
         }
     }
@@ -53,10 +52,10 @@ public class PerintojenJakaja {
         }
 
         for (Perinnonjako perinnonjako : perinnonjaot) {
-            for (Perija perija: perinnonjako.perijat) {
+            for (Perija perija : perinnonjako.perijat) {
                 System.out.println(perija.getNimi() + " saa " + perija.getPerintoaSaatu());
             }
-            if (perinnonjako.getValtionOsuus()>0) {
+            if (perinnonjako.getValtionOsuus() > 0) {
                 System.out.println("Valtio saa " + perinnonjako.getValtionOsuus());
             }
             System.out.println("Jakamatta jää " + perinnonjako.getPerinnonMaara());
@@ -67,12 +66,12 @@ public class PerintojenJakaja {
      * Palauttaa true jos annetun merkkijonon voi parsia kokonaisluvuksi
      */
     private boolean onKokonaisLuku(String merkkijono) {
-     try {
-        Integer.parseInt(merkkijono);
-        return true;
-     } catch (NumberFormatException e) {
-        return false;
-     }
+        try {
+            Integer.parseInt(merkkijono);
+            return true;
+        } catch (NumberFormatException e) {
+            return false;
+        }
     }
 
     public ArrayList<Perinnonjako> getPerinnonjaot() {
@@ -83,330 +82,6 @@ public class PerintojenJakaja {
         Scanner sc = new Scanner(System.in);
         StringBuilder syote = new StringBuilder();
 
-        String testString = """
-                4 7825349
-                1 Klaara 0 0
-                2 Vihtori 0 0
-                3 Amalia 0 2
-                -4 Bernard 2 1
-                5 Cecilia 1 2
-                -6 Erika 0 0
-                7 Ferdinand 6 0
-                8 Daniel 0 1
-                0
-                4 7825349
-                -1 Klaara 0 0
-                2 Vihtori 0 0
-                3 Amalia 0 2
-                -4 Bernard 2 1
-                5 Cecilia 1 2
-                -6 Erika 0 0
-                7 Ferdinand 6 0
-                8 Daniel 0 1
-                0
-                4 7825349
-                1 Klaara 0 0
-                -2 Vihtori 0 0
-                3 Amalia 0 2
-                -4 Bernard 2 1
-                5 Cecilia 1 2
-                -6 Erika 0 0
-                7 Ferdinand 6 0
-                8 Daniel 0 1
-                0
-                4 7825349
-                -1 Klaara 0 0
-                -2 Vihtori 0 0
-                3 Amalia 0 2
-                -4 Bernard 2 1
-                5 Cecilia 1 2
-                -6 Erika 0 0
-                7 Ferdinand 6 0
-                8 Daniel 0 1
-                0
-                4 7825349
-                1 Klaara 0 0
-                2 Vihtori 0 0
-                -3 Amalia 0 2
-                -4 Bernard 2 1
-                5 Cecilia 1 2
-                -6 Erika 0 0
-                7 Ferdinand 6 0
-                8 Daniel 0 1
-                0
-                4 7825349
-                -1 Klaara 0 0
-                2 Vihtori 0 0
-                -3 Amalia 0 2
-                -4 Bernard 2 1
-                5 Cecilia 1 2
-                -6 Erika 0 0
-                7 Ferdinand 6 0
-                8 Daniel 0 1
-                0
-                4 7825349
-                1 Klaara 0 0
-                -2 Vihtori 0 0
-                -3 Amalia 0 2
-                -4 Bernard 2 1
-                5 Cecilia 1 2
-                -6 Erika 0 0
-                7 Ferdinand 6 0
-                8 Daniel 0 1
-                0
-                4 7825349
-                -1 Klaara 0 0
-                -2 Vihtori 0 0
-                -3 Amalia 0 2
-                -4 Bernard 2 1
-                5 Cecilia 1 2
-                -6 Erika 0 0
-                7 Ferdinand 6 0
-                8 Daniel 0 1
-                0
-                4 7825349
-                1 Klaara 0 0
-                2 Vihtori 0 0
-                3 Amalia 0 2
-                -4 Bernard 2 1
-                -5 Cecilia 1 2
-                -6 Erika 0 0
-                7 Ferdinand 6 0
-                8 Daniel 0 1
-                0
-                4 7825349
-                -1 Klaara 0 0
-                2 Vihtori 0 0
-                3 Amalia 0 2
-                -4 Bernard 2 1
-                -5 Cecilia 1 2
-                -6 Erika 0 0
-                7 Ferdinand 6 0
-                8 Daniel 0 1
-                0
-                4 7825349
-                1 Klaara 0 0
-                -2 Vihtori 0 0
-                3 Amalia 0 2
-                -4 Bernard 2 1
-                -5 Cecilia 1 2
-                -6 Erika 0 0
-                7 Ferdinand 6 0
-                8 Daniel 0 1
-                0
-                4 7825349
-                -1 Klaara 0 0
-                -2 Vihtori 0 0
-                3 Amalia 0 2
-                -4 Bernard 2 1
-                -5 Cecilia 1 2
-                -6 Erika 0 0
-                7 Ferdinand 6 0
-                8 Daniel 0 1
-                0
-                4 7825349
-                1 Klaara 0 0
-                2 Vihtori 0 0
-                -3 Amalia 0 2
-                -4 Bernard 2 1
-                -5 Cecilia 1 2
-                -6 Erika 0 0
-                7 Ferdinand 6 0
-                8 Daniel 0 1
-                0
-                4 7825349
-                -1 Klaara 0 0
-                2 Vihtori 0 0
-                -3 Amalia 0 2
-                -4 Bernard 2 1
-                -5 Cecilia 1 2
-                -6 Erika 0 0
-                7 Ferdinand 6 0
-                8 Daniel 0 1
-                0
-                4 7825349
-                1 Klaara 0 0
-                -2 Vihtori 0 0
-                -3 Amalia 0 2
-                -4 Bernard 2 1
-                -5 Cecilia 1 2
-                -6 Erika 0 0
-                7 Ferdinand 6 0
-                8 Daniel 0 1
-                0
-                4 7825349
-                -1 Klaara 0 0
-                -2 Vihtori 0 0
-                -3 Amalia 0 2
-                -4 Bernard 2 1
-                -5 Cecilia 1 2
-                -6 Erika 0 0
-                7 Ferdinand 6 0
-                8 Daniel 0 1
-                0
-                4 7825349
-                1 Klaara 0 0
-                2 Vihtori 0 0
-                3 Amalia 0 2
-                -4 Bernard 2 1
-                5 Cecilia 1 2
-                -6 Erika 0 0
-                7 Ferdinand 6 0
-                -8 Daniel 0 1
-                0
-                4 7825349
-                -1 Klaara 0 0
-                2 Vihtori 0 0
-                3 Amalia 0 2
-                -4 Bernard 2 1
-                5 Cecilia 1 2
-                -6 Erika 0 0
-                7 Ferdinand 6 0
-                -8 Daniel 0 1
-                0
-                4 7825349
-                1 Klaara 0 0
-                -2 Vihtori 0 0
-                3 Amalia 0 2
-                -4 Bernard 2 1
-                5 Cecilia 1 2
-                -6 Erika 0 0
-                7 Ferdinand 6 0
-                -8 Daniel 0 1
-                0
-                4 7825349
-                -1 Klaara 0 0
-                -2 Vihtori 0 0
-                3 Amalia 0 2
-                -4 Bernard 2 1
-                5 Cecilia 1 2
-                -6 Erika 0 0
-                7 Ferdinand 6 0
-                -8 Daniel 0 1
-                0
-                4 7825349
-                1 Klaara 0 0
-                2 Vihtori 0 0
-                -3 Amalia 0 2
-                -4 Bernard 2 1
-                5 Cecilia 1 2
-                -6 Erika 0 0
-                7 Ferdinand 6 0
-                -8 Daniel 0 1
-                0
-                4 7825349
-                -1 Klaara 0 0
-                2 Vihtori 0 0
-                -3 Amalia 0 2
-                -4 Bernard 2 1
-                5 Cecilia 1 2
-                -6 Erika 0 0
-                7 Ferdinand 6 0
-                -8 Daniel 0 1
-                0
-                4 7825349
-                1 Klaara 0 0
-                -2 Vihtori 0 0
-                -3 Amalia 0 2
-                -4 Bernard 2 1
-                5 Cecilia 1 2
-                -6 Erika 0 0
-                7 Ferdinand 6 0
-                -8 Daniel 0 1
-                0
-                4 7825349
-                -1 Klaara 0 0
-                -2 Vihtori 0 0
-                -3 Amalia 0 2
-                -4 Bernard 2 1
-                5 Cecilia 1 2
-                -6 Erika 0 0
-                7 Ferdinand 6 0
-                -8 Daniel 0 1
-                0
-                4 7825349
-                1 Klaara 0 0
-                2 Vihtori 0 0
-                3 Amalia 0 2
-                -4 Bernard 2 1
-                -5 Cecilia 1 2
-                -6 Erika 0 0
-                7 Ferdinand 6 0
-                -8 Daniel 0 1
-                0
-                4 7825349
-                -1 Klaara 0 0
-                2 Vihtori 0 0
-                3 Amalia 0 2
-                -4 Bernard 2 1
-                -5 Cecilia 1 2
-                -6 Erika 0 0
-                7 Ferdinand 6 0
-                -8 Daniel 0 1
-                0
-                4 7825349
-                1 Klaara 0 0
-                -2 Vihtori 0 0
-                3 Amalia 0 2
-                -4 Bernard 2 1
-                -5 Cecilia 1 2
-                -6 Erika 0 0
-                7 Ferdinand 6 0
-                -8 Daniel 0 1
-                0
-                4 7825349
-                -1 Klaara 0 0
-                -2 Vihtori 0 0
-                3 Amalia 0 2
-                -4 Bernard 2 1
-                -5 Cecilia 1 2
-                -6 Erika 0 0
-                7 Ferdinand 6 0
-                -8 Daniel 0 1
-                0
-                4 7825349
-                1 Klaara 0 0
-                2 Vihtori 0 0
-                -3 Amalia 0 2
-                -4 Bernard 2 1
-                -5 Cecilia 1 2
-                -6 Erika 0 0
-                7 Ferdinand 6 0
-                -8 Daniel 0 1
-                0
-                4 7825349
-                -1 Klaara 0 0
-                2 Vihtori 0 0
-                -3 Amalia 0 2
-                -4 Bernard 2 1
-                -5 Cecilia 1 2
-                -6 Erika 0 0
-                7 Ferdinand 6 0
-                -8 Daniel 0 1
-                0
-                4 7825349
-                1 Klaara 0 0
-                -2 Vihtori 0 0
-                -3 Amalia 0 2
-                -4 Bernard 2 1
-                -5 Cecilia 1 2
-                -6 Erika 0 0
-                7 Ferdinand 6 0
-                -8 Daniel 0 1
-                0
-                4 7825349
-                -1 Klaara 0 0
-                -2 Vihtori 0 0
-                -3 Amalia 0 2
-                -4 Bernard 2 1
-                -5 Cecilia 1 2
-                -6 Erika 0 0
-                7 Ferdinand 6 0
-                -8 Daniel 0 1
-                0
-                0
-                """;
-       /*
         while (sc.hasNextLine()) {
             String line = sc.nextLine();
             if (line.isEmpty()) {
@@ -416,8 +91,7 @@ public class PerintojenJakaja {
         }
 
 
-        */
-        PerintojenJakaja perintojenJakaja = new PerintojenJakaja(testString);
+        PerintojenJakaja perintojenJakaja = new PerintojenJakaja(syote.toString());
         perintojenJakaja.jaaPerinnot();
 
         sc.close();
@@ -425,4 +99,3 @@ public class PerintojenJakaja {
 
     }
 }
-
