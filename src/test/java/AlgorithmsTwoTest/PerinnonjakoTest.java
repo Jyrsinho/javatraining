@@ -264,10 +264,6 @@ public class PerinnonjakoTest {
         Perinnonjako perinnonjako = new Perinnonjako(input);
         perinnonjako.suoritaPerinnonjako();
         ArrayList<Perija> perijat = perinnonjako.getPerijat();
-        for (Perija perija : perijat) {
-            System.out.println(perija.getNimi());
-            System.out.println(perija.getPerintoaSaatu());
-        }
         assertEquals(3, perijat.size());
         assertEquals(500, perijat.getFirst().getPerintoaSaatu());
 
@@ -286,10 +282,6 @@ public class PerinnonjakoTest {
         Perinnonjako perinnonjako = new Perinnonjako(input);
         perinnonjako.suoritaPerinnonjako();
         ArrayList<Perija> perijat = perinnonjako.getPerijat();
-        for (Perija perija : perijat) {
-            System.out.println(perija.getNimi());
-            System.out.println(perija.getPerintoaSaatu());
-        }
         assertEquals(1, perinnonjako.getPerinnonMaara());
 
     }
@@ -328,10 +320,6 @@ public class PerinnonjakoTest {
         Perinnonjako perinnonjako = new Perinnonjako(input);
         perinnonjako.suoritaPerinnonjako();
         ArrayList<Perija> perijat = perinnonjako.getPerijat();
-        for (Perija perija: perijat) {
-            System.out.println(perija.getNimi());
-            System.out.println(perija.getPerintoaSaatu());
-        }
         assertEquals("Klaara",perijat.getFirst().getNimi());
         assertEquals("Saara",perijat.get(1).getNimi());
     }
@@ -352,10 +340,6 @@ public class PerinnonjakoTest {
         Perinnonjako perinnonjako = new Perinnonjako(input);
         perinnonjako.suoritaPerinnonjako();
         ArrayList<Perija> perijat = perinnonjako.getPerijat();
-        for (Perija perija: perijat) {
-            System.out.println(perija.getNimi());
-            System.out.println(perija.getPerintoaSaatu());
-        }
         assertEquals("Samina",perijat.getFirst().getNimi());
     }
 
@@ -375,11 +359,29 @@ public class PerinnonjakoTest {
         Perinnonjako perinnonjako = new Perinnonjako(input);
         perinnonjako.suoritaPerinnonjako();
         ArrayList<Perija> perijat = perinnonjako.getPerijat();
+        assertEquals(true, perinnonjako.getPerijat().isEmpty());
+        assertEquals(10, perinnonjako.getValtionOsuus());
+    }
+
+    @Test
+    public void testShouldGiveInheritanceFromBothParentsToAChild() {
+        String input = """
+                3 10
+                -1 Klaara 0 0
+                -2 Rami 0 0
+                -3 Joakim 1 2
+                4 Siiri 1 2
+                5 Timo 1 0
+                """;
+        Perinnonjako perinnonjako = new Perinnonjako(input);
+        perinnonjako.suoritaPerinnonjako();
+        ArrayList<Perija> perijat = perinnonjako.getPerijat();
         for (Perija perija: perijat) {
             System.out.println(perija.getNimi());
             System.out.println(perija.getPerintoaSaatu());
         }
-        assertEquals(true, perinnonjako.getPerijat().isEmpty());
-        assertEquals(10, perinnonjako.getValtionOsuus());
+        assertEquals(2, perinnonjako.getPerijat().size());
+        assertEquals(7, perijat.getFirst().getPerintoaSaatu());
+        assertEquals(2, perijat.get(1).getPerintoaSaatu());
     }
 }

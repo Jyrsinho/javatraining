@@ -81,8 +81,8 @@ public class Perinnonjako {
 
         if (!validitPerijatVanhemmista.isEmpty()) {
             int perintoOsuus = perinnonMaara / validitPerijatVanhemmista.size();
-            for (Perija perija : validitPerijatVanhemmista) {
-                perija.peri(perinnonMaara, perijat, perintoOsuus);
+            for (Perija perija : vainajanVanhemmat) {
+                perinnonMaara = perija.peri(perinnonMaara, perijat, perintoOsuus);
             }
         }
 

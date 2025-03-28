@@ -69,7 +69,10 @@ public class Perija {
         if (this.onElossa()) {
             perintoaSaatu += perintoSumma;
             perinnonMaara -= perintoSumma;
-            perijat.add(this);
+            // lisataan Perija perijat listaan, jos hanta ei siella viela ole
+            if (!perijat.contains(this)) {
+                perijat.add(this);
+            }
             // jos perija on kuollut ja hanelle on jalkelaisia jaetaan hanen perinto-osuutensa hanen perijoidensa kesken
         }else if (!perivatJalkelaiset().isEmpty()) {
             perintoSumma = perintoSumma / this.perivatJalkelaiset().size();
