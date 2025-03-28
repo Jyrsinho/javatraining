@@ -358,4 +358,28 @@ public class PerinnonjakoTest {
         }
         assertEquals("Samina",perijat.getFirst().getNimi());
     }
+
+    @Test
+    public void testShouldGiveInheritanceToValtioIfNoLivingRelatives() {
+        String input = """
+                3 10
+                -1 Klaara 0 0
+                -2 Saara 0 0
+                -3 Jaana 2 1
+                -4 Timo 3 0
+                -5 Heikki 3 0
+                -6 Janina 2 0
+                -7 Samina 6 0
+              
+                """;
+        Perinnonjako perinnonjako = new Perinnonjako(input);
+        perinnonjako.suoritaPerinnonjako();
+        ArrayList<Perija> perijat = perinnonjako.getPerijat();
+        for (Perija perija: perijat) {
+            System.out.println(perija.getNimi());
+            System.out.println(perija.getPerintoaSaatu());
+        }
+        assertEquals(true, perinnonjako.getPerijat().isEmpty());
+        assertEquals(10, perinnonjako.getValtionOsuus());
+    }
 }

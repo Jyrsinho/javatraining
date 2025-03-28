@@ -65,12 +65,13 @@ public class Perija {
      * @return perinnonMaara palauttaa jaljella olevan perinnonMaaran
      */
     public int peri(int perinnonMaara,ArrayList <Perija> perijat, int perintoSumma) {
-
+            // jos perija on elossa, annetaan perinto perijalle itselleen
         if (this.onElossa()) {
             perintoaSaatu += perintoSumma;
             perinnonMaara -= perintoSumma;
             perijat.add(this);
-        }else {
+            // jos perija on kuollut ja hanelle on jalkelaisia jaetaan hanen perinto-osuutensa hanen perijoidensa kesken
+        }else if (!perivatJalkelaiset().isEmpty()) {
             perintoSumma = perintoSumma / this.perivatJalkelaiset().size();
             for (Perija lapsi: this.perivatJalkelaiset()) {
                 perinnonMaara = lapsi.peri(perinnonMaara, perijat, perintoSumma);
