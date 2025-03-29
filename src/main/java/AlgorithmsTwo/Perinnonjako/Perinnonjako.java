@@ -46,11 +46,7 @@ public class Perinnonjako {
         if (elossaTaiPerillisia.isEmpty()) {
             jaaPerintoVanhemmille();
         } else {
-            int perintoOsuus = perinnonMaara / elossaTaiPerillisia.size();
-
-            for (Perija perija : elossaTaiPerillisia) {
-                perinnonMaara = perija.peri(perinnonMaara, perijat, perintoOsuus);
-            }
+            jaaPerintoALenevassaPolvessa(elossaTaiPerillisia);
         }
         // ollaan yritetty antaa perinto lapsille ja vanhemmille, mutta perijat lista on yhä tyhjä. Joten annetaan
         // perintö valtiolle
@@ -58,6 +54,16 @@ public class Perinnonjako {
             jaaPerintoValtiolle();
         }
     }
+
+
+    private void jaaPerintoALenevassaPolvessa(ArrayList<Perija> elossaTaiPerillisia) {
+        int perintoOsuus = perinnonMaara / elossaTaiPerillisia.size();
+
+        for (Perija perija : elossaTaiPerillisia) {
+            perinnonMaara = perija.peri(perinnonMaara, perijat, perintoOsuus);
+        }
+    }
+
 
     private void jaaPerintoVanhemmille() {
         ArrayList<Perija> vainajanVanhemmat = etsiVanhemmat(vainaja);
@@ -68,7 +74,6 @@ public class Perinnonjako {
                 validitPerijatVanhemmista.add(vanhempi);
             }
         }
-
 
         if (!validitPerijatVanhemmista.isEmpty()) {
             int perintoOsuus = perinnonMaara / validitPerijatVanhemmista.size();
@@ -203,10 +208,6 @@ public class Perinnonjako {
     public ArrayList<Perija> getPerijat() {
         return perijat;
     }
-
-    public static void main(String[] args) {
-
-}
 
 
 }
