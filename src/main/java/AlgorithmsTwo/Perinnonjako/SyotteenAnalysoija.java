@@ -1,56 +1,64 @@
 package AlgorithmsTwo.Perinnonjako;
 
 import java.util.ArrayList;
-import java.util.Objects;
 import java.util.Scanner;
 
 public class SyotteenAnalysoija {
 
     /**
-     * kolme peräkkäistä kokonaislukua joista kolmas on 0 lopettaa perinnonjaon
-     * neljä peräkkäistä kokonaislukua joista kolmas ja neljäs ovat nollia, lopettaa koko syotteen
      * @param input merkkijono jota tutkitaan
      * @return ArrayList jossa input jaoteltuna eri perintoinputeihin
      */
     public ArrayList<String> annaPerinnonjakoSyotteet(String input) {
-
-        ArrayList<String> perinnonjakoSyotteet = new ArrayList<>();
-        int perakkaistenKokonaislukujenMaara = 0;
+        ArrayList<String> perinnonJaot = new ArrayList<>();
         Scanner sc = new Scanner(input);
         StringBuilder perinnonJako = new StringBuilder();
+        int jarjestysNumero = 0;
 
-        while (sc.hasNext()) {
-            String merkkijono = sc.next();
-            if (onKokonaisluku(merkkijono)) {
-                perakkaistenKokonaislukujenMaara++;
-            } else {
-                perakkaistenKokonaislukujenMaara = 0;
-            }
-            if (perakkaistenKokonaislukujenMaara == 3  && Objects.equals(merkkijono, "0")) {
-                // poistetaan viimeinen valilyonti
-                perinnonJako.delete(perinnonJako.length() - 1, perinnonJako.length());
-                perinnonjakoSyotteet.add(perinnonJako.toString());
-                perinnonJako = new StringBuilder();
-                continue;
-            }
-            if (perakkaistenKokonaislukujenMaara == 4 && Objects.equals(merkkijono, "0")) {
-                break;
-            }
-            perinnonJako.append(merkkijono).append(" ");
+            // otsikkoriveilla jarjestysnumerot ovat 0 ja 1
+            // normaaleilla riveilla jarjestysnumerot ovat 2 - 5
+            while (sc.hasNext()) {
+                String merkkijono = sc.next();
+                // otsikkorivin kasittely
+                if (jarjestysNumero == 0) {
+                    boolean syoteLoppuu = onNolla(merkkijono);
+                    if (syoteLoppuu) {
+                        break;
+                    } else {
+                        perinnonJako.append(merkkijono).append(" ");
+                        jarjestysNumero++;
+                    }
+                }else if (jarjestysNumero == 1){
+                    perinnonJako.append(merkkijono).append(" ");
+                    jarjestysNumero++;
+                    // muiden rivien kasittely
+                    // normaalin rivin ensimmainen merkki | jos nolla niin lopetetaan
+                } else if (jarjestysNumero == 2) {
+                    boolean perinnonJakoLoppuu = onNolla(merkkijono);
+                    if (perinnonJakoLoppuu) {
+                        perinnonJako.delete(perinnonJako.length() - 1, perinnonJako.length());
+                        perinnonJaot.add(perinnonJako.toString());
+                        jarjestysNumero = 0;
+                        perinnonJako = new StringBuilder();
+                    }else {
+                        perinnonJako.append(merkkijono).append(" ");
+                        jarjestysNumero++;
+                    }
+                } else if (jarjestysNumero < 5) {
+                    perinnonJako.append(merkkijono).append(" ");
+                    jarjestysNumero++;
+                    // normaalin rivin viimeisen merkin kasittely
+                } else {
+                    perinnonJako.append(merkkijono).append(" ");
+                    jarjestysNumero= 2;
+                }
+                }
 
-        }
-
-        return perinnonjakoSyotteet;
+        return perinnonJaot;
     }
 
-    private boolean onKokonaisluku(String merkkijono) {
-        try {
-            Integer.parseInt(merkkijono);
-            return true;
-        } catch (NumberFormatException e) {
-            return false;
-        }
+    private boolean onNolla(String merkkijono) {
+        return merkkijono.equals("0");
     }
-
 
 }
