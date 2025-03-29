@@ -281,7 +281,6 @@ public class PerinnonjakoTest {
                 """;
         Perinnonjako perinnonjako = new Perinnonjako(input);
         perinnonjako.suoritaPerinnonjako();
-        ArrayList<Perija> perijat = perinnonjako.getPerijat();
         assertEquals(1, perinnonjako.getPerinnonMaara());
 
     }
@@ -376,12 +375,26 @@ public class PerinnonjakoTest {
         Perinnonjako perinnonjako = new Perinnonjako(input);
         perinnonjako.suoritaPerinnonjako();
         ArrayList<Perija> perijat = perinnonjako.getPerijat();
-        for (Perija perija: perijat) {
-            System.out.println(perija.getNimi());
-            System.out.println(perija.getPerintoaSaatu());
-        }
         assertEquals(2, perinnonjako.getPerijat().size());
         assertEquals(7, perijat.getFirst().getPerintoaSaatu());
         assertEquals(2, perijat.get(1).getPerintoaSaatu());
+    }
+
+    @Test
+    public void testShouldDivideInheritanceWhenHeirsAreNumbers() {
+        String input = """
+                3 10
+                -1 2020 0 0
+                -2 2022 0 0
+                .3 2025 0 0
+                4 3300 1 2
+                5 4300 1 0
+                """;
+        Perinnonjako perinnonjako = new Perinnonjako(input);
+        perinnonjako.suoritaPerinnonjako();
+        ArrayList<Perija> perijat = perinnonjako.getPerijat();
+        assertEquals(2, perinnonjako.getPerijat().size());
+        assertEquals("3300", perijat.getFirst().getNimi());
+        assertEquals("4300", perijat.get(1).getNimi());
     }
 }

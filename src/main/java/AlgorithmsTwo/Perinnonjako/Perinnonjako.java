@@ -36,15 +36,6 @@ public class Perinnonjako {
 
 
     /**
-     * Parsii saamansa merkkijonon perinnön määrään, vainajaan ja jakoon osallistuviin henkilöihin
-     */
-    public void parsePerinnonJako() {
-        Scanner scanner = new Scanner(input);
-        parsePerinnonTiedot(scanner);
-        parseSukulaistenTiedot(scanner);
-    }
-
-    /**
      * Jos perittävällä on jälkeläisiä elossa, perintö jaetaan heille. Jokainen lapsi joka elää tai
      * jolla on elossa olevia jälkeläisiä saa yhtä suuren osan. Kuolleen lapsen osa jaetaan samalla tavalla
      * hänen jälkeläisilleen.
@@ -108,6 +99,15 @@ public class Perinnonjako {
         perinnonMaara = 0;
     }
 
+    /**
+     * Parsii saamansa merkkijonon perinnön määrään, vainajaan ja jakoon osallistuviin henkilöihin
+     */
+    public void parsePerinnonJako() {
+        Scanner scanner = new Scanner(input);
+        parsePerinnonTiedot(scanner);
+        parseSukulaistenTiedot(scanner);
+    }
+
 
     public void parsePerinnonTiedot(Scanner scanner) {
         this.vainajanID = scanner.nextInt();
@@ -116,30 +116,48 @@ public class Perinnonjako {
 
 
     public void parseSukulaistenTiedot(Scanner scanner) {
+        boolean elossa = true;
+
+        int sarakkeenNumero = 0;
+        int id = 0;
 
         while (scanner.hasNext()) {
-            boolean elossa = true;
-            int id = scanner.nextInt();
-            if (id < 0) {
-                elossa = false;
-            }
-            String nimi = scanner.next();
-            id = Math.abs(id);
+            String merkkijono = scanner.next();
 
-            if (id == vainajanID) {
-                this.vainaja = new Perija(nimi, elossa, id);
-                this.sukulaiset.add(this.vainaja);
-            } else {
-                Perija lisattavaHenkilo = new Perija(nimi, elossa, id);
-                this.sukulaiset.add(lisattavaHenkilo);
-            }
+            switch (sarakkeenNumero) {
+                case 0:
+                    id = Integer.parseInt(merkkijono);
+                    if (id < 0) {
+                        elossa = false;
+                    }
+                    sarakkeenNumero++;
+                    break;
+                case 1:
+                    String nimi = merkkijono;
+                    id = Math.abs(id);
+                    if (id == vainajanID) {
+                        this.vainaja = new Perija(nimi, false, id);
+                        this.sukulaiset.add(this.vainaja);
+                    } else {
+                        Perija lisattavaHenkilo = new Perija(nimi, elossa, id);
+                        this.sukulaiset.add(lisattavaHenkilo);
+                    }
+                    sarakkeenNumero++;
+                    break;
+                case 2:
+                    int ensimmaisenVanhemmanId = Integer.parseInt(merkkijono);
+                    lisaaVanhemmalleLapsi(ensimmaisenVanhemmanId, id);
+                    sarakkeenNumero++;
+                    break;
+                case 3:
+                    int toisenVanhemmanId = Integer.parseInt(merkkijono);
+                    lisaaVanhemmalleLapsi(toisenVanhemmanId, id);
+                    sarakkeenNumero = 0;
+                    elossa = true;
+                    break;
 
-            int ensimmaisenVanhemmanId = scanner.nextInt();
-            lisaaVanhemmalleLapsi(ensimmaisenVanhemmanId, id);
-            int toisenVanhemmanId = scanner.nextInt();
-            lisaaVanhemmalleLapsi(toisenVanhemmanId, id);
+            }
         }
-        scanner.close();
     }
 
 

@@ -33,7 +33,7 @@ public class Perija {
      * sekä vainajan kuolleet lapset, joilla on elossa olevia lapsia jne.
      */
     public ArrayList<Perija> perivatJalkelaiset() {
-        ArrayList<Perija> laillisetPerijat = new ArrayList<Perija>();
+        ArrayList<Perija> laillisetPerijat = new ArrayList<>();
         for (Perija lapsi: this.lapset) {
             if (lapsi.onValidiPerija()){
                 laillisetPerijat.add(lapsi);
