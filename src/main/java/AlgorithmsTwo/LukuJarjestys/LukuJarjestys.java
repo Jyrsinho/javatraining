@@ -20,21 +20,28 @@ TIEA211 Algoritmit 2 Kevät 2023
  */
 
 
-import ArrayString.ArrayString;
+import java.util.ArrayList;
 
 public class LukuJarjestys {
-    public String[][] kalenteri = new String [5] [24];
+    Kalenteri kalenteri;
+    int PAIVIAVIIKOSSA = 5;
+    int TUNTEJAPAIVASSA = 24;
+    String syote;
 
 
-    public void tulostaKalenteri() {
 
+    public LukuJarjestys(String syote) {
+        this.syote = syote;
+        this.kalenteri = new Kalenteri(PAIVIAVIIKOSSA,  TUNTEJAPAIVASSA);
     }
 
 
-    private String[][] lisaaTapahtumaKalenteriin(int paiva, int alkuAika, int loppuAIka) {
-        String[][] paivitettyKalenteri = new String[][];
-
-        return  paivitettyKalenteri;
+    public void teeLuettavaKalenteri() {
+        Parser parser = new Parser();
+        ArrayList<Tapahtuma> tapahtumat = parser.annaTapahtumat(syote);
+        // kalenteri.paivitaKalenteri(tapahtumat);
+        Tulostaja tulostaja = new Tulostaja();
+        //tulostaja.tulostaKalenteri(kalenteri);
     }
 
 
