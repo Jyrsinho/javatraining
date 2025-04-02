@@ -51,6 +51,8 @@ public class KalenteriTest {
     public void testShouldAddTapahtumaToKalenteri() {
        kalenteri.lisaaTapahtuma(tapahtuma1);
        Tapahtuma lisattytapahtuma = kalenteri.getTapahtuma(1, 10);
+       kalenteri.tulosta();
        assertEquals(tapahtuma1, lisattytapahtuma);
+
    }
 }

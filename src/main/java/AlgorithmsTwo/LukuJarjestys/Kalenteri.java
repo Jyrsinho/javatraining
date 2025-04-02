@@ -5,16 +5,18 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 public class Kalenteri {
-    String[][] tapahtumaKalenteri;
+    Tapahtuma[][] tapahtumaKalenteri;
 
     public Kalenteri(int paivia, int tunteja) {
-        this.tapahtumaKalenteri = new String[paivia][tunteja];
+        this.tapahtumaKalenteri = new Tapahtuma[paivia][tunteja];
     }
 
 
     public void lisaaTapahtuma(Tapahtuma uusiTapahtuma) {
         int paiva = viikonpaiva(uusiTapahtuma.paivamaara);
-
+        for (int i = uusiTapahtuma.alkuaika; i <= uusiTapahtuma.loppuaika; i++) {
+            tapahtumaKalenteri[paiva][i] = uusiTapahtuma;
+        }
     }
 
     /**
@@ -26,7 +28,11 @@ public class Kalenteri {
      * @return Tapahtuma
      */
     public Tapahtuma getTapahtuma(int paiva, int tunti) {
-        return new TapahtumaEiOlemassa();
+        if (tapahtumaKalenteri[paiva][tunti] != null) {
+            return tapahtumaKalenteri[paiva][tunti];
+        }else {
+            return new TapahtumaEiOlemassa();
+        }
     }
 
     /**
@@ -46,5 +52,17 @@ public class Kalenteri {
            case FRIDAY -> 4;
            default -> -1;
        };
+   }
+
+   public void tulosta () {
+       for (int i = 0; i < tapahtumaKalenteri.length; i++) {
+           System.out.println("Päivä " + i);
+           for (int j = 0; j < tapahtumaKalenteri[i].length; j++) {
+               if (tapahtumaKalenteri[i][j] != null) {
+                   tapahtumaKalenteri[i][j].tulosta();
+
+               }
+           }
+       }
    }
 }
