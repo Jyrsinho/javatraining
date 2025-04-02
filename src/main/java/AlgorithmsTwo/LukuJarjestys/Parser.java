@@ -26,37 +26,57 @@ public class Parser {
         ArrayList<Tapahtuma> tapahtumat = new ArrayList<>();
 
         Scanner sc = new Scanner(syote);
+        while (sc.hasNextLine()) {
+            String tapahtumaRivi = sc.nextLine();
+            Tapahtuma uusiTapahtuma = parsiTapahtuma(tapahtumaRivi);
+            tapahtumat.add(uusiTapahtuma);
+        }
+        return tapahtumat;
+    }
+
+    private Tapahtuma parsiTapahtuma(String tapahtumaRivi) {
+
+        Scanner sc = new Scanner(tapahtumaRivi);
         int elementinNumero = 0;
         String paivamaara = "";
         int alkuaika = 0;
         int loppuaika = 0;
-        String nimi;
+        String nimi = "";
 
         while (sc.hasNext()) {
+
             String merkkijono = sc.next();
             if (elementinNumero == 0) {
                 paivamaara = merkkijono;
                 elementinNumero++;
-            }else if (elementinNumero == 1) {
+            } else if (elementinNumero == 1) {
                 elementinNumero++;
                 String[] alkuJaLoppuAika = erotaAlkuJaLoppuAika(merkkijono);
                 alkuaika = Integer.parseInt(alkuJaLoppuAika[0]);
                 loppuaika = Integer.parseInt(alkuJaLoppuAika[1]);
-            }else if (elementinNumero == 2) {
-                nimi = merkkijono;
+            } else if (elementinNumero == 2) {
+                nimi = erotaTapahtumanNimi(sc, merkkijono);
                 elementinNumero = 0;
-                Tapahtuma uusiTapahtuma = new Tapahtuma(alkuaika, loppuaika, paivamaara, nimi);
-                tapahtumat.add(uusiTapahtuma);
+
             }
         }
-
-
-        return tapahtumat;
+      return new Tapahtuma(alkuaika, loppuaika, paivamaara, nimi);
     }
 
     private String[] erotaAlkuJaLoppuAika(String merkkijono) {
         String[]alkuJaLoppuAika = merkkijono.split("-");
 
         return alkuJaLoppuAika;
+    }
+
+
+    private String erotaTapahtumanNimi(Scanner sc, String merkkijono) {
+        StringBuilder sb = new StringBuilder();
+        sb.append(merkkijono);
+        while (sc.hasNext()) {
+            sb.append(" ");
+            sb.append(sc.next());
+        }
+        return sb.toString();
     }
 }

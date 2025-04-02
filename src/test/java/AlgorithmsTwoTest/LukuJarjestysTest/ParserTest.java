@@ -27,7 +27,18 @@ public class ParserTest {
                         31.03.2025 10-12 B103 Luento
                         """;
         ArrayList<Tapahtuma> tapahtumat = parser.annaTapahtumat(syote);
+        Tapahtuma tapahtuma = tapahtumat.get(0);
+        tapahtuma.tulosta();
         assertEquals("B103 Luento" ,tapahtumat.getFirst().getNimi());
+    }
 
+    @Test
+    public void testShouldReturnArrayListOfMultipleTapahtuma() {
+        String syote = """
+                31.03.2025 10-12 B103 Luento  \n 01.04.2025 12-14 C104 Tentti 
+                02.04.2025 13-14 C104 Tentti
+                """;
+        ArrayList<Tapahtuma> tapahtumat = parser.annaTapahtumat(syote);
+        assertEquals(3, tapahtumat.size());
     }
 }

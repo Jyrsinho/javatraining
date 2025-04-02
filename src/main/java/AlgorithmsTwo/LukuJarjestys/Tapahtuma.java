@@ -16,4 +16,11 @@ public class Tapahtuma {
     public String getNimi() {
         return nimi;
     }
+
+    public void tulosta() {
+        System.out.println(alkuaika);
+        System.out.println(loppuaika);
+        System.out.println(paivamaara);
+        System.out.println(nimi);
+    }
 }
