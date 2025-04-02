@@ -18,7 +18,7 @@ public class ParserTest {
     @BeforeEach
     public void setUp() {
         Kalenteri kalenteri = new Kalenteri(5, 24);
-        Parser parser = new Parser();
+        parser = new Parser();
 
     }
     @Test
@@ -28,7 +28,6 @@ public class ParserTest {
                         """;
         ArrayList<Tapahtuma> tapahtumat = parser.annaTapahtumat(syote);
         assertEquals("B103 Luento" ,tapahtumat.getFirst().getNimi());
-
 
     }
 }
