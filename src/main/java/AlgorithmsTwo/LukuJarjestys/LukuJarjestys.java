@@ -39,7 +39,8 @@ public class LukuJarjestys {
     public void teeLuettavaKalenteri() {
         Parser parser = new Parser();
         ArrayList<Tapahtuma> tapahtumat = parser.annaTapahtumat(syote);
-        // kalenteri.paivitaKalenteri(tapahtumat);
+        Kalenteri kalenteri = new Kalenteri(5, 24);
+        kalenteri.paivitaKalenteri(tapahtumat);
         Tulostaja tulostaja = new Tulostaja();
         //tulostaja.tulostaKalenteri(kalenteri);
     }

@@ -3,6 +3,7 @@ package AlgorithmsTwo.LukuJarjestys;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 
 public class Kalenteri {
     Tapahtuma[][] tapahtumaKalenteri;
@@ -15,9 +16,20 @@ public class Kalenteri {
     public void lisaaTapahtuma(Tapahtuma uusiTapahtuma) {
         int paiva = viikonpaiva(uusiTapahtuma.paivamaara);
         for (int i = uusiTapahtuma.alkuaika; i <= uusiTapahtuma.loppuaika; i++) {
-            tapahtumaKalenteri[paiva][i] = uusiTapahtuma;
+            // ekassa vaiheessa lisataan tapahtuma vain jos tapahtumaa ei ole viela olemassa
+            if (tapahtumaKalenteri[paiva][i] == null) {
+                tapahtumaKalenteri[paiva][i] = uusiTapahtuma;
+            }
         }
     }
+
+
+    public void paivitaKalenteri(ArrayList<Tapahtuma> tapahtumat) {
+       for (Tapahtuma tapahtuma: tapahtumat) {
+           lisaaTapahtuma(tapahtuma);
+       }
+    }
+
 
     /**
      * Palauttaa parametrina annettua paivaa ja tuntia vastaavan tapahtuman kalenterista, jos siella sellainen on.
