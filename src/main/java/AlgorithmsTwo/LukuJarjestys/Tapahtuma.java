@@ -1,5 +1,8 @@
 package AlgorithmsTwo.LukuJarjestys;
 
+/**
+ * Paivamaara annetaan muodossa dd.mm.yyyy
+ */
 public class Tapahtuma {
     int alkuaika;
     int loppuaika;
