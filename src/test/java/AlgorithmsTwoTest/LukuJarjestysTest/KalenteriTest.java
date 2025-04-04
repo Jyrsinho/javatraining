@@ -14,7 +14,7 @@ public class KalenteriTest {
     @BeforeEach
     public void setUp() {
         kalenteri = new Kalenteri(5, 24);
-        tapahtuma1 = new Tapahtuma(10, 12, "01.04.2025", "B105 Luento");
+        tapahtuma1 = new Tapahtuma(10, 12, "01.04.2025", "B105 Luento");        //Tiistai
     }
 
     @Test
@@ -82,6 +82,18 @@ public class KalenteriTest {
         Tapahtuma tapahtuma2 = new Tapahtuma(20, 22, "23.01.2024", "tapahtuma2" );
         kalenteri.lisaaTapahtuma(tapahtuma2);
         assertEquals(20, kalenteri.myohaisinTapahtuma());
+    }
+
+    @Test
+    public void testShouldReturnTrueForTapahtumaJatkuu() {
+        kalenteri.lisaaTapahtuma(tapahtuma1);
+        assertTrue(kalenteri.tapahtumaJatkuu(1, 11));
+    }
+
+    @Test
+    public void testShouldReturnFalseForTapahtumaJatkuu() {
+        kalenteri.lisaaTapahtuma(tapahtuma1);
+        assertFalse(kalenteri.tapahtumaJatkuu(1, 12));
     }
 
 

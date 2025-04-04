@@ -15,12 +15,9 @@ public class Kalenteri {
 
     public void lisaaTapahtuma(Tapahtuma uusiTapahtuma) {
         int paiva = viikonpaiva(uusiTapahtuma.paivamaara);
-        for (int i = uusiTapahtuma.alkuaika; i <= uusiTapahtuma.loppuaika; i++) {
-            // ekassa vaiheessa lisataan tapahtuma vain jos tapahtumaa ei ole viela olemassa
-            if (tapahtumaKalenteri[paiva][i] == null) {
-                tapahtumaKalenteri[paiva][i] = uusiTapahtuma;
+            if (tapahtumaKalenteri[paiva][uusiTapahtuma.alkuaika] == null) {
+                tapahtumaKalenteri[paiva][uusiTapahtuma.alkuaika] = uusiTapahtuma;
             }
-        }
     }
 
 
@@ -98,9 +95,22 @@ public class Kalenteri {
                 }
             }
         }
-
         return myohaisinTapahtuma;
+    }
 
+    public boolean tapahtumaJatkuu(int paiva, int kellonaika) {
+        Tapahtuma aiempiTapahtuma = new TapahtumaEiOlemassa();
+        int aiemmanTapahtumanAlkamisAika = kellonaika;
+
+        while (aiempiTapahtuma.getClass().getSimpleName().equals("TapahtumaEiOlemassa") && aiemmanTapahtumanAlkamisAika >= 0){
+            if (tapahtumaKalenteri[paiva][aiemmanTapahtumanAlkamisAika] != null) {
+                aiempiTapahtuma = tapahtumaKalenteri[paiva][aiemmanTapahtumanAlkamisAika];
+            }
+
+            aiemmanTapahtumanAlkamisAika--;
+        }
+
+        return aiempiTapahtuma.loppuaika > kellonaika+1;
     }
 
 

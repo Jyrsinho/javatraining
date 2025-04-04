@@ -55,13 +55,9 @@ public class Tulostaja {
         }
     }
 
-    private void tulostaValiRivi(PrintStream out) {
-        //tulostetaan ensimmainen solu
-        for (int i = 0; i <ensimmaisenSolunMerkkiMaara ; i++) {
-            out.print("_");
-        }
-        out.print("+");
 
+    private void tulostaValiRivi(PrintStream out) {
+        tulostaEnsimmaisenSolunAlaviiva(out);
         //tulostetaan viikonpaivien solut
         for (int i = 0; i < viikonPaivat.length; i++) {
             for (int j = 0; j < merkkejaSolussa; j++) {
@@ -71,6 +67,32 @@ public class Tulostaja {
         }
         out.println();
     }
+
+
+    private void tulostaValiRivi(PrintStream out, Kalenteri kalenteri, int kellonAika) {
+        tulostaEnsimmaisenSolunAlaviiva(out);
+        for (int i = 0; i < kalenteri.tapahtumaKalenteri.length; i++) {
+            if (kalenteri.tapahtumaJatkuu(i, kellonAika)) {
+                for (int j = 0; j < merkkejaSolussa; j++) {
+                    out.print(" ");
+                }
+            }else {
+                for (int k = 0; k < merkkejaSolussa; k++) {
+                    out.print("_");
+                }
+            }
+            out.print("+");
+        }
+        out.println();
+    }
+
+    private void tulostaEnsimmaisenSolunAlaviiva(PrintStream out) {
+        for (int i = 0; i <ensimmaisenSolunMerkkiMaara ; i++) {
+            out.print("_");
+        }
+        out.print("+");
+    }
+
 
     private void tulostaRivit(PrintStream out, Kalenteri kalenteri) {
         int ensimmainenRivi = kalenteri.aikaisinTapahtuma();
@@ -90,7 +112,7 @@ public class Tulostaja {
             tulostaTuntiSolu(out, kellonaika);
             tulostaTapahtumat(out, kellonaika, kalenteri);
             out.println();
-            tulostaValiRivi(out);
+            tulostaValiRivi(out,kalenteri, kellonaika);
     }
 
 
