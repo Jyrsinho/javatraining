@@ -48,8 +48,8 @@ public class LukuJarjestys {
 
 
     public static void main(String[] args) {
-        String testiSyote = "21.03.2023 10-12 B103 Luento\n" +
-                            "23.03.2023 14-16 B103 Luento";
+        String testiSyote = "31.03.2025 10-12 B103 Luento\n" +
+                            "01.04.2025 14-16 B103 Luento";
 
         LukuJarjestys lukuJarjestys = new LukuJarjestys(testiSyote);
         lukuJarjestys.teeLuettavaKalenteri();

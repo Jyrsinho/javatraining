@@ -9,11 +9,18 @@ public class Tulostaja {
     int merkkejaSolussa = 13;
     int ensimmaisenSolunMerkkiMaara= 6;
 
-
+    /**
+     * Lukujärjestykseen tulostetaan rivi jokaiselle tunnille alkaen päivän ensimmäi-
+     * sestä tapahtumasta tai tunnista 8–9 sen mukaan kumpi on varhaisempi, ja päättyen
+     * päivän viimeiseen tapahtumaan tai tuntiin 15–16 sen mukaan kumpi on myöhäi-
+     * sempi.
+     * @param kalenteri
+     */
     public void tulostaKalenteri(Kalenteri kalenteri) {
         PrintStream out = System.out;
         tulostaOtsikkoRivi(out);
         tulostaValiRivi(out);
+        tulostaRivit(out, kalenteri);
     }
 
     /**
@@ -62,5 +69,71 @@ public class Tulostaja {
             }
             out.print("+");
         }
+        out.println();
+    }
+
+    private void tulostaRivit(PrintStream out, Kalenteri kalenteri) {
+        int ensimmainenRivi = kalenteri.aikaisinTapahtuma();
+        int viimeinenRivi = kalenteri.myohaisinTapahtuma();
+        if (ensimmainenRivi > 8) {
+            ensimmainenRivi = 8;
+        }
+        if (viimeinenRivi < 17) {
+            viimeinenRivi = 17;
+        }
+        for (int i = ensimmainenRivi ; i <= viimeinenRivi; i++) {
+            tulostaRivi(kalenteri ,i, out);
+        }
+    }
+
+    private void tulostaRivi(Kalenteri kalenteri, int kellonaika, PrintStream out) {
+            tulostaTuntiSolu(out, kellonaika);
+            tulostaTapahtumat(out, kellonaika, kalenteri);
+            out.println();
+            tulostaValiRivi(out);
+    }
+
+
+    private void tulostaTapahtumat(PrintStream out, int kellonaika, Kalenteri kalenteri) {
+
+        for (int i = 0; i < kalenteri.tapahtumaKalenteri.length; i++) {
+
+            if (kalenteri.tapahtumaKalenteri[i][kellonaika] != null) {
+                String tapahtumanNimi = kalenteri.tapahtumaKalenteri[i][kellonaika].getNimi();
+                out.print(" ");
+                out.print(tapahtumanNimi);
+                out.print(" ");
+            } else {
+                for (int j = 0; j < merkkejaSolussa; j++) {
+                    out.print(" ");
+
+                }
+            }
+            out.print("|");
+        }
+    }
+
+    private void tulostaTuntiSolu(PrintStream out, int kellonaika) {
+        if (kellonaika < 9) {
+            out.print(" ");
+            out.print(kellonaika);
+            out.print("-");
+            out.print(" ");
+            out.print(kellonaika +1);
+            out.print(" ");
+
+        } else if (kellonaika == 9) {
+            out.print(" ");
+            out.print(kellonaika);
+            out.print("-");
+            out.print(kellonaika +1);
+            out.print(" ");
+        } else {
+            out.print(kellonaika);
+            out.print("-");
+            out.print(kellonaika +1);
+            out.print(" ");
+        }
+        out.print("|");
     }
 }

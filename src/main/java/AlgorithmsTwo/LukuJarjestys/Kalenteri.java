@@ -66,6 +66,44 @@ public class Kalenteri {
        };
    }
 
+    /**
+     * Palauttaa kalenterin aikaisimman tapahtuman kellonajan
+     * @return {int} aikaisimman tapahtuman kellonaika. Jos kalenterissa ei ole tapahtumia palauttaa 25
+     */
+   public int aikaisinTapahtuma() {
+       int aikaisinTapahtuma = 25;
+
+       for (int i = 0; i < tapahtumaKalenteri.length; i++) {
+           for (int j = 0; j < tapahtumaKalenteri[i].length; j++) {
+               if (tapahtumaKalenteri[i][j] != null && tapahtumaKalenteri[i][j].alkuaika < aikaisinTapahtuma) {
+                   aikaisinTapahtuma = tapahtumaKalenteri[i][j].alkuaika;
+               }
+           }
+       }
+
+       return aikaisinTapahtuma;
+    }
+
+    /**
+     * Palauttaa kalenterin myohaisimman tapahtuman kellonajan
+     * @return {int} myohaisimman tapahtuman kellonaika. Jos kalenterissa ei ole tapahtumia palauttaa -1
+     */
+    public int myohaisinTapahtuma() {
+       int myohaisinTapahtuma = -1;
+
+        for (int i = 0; i < tapahtumaKalenteri.length; i++) {
+            for (int j = 0; j < tapahtumaKalenteri[i].length; j++) {
+                if (tapahtumaKalenteri[i][j] != null && tapahtumaKalenteri[i][j].alkuaika > myohaisinTapahtuma) {
+                    myohaisinTapahtuma = tapahtumaKalenteri[i][j].alkuaika;
+                }
+            }
+        }
+
+        return myohaisinTapahtuma;
+
+    }
+
+
    public void tulosta () {
        for (int i = 0; i < tapahtumaKalenteri.length; i++) {
            System.out.println("Päivä " + i);
