@@ -42,13 +42,17 @@ public class LukuJarjestys {
         Kalenteri kalenteri = new Kalenteri(5, 24);
         kalenteri.paivitaKalenteri(tapahtumat);
         Tulostaja tulostaja = new Tulostaja();
-        //tulostaja.tulostaKalenteri(kalenteri);
+        tulostaja.tulostaKalenteri(kalenteri);
     }
 
 
 
     public static void main(String[] args) {
+        String testiSyote = "21.03.2023 10-12 B103 Luento\n" +
+                            "23.03.2023 14-16 B103 Luento";
 
+        LukuJarjestys lukuJarjestys = new LukuJarjestys(testiSyote);
+        lukuJarjestys.teeLuettavaKalenteri();
     }
 }
 
