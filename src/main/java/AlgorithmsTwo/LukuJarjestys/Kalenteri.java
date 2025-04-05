@@ -6,10 +6,12 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 public class Kalenteri {
-    Tapahtuma[][] tapahtumaKalenteri;
+    private Tapahtuma[][] tapahtumaKalenteri;
+    private String otsikko;
 
     public Kalenteri(int paivia, int tunteja) {
         this.tapahtumaKalenteri = new Tapahtuma[paivia][tunteja];
+        this.otsikko = "";
     }
 
 
@@ -165,5 +167,17 @@ public class Kalenteri {
                }
            }
        }
+   }
+
+   public Tapahtuma[][] getTapahtumaKalenteri() {
+        return tapahtumaKalenteri;
+   }
+
+   public String getOtsikko() {
+        return this.otsikko;
+   }
+
+   public void setOtsikkoRivi(String otsikko) {
+        this.otsikko = otsikko;
    }
 }

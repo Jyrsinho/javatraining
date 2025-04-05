@@ -16,9 +16,9 @@ public class Tulostaja {
      * sempi.
      * @param kalenteri
      */
-    public void tulostaKalenteri(String kalenterinOtsikko, Kalenteri kalenteri) {
+    public void tulostaKalenteri(Kalenteri kalenteri) {
         PrintStream out = System.out;
-        out.println(kalenterinOtsikko);
+        out.println(kalenteri.getOtsikko());
         tulostaKalenterinKesto(out, kalenteri);
         tulostaOtsikkoRivi(out);
         tulostaRivit(out, kalenteri);
@@ -82,7 +82,7 @@ public class Tulostaja {
     private void tulostaValiRivi(PrintStream out, Kalenteri kalenteri, int kellonAika) {
         tulostaEnsimmaisenSolunAlaviiva(out);
 
-        for (int i = 0; i < kalenteri.tapahtumaKalenteri.length; i++) {
+        for (int i = 0; i < kalenteri.getTapahtumaKalenteri().length; i++) {
 
             if (kalenteri.tapahtumaJatkuu(i, kellonAika  )) {
                 for (int j = 0; j < merkkejaSolussa; j++) {
@@ -131,10 +131,10 @@ public class Tulostaja {
 
     private void tulostaTapahtumat(PrintStream out, int kellonaika, Kalenteri kalenteri) {
 
-        for (int i = 0; i < kalenteri.tapahtumaKalenteri.length; i++) {
+        for (int i = 0; i < kalenteri.getTapahtumaKalenteri().length; i++) {
 
-            if (kalenteri.tapahtumaKalenteri[i][kellonaika] != null) {
-                String tapahtumanNimi = kalenteri.tapahtumaKalenteri[i][kellonaika].getNimi();
+            if (kalenteri.getTapahtumaKalenteri()[i][kellonaika] != null) {
+                String tapahtumanNimi = kalenteri.getTapahtumaKalenteri()[i][kellonaika].getNimi();
                 out.print(" ");
                 out.print(tapahtumanNimi);
                 out.print(" ");

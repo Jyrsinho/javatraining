@@ -1,9 +1,7 @@
 package AlgorithmsTwo.LukuJarjestys;
 
 
-
 import java.util.ArrayList;
-import java.util.Scanner;
 
 public class LukuJarjestys {
     Kalenteri kalenteri;
@@ -20,25 +18,26 @@ public class LukuJarjestys {
 
 
     public void teeLuettavaKalenteri() {
-        Parser parser = new Parser();
-        String otsikkoRivi = parser.annaOtsikkoRivi(syote);
-        ArrayList<Tapahtuma> tapahtumat = parser.annaTapahtumat(syote);
         Kalenteri kalenteri = new Kalenteri(5, 24);
+        Parser parser = new Parser();
+        kalenteri.setOtsikkoRivi( parser.annaOtsikkoRivi(syote));
+        ArrayList<Tapahtuma> tapahtumat = parser.annaTapahtumat(syote);
+
         kalenteri.paivitaKalenteri(tapahtumat);
         Tulostaja tulostaja = new Tulostaja();
-        tulostaja.tulostaKalenteri(otsikkoRivi, kalenteri);
+        tulostaja.tulostaKalenteri(kalenteri);
     }
 
 
 
     public static void main(String[] args) {
-        /*String testiSyote = """
+        String testiSyote = """
                             Tapahtuma 1
                             31.03.2025 9-11 B103 Luento
                             1.4.2025 14-16 B103 Luento
                             """;
 
-         */
+        /*
 
         Scanner sc = new Scanner(System.in);
         StringBuilder sb = new StringBuilder();
@@ -47,7 +46,9 @@ public class LukuJarjestys {
             sb.append(sc.nextLine());
         }
 
-        LukuJarjestys lukuJarjestys = new LukuJarjestys(sb.toString());
+         */
+
+        LukuJarjestys lukuJarjestys = new LukuJarjestys(testiSyote);
         lukuJarjestys.teeLuettavaKalenteri();
     }
 }

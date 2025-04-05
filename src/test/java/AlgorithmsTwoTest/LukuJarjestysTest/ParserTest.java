@@ -46,6 +46,21 @@ public class ParserTest {
     }
 
     @Test
+    public void testShouldReturnAnArrayListOfMultipleTapahtumaWhenEmptyRivit() {
+        String syote = """
+                          
+                Otsikko xxx
+                             
+                02.04.2025 13-14 C104 Tentti
+                        
+                03.04.2025 13-14 C105 Tentti
+                            
+                """;
+        ArrayList<Tapahtuma> tapahtumat = parser.annaTapahtumat(syote);
+        assertEquals(3, tapahtumat.size());
+    }
+
+    @Test
     public void testShouldParseLocalDateFromStringDMYYYY() {
         String mj = "3.4.2025";
         LocalDate expectedDate = LocalDate.of(2025, 4,3);
