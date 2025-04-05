@@ -5,6 +5,8 @@ import AlgorithmsTwo.LukuJarjestys.Tapahtuma;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.time.LocalDate;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 public class KalenteriTest {
@@ -14,7 +16,8 @@ public class KalenteriTest {
     @BeforeEach
     public void setUp() {
         kalenteri = new Kalenteri(5, 24);
-        tapahtuma1 = new Tapahtuma(10, 12, "01.04.2025", "B105 Luento");        //Tiistai
+        LocalDate ld = LocalDate.of(2025, 4, 1);
+        tapahtuma1 = new Tapahtuma(10, 12, ld, "B105 Luento");        //Tiistai
     }
 
     @Test
@@ -25,25 +28,25 @@ public class KalenteriTest {
 
     @Test
     public void testShouldReturnZeroForDateThatIsMOnday() {
-        String pvm = "31.03.2025";
+        LocalDate pvm = LocalDate.of(2025, 3,31);
         assertEquals(0, kalenteri.viikonpaiva(pvm));
     }
 
     @Test
     public void testShouldReturnOneForDateThatIsTuesday() {
-        String pvm = "01.04.2025";
+        LocalDate pvm = LocalDate.of(2025, 4, 1);
         assertEquals(1, kalenteri.viikonpaiva(pvm));
     }
 
     @Test
     public void testShouldReturnOneForDateThatIsWednesday() {
-        String pvm = "02.04.2025";
+        LocalDate pvm = LocalDate.of(2025,4,2);
         assertEquals(2, kalenteri.viikonpaiva(pvm));
     }
 
     @Test
     public void testShouldReturnNegativeValueForWeekend() {
-        String pvm = "05.04.2025";
+        LocalDate pvm = LocalDate.of(2025, 4, 5);
         assertEquals(-1, kalenteri.viikonpaiva(pvm));
     }
 
@@ -65,7 +68,7 @@ public class KalenteriTest {
     @Test
     public void testShouldReturn8ForAikaisinTapahtuma() {
         kalenteri.lisaaTapahtuma(tapahtuma1);
-        Tapahtuma tapahtuma2 = new Tapahtuma(8, 10, "23.01.2024", "tapahtuma2" );
+        Tapahtuma tapahtuma2 = new Tapahtuma(8, 10, LocalDate.of(2024,1, 23), "tapahtuma2" );
         kalenteri.lisaaTapahtuma(tapahtuma2);
         assertEquals(8, kalenteri.aikaisinTapahtuma());
     }
@@ -79,7 +82,7 @@ public class KalenteriTest {
     @Test
     public void testShouldReturnTwentyForMyohaisinTapahtuma() {
         kalenteri.lisaaTapahtuma(tapahtuma1);
-        Tapahtuma tapahtuma2 = new Tapahtuma(20, 22, "23.01.2024", "tapahtuma2" );
+        Tapahtuma tapahtuma2 = new Tapahtuma(20, 22, LocalDate.of(2024,1,23), "tapahtuma2" );
         kalenteri.lisaaTapahtuma(tapahtuma2);
         assertEquals(20, kalenteri.myohaisinTapahtuma());
     }
@@ -112,7 +115,7 @@ public class KalenteriTest {
     @Test
     public void testKalenteriShouldReturnEnsimmainenPaivaOfKalenteri2() {
         kalenteri.lisaaTapahtuma(tapahtuma1);
-        Tapahtuma tapahtuma2 = new Tapahtuma(10, 20, "23.01.2025", "tapahtuma2" );
+        Tapahtuma tapahtuma2 = new Tapahtuma(10, 20, LocalDate.of(2025,1,23), "tapahtuma2" );
         kalenteri.lisaaTapahtuma(tapahtuma2);
         String expected = "23.1.2025";
         assertEquals(expected, kalenteri.ensimmaisenTapahtumanPV());

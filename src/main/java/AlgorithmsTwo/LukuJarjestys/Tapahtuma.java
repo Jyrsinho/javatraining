@@ -1,15 +1,17 @@
 package AlgorithmsTwo.LukuJarjestys;
 
+import java.time.LocalDate;
+
 /**
  * Paivamaara annetaan muodossa dd.mm.yyyy
  */
 public class Tapahtuma {
     int alkuaika;
     int loppuaika;
-    String paivamaara;
+    LocalDate paivamaara;
     String nimi;
 
-    public Tapahtuma(int alkuaika, int loppuaika, String paivamaara, String nimi) {
+    public Tapahtuma(int alkuaika, int loppuaika, LocalDate paivamaara, String nimi) {
         this.alkuaika = alkuaika;
         this.loppuaika = loppuaika;
         this.paivamaara = paivamaara;

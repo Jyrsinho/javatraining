@@ -1,5 +1,6 @@
 package AlgorithmsTwo.LukuJarjestys;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -47,7 +48,7 @@ public class Parser {
 
         Scanner sc = new Scanner(tapahtumaRivi);
         int elementinNumero = 0;
-        String paivamaara = "";
+        LocalDate paivamaara = LocalDate.now();
         int alkuaika = 0;
         int loppuaika = 0;
         String nimi = "";
@@ -56,7 +57,7 @@ public class Parser {
 
             String merkkijono = sc.next();
             if (elementinNumero == 0) {
-                paivamaara = merkkijono;
+                paivamaara = parsiPvmMerkkiJono(merkkijono);
                 elementinNumero++;
             } else if (elementinNumero == 1) {
                 elementinNumero++;
@@ -76,6 +77,21 @@ public class Parser {
         String[]alkuJaLoppuAika = merkkijono.split("-");
 
         return alkuJaLoppuAika;
+    }
+
+    /**
+     * Päivämäärä on muotoa pp.kk.vvvv tai p.kk.vvvv tai pp.k.vvvv tai p.k.vvvv.
+     * @param merkkijono josta LocalDate paivamaara muodostetaan
+     * @return {LocalDate} tapahtuman PVM
+     */
+    public LocalDate parsiPvmMerkkiJono(String merkkijono) {
+        String[] eroteltuPVM = merkkijono.split("\\.");
+
+        int paiva = Integer.parseInt(eroteltuPVM[0]);
+        int kuukausi = Integer.parseInt(eroteltuPVM[1]);
+        int vuosi = Integer.parseInt(eroteltuPVM[2]);
+
+        return LocalDate.of(vuosi, kuukausi, paiva);
     }
 
 

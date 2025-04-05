@@ -49,10 +49,9 @@ public class Kalenteri {
      * @param pvm {String} jolle haetaan viikonpaiva
      * @return viikonpaivan jarjestysnumero. Maanantai on 0, perjantai 5 ja vkloput -1.
      */
-   public int viikonpaiva(String pvm) {
-       DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
-       LocalDate date = LocalDate.parse(pvm, formatter);
-      DayOfWeek dayOfWeek = date.getDayOfWeek();
+   public int viikonpaiva(LocalDate pvm) {
+
+      DayOfWeek dayOfWeek = pvm.getDayOfWeek();
        return switch (dayOfWeek) {
            case MONDAY -> 0;
            case TUESDAY -> 1;
@@ -119,9 +118,7 @@ public class Kalenteri {
         for (int i = 0; i < tapahtumaKalenteri.length; i++) {
             for (int j = 0; j < tapahtumaKalenteri[i].length; j++) {
                 if (tapahtumaKalenteri[i][j] != null) {
-                    String dateString = tapahtumaKalenteri[i][j].paivamaara;
-                    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
-                    LocalDate ehdokas = LocalDate.parse(dateString, formatter);
+                    LocalDate ehdokas = tapahtumaKalenteri[i][j].paivamaara;
                     if (onAikaisempiKuin(ehdokas, aikaisinTapahtuma)) {
                         aikaisinTapahtuma = ehdokas;
                     }
@@ -140,9 +137,7 @@ public class Kalenteri {
         for (int i = 0; i < tapahtumaKalenteri.length; i++) {
             for (int j = 0; j < tapahtumaKalenteri[i].length; j++) {
                 if (tapahtumaKalenteri[i][j] != null) {
-                    String dateString = tapahtumaKalenteri[i][j].paivamaara;
-                    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
-                    LocalDate ehdokas = LocalDate.parse(dateString, formatter);
+                    LocalDate ehdokas = tapahtumaKalenteri[i][j].paivamaara;
                     if (!onAikaisempiKuin(ehdokas, viimeisinTapahtuma)) {
                         viimeisinTapahtuma = ehdokas;
                     }

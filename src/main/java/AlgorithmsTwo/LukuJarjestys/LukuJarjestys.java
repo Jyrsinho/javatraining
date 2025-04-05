@@ -52,7 +52,7 @@ public class LukuJarjestys {
         String testiSyote = """
                             Tapahtuma 1
                             31.03.2025 9-11 B103 Luento
-                            01.04.2025 14-16 B103 Luento
+                            1.4.2025 14-16 B103 Luento
                             """;
 
         LukuJarjestys lukuJarjestys = new LukuJarjestys(testiSyote);
