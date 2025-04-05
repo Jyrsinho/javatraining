@@ -20,8 +20,8 @@ import java.util.Scanner;
  */
 
 public class Parser {
-    String otsikkorivi;
-    ArrayList<Tapahtuma> tapahtumat;
+    private String otsikkorivi;
+    private ArrayList<Tapahtuma> tapahtumat;
 
     public Parser() {
         this.otsikkorivi = "";
@@ -29,69 +29,46 @@ public class Parser {
     }
 
     public void analysoiSyote(String syote) {
-        Scanner sc = new Scanner(syote);
-        otaOtsikkoTalteen(sc);
-        while (sc.hasNextLine()) {
-            String tapahtumaRivi = sc.nextLine();
-            if (!tapahtumaRivi.trim().isEmpty()) {
-                Tapahtuma uusiTapahtuma = parsiTapahtuma(tapahtumaRivi);
-                tapahtumat.add(uusiTapahtuma);
-            }
+        String[] tapahtumaRivit = pilkoSyote(syote);
+        otsikkorivi = tapahtumaRivit[0].trim();
+        for (int i = 1; i < tapahtumaRivit.length; i++) {
+            Tapahtuma uusiTapahtuma = parsiTapahtumaMerkkijonosta(tapahtumaRivit[i]);
+            tapahtumat.add(uusiTapahtuma);
         }
     }
 
-    private void otaOtsikkoTalteen(Scanner sc) {
-        while (sc.hasNextLine()) {
-            String tapahtumaRivi = sc.nextLine();
-            if (!tapahtumaRivi.trim().isEmpty()) {
-                this.otsikkorivi = tapahtumaRivi;
-                break;
-            }
-        }
 
+    public String[] pilkoSyote(String syote) {
+        return syote.split("(?=\\d{2}\\.\\d{1,2}\\.\\d{4})");
     }
 
 
-    public ArrayList<Tapahtuma> annaTapahtumat() {
+    public Tapahtuma parsiTapahtumaMerkkijonosta(String merkkijono ) {
+        Scanner sc = new Scanner(merkkijono);
+        String pvm = sc.next();
+        String kellonaika = sc.next();
+        String[] kellonajat = erotaAlkuJaLoppuAika(kellonaika);
+        int alkuaika = Integer.parseInt(kellonajat[0]);
+        int loppuaika = Integer.parseInt(kellonajat[1]);
 
-        return tapahtumat;
-    }
-
-
-    private Tapahtuma parsiTapahtuma(String tapahtumaRivi) {
-
-        Scanner sc = new Scanner(tapahtumaRivi);
-        int elementinNumero = 0;
-        LocalDate paivamaara = LocalDate.now();
-        int alkuaika = 0;
-        int loppuaika = 0;
-        String nimi = "";
-
+        StringBuilder nimiSB = new StringBuilder();
         while (sc.hasNext()) {
-
-            String merkkijono = sc.next();
-            if (elementinNumero == 0) {
-                paivamaara = parsiPvmMerkkiJono(merkkijono);
-                elementinNumero++;
-            } else if (elementinNumero == 1) {
-                elementinNumero++;
-                String[] alkuJaLoppuAika = erotaAlkuJaLoppuAika(merkkijono);
-                alkuaika = Integer.parseInt(alkuJaLoppuAika[0]);
-                loppuaika = Integer.parseInt(alkuJaLoppuAika[1]);
-            } else if (elementinNumero == 2) {
-                nimi = erotaTapahtumanNimi(sc, merkkijono);
-                elementinNumero = 0;
-
-            }
+            nimiSB.append(sc.next());
+            nimiSB.append(" ");
         }
-      return new Tapahtuma(alkuaika, loppuaika, paivamaara, nimi);
+        String nimi = nimiSB.toString().trim();
+
+        Tapahtuma uusiTapahtuma = new Tapahtuma(alkuaika, loppuaika, parsiPvmMerkkiJono(pvm), nimi);
+        return uusiTapahtuma;
     }
+
 
     private String[] erotaAlkuJaLoppuAika(String merkkijono) {
         String[]alkuJaLoppuAika = merkkijono.split("-");
 
         return alkuJaLoppuAika;
     }
+
 
     /**
      * Päivämäärä on muotoa pp.kk.vvvv tai p.kk.vvvv tai pp.k.vvvv tai p.k.vvvv.
@@ -119,11 +96,25 @@ public class Parser {
         return sb.toString();
     }
 
+    /**
+     * Tarkistaa onko merkkijonossa 3 pisteellä erotettua osaa
+     * @param mj merkkijono joka tarkistetaan
+     * @return true jos merkkijono on paivamaara, false jos ei ole
+     */
+    public boolean onPvm(String mj) {
+        String[] osat = mj.split("\\.");
+        return (osat.length == 3);
+    }
+
     private void setOtsikko(String otsikko) {
         this.otsikkorivi = otsikko;
     }
 
     public String getOtsikko() {
         return this.otsikkorivi;
+    }
+
+    public ArrayList<Tapahtuma> annaTapahtumat() {
+        return tapahtumat;
     }
 }
