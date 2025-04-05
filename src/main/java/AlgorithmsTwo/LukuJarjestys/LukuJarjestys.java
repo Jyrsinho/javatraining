@@ -1,26 +1,9 @@
 package AlgorithmsTwo.LukuJarjestys;
 
-/*
-Vaiheessa 1 tuotetaan vain lukujärjestys, käyttäen kunkin tunnin ja viikonpäi-
-
-vän kohdalla syötteessä ensin esiintynyttä tapahtumaa. Pois jää kunkin tunnin ja
-viikonpäivän eniten esiintyvän vaihtoehdon (jokin tapahtuma tai ei tapahtumaa)
-tunnistaminen ja muut vaihtoehdot esittävän poikkeusten luettelon tuottaminen.
-*/
-
-/* EsimerkkiSyote
-TIEA211 Algoritmit 2 Kevät 2023
-21.03.2023 10-12 B103 Luento
-23.03.2023 14-16 B103 Luento
-23.03.2023 16-18 C231.1 Neuvonta
- */
-
-/*
-1. Täytetään kalenteri syotteen  otsikolla ja luennolla.
- */
 
 
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class LukuJarjestys {
     Kalenteri kalenteri;
@@ -49,13 +32,22 @@ public class LukuJarjestys {
 
 
     public static void main(String[] args) {
-        String testiSyote = """
+        /*String testiSyote = """
                             Tapahtuma 1
                             31.03.2025 9-11 B103 Luento
                             1.4.2025 14-16 B103 Luento
                             """;
 
-        LukuJarjestys lukuJarjestys = new LukuJarjestys(testiSyote);
+         */
+
+        Scanner sc = new Scanner(System.in);
+        StringBuilder sb = new StringBuilder();
+
+        while (sc.hasNextLine()) {
+            sb.append(sc.nextLine());
+        }
+
+        LukuJarjestys lukuJarjestys = new LukuJarjestys(sb.toString());
         lukuJarjestys.teeLuettavaKalenteri();
     }
 }
