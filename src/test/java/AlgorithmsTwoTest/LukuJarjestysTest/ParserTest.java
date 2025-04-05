@@ -1,6 +1,5 @@
 package AlgorithmsTwoTest.LukuJarjestysTest;
 
-import AlgorithmsTwo.LukuJarjestys.Kalenteri;
 import AlgorithmsTwo.LukuJarjestys.Parser;
 import AlgorithmsTwo.LukuJarjestys.Tapahtuma;
 import org.junit.jupiter.api.BeforeEach;
@@ -18,7 +17,6 @@ public class ParserTest {
 
     @BeforeEach
     public void setUp() {
-        Kalenteri kalenteri = new Kalenteri(5, 24);
         parser = new Parser();
 
     }
@@ -28,7 +26,8 @@ public class ParserTest {
                         Otsikko xxx 
                         31.03.2025 10-12 B103 Luento
                         """;
-        ArrayList<Tapahtuma> tapahtumat = parser.annaTapahtumat(syote);
+        parser.analysoiSyote(syote);
+        ArrayList<Tapahtuma> tapahtumat = parser.annaTapahtumat();
         Tapahtuma tapahtuma = tapahtumat.get(0);
         tapahtuma.tulosta();
         assertEquals("B103 Luento" ,tapahtumat.getFirst().getNimi());
@@ -41,7 +40,8 @@ public class ParserTest {
                 31.03.2025 10-12 B103 Luento  \n 01.04.2025 12-14 C104 Tentti 
                 02.04.2025 13-14 C104 Tentti
                 """;
-        ArrayList<Tapahtuma> tapahtumat = parser.annaTapahtumat(syote);
+        parser.analysoiSyote(syote);
+        ArrayList<Tapahtuma> tapahtumat = parser.annaTapahtumat();
         assertEquals(3, tapahtumat.size());
     }
 
@@ -56,8 +56,21 @@ public class ParserTest {
                 03.04.2025 13-14 C105 Tentti
                             
                 """;
-        ArrayList<Tapahtuma> tapahtumat = parser.annaTapahtumat(syote);
-        assertEquals(3, tapahtumat.size());
+        parser.analysoiSyote(syote);
+        ArrayList<Tapahtuma> tapahtumat = parser.annaTapahtumat();
+        assertEquals(2, tapahtumat.size());
+    }
+
+    @Test
+    public void testShouldUpdateParsersOtsikko() {
+        String syote = """
+                Otsikko xxx
+                31.03.2025 10-12 B103 Luento  \n 01.04.2025 12-14 C104 Tentti 
+                02.04.2025 13-14 C104 Tentti
+                """;
+        parser.analysoiSyote(syote);
+        String otsikko = parser.getOtsikko();
+        assertEquals("Otsikko xxx", otsikko);
     }
 
     @Test
@@ -73,4 +86,9 @@ public class ParserTest {
         LocalDate expectedDate = LocalDate.of(2025,4,3);
         assertEquals(expectedDate, parser.parsiPvmMerkkiJono(mj));
     }
+/*
+    Yksi tapahtuma
+5.12.2023 12-13 lounas
+
+ */
 }

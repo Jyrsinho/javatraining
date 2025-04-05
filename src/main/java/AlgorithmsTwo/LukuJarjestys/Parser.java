@@ -20,29 +20,43 @@ import java.util.Scanner;
  */
 
 public class Parser {
+    String otsikkorivi;
+    ArrayList<Tapahtuma> tapahtumat;
 
+    public Parser() {
+        this.otsikkorivi = "";
+        this.tapahtumat = new ArrayList<>();
+    }
 
-
-    public ArrayList<Tapahtuma> annaTapahtumat(String syote) {
-
-        ArrayList<Tapahtuma> tapahtumat = new ArrayList<>();
-
+    public void analysoiSyote(String syote) {
         Scanner sc = new Scanner(syote);
-        //skipataaan otsikkorivi
-        sc.nextLine();
+        otaOtsikkoTalteen(sc);
         while (sc.hasNextLine()) {
             String tapahtumaRivi = sc.nextLine();
-            Tapahtuma uusiTapahtuma = parsiTapahtuma(tapahtumaRivi);
-            tapahtumat.add(uusiTapahtuma);
+            if (!tapahtumaRivi.trim().isEmpty()) {
+                Tapahtuma uusiTapahtuma = parsiTapahtuma(tapahtumaRivi);
+                tapahtumat.add(uusiTapahtuma);
+            }
         }
+    }
+
+    private void otaOtsikkoTalteen(Scanner sc) {
+        while (sc.hasNextLine()) {
+            String tapahtumaRivi = sc.nextLine();
+            if (!tapahtumaRivi.trim().isEmpty()) {
+                this.otsikkorivi = tapahtumaRivi;
+                break;
+            }
+        }
+
+    }
+
+
+    public ArrayList<Tapahtuma> annaTapahtumat() {
+
         return tapahtumat;
     }
 
-
-    public String annaOtsikkoRivi(String syote) {
-        Scanner sc = new Scanner(syote);
-        return sc.nextLine();
-    }
 
     private Tapahtuma parsiTapahtuma(String tapahtumaRivi) {
 
@@ -103,5 +117,13 @@ public class Parser {
             sb.append(sc.next());
         }
         return sb.toString();
+    }
+
+    private void setOtsikko(String otsikko) {
+        this.otsikkorivi = otsikko;
+    }
+
+    public String getOtsikko() {
+        return this.otsikkorivi;
     }
 }

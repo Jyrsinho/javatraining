@@ -20,8 +20,9 @@ public class LukuJarjestys {
     public void teeLuettavaKalenteri() {
         Kalenteri kalenteri = new Kalenteri(5, 24);
         Parser parser = new Parser();
-        kalenteri.setOtsikkoRivi( parser.annaOtsikkoRivi(syote));
-        ArrayList<Tapahtuma> tapahtumat = parser.annaTapahtumat(syote);
+        parser.analysoiSyote(syote);
+        kalenteri.setOtsikkoRivi(parser.getOtsikko());
+        ArrayList<Tapahtuma> tapahtumat = parser.annaTapahtumat();
 
         kalenteri.paivitaKalenteri(tapahtumat);
         Tulostaja tulostaja = new Tulostaja();
