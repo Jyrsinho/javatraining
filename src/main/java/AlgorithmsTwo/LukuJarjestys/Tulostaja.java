@@ -19,8 +19,8 @@ public class Tulostaja {
     public void tulostaKalenteri(Kalenteri kalenteri) {
         PrintStream out = System.out;
         tulostaOtsikkoRivi(out);
-        tulostaValiRivi(out);
         tulostaRivit(out, kalenteri);
+        tulostaValiRivi(out);
     }
 
     /**
@@ -71,8 +71,10 @@ public class Tulostaja {
 
     private void tulostaValiRivi(PrintStream out, Kalenteri kalenteri, int kellonAika) {
         tulostaEnsimmaisenSolunAlaviiva(out);
+
         for (int i = 0; i < kalenteri.tapahtumaKalenteri.length; i++) {
-            if (kalenteri.tapahtumaJatkuu(i, kellonAika)) {
+
+            if (kalenteri.tapahtumaJatkuu(i, kellonAika  )) {
                 for (int j = 0; j < merkkejaSolussa; j++) {
                     out.print(" ");
                 }
@@ -95,24 +97,25 @@ public class Tulostaja {
 
 
     private void tulostaRivit(PrintStream out, Kalenteri kalenteri) {
-        int ensimmainenRivi = kalenteri.aikaisinTapahtuma();
-        int viimeinenRivi = kalenteri.myohaisinTapahtuma();
-        if (ensimmainenRivi > 8) {
-            ensimmainenRivi = 8;
+        int ensimmainenAlkavaTunti = kalenteri.aikaisinTapahtuma();
+        int viimeinenAlkavaTunti = kalenteri.myohaisinTapahtuma();
+        if (ensimmainenAlkavaTunti > 8) {
+            ensimmainenAlkavaTunti = 8;
         }
-        if (viimeinenRivi < 17) {
-            viimeinenRivi = 17;
+        if (viimeinenAlkavaTunti < 17) {
+            viimeinenAlkavaTunti = 17;
         }
-        for (int i = ensimmainenRivi ; i <= viimeinenRivi; i++) {
+        for (int i = ensimmainenAlkavaTunti; i <= viimeinenAlkavaTunti; i++) {
             tulostaRivi(kalenteri ,i, out);
         }
     }
 
     private void tulostaRivi(Kalenteri kalenteri, int kellonaika, PrintStream out) {
+            tulostaValiRivi(out,kalenteri, kellonaika);
             tulostaTuntiSolu(out, kellonaika);
             tulostaTapahtumat(out, kellonaika, kalenteri);
             out.println();
-            tulostaValiRivi(out,kalenteri, kellonaika);
+
     }
 
 

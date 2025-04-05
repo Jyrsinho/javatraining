@@ -48,7 +48,7 @@ public class LukuJarjestys {
 
 
     public static void main(String[] args) {
-        String testiSyote = "31.03.2025 16-18 B103 Luento\n" +
+        String testiSyote = "31.03.2025 9-11 B103 Luento\n" +
                             "01.04.2025 14-16 B103 Luento";
 
         LukuJarjestys lukuJarjestys = new LukuJarjestys(testiSyote);

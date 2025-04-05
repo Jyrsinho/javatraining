@@ -96,5 +96,11 @@ public class KalenteriTest {
         assertFalse(kalenteri.tapahtumaJatkuu(1, 12));
     }
 
+    @Test
+    public void testShouldReturnFalseForTapahtumaJatkuuWhenTapahtumaJustStarted() {
+        kalenteri.lisaaTapahtuma(tapahtuma1);
+        assertFalse(kalenteri.tapahtumaJatkuu(1, 10));
+    }
+
 
 }

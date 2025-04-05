@@ -110,7 +110,7 @@ public class Kalenteri {
             aiemmanTapahtumanAlkamisAika--;
         }
 
-        return aiempiTapahtuma.loppuaika > kellonaika+1;
+        return aiempiTapahtuma.loppuaika > kellonaika && kellonaika != aiempiTapahtuma.alkuaika;
     }
 
 
