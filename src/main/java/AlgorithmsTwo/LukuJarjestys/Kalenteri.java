@@ -114,6 +114,52 @@ public class Kalenteri {
     }
 
 
+    public String ensimmaisenTapahtumanPV() {
+        LocalDate aikaisinTapahtuma = LocalDate.now();
+        for (int i = 0; i < tapahtumaKalenteri.length; i++) {
+            for (int j = 0; j < tapahtumaKalenteri[i].length; j++) {
+                if (tapahtumaKalenteri[i][j] != null) {
+                    String dateString = tapahtumaKalenteri[i][j].paivamaara;
+                    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
+                    LocalDate ehdokas = LocalDate.parse(dateString, formatter);
+                    if (onAikaisempiKuin(ehdokas, aikaisinTapahtuma)) {
+                        aikaisinTapahtuma = ehdokas;
+                    }
+                }
+            }
+        }
+
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d.M.yyyy");
+        String formattedDate = aikaisinTapahtuma.format(formatter);
+        return formattedDate;
+    }
+
+
+    public String viimeisenTapahtumanPV() {
+        LocalDate viimeisinTapahtuma = LocalDate.MIN;
+        for (int i = 0; i < tapahtumaKalenteri.length; i++) {
+            for (int j = 0; j < tapahtumaKalenteri[i].length; j++) {
+                if (tapahtumaKalenteri[i][j] != null) {
+                    String dateString = tapahtumaKalenteri[i][j].paivamaara;
+                    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
+                    LocalDate ehdokas = LocalDate.parse(dateString, formatter);
+                    if (!onAikaisempiKuin(ehdokas, viimeisinTapahtuma)) {
+                        viimeisinTapahtuma = ehdokas;
+                    }
+                }
+            }
+        }
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d.M.yyyy");
+        String formattedDate = viimeisinTapahtuma.format(formatter);
+        return formattedDate;
+    }
+
+    private boolean onAikaisempiKuin(LocalDate ehdokas, LocalDate verrattava) {
+        return ehdokas.isBefore(verrattava);
+    }
+
+
+
    public void tulosta () {
        for (int i = 0; i < tapahtumaKalenteri.length; i++) {
            System.out.println("Päivä " + i);

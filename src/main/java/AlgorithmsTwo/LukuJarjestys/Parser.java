@@ -23,15 +23,24 @@ public class Parser {
 
 
     public ArrayList<Tapahtuma> annaTapahtumat(String syote) {
+
         ArrayList<Tapahtuma> tapahtumat = new ArrayList<>();
 
         Scanner sc = new Scanner(syote);
+        //skipataaan otsikkorivi
+        sc.nextLine();
         while (sc.hasNextLine()) {
             String tapahtumaRivi = sc.nextLine();
             Tapahtuma uusiTapahtuma = parsiTapahtuma(tapahtumaRivi);
             tapahtumat.add(uusiTapahtuma);
         }
         return tapahtumat;
+    }
+
+
+    public String annaOtsikkoRivi(String syote) {
+        Scanner sc = new Scanner(syote);
+        return sc.nextLine();
     }
 
     private Tapahtuma parsiTapahtuma(String tapahtumaRivi) {

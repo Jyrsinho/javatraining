@@ -16,11 +16,21 @@ public class Tulostaja {
      * sempi.
      * @param kalenteri
      */
-    public void tulostaKalenteri(Kalenteri kalenteri) {
+    public void tulostaKalenteri(String kalenterinOtsikko, Kalenteri kalenteri) {
         PrintStream out = System.out;
+        out.println(kalenterinOtsikko);
+        tulostaKalenterinKesto(out, kalenteri);
         tulostaOtsikkoRivi(out);
         tulostaRivit(out, kalenteri);
         tulostaValiRivi(out);
+    }
+
+    private void tulostaKalenterinKesto(PrintStream out, Kalenteri kalenteri) {
+        String ensimmainenPaiva = kalenteri.ensimmaisenTapahtumanPV();
+        String viimeinenPaiva = kalenteri.viimeisenTapahtumanPV();
+
+        out.printf("%s-%s", ensimmainenPaiva, viimeinenPaiva);
+        out.println();
     }
 
     /**

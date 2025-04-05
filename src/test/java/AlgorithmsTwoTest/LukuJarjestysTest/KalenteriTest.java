@@ -102,5 +102,28 @@ public class KalenteriTest {
         assertFalse(kalenteri.tapahtumaJatkuu(1, 10));
     }
 
+    @Test
+    public void testKalenteriShouldReturnEnsimmainenPaivaOfKalenteri() {
+        kalenteri.lisaaTapahtuma(tapahtuma1);
+        String expected = "1.4.2025";
+        assertEquals(expected, kalenteri.ensimmaisenTapahtumanPV());
+    }
+
+    @Test
+    public void testKalenteriShouldReturnEnsimmainenPaivaOfKalenteri2() {
+        kalenteri.lisaaTapahtuma(tapahtuma1);
+        Tapahtuma tapahtuma2 = new Tapahtuma(10, 20, "23.01.2025", "tapahtuma2" );
+        kalenteri.lisaaTapahtuma(tapahtuma2);
+        String expected = "23.1.2025";
+        assertEquals(expected, kalenteri.ensimmaisenTapahtumanPV());
+    }
+
+    @Test
+    public void testKalenteriShouldReturnViimeinenPaivaOfKalenteri() {
+        kalenteri.lisaaTapahtuma(tapahtuma1);
+        String expected = "1.4.2025";
+        assertEquals(expected, kalenteri.viimeisenTapahtumanPV());
+    }
+
 
 }
