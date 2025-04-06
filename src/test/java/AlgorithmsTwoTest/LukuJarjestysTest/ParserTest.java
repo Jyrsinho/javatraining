@@ -70,8 +70,31 @@ public class ParserTest {
                 """;
         parser.analysoiSyote(syote);
         String otsikko = parser.getOtsikko();
+        ArrayList<Tapahtuma> tapahtumat = parser.annaTapahtumat();
         assertEquals("Otsikko xxx", otsikko);
+        assertEquals(3, tapahtumat.size());
+        for (Tapahtuma tapahtuma: tapahtumat) {
+            tapahtuma.tulosta();
+        }
     }
+    @Test
+    public void testParserShouldCreateThreeTapahtumatEvenWhenLineBreaks() {
+        String testiSyote = """
+                Tapahtuma 1
+                31.03.2025 9-11 B103 Luento
+                1.4.2025 14-16 B103 Luento
+                2.4.2025 10-12 B103 LuentoAlgoritmeista
+                """;
+        parser.analysoiSyote(testiSyote);
+        String otsikko = parser.getOtsikko();
+        ArrayList<Tapahtuma> tapahtumat = parser.annaTapahtumat();
+        for (Tapahtuma tapahtuma: tapahtumat) {
+            tapahtuma.tulosta();
+        }
+        assertEquals("Tapahtuma 1", otsikko);
+        assertEquals(3, tapahtumat.size());
+    }
+
 
    @Test
    public void testShouldHandleInputWithoutLineChanges() {
@@ -114,18 +137,36 @@ public class ParserTest {
 
     @Test
     public void testPilkoSyoteShouldSplitSyoteIntoStringArray() {
-        String syote = """
-                Otsikko xxx 31.03.2025 10-12 B103 Luento   01.04.2025 12-14 C104 Tentti 02.04.2025 13-14 C104 Tentti
-                """;
+        String syote =
+                "Otsikko xxx 31.03.2025 10-12 B103 Luento   01.04.2025 12-14 C104 Tentti 02.04.2025 13-14 C104 Tentti";
+
         String[] pilkottuSyote = parser.pilkoSyote(syote);
         for (int i = 0; i < pilkottuSyote.length; i++) {
             System.out.println(pilkottuSyote[i]);
         }
         assertEquals(4, pilkottuSyote.length);
     }
+
+    @Test
+    public void
+
+    testPilkoSyoteShouldSplitSyoteIntoStringArrayEvenWhenLineBreaks() {
+        String testiSyote = """
+                Tapahtuma 1
+                3.3.2025 9-11 B103 Luento
+                1.4.2025 14-16 B103 Luento
+                2.04.2025 10-12 B103 LuentoAlgoritmeista
+                """;
+        String [] syoteRivit = parser.pilkoSyote(testiSyote);
+        for (int i = 0; i < syoteRivit.length; i++) {
+            System.out.println("indeksi " + i +"   :    "+ syoteRivit[i]);
+        }
+        assertEquals(4, syoteRivit.length);
+        }
+    }
 /*
     Yksi tapahtuma
 5.12.2023 12-13 lounas
 
  */
-}
+

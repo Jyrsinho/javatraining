@@ -39,7 +39,9 @@ public class Parser {
 
 
     public String[] pilkoSyote(String syote) {
-        return syote.split("(?=\\d{2}\\.\\d{1,2}\\.\\d{4})");
+        syote = syote.replaceAll("\n", " ");
+
+        return syote.split("(?=(.\\d\\.\\d+\\.\\d{4}))");
     }
 
 
