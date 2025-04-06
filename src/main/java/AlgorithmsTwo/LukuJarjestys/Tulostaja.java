@@ -136,7 +136,11 @@ public class Tulostaja {
             if (kalenteri.getTapahtumaKalenteri()[i][kellonaika] != null) {
                 String tapahtumanNimi = kalenteri.getTapahtumaKalenteri()[i][kellonaika].getNimi();
                 out.print(" ");
-                out.print(tapahtumanNimi);
+                if (tapahtumanNimi.length() < 11) {
+                    out.print(tapahtumanNimi);
+                } else {
+                    out.print(tapahtumanNimi.substring(0, 11));
+                }
                 out.print(" ");
             } else {
                 for (int j = 0; j < merkkejaSolussa; j++) {
