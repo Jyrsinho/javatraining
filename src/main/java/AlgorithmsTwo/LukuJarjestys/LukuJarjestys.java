@@ -33,9 +33,14 @@ public class LukuJarjestys {
 
     public static void main(String[] args) {
         String testiSyote = """
+                            
+                            
                             Tapahtuma 1
-                            31.03.2025 9-11 B103 Luento
-                            1.4.2025 14-16 B103 Luento
+                            
+                            
+                            
+                                        31.03.2025        9-11 B103 Luento
+                                  1.4.2025      14-16 B103 Luento
                             2.4.2025 10-12 B103 TenttiAlgoritmeista
                             """;
 

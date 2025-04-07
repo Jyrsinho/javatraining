@@ -22,6 +22,18 @@ public class Tapahtuma {
         return nimi;
     }
 
+    public int getAlkuaika() {
+        return alkuaika;
+    }
+
+    public int getLoppuaika() {
+        return loppuaika;
+    }
+
+    public LocalDate getPaivamaara() {
+        return paivamaara;
+    }
+
     public void tulosta() {
         System.out.println(alkuaika);
         System.out.println(loppuaika);

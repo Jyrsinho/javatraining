@@ -2,7 +2,8 @@ package AlgorithmsTwo.LukuJarjestys;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Scanner;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * Lukee kauttajan syotteen.
@@ -30,7 +31,7 @@ public class Parser {
 
     public void analysoiSyote(String syote) {
         String[] tapahtumaRivit = pilkoSyote(syote);
-        otsikkorivi = tapahtumaRivit[0].trim();
+        setOtsikko(tapahtumaRivit[0].trim());
         for (int i = 1; i < tapahtumaRivit.length; i++) {
             Tapahtuma uusiTapahtuma = parsiTapahtumaMerkkijonosta(tapahtumaRivit[i]);
             tapahtumat.add(uusiTapahtuma);
@@ -46,27 +47,41 @@ public class Parser {
 
 
     public Tapahtuma parsiTapahtumaMerkkijonosta(String merkkijono ) {
-        Scanner sc = new Scanner(merkkijono);
-        String pvm = sc.next();
-        String kellonaika = sc.next();
-        String[] kellonajat = erotaAlkuJaLoppuAika(kellonaika);
-        int alkuaika = Integer.parseInt(kellonajat[0]);
-        int loppuaika = Integer.parseInt(kellonajat[1]);
 
-        StringBuilder nimiSB = new StringBuilder();
-        while (sc.hasNext()) {
-            nimiSB.append(sc.next());
-            nimiSB.append(" ");
+        String pvmRegEx = "(\\d{1,2}\\.\\d{1,2}\\.\\d{4})";
+        String pvm = getMatchingSubstring(merkkijono, pvmRegEx);
+        int alkuaika = -1;
+        int loppuaika = -1;
+        String kelloRegEx = "(\\d{1,2})\\s*-\\s*(\\d{1,2})";
+        String kellonaika = getMatchingSubstring(merkkijono, kelloRegEx);
+        if (kellonaika!= null) {
+            String[] kellonajat = erotaAlkuJaLoppuAika(kellonaika);
+            alkuaika = Integer.parseInt(kellonajat[0]);
+            loppuaika = Integer.parseInt(kellonajat[1]);
         }
-        String nimi = nimiSB.toString().trim();
+
+        String nimi = merkkijono.split(kelloRegEx)[1].trim();
 
         Tapahtuma uusiTapahtuma = new Tapahtuma(alkuaika, loppuaika, parsiPvmMerkkiJono(pvm), nimi);
         return uusiTapahtuma;
     }
 
+    public static String getMatchingSubstring(String input, String regex) {
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher = pattern.matcher(input);
+
+        if (matcher.find()) {
+            return matcher.group();
+        }
+
+        return null;
+    }
+
 
     private String[] erotaAlkuJaLoppuAika(String merkkijono) {
         String[]alkuJaLoppuAika = merkkijono.split("-");
+        alkuJaLoppuAika[0] = alkuJaLoppuAika[0].trim();
+        alkuJaLoppuAika[1] = alkuJaLoppuAika[1].trim();
 
         return alkuJaLoppuAika;
     }
@@ -88,25 +103,6 @@ public class Parser {
     }
 
 
-    private String erotaTapahtumanNimi(Scanner sc, String merkkijono) {
-        StringBuilder sb = new StringBuilder();
-        sb.append(merkkijono);
-        while (sc.hasNext()) {
-            sb.append(" ");
-            sb.append(sc.next());
-        }
-        return sb.toString();
-    }
-
-    /**
-     * Tarkistaa onko merkkijonossa 3 pisteellä erotettua osaa
-     * @param mj merkkijono joka tarkistetaan
-     * @return true jos merkkijono on paivamaara, false jos ei ole
-     */
-    public boolean onPvm(String mj) {
-        String[] osat = mj.split("\\.");
-        return (osat.length == 3);
-    }
 
     private void setOtsikko(String otsikko) {
         this.otsikkorivi = otsikko;

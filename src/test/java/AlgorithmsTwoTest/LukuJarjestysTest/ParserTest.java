@@ -108,17 +108,6 @@ public class ParserTest {
             assertEquals(3, tapahtumat.size());
    }
 
-   @Test
-   public void testShouldReturnTrueForPaivaMaaraDMYYYY() {
-        String mj = "4.3.2025";
-        assertTrue(parser.onPvm(mj));
-   }
-
-   @Test
-   public void testOnPvmShouldReturnFalseForKissa() {
-        String mj = "kissa";
-        assertFalse(parser.onPvm(mj));
-   }
 
 
     @Test
@@ -149,7 +138,6 @@ public class ParserTest {
 
     @Test
     public void
-
     testPilkoSyoteShouldSplitSyoteIntoStringArrayEvenWhenLineBreaks() {
         String testiSyote = """
                 Tapahtuma 1
@@ -163,7 +151,56 @@ public class ParserTest {
         }
         assertEquals(4, syoteRivit.length);
         }
+
+    @Test
+    public void testShouldHandleCasesWhenSpacesBetweenTimes() {
+        String testiSyote = """
+        1.4.2025  10 -  12   Tiimipalaveri
+
+        2.4.2025 9 - 11  Kehityskeskustelu
+
+        03.4.2025 13 - 14  Lounas asiakkaan kanssa
+        """;
+        String [] syoteRivit = parser.pilkoSyote(testiSyote);
+        for (int i = 0; i < syoteRivit.length; i++) {
+            System.out.println("indeksi " + i +"   :    "+ syoteRivit[i]);
+        }
+        assertEquals(3, syoteRivit.length);
     }
+
+    @Test
+    public void testShouldHandleSpaces() {
+        String testiSyote= """
+                  Aikataulu \s
+                
+                1.4.2025   8 -  9   Aamu  kahvit
+                
+                
+                1.4.2025 10 - 11  Projektin suunnittelu \s
+                
+                
+                
+                
+                  1.4.2025   13  -  15     Tapaaminen  tiimin kanssa
+                """;
+        String [] syoteRivit = parser.pilkoSyote(testiSyote);
+        for (int i = 0; i < syoteRivit.length; i++) {
+            System.out.println("indeksi " + i +"   :    "+ syoteRivit[i]);
+        }
+        assertEquals(4, syoteRivit.length);
+    }
+
+    @Test
+    public void testParsiTapahtumaMerkkijonostaShouldCreateTapahtumaWithCorrectAlkuJaLoppuAIka() {
+        String merkkijono = "     1.4.2025   13  -  15     Tapaaminen  tiimin kanssa ";
+        Tapahtuma tapahtuma = parser.parsiTapahtumaMerkkijonosta(merkkijono);
+        assertEquals(13, tapahtuma.getAlkuaika());
+        assertEquals(15, tapahtuma.getLoppuaika());
+
+    }
+
+}
+
 /*
     Yksi tapahtuma
 5.12.2023 12-13 lounas
