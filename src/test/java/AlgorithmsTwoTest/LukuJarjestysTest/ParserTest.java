@@ -99,10 +99,7 @@ public class ParserTest {
    @Test
    public void testShouldHandleInputWithoutLineChanges() {
         String syote = """
-                TIEA211 Algoritmit 2 Kevät 2023
-                 21.03.2023 10-12 B103 Luento 
-                 23.03.2023 14-16 B103 Luento 
-                 23.03.2023 16-18 C231.1 Neuvonta
+                TIEA211 Algoritmit 2 Kevät 2023 21.03.2023 10-12 B103 Luento  23.03.2023 14-16 B103 Luento 23.03.2023 16-18 C231.1 Neuvonta
                 """;
             parser.analysoiSyote(syote);
             String otsikko = parser.getOtsikko();
@@ -138,7 +135,48 @@ public class ParserTest {
 
     }
 
+    @Test
+    public void testOtsikkoJatapahtumatShouldGIveAnArrayOfOtsikkoANdTapahtumat() {
+        String syote = """
+                TIEA211 Algoritmit 2 Kevät 2023 21.03.2023 10-12 B103 Luento  23.03.2023 14-16 B103 Luento 23.03.2023 16-18 C231.1 Neuvonta
+                """;
+        String[] otsikkoJatapahtumat = parser.otsikkoJaTapahtumat(syote);
+        assertEquals(4, otsikkoJatapahtumat.length);
+        assertEquals("TIEA211 Algoritmit 2 Kevät 2023 ", otsikkoJatapahtumat[0]);
+    }
+
+    @Test
+    public void testTapahtumaRivitShouldSeparateOtsikkoFromTapahtumat() {
+        String[] otsikkoJaTapahtumat = {"TIEA211 Algoritmit 2 Kevät 2023", "10-12 B103 Luento",  "14-16 B103 Luento",
+                "16-18 C231.1 Neuvonta"};
+        String [] tapahtumat = parser.tapahtumaRivit(otsikkoJaTapahtumat);
+        assertEquals(3, tapahtumat.length);
+        assertEquals("10-12 B103 Luento", tapahtumat[0]);
+    }
+
+    @Test
+    public void testEtsiPaivaMaaratShouldFindOneDate() {
+        String syote = """
+                TIEA211 Algoritmit 2 Kevät 2023 21.03.2023 10-12 B103 Luento             
+                """;
+        ArrayList<String> paivamaarat = parser.etsiPaivaMaaratSyotteesta(syote);
+        assertEquals(1, paivamaarat.size());
+        assertEquals("21.03.2023" ,paivamaarat.get(0));
+    }
+
+    @Test
+    public void testShouldFindTwoDatesEvenWhenAttachedToString() {
+        String syote = """
+                TIEA211 Algoritmit 2 Kevät 2023 21.03.2023 10-12 B103 Luento01.03.2022 B102 Luento            
+                """;
+        ArrayList<String> paivamaarat = parser.etsiPaivaMaaratSyotteesta(syote);
+        assertEquals(2, paivamaarat.size());
+        assertEquals("01.03.2022" ,paivamaarat.get(1));
+    }
+
 }
+
+
 
 /*
     Yksi tapahtuma

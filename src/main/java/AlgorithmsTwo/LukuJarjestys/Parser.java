@@ -2,7 +2,7 @@ package AlgorithmsTwo.LukuJarjestys;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Scanner;
+import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -32,23 +32,70 @@ public class Parser {
 
     public void analysoiSyote(String syote) {
 
-        Scanner scanner = new Scanner(syote);
+        String[] otsikkoJaTapahtumat = syote.split("(\\d{1,2}\\.\\d{1,2}\\.\\d{4})");
+        String otsikko = otsikkoJaTapahtumat[0];
+        otsikko = otsikko.trim();
+        otsikko = otsikko.replaceAll("\\n+", "");
 
-        while (scanner.hasNextLine()) {
-            String merkkijono = scanner.nextLine();
-            if (!merkkijono.trim().isEmpty()) {
-                setOtsikko(merkkijono);
-                break;
-            }
-        }
-        while (scanner.hasNextLine()) {
-           String merkkijono = scanner.nextLine();
-           if (!merkkijono.trim().isEmpty()) {
-               Tapahtuma uusiTapahtuma = parsiTapahtumaMerkkijonosta(merkkijono);
-               tapahtumat.add(uusiTapahtuma);
-           }
-        }
+        this.otsikkorivi = otsikko;
 
+        String[] tapahtumaRivit =  tapahtumaRivit(otsikkoJaTapahtumat);
+        ArrayList<String> paivamaarat = etsiPaivaMaaratSyotteesta(syote);
+        luoTapahtumat(paivamaarat, tapahtumaRivit);
+    }
+
+    public void luoTapahtumat(ArrayList<String> paivamaarat, String[] tapahtumaRivit) {
+        String kelloRegEx = "(\\d{1,2})\\s*-\\s*(\\d{1,2})";
+        for (int i = 0; i <tapahtumaRivit.length ; i++) {
+            String pvm = paivamaarat.get(i);
+            String tapahtumarivi = tapahtumaRivit[i];
+            String kellonaika = getMatchingSubstring(tapahtumarivi, kelloRegEx);
+            String nimi = tapahtumarivi.split(kelloRegEx)[1].trim();
+            Tapahtuma uusiTapahtuma = luoTapahtuma(pvm, kellonaika, nimi);
+            this.tapahtumat.add(uusiTapahtuma);
+        }
+    }
+
+    public Tapahtuma luoTapahtuma(String pvm, String kellonaika, String tapahtumanNimi) {
+        LocalDate paivamaara = parsiPvmMerkkiJono(pvm);
+        int alkuaika = -1;
+        int loppuaika = -1;
+        if (!Objects.equals(kellonaika, "-1")) {
+            String[] kellonajat = erotaAlkuJaLoppuAika(kellonaika);
+            alkuaika = Integer.parseInt(kellonajat[0]);
+            loppuaika = Integer.parseInt(kellonajat[1]);
+        }
+        Tapahtuma uusiTapahtuma = new Tapahtuma(alkuaika, loppuaika, paivamaara, tapahtumanNimi );
+        return uusiTapahtuma;
+    }
+
+
+
+    public ArrayList<String> etsiPaivaMaaratSyotteesta(String syote) {
+        ArrayList<String> paivamaarat = new ArrayList<>();
+
+        String regex = "(\\d{1,2}\\.\\d{1,2}\\.\\d{4})";
+
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher = pattern.matcher(syote);
+
+        while (matcher.find()) {
+           paivamaarat.add(matcher.group());
+        }
+        return paivamaarat;
+    }
+
+
+    public String[] tapahtumaRivit (String[] otsikkoJaTapahtumat) {
+        String[] tapahtumaRivit =  new String[otsikkoJaTapahtumat.length-1];
+        System.arraycopy(otsikkoJaTapahtumat, 1, tapahtumaRivit, 0, tapahtumaRivit.length);
+        return tapahtumaRivit;
+    }
+
+
+    public String[] otsikkoJaTapahtumat(String syote) {
+        String[] otsikkoJaTapahtumat = syote.split("(\\d{1,2}\\.\\d{1,2}\\.\\d{4})");
+        return otsikkoJaTapahtumat;
     }
 
 
@@ -81,7 +128,7 @@ public class Parser {
             return matcher.group();
         }
 
-        return null;
+        return "-1";
     }
 
 
