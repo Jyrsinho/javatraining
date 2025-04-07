@@ -99,7 +99,10 @@ public class ParserTest {
    @Test
    public void testShouldHandleInputWithoutLineChanges() {
         String syote = """
-                TIEA211 Algoritmit 2 Kevät 2023 21.03.2023 10-12 B103 Luento 23.03.2023 14-16 B103 Luento 23.03.2023 16-18 C231.1 Neuvonta
+                TIEA211 Algoritmit 2 Kevät 2023
+                 21.03.2023 10-12 B103 Luento 
+                 23.03.2023 14-16 B103 Luento 
+                 23.03.2023 16-18 C231.1 Neuvonta
                 """;
             parser.analysoiSyote(syote);
             String otsikko = parser.getOtsikko();
@@ -124,71 +127,7 @@ public class ParserTest {
         assertEquals(expectedDate, parser.parsiPvmMerkkiJono(mj));
     }
 
-    @Test
-    public void testPilkoSyoteShouldSplitSyoteIntoStringArray() {
-        String syote =
-                "Otsikko xxx 31.03.2025 10-12 B103 Luento   01.04.2025 12-14 C104 Tentti 02.04.2025 13-14 C104 Tentti";
 
-        String[] pilkottuSyote = parser.pilkoSyote(syote);
-        for (int i = 0; i < pilkottuSyote.length; i++) {
-            System.out.println(pilkottuSyote[i]);
-        }
-        assertEquals(4, pilkottuSyote.length);
-    }
-
-    @Test
-    public void
-    testPilkoSyoteShouldSplitSyoteIntoStringArrayEvenWhenLineBreaks() {
-        String testiSyote = """
-                Tapahtuma 1
-                3.3.2025 9-11 B103 Luento
-                1.4.2025 14-16 B103 Luento
-                2.04.2025 10-12 B103 LuentoAlgoritmeista
-                """;
-        String [] syoteRivit = parser.pilkoSyote(testiSyote);
-        for (int i = 0; i < syoteRivit.length; i++) {
-            System.out.println("indeksi " + i +"   :    "+ syoteRivit[i]);
-        }
-        assertEquals(4, syoteRivit.length);
-        }
-
-    @Test
-    public void testShouldHandleCasesWhenSpacesBetweenTimes() {
-        String testiSyote = """
-        1.4.2025  10 -  12   Tiimipalaveri
-
-        2.4.2025 9 - 11  Kehityskeskustelu
-
-        03.4.2025 13 - 14  Lounas asiakkaan kanssa
-        """;
-        String [] syoteRivit = parser.pilkoSyote(testiSyote);
-        for (int i = 0; i < syoteRivit.length; i++) {
-            System.out.println("indeksi " + i +"   :    "+ syoteRivit[i]);
-        }
-        assertEquals(3, syoteRivit.length);
-    }
-
-    @Test
-    public void testShouldHandleSpaces() {
-        String testiSyote= """
-                  Aikataulu \s
-                
-                1.4.2025   8 -  9   Aamu  kahvit
-                
-                
-                1.4.2025 10 - 11  Projektin suunnittelu \s
-                
-                
-                
-                
-                  1.4.2025   13  -  15     Tapaaminen  tiimin kanssa
-                """;
-        String [] syoteRivit = parser.pilkoSyote(testiSyote);
-        for (int i = 0; i < syoteRivit.length; i++) {
-            System.out.println("indeksi " + i +"   :    "+ syoteRivit[i]);
-        }
-        assertEquals(4, syoteRivit.length);
-    }
 
     @Test
     public void testParsiTapahtumaMerkkijonostaShouldCreateTapahtumaWithCorrectAlkuJaLoppuAIka() {

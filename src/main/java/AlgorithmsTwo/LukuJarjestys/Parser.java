@@ -2,6 +2,7 @@ package AlgorithmsTwo.LukuJarjestys;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -30,20 +31,26 @@ public class Parser {
     }
 
     public void analysoiSyote(String syote) {
-        String[] tapahtumaRivit = pilkoSyote(syote);
-        setOtsikko(tapahtumaRivit[0].trim());
-        for (int i = 1; i < tapahtumaRivit.length; i++) {
-            Tapahtuma uusiTapahtuma = parsiTapahtumaMerkkijonosta(tapahtumaRivit[i]);
-            tapahtumat.add(uusiTapahtuma);
+
+        Scanner scanner = new Scanner(syote);
+
+        while (scanner.hasNextLine()) {
+            String merkkijono = scanner.nextLine();
+            if (!merkkijono.trim().isEmpty()) {
+                setOtsikko(merkkijono);
+                break;
+            }
         }
+        while (scanner.hasNextLine()) {
+           String merkkijono = scanner.nextLine();
+           if (!merkkijono.trim().isEmpty()) {
+               Tapahtuma uusiTapahtuma = parsiTapahtumaMerkkijonosta(merkkijono);
+               tapahtumat.add(uusiTapahtuma);
+           }
+        }
+
     }
 
-
-    public String[] pilkoSyote(String syote) {
-        syote = syote.replaceAll("\n", " ");
-
-        return syote.split("(?=(.\\d\\.\\d+\\.\\d{4}))");
-    }
 
 
     public Tapahtuma parsiTapahtumaMerkkijonosta(String merkkijono ) {

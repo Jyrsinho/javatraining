@@ -138,6 +138,9 @@ public class Tulostaja {
                 out.print(" ");
                 if (tapahtumanNimi.length() < 11) {
                     out.print(tapahtumanNimi);
+                    for (int j = 0; j < merkkejaSolussa - tapahtumanNimi.length() -2; j++) {
+                        out.print(" ");
+                    }
                 } else {
                     out.print(tapahtumanNimi.substring(0, 11));
                 }
