@@ -17,13 +17,29 @@ public class Tulostaja {
      * @param kalenteri
      */
     public void tulostaKalenteri(Kalenteri kalenteri) {
+       //TODO SIISTI TÄMÄ
         PrintStream out = System.out;
         out.println(kalenteri.getOtsikko());
+
+        if (kalenteri.getOtsikko().isEmpty()) {
+            out.println("Syöte puuttuu");
+            if (kalenteri.getTapahtumienMaara() > 0)
+                tulostaKalenterinKesto(out, kalenteri);
+        } else {
+            out.println("Ei tapahtumia");
+        }
+        return;
+        if (kalenteri.getTapahtumienMaara() == 0) {
+            out.println("Ei tapahtumia");
+            return;
+        }
         tulostaKalenterinKesto(out, kalenteri);
         tulostaOtsikkoRivi(out);
         tulostaRivit(out, kalenteri);
         tulostaValiRivi(out);
     }
+
+    private void tulostaEiOtsikkoa
 
     private void tulostaKalenterinKesto(PrintStream out, Kalenteri kalenteri) {
         String ensimmainenPaiva = kalenteri.ensimmaisenTapahtumanPV();
@@ -71,7 +87,7 @@ public class Tulostaja {
         //tulostetaan viikonpaivien solut
         for (int i = 0; i < viikonPaivat.length; i++) {
             for (int j = 0; j < merkkejaSolussa; j++) {
-                out.print("_");
+                out.print("-");
             }
             out.print("+");
         }
@@ -90,7 +106,7 @@ public class Tulostaja {
                 }
             }else {
                 for (int k = 0; k < merkkejaSolussa; k++) {
-                    out.print("_");
+                    out.print("-");
                 }
             }
             out.print("+");
@@ -100,7 +116,7 @@ public class Tulostaja {
 
     private void tulostaEnsimmaisenSolunAlaviiva(PrintStream out) {
         for (int i = 0; i <ensimmaisenSolunMerkkiMaara ; i++) {
-            out.print("_");
+            out.print("-");
         }
         out.print("+");
     }
@@ -112,8 +128,8 @@ public class Tulostaja {
         if (ensimmainenAlkavaTunti > 8) {
             ensimmainenAlkavaTunti = 8;
         }
-        if (viimeinenAlkavaTunti < 17) {
-            viimeinenAlkavaTunti = 17;
+        if (viimeinenAlkavaTunti < 15) {
+            viimeinenAlkavaTunti = 15;
         }
         for (int i = ensimmainenAlkavaTunti; i <= viimeinenAlkavaTunti; i++) {
             tulostaRivi(kalenteri ,i, out);

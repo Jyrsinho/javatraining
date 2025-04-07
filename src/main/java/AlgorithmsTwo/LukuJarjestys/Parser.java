@@ -32,6 +32,7 @@ public class Parser {
 
     public void analysoiSyote(String syote) {
 
+
         String[] otsikkoJaTapahtumat = syote.split("(\\d{1,2}\\.\\d{1,2}\\.\\d{4})");
         String otsikko = otsikkoJaTapahtumat[0];
         otsikko = otsikko.trim();
@@ -43,6 +44,7 @@ public class Parser {
         ArrayList<String> paivamaarat = etsiPaivaMaaratSyotteesta(syote);
         luoTapahtumat(paivamaarat, tapahtumaRivit);
     }
+
 
     public void luoTapahtumat(ArrayList<String> paivamaarat, String[] tapahtumaRivit) {
         String kelloRegEx = "(\\d{1,2})\\s*-\\s*(\\d{1,2})";

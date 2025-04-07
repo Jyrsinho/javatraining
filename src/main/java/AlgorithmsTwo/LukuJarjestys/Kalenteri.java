@@ -8,10 +8,12 @@ import java.util.ArrayList;
 public class Kalenteri {
     private Tapahtuma[][] tapahtumaKalenteri;
     private String otsikko;
+    private int tapahtumienMaara;
 
     public Kalenteri(int paivia, int tunteja) {
         this.tapahtumaKalenteri = new Tapahtuma[paivia][tunteja];
         this.otsikko = "";
+        this.tapahtumienMaara = 0;
     }
 
 
@@ -19,7 +21,9 @@ public class Kalenteri {
         int paiva = viikonpaiva(uusiTapahtuma.paivamaara);
             if (tapahtumaKalenteri[paiva][uusiTapahtuma.alkuaika] == null) {
                 tapahtumaKalenteri[paiva][uusiTapahtuma.alkuaika] = uusiTapahtuma;
+                tapahtumienMaara++;
             }
+
     }
 
 
@@ -176,6 +180,10 @@ public class Kalenteri {
    public String getOtsikko() {
         return this.otsikko;
    }
+
+   public int getTapahtumienMaara() {
+        return this.tapahtumienMaara;
+    }
 
    public void setOtsikkoRivi(String otsikko) {
         this.otsikko = otsikko;

@@ -21,6 +21,8 @@ public class LukuJarjestys {
         Kalenteri kalenteri = new Kalenteri(5, 24);
         Parser parser = new Parser();
         parser.analysoiSyote(syote);
+
+
         kalenteri.setOtsikkoRivi(parser.getOtsikko());
         ArrayList<Tapahtuma> tapahtumat = parser.annaTapahtumat();
 
@@ -32,11 +34,10 @@ public class LukuJarjestys {
 
 
     public static void main(String[] args) {
-        String testiSyote = """                                                        
-                Yksi tapahtuma
-                5.12.2023 12-13 lounas
-              
-                            """;
+        String testiSyote = """
+                7.4.2025 10-12 Luento
+                8.4.2025 11-13 Luento
+                """;
 
         /*
 
