@@ -48,6 +48,60 @@ public class MyPriorityQueue {
         }
     }
 
+    public int pop() {
+
+
+        int currentTop = priorityQueue[0];
+
+        swapBottomToTop();
+
+        size--;
+        bubbleToBottom();
+
+
+        return currentTop;
+    }
+
+    private void swapBottomToTop() {
+        priorityQueue[0] = priorityQueue[size -1];
+        priorityQueue[size - 1] = 0;
+    }
+
+
+    private void bubbleToBottom() {
+        int parentIndex = 0;
+        int firsChildIndex = parentIndex + 1;
+
+
+        while (firsChildIndex < size) {
+
+            int firstChildIndex = parentIndex * 2 + 1;
+            int secondChildIndex = parentIndex * 2 + 2;
+
+            int smallerChildIndex = getSmallerChildIndex(firstChildIndex, secondChildIndex);
+
+            if (priorityQueue[parentIndex] > priorityQueue[smallerChildIndex] && priorityQueue[smallerChildIndex] != 0) {
+                swap(parentIndex, smallerChildIndex);
+                parentIndex = smallerChildIndex;
+                firsChildIndex = parentIndex * 2 + 1;
+            } else {
+                break;
+            }
+
+        }
+    }
+
+    private int getSmallerChildIndex(int firstChildIndex, int secondChildIndex) {
+        if (priorityQueue[secondChildIndex] == 0) {
+            return firstChildIndex;
+        }
+
+        if (priorityQueue[firstChildIndex] <= priorityQueue[secondChildIndex]) {
+            return firstChildIndex;
+        }
+        return secondChildIndex;
+    }
+
 
     /**
      *
@@ -82,11 +136,6 @@ public class MyPriorityQueue {
         priorityQueue[j] = temp;
     }
 
-    public int pop() {
-
-        size--;
-        return priorityQueue[0];
-    }
 
     public boolean isEmpty() {
         boolean isEmpty = true;

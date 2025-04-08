@@ -9,9 +9,14 @@ import static org.junit.jupiter.api.Assertions.*;
 public class MyPriorityQueueTest {
 
     MyPriorityQueue mpq;
+    MyPriorityQueue mpqNumbersOneToThree;
     @BeforeEach
     public void setUp() {
         mpq = new MyPriorityQueue(5);
+        mpqNumbersOneToThree = new MyPriorityQueue(5);
+        mpqNumbersOneToThree.push(1);
+        mpqNumbersOneToThree.push(2);
+        mpqNumbersOneToThree.push(3);
     }
 
     @Test
@@ -90,6 +95,38 @@ public class MyPriorityQueueTest {
         mpq.push(1);
         assertEquals(10, mpq.capacity());
 
+    }
+
+    @Test
+    public void testPopShouldRemoveTopItem() {
+        mpqNumbersOneToThree.tulosta();
+
+        System.out.println();
+        System.out.println("-----------------------");
+        System.out.println();
+        assertEquals(1 , mpqNumbersOneToThree.pop());
+        mpqNumbersOneToThree.tulosta();
+
+    }
+
+    @Test
+    public void testPopShouldRemoveTopItemAndSetNewTopItem() {
+        mpq.push(4);
+        mpq.push(5);
+        mpq.pop();
+
+        mpq.tulosta();
+        assertEquals(5, mpq.top());
+
+    }
+
+    @Test
+    public void testPopShouldKnowHowToFixItself() {
+        mpqNumbersOneToThree.tulosta();
+        mpqNumbersOneToThree.pop();
+        System.out.println();
+        mpqNumbersOneToThree.tulosta();
+        assertEquals(mpqNumbersOneToThree.top(), 2);
     }
 
 
