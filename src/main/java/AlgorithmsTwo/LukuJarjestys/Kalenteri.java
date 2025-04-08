@@ -87,7 +87,7 @@ public class Kalenteri {
     }
 
     /**
-     * Palauttaa kalenterin myohaisimman tapahtuman kellonajan
+     * Palauttaa kalenterin myohaisimman tapahtuman viimeisen alkavan tunnin
      * @return {int} myohaisimman tapahtuman kellonaika. Jos kalenterissa ei ole tapahtumia palauttaa -1
      */
     public int myohaisinTapahtuma() {
@@ -95,8 +95,8 @@ public class Kalenteri {
 
         for (int i = 0; i < tapahtumaKalenteri.length; i++) {
             for (int j = 0; j < tapahtumaKalenteri[i].length; j++) {
-                if (tapahtumaKalenteri[i][j] != null && tapahtumaKalenteri[i][j].alkuaika > myohaisinTapahtuma) {
-                    myohaisinTapahtuma = tapahtumaKalenteri[i][j].alkuaika;
+                if (tapahtumaKalenteri[i][j] != null && tapahtumaKalenteri[i][j].loppuaika - 1 > myohaisinTapahtuma) {
+                    myohaisinTapahtuma = tapahtumaKalenteri[i][j].loppuaika -1 ;
                 }
             }
         }

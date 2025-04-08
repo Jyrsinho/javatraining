@@ -17,31 +17,44 @@ public class Tulostaja {
      * @param kalenteri
      */
     public void tulostaKalenteri(Kalenteri kalenteri) {
-        //TODO SIISTI TÄMÄ
-        /*
+
         PrintStream out = System.out;
-        out.println(kalenteri.getOtsikko());
 
         if (kalenteri.getOtsikko().isEmpty()) {
-            out.println("Syöte puuttuu");
-            if (kalenteri.getTapahtumienMaara() > 0)
-                tulostaKalenterinKesto(out, kalenteri);
-        } else {
-            out.println("Ei tapahtumia");
-        }
-        return;
-        if (kalenteri.getTapahtumienMaara() == 0) {
-            out.println("Ei tapahtumia");
+            kasittelePuuttuvaOtsikko(out, kalenteri);
             return;
         }
+
+        if (kalenteri.getTapahtumienMaara() == 0) {
+            kasitteleEiTapahtumia(out);
+            return;
+        }
+
+        out.println(kalenteri.getOtsikko());
         tulostaKalenterinKesto(out, kalenteri);
         tulostaOtsikkoRivi(out);
         tulostaRivit(out, kalenteri);
         tulostaValiRivi(out);
     }
 
-         */
 
+    /**
+     * Jos otsikkoriviä ei saatu,
+     * niin pitää tulostaa rivi jossa lukee ”Syöte puuttuu” ja lopettaa. Sitten pitää olla rivi,
+     * jossa on kurssin ajanjakso muodossa päivämäärä-päivämäärä tai ”Ei tapahtumia
+     * @param out
+     */
+    private void kasittelePuuttuvaOtsikko(PrintStream out, Kalenteri kalenteri) {
+        out.println("Syöte puuttuu");
+        if (kalenteri.getTapahtumienMaara() == 0) {
+            kasitteleEiTapahtumia(out);
+        } else {
+            tulostaKalenterinKesto(out, kalenteri);
+        }
+}
+
+    private void kasitteleEiTapahtumia(PrintStream out) {
+        out.println("Ei tapahtumia");
     }
 
     private void tulostaKalenterinKesto(PrintStream out, Kalenteri kalenteri) {
