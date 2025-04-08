@@ -26,7 +26,8 @@ public class Tulostaja {
         }
 
         if (kalenteri.getTapahtumienMaara() == 0) {
-            kasitteleEiTapahtumia(out);
+            out.println(kalenteri.getOtsikko());
+            out.println("Ei tapahtumia");
             return;
         }
 
@@ -47,15 +48,12 @@ public class Tulostaja {
     private void kasittelePuuttuvaOtsikko(PrintStream out, Kalenteri kalenteri) {
         out.println("Syöte puuttuu");
         if (kalenteri.getTapahtumienMaara() == 0) {
-            kasitteleEiTapahtumia(out);
+            out.println("Ei tapahtumia");
         } else {
             tulostaKalenterinKesto(out, kalenteri);
         }
 }
 
-    private void kasitteleEiTapahtumia(PrintStream out) {
-        out.println("Ei tapahtumia");
-    }
 
     private void tulostaKalenterinKesto(PrintStream out, Kalenteri kalenteri) {
         String ensimmainenPaiva = kalenteri.ensimmaisenTapahtumanPV();
