@@ -76,7 +76,20 @@ public class MyPriorityQueueTest {
         mpq.push(3);
         mpq.push(2);
         mpq.push(1);
-        assertEquals(2, mpq.top());
+        mpq.tulosta();
+        assertEquals(1, mpq.top());
+    }
+
+    @Test
+    public void testShouldUpdateCapacity() {
+        mpq.push(5);
+        mpq.push(4);
+        mpq.push(3);
+        mpq.push(2);
+        assertEquals(5, mpq.capacity());
+        mpq.push(1);
+        assertEquals(10, mpq.capacity());
+
     }
 
 

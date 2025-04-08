@@ -17,7 +17,8 @@ public class Tulostaja {
      * @param kalenteri
      */
     public void tulostaKalenteri(Kalenteri kalenteri) {
-       //TODO SIISTI TÄMÄ
+        //TODO SIISTI TÄMÄ
+        /*
         PrintStream out = System.out;
         out.println(kalenteri.getOtsikko());
 
@@ -39,7 +40,9 @@ public class Tulostaja {
         tulostaValiRivi(out);
     }
 
-    private void tulostaEiOtsikkoa
+         */
+
+    }
 
     private void tulostaKalenterinKesto(PrintStream out, Kalenteri kalenteri) {
         String ensimmainenPaiva = kalenteri.ensimmaisenTapahtumanPV();

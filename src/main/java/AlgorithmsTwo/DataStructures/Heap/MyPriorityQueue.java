@@ -40,12 +40,12 @@ public class MyPriorityQueue {
         //lisataan heapin loppuun
         priorityQueue[size] = value;
         size++;
+
         bubbleToTop();
 
         if (size == capacity()) {
             growArray();
         }
-
     }
 
 
@@ -53,11 +53,26 @@ public class MyPriorityQueue {
      *
      */
     private void bubbleToTop () {
-        int parent = (size -1)  / 2;
-        int lapsi = size -1;
 
-        if (priorityQueue[lapsi] < priorityQueue[parent]) {
-            swap(priorityQueue[lapsi], priorityQueue[parent]);
+        int childIndex = size - 1;
+        if (childIndex > 0) {
+            bubbleHelper(childIndex);
+        }
+
+    }
+
+    private void bubbleHelper(int childIndex) {
+        int parentIndex;
+        // lapsi on vasemmalla
+        if (childIndex % 2 != 0) {
+            parentIndex = childIndex / 2;
+        } else {
+            parentIndex = (childIndex - 1 ) / 2;
+        }
+
+        if (priorityQueue[childIndex] < priorityQueue[parentIndex]) {
+            swap(childIndex, parentIndex);
+            bubbleHelper(parentIndex);
         }
     }
 
