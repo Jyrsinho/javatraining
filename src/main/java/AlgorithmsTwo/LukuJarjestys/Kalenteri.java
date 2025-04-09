@@ -19,11 +19,20 @@ public class Kalenteri {
 
     public void lisaaTapahtuma(Tapahtuma uusiTapahtuma) {
         int paiva = viikonpaiva(uusiTapahtuma.paivamaara);
-            if (tapahtumaKalenteri[paiva][uusiTapahtuma.alkuaika] == null) {
+            if (tapahtumaPaikkaOnTyhja(uusiTapahtuma)) {
                 tapahtumaKalenteri[paiva][uusiTapahtuma.alkuaika] = uusiTapahtuma;
                 tapahtumienMaara++;
             }
 
+    }
+
+    /**
+     * Tarkistaa, että lisattavan tapahtuman tapahtuma-aikana kalenterissa ei jo ole tapahtumaa
+     */
+    private boolean tapahtumaPaikkaOnTyhja(Tapahtuma uusiTapahtuma) {
+        // Pitää tarkistaa kaikki tapahtumat uuden tapahtuman aikasloteissa ja niiden alku ja loppumisajat
+
+        return true;
     }
 
 

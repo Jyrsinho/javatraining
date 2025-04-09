@@ -16,8 +16,9 @@ public class KalenteriTest {
     @BeforeEach
     public void setUp() {
         kalenteri = new Kalenteri(5, 24);
-        LocalDate ld = LocalDate.of(2025, 4, 1);
-        tapahtuma1 = new Tapahtuma(10, 12, ld, "B105 Luento");        //Tiistai
+        LocalDate ld = LocalDate.of(2025, 4, 1);                    // tiistai
+        tapahtuma1 = new Tapahtuma(10, 12, ld, "B105 Luento");
+
     }
 
     @Test
@@ -66,25 +67,25 @@ public class KalenteriTest {
     }
 
     @Test
-    public void testShouldReturn8ForAikaisinTapahtuma() {
+    public void testShouldReturnEightForAikaisinTapahtuma() {
         kalenteri.lisaaTapahtuma(tapahtuma1);
-        Tapahtuma tapahtuma2 = new Tapahtuma(8, 10, LocalDate.of(2024,1, 23), "tapahtuma2" );
+        Tapahtuma tapahtuma2 = new Tapahtuma(8, 10, LocalDate.of(2025,4, 4), "tapahtuma2" ); // perjantai
         kalenteri.lisaaTapahtuma(tapahtuma2);
         assertEquals(8, kalenteri.aikaisinTapahtuma());
     }
 
     @Test
-    public void testShouldReturnTenForMyohaisinTapahtuma() {
+    public void testShouldReturnElevenForMyohaisinTapahtuma() {
         kalenteri.lisaaTapahtuma(tapahtuma1);
-        assertEquals(10, kalenteri.myohaisinTapahtuma());
+        assertEquals(11, kalenteri.myohaisinTapahtuma());
     }
 
     @Test
-    public void testShouldReturnTwentyForMyohaisinTapahtuma() {
+    public void testShouldReturnTwentyOneForMyohaisinTapahtuma() {
         kalenteri.lisaaTapahtuma(tapahtuma1);
         Tapahtuma tapahtuma2 = new Tapahtuma(20, 22, LocalDate.of(2024,1,23), "tapahtuma2" );
         kalenteri.lisaaTapahtuma(tapahtuma2);
-        assertEquals(20, kalenteri.myohaisinTapahtuma());
+        assertEquals(21, kalenteri.myohaisinTapahtuma());
     }
 
     @Test
@@ -126,6 +127,25 @@ public class KalenteriTest {
         kalenteri.lisaaTapahtuma(tapahtuma1);
         String expected = "1.4.2025";
         assertEquals(expected, kalenteri.viimeisenTapahtumanPV());
+    }
+
+    @Test
+    public void testKalenteriShouldNotAddEventWhenThereAlreadyIsAnEventInThatSameTimeSlot() {
+        Tapahtuma olemassaolevaTapahtuma = new Tapahtuma(10, 14, LocalDate.of(2025,4,9), "olemassaoleva" );
+        kalenteri.lisaaTapahtuma(olemassaolevaTapahtuma);
+        Tapahtuma eiSaaLisata = new Tapahtuma(10, 14, LocalDate.of(2025,4,9), "eiSaaLisata" );
+        kalenteri.lisaaTapahtuma(eiSaaLisata);
+        assertEquals( 1, kalenteri.getTapahtumienMaara());
+
+    }
+
+    @Test
+    public void testKalenteriShouldNotAddEventWhenAlreadyAnEventWithinTHatTImeSlot() {
+        Tapahtuma olemassaolevaTapahtuma = new Tapahtuma(10, 14, LocalDate.of(2025,4,2), "olemassaoleva" );
+        kalenteri.lisaaTapahtuma(olemassaolevaTapahtuma);
+        Tapahtuma eiSaaLisata = new Tapahtuma(13, 15, LocalDate.of(2025,4,9), "eiSaaLisata" );
+        kalenteri.lisaaTapahtuma(eiSaaLisata);
+        assertEquals( 1, kalenteri.getTapahtumienMaara());
     }
 
 

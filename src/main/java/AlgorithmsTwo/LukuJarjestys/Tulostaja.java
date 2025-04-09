@@ -47,11 +47,6 @@ public class Tulostaja {
      */
     private void kasittelePuuttuvaOtsikko(PrintStream out, Kalenteri kalenteri) {
         out.println("Syöte puuttuu");
-        if (kalenteri.getTapahtumienMaara() == 0) {
-            out.println("Ei tapahtumia");
-        } else {
-            tulostaKalenterinKesto(out, kalenteri);
-        }
 }
 
 
