@@ -36,6 +36,8 @@ public class MyPriorityQueue {
 
     }
 
+
+
     public void push(int value) {
         //lisataan heapin loppuun
         priorityQueue[size] = value;
@@ -109,26 +111,14 @@ public class MyPriorityQueue {
     private void bubbleToTop () {
 
         int childIndex = size - 1;
-        if (childIndex > 0) {
-            bubbleHelper(childIndex);
-        }
-
-    }
-
-    private void bubbleHelper(int childIndex) {
-        int parentIndex;
-        // lapsi on vasemmalla
-        if (childIndex % 2 != 0) {
-            parentIndex = childIndex / 2;
-        } else {
-            parentIndex = (childIndex - 1 ) / 2;
-        }
-
-        if (priorityQueue[childIndex] < priorityQueue[parentIndex]) {
+        int parentIndex = childIndex / 2;
+        while (childIndex > 0 && priorityQueue[parentIndex] > priorityQueue[childIndex]) {
             swap(childIndex, parentIndex);
-            bubbleHelper(parentIndex);
+            childIndex = parentIndex;
+            parentIndex = childIndex / 2;
         }
     }
+
 
     private void swap(int i, int j) {
         int temp = priorityQueue[i];
@@ -147,9 +137,7 @@ public class MyPriorityQueue {
         return isEmpty;
     }
 
-    private boolean onParillinenIndeksi(int indeksi) {
-        return indeksi % 2 == 0;
-    }
+
 
    public int top() {
         return priorityQueue[0];
