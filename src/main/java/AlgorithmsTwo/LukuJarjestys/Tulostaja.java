@@ -157,8 +157,9 @@ public class Tulostaja {
     private void tulostaTapahtumat(PrintStream out, int kellonaika, Kalenteri kalenteri) {
 
         for (int i = 0; i < kalenteri.getTapahtumaKalenteri().length; i++) {
-
-            if (kalenteri.getTapahtumaKalenteri()[i][kellonaika] != null) {
+            Tapahtuma kalenteriSolu = kalenteri.getTapahtumaKalenteri()[i][kellonaika];
+            // TODO: TÄÄLLÄ PITÄÄ TEHDÄ CHEKKI ETTEI TULOSTETA TAPAHTUMAA JOS TAPAHTUMA ON TAPAHTUMAJATKUU- TAPAHTUMA
+            if (kalenteriSolu != null && !kalenteriSolu.getClass().getSimpleName().equals("TapahtumaJatkuu")  ) {
                 String tapahtumanNimi = kalenteri.getTapahtumaKalenteri()[i][kellonaika].getNimi();
                 out.print(" ");
                 if (tapahtumanNimi.length() < 11) {

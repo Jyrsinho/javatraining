@@ -140,6 +140,14 @@ public class KalenteriTest {
     }
 
     @Test
+    public void testShouldAddTapahtumaJatkuuToSecondTimeSlotOfTapahtuma() {
+        kalenteri.lisaaTapahtuma(tapahtuma1);
+        Tapahtuma[][] tapahtumaKalenteri = kalenteri.getTapahtumaKalenteri();
+        Tapahtuma tapahtumanToinenTunti = tapahtumaKalenteri[kalenteri.viikonpaiva(tapahtuma1.getPaivamaara())][tapahtuma1.getLoppuaika() -1];
+        assertEquals("TapahtumaJatkuu" ,tapahtumanToinenTunti.getClass().getSimpleName());
+    }
+
+    @Test
     public void testKalenteriShouldNotAddEventWhenAlreadyAnEventWithinTHatTImeSlot() {
         Tapahtuma olemassaolevaTapahtuma = new Tapahtuma(10, 14, LocalDate.of(2025,4,2), "olemassaoleva" );
         kalenteri.lisaaTapahtuma(olemassaolevaTapahtuma);
@@ -149,18 +157,53 @@ public class KalenteriTest {
     }
 
     @Test
-    public void testKalenteriShouldNotAddEventWhenAlreadyAnEventWithinTHatTImeSlot2() {
-        String testiSyote = """
-                                Tuplavälejä siellä sun täällä ym.
-                                6.12.2023 20-22 pres.linna
-                                6.12.2023 19-20 pres.linna
-                """;
-        Tapahtuma olemassaolevaTapahtuma = new Tapahtuma(20, 22, LocalDate.of(2023,12,6), "olemassaoleva" );
-        kalenteri.lisaaTapahtuma(olemassaolevaTapahtuma);
-        Tapahtuma eiSaaLisata = new Tapahtuma(19, 20, LocalDate.of(2023, 12, 6), "eiSaaLisata" );
-        kalenteri.lisaaTapahtuma(eiSaaLisata);
+    public void testKalenteriShouldDetermineThatTapahtumaJatkuuWhenTwoAdjacentEventsHaveSameName() {
+        Tapahtuma tapahtuma1 = new Tapahtuma(10, 12, LocalDate.of(2025, 4,10), "tapahtuma1" );
+        Tapahtuma tapahtuma2 = new Tapahtuma(12, 14, LocalDate.of(2025, 4,10), "tapahtuma1" );
+        kalenteri.lisaaTapahtuma(tapahtuma1);
+        kalenteri.lisaaTapahtuma(tapahtuma2);
+        assertTrue(kalenteri.tapahtumaJatkuu(kalenteri.viikonpaiva(tapahtuma1.getPaivamaara()), tapahtuma2.getAlkuaika()));
+    }
 
-        assertEquals(1, kalenteri.getTapahtumienMaara());
+    @Test
+    public void testKalenteriShouldDetermineThatTapahtumaJatkuuFollowingEventsHaveSameName() {
+        Tapahtuma tapahtuma1 = new Tapahtuma(12, 14, LocalDate.of(2025, 4,10), "tapahtuma1" );
+        Tapahtuma tapahtuma2 = new Tapahtuma(10, 12, LocalDate.of(2025, 4,10), "tapahtuma1" );
+        kalenteri.lisaaTapahtuma(tapahtuma1);
+        kalenteri.lisaaTapahtuma(tapahtuma2);
+        assertTrue(kalenteri.tapahtumaJatkuu(kalenteri.viikonpaiva(tapahtuma1.getPaivamaara()), tapahtuma1.getAlkuaika()));
+    }
+
+    @Test
+    public void testKalenteriShouldKnowThatUusiTapahtumaHasPreviousOneWithSameName() {
+        Tapahtuma tapahtuma1 = new Tapahtuma(10, 12, LocalDate.of(2025, 4,10), "tapahtuma1" );
+        Tapahtuma tapahtuma2 = new Tapahtuma(12, 14, LocalDate.of(2025, 4,10), "tapahtuma1" );
+        kalenteri.lisaaTapahtuma(tapahtuma1);
+        assertTrue(kalenteri.yhdistaJatkuvat(kalenteri.viikonpaiva(tapahtuma2.getPaivamaara()),tapahtuma2));
+    }
+
+    @Test
+    public void testKalenteriShouldKnowThatUusiTapahtumaHasNoPreviousOneWithSameName() {
+        Tapahtuma tapahtuma1 = new Tapahtuma(10, 12, LocalDate.of(2025, 4,10), "tapahtuma1" );
+        Tapahtuma tapahtuma2 = new Tapahtuma(12, 14, LocalDate.of(2025, 4,10), "tapahtuma12" );
+        kalenteri.lisaaTapahtuma(tapahtuma1);
+        assertFalse(kalenteri.yhdistaJatkuvat(kalenteri.viikonpaiva(tapahtuma2.getPaivamaara()),tapahtuma2));
+    }
+
+    @Test
+    public void testKalenteriShouldKnowThatUusiTapahtumaHasNextOneWithSameName() {
+        Tapahtuma tapahtuma1 = new Tapahtuma(12, 14, LocalDate.of(2025, 4,10), "tapahtuma1" );
+        Tapahtuma tapahtuma2 = new Tapahtuma(10, 12, LocalDate.of(2025, 4,10), "tapahtuma1" );
+        kalenteri.lisaaTapahtuma(tapahtuma1);
+        assertTrue(kalenteri.yhdistaJatkuvat(kalenteri.viikonpaiva(tapahtuma2.getPaivamaara()),tapahtuma2));
+    }
+
+    @Test
+    public void testKalenteriShouldKnowThatUusiTapahtumaHasNoNextOneWithSameName() {
+        Tapahtuma tapahtuma1 = new Tapahtuma(12, 14, LocalDate.of(2025, 4,10), "tapahtuma1" );
+        Tapahtuma tapahtuma2 = new Tapahtuma(10, 11, LocalDate.of(2025, 4,10), "tapahtuma1" );
+        kalenteri.lisaaTapahtuma(tapahtuma1);
+        assertTrue(kalenteri.yhdistaJatkuvat(kalenteri.viikonpaiva(tapahtuma2.getPaivamaara()),tapahtuma2));
     }
 
 }

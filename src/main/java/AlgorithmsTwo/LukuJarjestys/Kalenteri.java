@@ -21,8 +21,12 @@ public class Kalenteri {
         int paiva = viikonpaiva(uusiTapahtuma.paivamaara);
             if (tapahtumaPaikkaOnTyhja(uusiTapahtuma)) {
                 tapahtumaKalenteri[paiva][uusiTapahtuma.alkuaika] = uusiTapahtuma;
+                for (int i = uusiTapahtuma.alkuaika+1; i < uusiTapahtuma.loppuaika; i++) {
+                    tapahtumaKalenteri[paiva][i] =  new TapahtumaJatkuu(uusiTapahtuma.alkuaika, uusiTapahtuma.loppuaika, uusiTapahtuma.paivamaara, uusiTapahtuma.nimi);
+                }
                 tapahtumienMaara++;
             }
+            yhdistaJatkuvat(paiva, uusiTapahtuma);
 
     }
 
@@ -30,33 +34,53 @@ public class Kalenteri {
      * Tarkistaa, että lisattavan tapahtuman tapahtuma-aikana kalenterissa ei jo ole tapahtumaa
      */
     private boolean tapahtumaPaikkaOnTyhja(Tapahtuma uusiTapahtuma) {
-        // Pitää tarkistaa kaikki tapahtumat uuden tapahtuman aikasloteissa ja niiden alku ja loppumisajat
         int paiva = viikonpaiva(uusiTapahtuma.paivamaara);
 
-        // ensin pitää etsiä päivän aiemmmin tai samaan aikaan alkaneet tapahtumat ja tarkistaa ettei lisättävä
-        // tapahtuma osu niiden päälle
-        Tapahtuma aiempiTapahtuma = new TapahtumaEiOlemassa();
-        int kellonaika = uusiTapahtuma.loppuaika;
-
-        // etsitaan lisattavaa tapahtumaa aiempi tapahtuma
-        while  (aiempiTapahtuma.getClass().getSimpleName().equals("TapahtumaEiOlemassa") && kellonaika >= 0) {
-            if (tapahtumaKalenteri[paiva][kellonaika] != null) {
-                aiempiTapahtuma = tapahtumaKalenteri [paiva][kellonaika];
-            }
-            kellonaika--;
-        }
-
-        if (aiempiTapahtuma.getClass().getSimpleName().equals("TapahtumaEiOlemassa")){
-            return true;
-        }
-
-        for (int i = aiempiTapahtuma.alkuaika; i < aiempiTapahtuma.loppuaika; i++) {
-            if (i == uusiTapahtuma.alkuaika) {
+        for (int i = uusiTapahtuma.alkuaika; i < uusiTapahtuma.loppuaika; i++) {
+            if (tapahtumaKalenteri[paiva][i] != null) {
                 return false;
             }
         }
         return true;
+    }
 
+    /**
+     * Jos lisatty tapahtuma on samanniminen kuin sitä suoraan edeltävä tapahtuma tai siitä
+     * suoraan jatkuva tapahtuma. Yhdistetään ne yhdeksi tapahtumaksi.
+     * @return tehtiinko yhdistys
+     */
+    public boolean yhdistaJatkuvat (int paiva, Tapahtuma uusiTapahtuma) {
+        Tapahtuma edellinenTapahtuma = tapahtumaKalenteri[paiva][uusiTapahtuma.alkuaika-1];
+        if (edellinenTapahtuma != null) {
+            String edellisenTapahtumanNimi = edellinenTapahtuma.getNimi();
+            if (edellisenTapahtumanNimi.equals(uusiTapahtuma.nimi)) {
+                yhdistaTapahtumaEdelliseen(paiva, uusiTapahtuma);
+                return true;
+            }
+        }
+
+        Tapahtuma seuraavaTapahtuma = tapahtumaKalenteri[paiva][uusiTapahtuma.loppuaika+1];
+            if (seuraavaTapahtuma != null) {
+                String seuraavanTapahtumanNimi = seuraavaTapahtuma.getNimi();
+                if (seuraavanTapahtumanNimi.equals(uusiTapahtuma.nimi)) {
+                    yhdistaTapahtumaSeuraavaan(paiva, uusiTapahtuma);
+                    return true;
+                }
+            }
+
+        return false;
+    }
+
+    private void yhdistaTapahtumaEdelliseen(int paiva, Tapahtuma uusiTapahtuma) {
+        Tapahtuma edellinenTapahtuma = tapahtumaKalenteri[paiva][uusiTapahtuma.alkuaika-1];
+
+        tapahtumaKalenteri[paiva][uusiTapahtuma.alkuaika] = new TapahtumaJatkuu(edellinenTapahtuma.alkuaika, edellinenTapahtuma.loppuaika, edellinenTapahtuma.paivamaara, edellinenTapahtuma.nimi);
+    }
+
+
+    private void yhdistaTapahtumaSeuraavaan(int paiva, Tapahtuma uusiTapahtuma) {
+        Tapahtuma seuraavaTapahtuma = tapahtumaKalenteri[paiva][uusiTapahtuma.loppuaika + 1];
+        tapahtumaKalenteri[paiva][seuraavaTapahtuma.alkuaika] = new TapahtumaJatkuu(uusiTapahtuma.alkuaika, uusiTapahtuma.loppuaika, uusiTapahtuma.paivamaara, seuraavaTapahtuma.nimi);
     }
 
 
@@ -144,18 +168,13 @@ public class Kalenteri {
      * @return True jos annetun kellonajan aikana on jo olemassaoleva tapahtuma
      */
     public boolean tapahtumaJatkuu(int paiva, int kellonaika) {
-        Tapahtuma aiempiTapahtuma = new TapahtumaEiOlemassa();
-        int aiemmanTapahtumanAlkamisAika = kellonaika;
-
-        while (aiempiTapahtuma.getClass().getSimpleName().equals("TapahtumaEiOlemassa") && aiemmanTapahtumanAlkamisAika >= 0){
-            if (tapahtumaKalenteri[paiva][aiemmanTapahtumanAlkamisAika] != null) {
-                aiempiTapahtuma = tapahtumaKalenteri[paiva][aiemmanTapahtumanAlkamisAika];
-            }
-            aiemmanTapahtumanAlkamisAika--;
+        if (tapahtumaKalenteri[paiva][kellonaika] == null) {
+            return false;
         }
 
-        return aiempiTapahtuma.loppuaika > kellonaika && kellonaika != aiempiTapahtuma.alkuaika;
+        return tapahtumaKalenteri[paiva][kellonaika].getClass().getSimpleName().equals("TapahtumaJatkuu");
     }
+
 
 
     public String ensimmaisenTapahtumanPV() {
