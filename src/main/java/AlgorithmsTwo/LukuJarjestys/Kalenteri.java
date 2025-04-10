@@ -31,8 +31,32 @@ public class Kalenteri {
      */
     private boolean tapahtumaPaikkaOnTyhja(Tapahtuma uusiTapahtuma) {
         // Pitää tarkistaa kaikki tapahtumat uuden tapahtuman aikasloteissa ja niiden alku ja loppumisajat
+        int paiva = viikonpaiva(uusiTapahtuma.paivamaara);
 
+        // ensin pitää etsiä päivän aiemmmin tai samaan aikaan alkaneet tapahtumat ja tarkistaa ettei lisättävä
+        // tapahtuma osu niiden päälle
+        Tapahtuma aiempiTapahtuma = new TapahtumaEiOlemassa();
+        int kellonaika = uusiTapahtuma.loppuaika;
+
+        // etsitaan lisattavaa tapahtumaa aiempi tapahtuma
+        while  (aiempiTapahtuma.getClass().getSimpleName().equals("TapahtumaEiOlemassa") && kellonaika >= 0) {
+            if (tapahtumaKalenteri[paiva][kellonaika] != null) {
+                aiempiTapahtuma = tapahtumaKalenteri [paiva][kellonaika];
+            }
+            kellonaika--;
+        }
+
+        if (aiempiTapahtuma.getClass().getSimpleName().equals("TapahtumaEiOlemassa")){
+            return true;
+        }
+
+        for (int i = aiempiTapahtuma.alkuaika; i < aiempiTapahtuma.loppuaika; i++) {
+            if (i == uusiTapahtuma.alkuaika) {
+                return false;
+            }
+        }
         return true;
+
     }
 
 
@@ -112,6 +136,13 @@ public class Kalenteri {
         return myohaisinTapahtuma;
     }
 
+
+    /**
+     * True jos annetun kellonajan aikana on jo olemassaoleva tapahtuma
+     * @param paiva jota tutkitaan
+     * @param kellonaika jota tutkitaan
+     * @return True jos annetun kellonajan aikana on jo olemassaoleva tapahtuma
+     */
     public boolean tapahtumaJatkuu(int paiva, int kellonaika) {
         Tapahtuma aiempiTapahtuma = new TapahtumaEiOlemassa();
         int aiemmanTapahtumanAlkamisAika = kellonaika;
@@ -120,7 +151,6 @@ public class Kalenteri {
             if (tapahtumaKalenteri[paiva][aiemmanTapahtumanAlkamisAika] != null) {
                 aiempiTapahtuma = tapahtumaKalenteri[paiva][aiemmanTapahtumanAlkamisAika];
             }
-
             aiemmanTapahtumanAlkamisAika--;
         }
 

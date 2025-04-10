@@ -148,5 +148,19 @@ public class KalenteriTest {
         assertEquals( 1, kalenteri.getTapahtumienMaara());
     }
 
+    @Test
+    public void testKalenteriShouldNotAddEventWhenAlreadyAnEventWithinTHatTImeSlot2() {
+        String testiSyote = """
+                                Tuplavälejä siellä sun täällä ym.
+                                6.12.2023 20-22 pres.linna
+                                6.12.2023 19-20 pres.linna
+                """;
+        Tapahtuma olemassaolevaTapahtuma = new Tapahtuma(20, 22, LocalDate.of(2023,12,6), "olemassaoleva" );
+        kalenteri.lisaaTapahtuma(olemassaolevaTapahtuma);
+        Tapahtuma eiSaaLisata = new Tapahtuma(19, 20, LocalDate.of(2023, 12, 6), "eiSaaLisata" );
+        kalenteri.lisaaTapahtuma(eiSaaLisata);
+
+        assertEquals(1, kalenteri.getTapahtumienMaara());
+    }
 
 }

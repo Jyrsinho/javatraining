@@ -6,4 +6,5 @@ public class TapahtumaEiOlemassa extends Tapahtuma{
     public TapahtumaEiOlemassa() {
         super(0,0, LocalDate.MIN, "");
     }
+
 }
