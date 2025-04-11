@@ -2,6 +2,8 @@ package AlgorithmsTwo.LukuJarjestys;
 
 
 import java.io.PrintStream;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 public class Tulostaja {
 
@@ -51,10 +53,16 @@ public class Tulostaja {
 
 
     private void tulostaKalenterinKesto(PrintStream out, Kalenteri kalenteri) {
-        String ensimmainenPaiva = kalenteri.ensimmaisenTapahtumanPV();
-        String viimeinenPaiva = kalenteri.viimeisenTapahtumanPV();
 
-        out.printf("%s-%s", ensimmainenPaiva, viimeinenPaiva);
+        LocalDate ensimmainenPaiva = kalenteri.getEnsimmaisenTapahtumanPVM();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d.M.yyyy");
+        String ensimmainenPaivaMJ = ensimmainenPaiva.format(formatter);
+
+        LocalDate viimeinenPaiva = kalenteri.getViimeisenTapahtumanPVM();
+        String viimeinenPaivaMJ = viimeinenPaiva.format(formatter);
+
+
+        out.printf("%s-%s", ensimmainenPaivaMJ, viimeinenPaivaMJ);
         out.println();
     }
 

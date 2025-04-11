@@ -2,18 +2,22 @@ package AlgorithmsTwo.LukuJarjestys;
 
 import java.time.DayOfWeek;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 public class Kalenteri {
     private Tapahtuma[][] tapahtumaKalenteri;
     private String otsikko;
     private int tapahtumienMaara;
+    private LocalDate ensimmaisenTapahtumanPVM;
+    private LocalDate viimeisenTapahtumanPVM;
+
 
     public Kalenteri(int paivia, int tunteja) {
         this.tapahtumaKalenteri = new Tapahtuma[paivia][tunteja];
         this.otsikko = "";
         this.tapahtumienMaara = 0;
+        this.ensimmaisenTapahtumanPVM = LocalDate.MAX;
+        this.viimeisenTapahtumanPVM = LocalDate.MIN;
     }
 
 
@@ -27,8 +31,23 @@ public class Kalenteri {
                 tapahtumienMaara++;
             }
             yhdistaJatkuvat(paiva, uusiTapahtuma);
-
+            paivitaEnsimmaisenTapahtumanPVM(uusiTapahtuma);
+            paivitaViimeisenTapahtumaPVM(uusiTapahtuma);
     }
+
+    private void paivitaEnsimmaisenTapahtumanPVM(Tapahtuma uusiTapahtuma) {
+        if (uusiTapahtuma.paivamaara.isBefore(ensimmaisenTapahtumanPVM)) {
+            ensimmaisenTapahtumanPVM = uusiTapahtuma.getPaivamaara();
+        }
+    }
+
+    private void paivitaViimeisenTapahtumaPVM(Tapahtuma uusiTapahtuma) {
+        if (uusiTapahtuma.paivamaara.isAfter(viimeisenTapahtumanPVM)) {
+            viimeisenTapahtumanPVM = uusiTapahtuma.getPaivamaara();
+        }
+    }
+
+
 
     /**
      * Tarkistaa, että lisattavan tapahtuman tapahtuma-aikana kalenterissa ei jo ole tapahtumaa
@@ -179,43 +198,6 @@ public class Kalenteri {
     }
 
 
-
-    public String ensimmaisenTapahtumanPV() {
-        LocalDate aikaisinTapahtuma = LocalDate.MAX;
-        for (int i = 0; i < tapahtumaKalenteri.length; i++) {
-            for (int j = 0; j < tapahtumaKalenteri[i].length; j++) {
-                if (tapahtumaKalenteri[i][j] != null) {
-                    LocalDate ehdokas = tapahtumaKalenteri[i][j].paivamaara;
-                    if (onAikaisempiKuin(ehdokas, aikaisinTapahtuma)) {
-                        aikaisinTapahtuma = ehdokas;
-                    }
-                }
-            }
-        }
-
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d.M.yyyy");
-        String formattedDate = aikaisinTapahtuma.format(formatter);
-        return formattedDate;
-    }
-
-
-    public String viimeisenTapahtumanPV() {
-        LocalDate viimeisinTapahtuma = LocalDate.MIN;
-        for (int i = 0; i < tapahtumaKalenteri.length; i++) {
-            for (int j = 0; j < tapahtumaKalenteri[i].length; j++) {
-                if (tapahtumaKalenteri[i][j] != null) {
-                    LocalDate ehdokas = tapahtumaKalenteri[i][j].paivamaara;
-                    if (!onAikaisempiKuin(ehdokas, viimeisinTapahtuma)) {
-                        viimeisinTapahtuma = ehdokas;
-                    }
-                }
-            }
-        }
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d.M.yyyy");
-        String formattedDate = viimeisinTapahtuma.format(formatter);
-        return formattedDate;
-    }
-
     private boolean onAikaisempiKuin(LocalDate ehdokas, LocalDate verrattava) {
         return ehdokas.isBefore(verrattava);
     }
@@ -248,5 +230,13 @@ public class Kalenteri {
 
    public void setOtsikkoRivi(String otsikko) {
         this.otsikko = otsikko;
+   }
+
+   public LocalDate getEnsimmaisenTapahtumanPVM() {
+        return ensimmaisenTapahtumanPVM;
+   }
+
+   public LocalDate getViimeisenTapahtumanPVM() {
+        return viimeisenTapahtumanPVM;
    }
 }

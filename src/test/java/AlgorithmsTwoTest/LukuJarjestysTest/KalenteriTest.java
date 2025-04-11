@@ -206,4 +206,46 @@ public class KalenteriTest {
         assertTrue(kalenteri.yhdistaJatkuvat(kalenteri.viikonpaiva(tapahtuma2.getPaivamaara()),tapahtuma2));
     }
 
+    @Test
+    public void testKalenteriShouldUpdateVarhaisinTapahtumaWhenAddingToKaleteri() {
+        kalenteri.lisaaTapahtuma(tapahtuma1);
+        assertEquals(kalenteri.getEnsimmaisenTapahtumanPVM(), tapahtuma1.getPaivamaara());
+    }
+
+    @Test
+    public void testShouldUpdateMyohaisinTapahtumaWhenAddingToKalenteri() {
+        kalenteri.lisaaTapahtuma(tapahtuma1);
+        assertEquals(kalenteri.getViimeisenTapahtumanPVM(), tapahtuma1.getPaivamaara());
+    }
+
+    @Test
+    public void testKalenteriShouldNotUpdateVarhaisinTapahtumaWhenAddingSecondTapahtuma() {
+        kalenteri.lisaaTapahtuma(tapahtuma1);
+        Tapahtuma tapahtuma2 = new Tapahtuma(10, 12, LocalDate.of(2025, 4,11), "tapahtuma2" );
+        kalenteri.lisaaTapahtuma(tapahtuma2);
+        assertEquals(kalenteri.getEnsimmaisenTapahtumanPVM(), tapahtuma1.getPaivamaara());
+    }
+
+    @Test
+    public void testKalenteriShouldUpdateVarhaisinTapahtumaWhenAddingSecondTapahtuma() {
+        kalenteri.lisaaTapahtuma(tapahtuma1);
+        Tapahtuma tapahtuma2 = new Tapahtuma(10, 12, LocalDate.of(2025, 1,1), "tapahtuma2" );
+        kalenteri.lisaaTapahtuma(tapahtuma2);
+        assertEquals(kalenteri.getEnsimmaisenTapahtumanPVM(), tapahtuma2.getPaivamaara());
+    }
+
+    @Test
+    public void testKalenteriShouldUpdateMyohaisinTapahtuma() {
+        kalenteri.lisaaTapahtuma(tapahtuma1);
+        assertEquals(kalenteri.getViimeisenTapahtumanPVM(), tapahtuma1.getPaivamaara());
+    }
+
+    @Test
+    public void testKalenteriShouldUpdateMyohaisinTapahtuma2() {
+        kalenteri.lisaaTapahtuma(tapahtuma1);
+        Tapahtuma tapahtuma2 = new Tapahtuma(12, 14, LocalDate.of(2025, 4,11), "tapahtuma2" );
+        kalenteri.lisaaTapahtuma(tapahtuma2);
+        assertEquals(tapahtuma2.getPaivamaara(), kalenteri.getViimeisenTapahtumanPVM());
+    }
+
 }
