@@ -158,7 +158,6 @@ public class Tulostaja {
 
         for (int i = 0; i < kalenteri.getTapahtumaKalenteri().length; i++) {
             Tapahtuma kalenteriSolu = kalenteri.getTapahtumaKalenteri()[i][kellonaika];
-            // TODO: TÄÄLLÄ PITÄÄ TEHDÄ CHEKKI ETTEI TULOSTETA TAPAHTUMAA JOS TAPAHTUMA ON TAPAHTUMAJATKUU- TAPAHTUMA
             if (kalenteriSolu != null && !kalenteriSolu.getClass().getSimpleName().equals("TapahtumaJatkuu")  ) {
                 String tapahtumanNimi = kalenteri.getTapahtumaKalenteri()[i][kellonaika].getNimi();
                 out.print(" ");

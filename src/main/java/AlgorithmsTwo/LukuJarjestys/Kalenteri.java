@@ -178,7 +178,7 @@ public class Kalenteri {
 
 
     public String ensimmaisenTapahtumanPV() {
-        LocalDate aikaisinTapahtuma = LocalDate.now();
+        LocalDate aikaisinTapahtuma = LocalDate.MAX;
         for (int i = 0; i < tapahtumaKalenteri.length; i++) {
             for (int j = 0; j < tapahtumaKalenteri[i].length; j++) {
                 if (tapahtumaKalenteri[i][j] != null) {

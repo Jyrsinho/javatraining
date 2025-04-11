@@ -35,15 +35,9 @@ public class LukuJarjestys {
 
     public static void main(String[] args) {
         String testiSyote = """
-                Tuplavälejä siellä sun täällä ym.
-                4.12.2023 8-10 aamiastapaaminen
-                4.12.2023 11-12 lounas
-                6.12.2023 11-12  kevytlounas
-                8.12.2023 11-12 lounastaas \s
-                6.12.2023 20-22 pres.linna
-                5.12.2023 11-12 lounas
-                6.12.2023 19-20 pres.linna
-         
+                Aamuseitsemästä iltaviiteen
+                22.4.2025 7-8 matkalle
+                24.4.2025 16-17 kotiin
                 """;
 
         /*ERROR: Syötteellä numero 3
