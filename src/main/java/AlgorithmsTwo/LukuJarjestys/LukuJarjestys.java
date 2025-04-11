@@ -35,9 +35,9 @@ public class LukuJarjestys {
 
     public static void main(String[] args) {
         String testiSyote = """
-                Aamuseitsemästä iltaviiteen
-                22.4.2025 7-8 matkalle
-                24.4.2025 16-17 kotiin
+                Koodausta koko illan ja yön
+                2.04.2024 18-24 koodausta
+                03.4.2024 00-7 koodausta
                 """;
 
         /*ERROR: Syötteellä numero 3

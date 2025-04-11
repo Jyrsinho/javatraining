@@ -50,6 +50,7 @@ public class Kalenteri {
      * @return tehtiinko yhdistys
      */
     public boolean yhdistaJatkuvat (int paiva, Tapahtuma uusiTapahtuma) {
+        if (uusiTapahtuma.alkuaika > 0) {
         Tapahtuma edellinenTapahtuma = tapahtumaKalenteri[paiva][uusiTapahtuma.alkuaika-1];
         if (edellinenTapahtuma != null) {
             String edellisenTapahtumanNimi = edellinenTapahtuma.getNimi();
@@ -58,8 +59,9 @@ public class Kalenteri {
                 return true;
             }
         }
-
-        Tapahtuma seuraavaTapahtuma = tapahtumaKalenteri[paiva][uusiTapahtuma.loppuaika+1];
+        }
+        if (uusiTapahtuma.loppuaika < 24) {
+            Tapahtuma seuraavaTapahtuma = tapahtumaKalenteri[paiva][uusiTapahtuma.loppuaika + 1];
             if (seuraavaTapahtuma != null) {
                 String seuraavanTapahtumanNimi = seuraavaTapahtuma.getNimi();
                 if (seuraavanTapahtumanNimi.equals(uusiTapahtuma.nimi)) {
@@ -67,6 +69,7 @@ public class Kalenteri {
                     return true;
                 }
             }
+        }
 
         return false;
     }
