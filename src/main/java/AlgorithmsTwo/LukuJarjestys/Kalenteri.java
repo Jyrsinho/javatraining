@@ -79,7 +79,7 @@ public class Kalenteri {
             }
         }
         }
-        if (uusiTapahtuma.viimeinenAlkavaTunti < 24) {
+        if (uusiTapahtuma.viimeinenAlkavaTunti < 23) {
             Tapahtuma seuraavaTapahtuma = tapahtumaKalenteri[paiva][uusiTapahtuma.viimeinenAlkavaTunti + 1] ;
             if (seuraavaTapahtuma != null) {
                 String seuraavanTapahtumanNimi = seuraavaTapahtuma.getNimi();
@@ -170,16 +170,17 @@ public class Kalenteri {
      * @return {int} myohaisimman tapahtuman kellonaika. Jos kalenterissa ei ole tapahtumia palauttaa -1
      */
     public int myohaisinTapahtuma() {
-       int myohaisinTapahtumaTunti = -1;
+       int myohaisinTapahtumanAlkavaTunti = -1;
 
-        for (int i = 0; i < tapahtumaKalenteri.length; i++) {
-            for (int j = 0; j < tapahtumaKalenteri[i].length; j++) {
-                if (tapahtumaKalenteri[i][j] != null && tapahtumaKalenteri[i][j].viimeinenAlkavaTunti  > myohaisinTapahtumaTunti) {
-                    myohaisinTapahtumaTunti = tapahtumaKalenteri[i][j].viimeinenAlkavaTunti;
-                }
-            }
-        }
-        return myohaisinTapahtumaTunti;
+       for (int i = 0; i < tapahtumaKalenteri.length; i++) {
+           for (int j = 0; j < tapahtumaKalenteri[i].length; j++) {
+               if (tapahtumaKalenteri [i][j]!= null && j > myohaisinTapahtumanAlkavaTunti) {
+                   myohaisinTapahtumanAlkavaTunti =  j ;
+               }
+           }
+       }
+
+        return myohaisinTapahtumanAlkavaTunti;
     }
 
 

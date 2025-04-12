@@ -35,13 +35,12 @@ public class LukuJarjestys {
 
     public static void main(String[] args) {
         String testiSyote = """
-                Tyhjiä rivejä, rivien alussa ja lopussa tyhjää
-                11.12.2023 12-13 lounas
-                4.12.2023 11-13 lounas
-                11.12.2023 11-12 lounas
-                5.12.2023 11-12 lounas
-                6.12.2023 11-13 juhlalounas
-                8.12.2023 10-11 lounas
+                Koodausta tunnin ja viikon tauolla
+                2.4.2024 23-24 koodausta
+                17.4.2024 00-07 koodausta
+                2.4.2024 18-20 koodausta
+                2.4.2024 22-23 koodausta
+                2.4.2024 20-21 koodausta
                 """;
 
         /*ERROR: Syötteellä numero 3

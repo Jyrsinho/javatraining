@@ -81,7 +81,7 @@ public class KalenteriTest {
     }
 
     @Test
-    public void testShouldReturnTwentyOneForMyohaisinTapahtuma() {
+    public void testShouldReturnTwentyTwoForMyohaisinTapahtuma() {
         kalenteri.lisaaTapahtuma(tapahtuma1);
         Tapahtuma tapahtuma2 = new Tapahtuma(20, 22, LocalDate.of(2024,1,23), "tapahtuma2" );
         kalenteri.lisaaTapahtuma(tapahtuma2);
