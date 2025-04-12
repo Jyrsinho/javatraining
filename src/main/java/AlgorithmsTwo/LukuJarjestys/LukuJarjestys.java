@@ -1,6 +1,11 @@
 package AlgorithmsTwo.LukuJarjestys;
 
 
+/*
+ * Vaiheessa 1 tuntia ja viikonpäi-
+ * vää vastaava tieto on syötteessä ensimmäisenä sille tunnille ja viikonpäivälle osuvan tapahtuman nimi.
+ */
+
 import java.util.ArrayList;
 
 public class LukuJarjestys {
@@ -35,14 +40,14 @@ public class LukuJarjestys {
 
     public static void main(String[] args) {
         String testiSyote = """
-                Kolme salia --- mistä poikkeukset?
-                10.6.2025 8-10 A123
-                3.6.2025 8-10 B321
-                24.6.2025 8-10 B321
-                17.6.2025 8-10 A123
-                1.7.2025 8-10 C222
-                8.7.2025 8-10 C222
+                Sekavia tapahtumia ja poikkeuksia
+                3.6.2026 9-10 kaksi
+                17.6.2026 8-10 yksi
+                4.6.2026 10-12 kolme
+                11.6.2026 11-13 neljä
                 """;
+
+        // 3.6. ja 17.6 on keskiviikko 4.6 ja 11.6 on torstai
 
         /*ERROR: Syötteellä numero 3
         ohjelmasi vastasi
@@ -60,6 +65,7 @@ public class LukuJarjestys {
 
         while (sc.hasNextLine()) {
             sb.append(sc.nextLine());
+            sb.append("\n");
         }
 
          */

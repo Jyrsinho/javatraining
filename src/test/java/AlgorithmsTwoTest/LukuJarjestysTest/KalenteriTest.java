@@ -3,6 +3,7 @@ package AlgorithmsTwoTest.LukuJarjestysTest;
 import AlgorithmsTwo.LukuJarjestys.Kalenteri;
 import AlgorithmsTwo.LukuJarjestys.Tapahtuma;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
@@ -119,6 +120,20 @@ public class KalenteriTest {
     }
 
     @Test
+    public void testKalenteriShoulAddEventsLastHourIfOnlyThatHourIsAvailable() {
+        Tapahtuma olemassaolevaTapahtuma = new Tapahtuma(10, 14, LocalDate.of(2025,4,2), "olemassaoleva" );
+        kalenteri.lisaaTapahtuma(olemassaolevaTapahtuma);
+        Tapahtuma lisataanVainViimeinenTunti = new Tapahtuma(13, 15, LocalDate.of(2025,4,9), "lisataanVainViimeinenTunti" );
+        kalenteri.lisaaTapahtuma(lisataanVainViimeinenTunti);
+        assertEquals(lisataanVainViimeinenTunti, kalenteri.getTapahtumaKalenteri()[2][15]);
+    }
+
+    @Disabled
+    public void testShouldAddItsFirstTwoHoursToCalendarWhenThirdHourIsOccupied() {
+
+    }
+
+    @Test
     public void testShouldAddTapahtumaJatkuuToSecondTimeSlotOfTapahtuma() {
         kalenteri.lisaaTapahtuma(tapahtuma1);
         Tapahtuma[][] tapahtumaKalenteri = kalenteri.getTapahtumaKalenteri();
@@ -126,14 +141,7 @@ public class KalenteriTest {
         assertEquals("TapahtumaJatkuu" ,tapahtumanToinenTunti.getClass().getSimpleName());
     }
 
-    @Test
-    public void testKalenteriShouldNotAddEventWhenAlreadyAnEventWithinTHatTImeSlot() {
-        Tapahtuma olemassaolevaTapahtuma = new Tapahtuma(10, 14, LocalDate.of(2025,4,2), "olemassaoleva" );
-        kalenteri.lisaaTapahtuma(olemassaolevaTapahtuma);
-        Tapahtuma eiSaaLisata = new Tapahtuma(13, 15, LocalDate.of(2025,4,9), "eiSaaLisata" );
-        kalenteri.lisaaTapahtuma(eiSaaLisata);
-        assertEquals( 1, kalenteri.getTapahtumienMaara());
-    }
+
 
     @Test
     public void testKalenteriShouldDetermineThatTapahtumaJatkuuWhenTwoAdjacentEventsHaveSameName() {
@@ -226,5 +234,7 @@ public class KalenteriTest {
         kalenteri.lisaaTapahtuma(tapahtuma2);
         assertEquals(tapahtuma2.getPaivamaara(), kalenteri.getViimeisenTapahtumanPVM());
     }
+
+
 
 }
