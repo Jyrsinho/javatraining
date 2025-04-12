@@ -149,13 +149,20 @@ public class Parser {
      * @return {LocalDate} tapahtuman PVM
      */
     public LocalDate parsiPvmMerkkiJono(String merkkijono) {
-        String[] eroteltuPVM = merkkijono.split("\\.");
+        try {
+            String[] eroteltuPVM = merkkijono.trim().split("\\.");
+            if (eroteltuPVM.length != 3) {
+                throw new IllegalArgumentException("Päivämäärä ei ole oikeassa muodossa.");
+            }
 
-        int paiva = Integer.parseInt(eroteltuPVM[0]);
-        int kuukausi = Integer.parseInt(eroteltuPVM[1]);
-        int vuosi = Integer.parseInt(eroteltuPVM[2]);
+            int paiva = Integer.parseInt(eroteltuPVM[0]);
+            int kuukausi = Integer.parseInt(eroteltuPVM[1]);
+            int vuosi = Integer.parseInt(eroteltuPVM[2]);
 
-        return LocalDate.of(vuosi, kuukausi, paiva);
+            return LocalDate.of(vuosi, kuukausi, paiva);
+        } catch (Exception e) {
+            throw new IllegalArgumentException("Virheellinen päivämäärä: " + merkkijono, e);
+        }
     }
 
 
