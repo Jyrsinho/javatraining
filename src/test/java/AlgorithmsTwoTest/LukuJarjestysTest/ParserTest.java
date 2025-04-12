@@ -130,8 +130,8 @@ public class ParserTest {
     public void testParsiTapahtumaMerkkijonostaShouldCreateTapahtumaWithCorrectAlkuJaLoppuAIka() {
         String merkkijono = "     1.4.2025   13  -  15     Tapaaminen  tiimin kanssa ";
         Tapahtuma tapahtuma = parser.parsiTapahtumaMerkkijonosta(merkkijono);
-        assertEquals(13, tapahtuma.getAlkuaika());
-        assertEquals(15, tapahtuma.getLoppuaika());
+        assertEquals(13, tapahtuma.getEnsimmainenAlkavaTunti());
+        assertEquals(15, tapahtuma.getViimeinenAlkavaTunti());
 
     }
 

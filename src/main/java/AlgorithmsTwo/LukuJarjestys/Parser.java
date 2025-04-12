@@ -65,7 +65,7 @@ public class Parser {
         if (!Objects.equals(kellonaika, "-1")) {
             String[] kellonajat = erotaAlkuJaLoppuAika(kellonaika);
             alkuaika = Integer.parseInt(kellonajat[0]);
-            loppuaika = Integer.parseInt(kellonajat[1]);
+            loppuaika = Integer.parseInt(kellonajat[1]) - 1;
         }
         Tapahtuma uusiTapahtuma = new Tapahtuma(alkuaika, loppuaika, paivamaara, tapahtumanNimi );
         return uusiTapahtuma;

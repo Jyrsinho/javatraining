@@ -24,9 +24,9 @@ public class Kalenteri {
     public void lisaaTapahtuma(Tapahtuma uusiTapahtuma) {
         int paiva = viikonpaiva(uusiTapahtuma.paivamaara);
             if (tapahtumaPaikkaOnTyhja(uusiTapahtuma)) {
-                tapahtumaKalenteri[paiva][uusiTapahtuma.alkuaika] = uusiTapahtuma;
-                for (int i = uusiTapahtuma.alkuaika+1; i < uusiTapahtuma.loppuaika; i++) {
-                    tapahtumaKalenteri[paiva][i] =  new TapahtumaJatkuu(uusiTapahtuma.alkuaika, uusiTapahtuma.loppuaika, uusiTapahtuma.paivamaara, uusiTapahtuma.nimi);
+                tapahtumaKalenteri[paiva][uusiTapahtuma.ensimmainenAlkavaTunti] = uusiTapahtuma;
+                for (int i = uusiTapahtuma.ensimmainenAlkavaTunti +1; i <= uusiTapahtuma.viimeinenAlkavaTunti; i++) {
+                    tapahtumaKalenteri[paiva][i] =  new TapahtumaJatkuu(uusiTapahtuma.ensimmainenAlkavaTunti, uusiTapahtuma.viimeinenAlkavaTunti, uusiTapahtuma.paivamaara, uusiTapahtuma.nimi);
                 }
                 tapahtumienMaara++;
             }
@@ -55,7 +55,7 @@ public class Kalenteri {
     private boolean tapahtumaPaikkaOnTyhja(Tapahtuma uusiTapahtuma) {
         int paiva = viikonpaiva(uusiTapahtuma.paivamaara);
 
-        for (int i = uusiTapahtuma.alkuaika; i < uusiTapahtuma.loppuaika; i++) {
+        for (int i = uusiTapahtuma.ensimmainenAlkavaTunti; i <= uusiTapahtuma.viimeinenAlkavaTunti; i++) {
             if (tapahtumaKalenteri[paiva][i] != null) {
                 return false;
             }
@@ -69,8 +69,8 @@ public class Kalenteri {
      * @return tehtiinko yhdistys
      */
     public boolean yhdistaJatkuvat (int paiva, Tapahtuma uusiTapahtuma) {
-        if (uusiTapahtuma.alkuaika > 0) {
-        Tapahtuma edellinenTapahtuma = tapahtumaKalenteri[paiva][uusiTapahtuma.alkuaika-1];
+        if (uusiTapahtuma.ensimmainenAlkavaTunti > 0) {
+        Tapahtuma edellinenTapahtuma = tapahtumaKalenteri[paiva][uusiTapahtuma.ensimmainenAlkavaTunti -1];
         if (edellinenTapahtuma != null) {
             String edellisenTapahtumanNimi = edellinenTapahtuma.getNimi();
             if (edellisenTapahtumanNimi.equals(uusiTapahtuma.nimi)) {
@@ -79,8 +79,8 @@ public class Kalenteri {
             }
         }
         }
-        if (uusiTapahtuma.loppuaika < 24) {
-            Tapahtuma seuraavaTapahtuma = tapahtumaKalenteri[paiva][uusiTapahtuma.loppuaika + 1];
+        if (uusiTapahtuma.viimeinenAlkavaTunti < 24) {
+            Tapahtuma seuraavaTapahtuma = tapahtumaKalenteri[paiva][uusiTapahtuma.viimeinenAlkavaTunti + 1] ;
             if (seuraavaTapahtuma != null) {
                 String seuraavanTapahtumanNimi = seuraavaTapahtuma.getNimi();
                 if (seuraavanTapahtumanNimi.equals(uusiTapahtuma.nimi)) {
@@ -94,15 +94,15 @@ public class Kalenteri {
     }
 
     private void yhdistaTapahtumaEdelliseen(int paiva, Tapahtuma uusiTapahtuma) {
-        Tapahtuma edellinenTapahtuma = tapahtumaKalenteri[paiva][uusiTapahtuma.alkuaika-1];
+        Tapahtuma edellinenTapahtuma = tapahtumaKalenteri[paiva][uusiTapahtuma.ensimmainenAlkavaTunti -1];
 
-        tapahtumaKalenteri[paiva][uusiTapahtuma.alkuaika] = new TapahtumaJatkuu(edellinenTapahtuma.alkuaika, edellinenTapahtuma.loppuaika, edellinenTapahtuma.paivamaara, edellinenTapahtuma.nimi);
+        tapahtumaKalenteri[paiva][uusiTapahtuma.ensimmainenAlkavaTunti] = new TapahtumaJatkuu(edellinenTapahtuma.ensimmainenAlkavaTunti, edellinenTapahtuma.viimeinenAlkavaTunti, edellinenTapahtuma.paivamaara, edellinenTapahtuma.nimi);
     }
 
 
     private void yhdistaTapahtumaSeuraavaan(int paiva, Tapahtuma uusiTapahtuma) {
-        Tapahtuma seuraavaTapahtuma = tapahtumaKalenteri[paiva][uusiTapahtuma.loppuaika + 1];
-        tapahtumaKalenteri[paiva][seuraavaTapahtuma.alkuaika] = new TapahtumaJatkuu(uusiTapahtuma.alkuaika, uusiTapahtuma.loppuaika, uusiTapahtuma.paivamaara, seuraavaTapahtuma.nimi);
+        Tapahtuma seuraavaTapahtuma = tapahtumaKalenteri[paiva][uusiTapahtuma.viimeinenAlkavaTunti + 1];
+        tapahtumaKalenteri[paiva][seuraavaTapahtuma.ensimmainenAlkavaTunti] = new TapahtumaJatkuu(uusiTapahtuma.ensimmainenAlkavaTunti, uusiTapahtuma.viimeinenAlkavaTunti, uusiTapahtuma.paivamaara, seuraavaTapahtuma.nimi);
     }
 
 
@@ -156,8 +156,8 @@ public class Kalenteri {
 
        for (int i = 0; i < tapahtumaKalenteri.length; i++) {
            for (int j = 0; j < tapahtumaKalenteri[i].length; j++) {
-               if (tapahtumaKalenteri[i][j] != null && tapahtumaKalenteri[i][j].alkuaika < aikaisinTapahtuma) {
-                   aikaisinTapahtuma = tapahtumaKalenteri[i][j].alkuaika;
+               if (tapahtumaKalenteri[i][j] != null && tapahtumaKalenteri[i][j].ensimmainenAlkavaTunti < aikaisinTapahtuma) {
+                   aikaisinTapahtuma = tapahtumaKalenteri[i][j].ensimmainenAlkavaTunti;
                }
            }
        }
@@ -170,16 +170,16 @@ public class Kalenteri {
      * @return {int} myohaisimman tapahtuman kellonaika. Jos kalenterissa ei ole tapahtumia palauttaa -1
      */
     public int myohaisinTapahtuma() {
-       int myohaisinTapahtuma = -1;
+       int myohaisinTapahtumaTunti = -1;
 
         for (int i = 0; i < tapahtumaKalenteri.length; i++) {
             for (int j = 0; j < tapahtumaKalenteri[i].length; j++) {
-                if (tapahtumaKalenteri[i][j] != null && tapahtumaKalenteri[i][j].loppuaika - 1 > myohaisinTapahtuma) {
-                    myohaisinTapahtuma = tapahtumaKalenteri[i][j].loppuaika -1 ;
+                if (tapahtumaKalenteri[i][j] != null && tapahtumaKalenteri[i][j].viimeinenAlkavaTunti  > myohaisinTapahtumaTunti) {
+                    myohaisinTapahtumaTunti = tapahtumaKalenteri[i][j].viimeinenAlkavaTunti;
                 }
             }
         }
-        return myohaisinTapahtuma;
+        return myohaisinTapahtumaTunti;
     }
 
 
@@ -197,10 +197,6 @@ public class Kalenteri {
         return tapahtumaKalenteri[paiva][kellonaika].getClass().getSimpleName().equals("TapahtumaJatkuu");
     }
 
-
-    private boolean onAikaisempiKuin(LocalDate ehdokas, LocalDate verrattava) {
-        return ehdokas.isBefore(verrattava);
-    }
 
 
 

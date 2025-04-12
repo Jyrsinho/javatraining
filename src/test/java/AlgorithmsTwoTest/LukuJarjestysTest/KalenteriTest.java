@@ -75,9 +75,9 @@ public class KalenteriTest {
     }
 
     @Test
-    public void testShouldReturnElevenForMyohaisinTapahtuma() {
+    public void testShouldReturnTvelweForMyohaisinTapahtuma() {
         kalenteri.lisaaTapahtuma(tapahtuma1);
-        assertEquals(11, kalenteri.myohaisinTapahtuma());
+        assertEquals(12, kalenteri.myohaisinTapahtuma());
     }
 
     @Test
@@ -85,7 +85,7 @@ public class KalenteriTest {
         kalenteri.lisaaTapahtuma(tapahtuma1);
         Tapahtuma tapahtuma2 = new Tapahtuma(20, 22, LocalDate.of(2024,1,23), "tapahtuma2" );
         kalenteri.lisaaTapahtuma(tapahtuma2);
-        assertEquals(21, kalenteri.myohaisinTapahtuma());
+        assertEquals(22, kalenteri.myohaisinTapahtuma());
     }
 
     @Test
@@ -97,7 +97,7 @@ public class KalenteriTest {
     @Test
     public void testShouldReturnFalseForTapahtumaJatkuu() {
         kalenteri.lisaaTapahtuma(tapahtuma1);
-        assertFalse(kalenteri.tapahtumaJatkuu(1, 12));
+        assertFalse(kalenteri.tapahtumaJatkuu(1, 13));
     }
 
     @Test
@@ -106,28 +106,7 @@ public class KalenteriTest {
         assertFalse(kalenteri.tapahtumaJatkuu(1, 10));
     }
 
-    @Test
-    public void testKalenteriShouldReturnEnsimmainenPaivaOfKalenteri() {
-        kalenteri.lisaaTapahtuma(tapahtuma1);
-        String expected = "1.4.2025";
-        assertEquals(expected, kalenteri.ensimmaisenTapahtumanPV());
-    }
 
-    @Test
-    public void testKalenteriShouldReturnEnsimmainenPaivaOfKalenteri2() {
-        kalenteri.lisaaTapahtuma(tapahtuma1);
-        Tapahtuma tapahtuma2 = new Tapahtuma(10, 20, LocalDate.of(2025,1,23), "tapahtuma2" );
-        kalenteri.lisaaTapahtuma(tapahtuma2);
-        String expected = "23.1.2025";
-        assertEquals(expected, kalenteri.ensimmaisenTapahtumanPV());
-    }
-
-    @Test
-    public void testKalenteriShouldReturnViimeinenPaivaOfKalenteri() {
-        kalenteri.lisaaTapahtuma(tapahtuma1);
-        String expected = "1.4.2025";
-        assertEquals(expected, kalenteri.viimeisenTapahtumanPV());
-    }
 
     @Test
     public void testKalenteriShouldNotAddEventWhenThereAlreadyIsAnEventInThatSameTimeSlot() {
@@ -143,7 +122,7 @@ public class KalenteriTest {
     public void testShouldAddTapahtumaJatkuuToSecondTimeSlotOfTapahtuma() {
         kalenteri.lisaaTapahtuma(tapahtuma1);
         Tapahtuma[][] tapahtumaKalenteri = kalenteri.getTapahtumaKalenteri();
-        Tapahtuma tapahtumanToinenTunti = tapahtumaKalenteri[kalenteri.viikonpaiva(tapahtuma1.getPaivamaara())][tapahtuma1.getLoppuaika() -1];
+        Tapahtuma tapahtumanToinenTunti = tapahtumaKalenteri[kalenteri.viikonpaiva(tapahtuma1.getPaivamaara())][tapahtuma1.getViimeinenAlkavaTunti() -1];
         assertEquals("TapahtumaJatkuu" ,tapahtumanToinenTunti.getClass().getSimpleName());
     }
 
@@ -162,7 +141,7 @@ public class KalenteriTest {
         Tapahtuma tapahtuma2 = new Tapahtuma(12, 14, LocalDate.of(2025, 4,10), "tapahtuma1" );
         kalenteri.lisaaTapahtuma(tapahtuma1);
         kalenteri.lisaaTapahtuma(tapahtuma2);
-        assertTrue(kalenteri.tapahtumaJatkuu(kalenteri.viikonpaiva(tapahtuma1.getPaivamaara()), tapahtuma2.getAlkuaika()));
+        assertTrue(kalenteri.tapahtumaJatkuu(kalenteri.viikonpaiva(tapahtuma1.getPaivamaara()), tapahtuma2.getEnsimmainenAlkavaTunti()));
     }
 
     @Test
@@ -171,7 +150,7 @@ public class KalenteriTest {
         Tapahtuma tapahtuma2 = new Tapahtuma(10, 12, LocalDate.of(2025, 4,10), "tapahtuma1" );
         kalenteri.lisaaTapahtuma(tapahtuma1);
         kalenteri.lisaaTapahtuma(tapahtuma2);
-        assertTrue(kalenteri.tapahtumaJatkuu(kalenteri.viikonpaiva(tapahtuma1.getPaivamaara()), tapahtuma1.getAlkuaika()));
+        assertTrue(kalenteri.tapahtumaJatkuu(kalenteri.viikonpaiva(tapahtuma1.getPaivamaara()), tapahtuma1.getEnsimmainenAlkavaTunti()));
     }
 
     @Test

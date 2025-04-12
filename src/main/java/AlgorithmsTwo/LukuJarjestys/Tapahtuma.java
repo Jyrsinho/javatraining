@@ -6,14 +6,14 @@ import java.time.LocalDate;
  * Paivamaara annetaan muodossa dd.mm.yyyy
  */
 public class Tapahtuma {
-    int alkuaika;
-    int loppuaika;
+    int ensimmainenAlkavaTunti;
+    int viimeinenAlkavaTunti;
     LocalDate paivamaara;
     String nimi;
 
-    public Tapahtuma(int alkuaika, int loppuaika, LocalDate paivamaara, String nimi) {
-        this.alkuaika = alkuaika;
-        this.loppuaika = loppuaika;
+    public Tapahtuma(int ensimmainenAlkavaTunti, int viimeinenAlkavaTunti, LocalDate paivamaara, String nimi) {
+        this.ensimmainenAlkavaTunti = ensimmainenAlkavaTunti;
+        this.viimeinenAlkavaTunti = viimeinenAlkavaTunti;
         this.paivamaara = paivamaara;
         this.nimi = nimi;
     }
@@ -22,12 +22,12 @@ public class Tapahtuma {
         return nimi;
     }
 
-    public int getAlkuaika() {
-        return alkuaika;
+    public int getEnsimmainenAlkavaTunti() {
+        return ensimmainenAlkavaTunti;
     }
 
-    public int getLoppuaika() {
-        return loppuaika;
+    public int getViimeinenAlkavaTunti() {
+        return viimeinenAlkavaTunti;
     }
 
     public LocalDate getPaivamaara() {
@@ -35,8 +35,8 @@ public class Tapahtuma {
     }
 
     public void tulosta() {
-        System.out.println(alkuaika);
-        System.out.println(loppuaika);
+        System.out.println(ensimmainenAlkavaTunti);
+        System.out.println(viimeinenAlkavaTunti);
         System.out.println(paivamaara);
         System.out.println(nimi);
     }
