@@ -23,13 +23,20 @@ public class Kalenteri {
 
     public void lisaaTapahtuma(Tapahtuma uusiTapahtuma) {
         int paiva = viikonpaiva(uusiTapahtuma.paivamaara);
-            if (tapahtumaPaikkaOnTyhja(uusiTapahtuma)) {
-                tapahtumaKalenteri[paiva][uusiTapahtuma.ensimmainenAlkavaTunti] = uusiTapahtuma;
-                for (int i = uusiTapahtuma.ensimmainenAlkavaTunti +1; i <= uusiTapahtuma.viimeinenAlkavaTunti; i++) {
+
+        boolean alkanut = false;
+        for (int i = uusiTapahtuma.ensimmainenAlkavaTunti; i <= uusiTapahtuma.viimeinenAlkavaTunti ; i++) {
+            if (tapahtumaKalenteri[paiva][i] == null) {
+                if (!alkanut) {
+                    tapahtumaKalenteri[paiva][i] =uusiTapahtuma;
+                    alkanut = true;
+                    tapahtumienMaara++;
+                } else {
                     tapahtumaKalenteri[paiva][i] =  new TapahtumaJatkuu(uusiTapahtuma.ensimmainenAlkavaTunti, uusiTapahtuma.viimeinenAlkavaTunti, uusiTapahtuma.paivamaara, uusiTapahtuma.nimi);
                 }
-                tapahtumienMaara++;
             }
+        }
+
             yhdistaJatkuvat(paiva, uusiTapahtuma);
             paivitaEnsimmaisenTapahtumanPVM(uusiTapahtuma);
             paivitaViimeisenTapahtumaPVM(uusiTapahtuma);
