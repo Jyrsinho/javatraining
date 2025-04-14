@@ -98,7 +98,15 @@ public class Poikkeustaja {
 
 
     private void analysoiKalenteri() {
-
+        for (int i = 0; i < paivia; i++) {
+            int paiviaKalenterissa = getTapahtumaPaivanMaara(i);
+            for (int j = 0; j < tunteja; j++) {
+                AikatauluRuutu tutkittava = kalenteri[i][j];
+                Tapahtuma saannollinenTapahtuma = tutkittava.saannollinenTapahtuma(paiviaKalenterissa);
+                saannolliset.add(saannollinenTapahtuma);
+                ArrayList<Tapahtuma> poikkeukset = tutkittava.poikkeukset(paiviaKalenterissa);
+            }
+        }
     }
 
     public ArrayList<Tapahtuma> getSaannolliset() {
