@@ -8,6 +8,7 @@ import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
 
+import static AlgorithmsTwo.LukuJarjestys.Utils.viikonpaiva;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class KalenteriTest {
@@ -31,25 +32,25 @@ public class KalenteriTest {
     @Test
     public void testShouldReturnZeroForDateThatIsMOnday() {
         LocalDate pvm = LocalDate.of(2025, 3,31);
-        assertEquals(0, kalenteri.viikonpaiva(pvm));
+        assertEquals(0, viikonpaiva(pvm));
     }
 
     @Test
     public void testShouldReturnOneForDateThatIsTuesday() {
         LocalDate pvm = LocalDate.of(2025, 4, 1);
-        assertEquals(1, kalenteri.viikonpaiva(pvm));
+        assertEquals(1, viikonpaiva(pvm));
     }
 
     @Test
     public void testShouldReturnOneForDateThatIsWednesday() {
         LocalDate pvm = LocalDate.of(2025,4,2);
-        assertEquals(2, kalenteri.viikonpaiva(pvm));
+        assertEquals(2, viikonpaiva(pvm));
     }
 
     @Test
     public void testShouldReturnNegativeValueForWeekend() {
         LocalDate pvm = LocalDate.of(2025, 4, 5);
-        assertEquals(-1, kalenteri.viikonpaiva(pvm));
+        assertEquals(-1, viikonpaiva(pvm));
     }
 
     @Test
@@ -137,7 +138,7 @@ public class KalenteriTest {
     public void testShouldAddTapahtumaJatkuuToSecondTimeSlotOfTapahtuma() {
         kalenteri.lisaaTapahtuma(tapahtuma1);
         Tapahtuma[][] tapahtumaKalenteri = kalenteri.getTapahtumaKalenteri();
-        Tapahtuma tapahtumanToinenTunti = tapahtumaKalenteri[kalenteri.viikonpaiva(tapahtuma1.getPaivamaara())][tapahtuma1.getViimeinenAlkavaTunti() -1];
+        Tapahtuma tapahtumanToinenTunti = tapahtumaKalenteri[viikonpaiva(tapahtuma1.getPaivamaara())][tapahtuma1.getViimeinenAlkavaTunti() -1];
         assertEquals("TapahtumaJatkuu" ,tapahtumanToinenTunti.getClass().getSimpleName());
     }
 
@@ -149,7 +150,7 @@ public class KalenteriTest {
         Tapahtuma tapahtuma2 = new Tapahtuma(12, 14, LocalDate.of(2025, 4,10), "tapahtuma1" );
         kalenteri.lisaaTapahtuma(tapahtuma1);
         kalenteri.lisaaTapahtuma(tapahtuma2);
-        assertTrue(kalenteri.tapahtumaJatkuu(kalenteri.viikonpaiva(tapahtuma1.getPaivamaara()), tapahtuma2.getEnsimmainenAlkavaTunti()));
+        assertTrue(kalenteri.tapahtumaJatkuu(viikonpaiva(tapahtuma1.getPaivamaara()), tapahtuma2.getEnsimmainenAlkavaTunti()));
     }
 
     @Test
@@ -158,7 +159,7 @@ public class KalenteriTest {
         Tapahtuma tapahtuma2 = new Tapahtuma(10, 12, LocalDate.of(2025, 4,10), "tapahtuma1" );
         kalenteri.lisaaTapahtuma(tapahtuma1);
         kalenteri.lisaaTapahtuma(tapahtuma2);
-        assertTrue(kalenteri.tapahtumaJatkuu(kalenteri.viikonpaiva(tapahtuma1.getPaivamaara()), tapahtuma1.getEnsimmainenAlkavaTunti()));
+        assertTrue(kalenteri.tapahtumaJatkuu(viikonpaiva(tapahtuma1.getPaivamaara()), tapahtuma1.getEnsimmainenAlkavaTunti()));
     }
 
     @Test
@@ -166,7 +167,7 @@ public class KalenteriTest {
         Tapahtuma tapahtuma1 = new Tapahtuma(10, 12, LocalDate.of(2025, 4,10), "tapahtuma1" );
         Tapahtuma tapahtuma2 = new Tapahtuma(12, 14, LocalDate.of(2025, 4,10), "tapahtuma1" );
         kalenteri.lisaaTapahtuma(tapahtuma1);
-        assertTrue(kalenteri.yhdistaJatkuvat(kalenteri.viikonpaiva(tapahtuma2.getPaivamaara()),tapahtuma2));
+        assertTrue(kalenteri.yhdistaJatkuvat(viikonpaiva(tapahtuma2.getPaivamaara()),tapahtuma2));
     }
 
     @Test
@@ -174,7 +175,7 @@ public class KalenteriTest {
         Tapahtuma tapahtuma1 = new Tapahtuma(10, 12, LocalDate.of(2025, 4,10), "tapahtuma1" );
         Tapahtuma tapahtuma2 = new Tapahtuma(12, 14, LocalDate.of(2025, 4,10), "tapahtuma12" );
         kalenteri.lisaaTapahtuma(tapahtuma1);
-        assertFalse(kalenteri.yhdistaJatkuvat(kalenteri.viikonpaiva(tapahtuma2.getPaivamaara()),tapahtuma2));
+        assertFalse(kalenteri.yhdistaJatkuvat(viikonpaiva(tapahtuma2.getPaivamaara()),tapahtuma2));
     }
 
     @Test
@@ -182,7 +183,7 @@ public class KalenteriTest {
         Tapahtuma tapahtuma1 = new Tapahtuma(12, 14, LocalDate.of(2025, 4,10), "tapahtuma1" );
         Tapahtuma tapahtuma2 = new Tapahtuma(10, 12, LocalDate.of(2025, 4,10), "tapahtuma1" );
         kalenteri.lisaaTapahtuma(tapahtuma1);
-        assertTrue(kalenteri.yhdistaJatkuvat(kalenteri.viikonpaiva(tapahtuma2.getPaivamaara()),tapahtuma2));
+        assertTrue(kalenteri.yhdistaJatkuvat(viikonpaiva(tapahtuma2.getPaivamaara()),tapahtuma2));
     }
 
     @Test
@@ -190,7 +191,7 @@ public class KalenteriTest {
         Tapahtuma tapahtuma1 = new Tapahtuma(12, 14, LocalDate.of(2025, 4,10), "tapahtuma1" );
         Tapahtuma tapahtuma2 = new Tapahtuma(10, 11, LocalDate.of(2025, 4,10), "tapahtuma1" );
         kalenteri.lisaaTapahtuma(tapahtuma1);
-        assertTrue(kalenteri.yhdistaJatkuvat(kalenteri.viikonpaiva(tapahtuma2.getPaivamaara()),tapahtuma2));
+        assertTrue(kalenteri.yhdistaJatkuvat(viikonpaiva(tapahtuma2.getPaivamaara()),tapahtuma2));
     }
 
     @Test

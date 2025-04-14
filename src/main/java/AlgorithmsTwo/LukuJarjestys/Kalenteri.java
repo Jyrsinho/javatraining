@@ -1,8 +1,9 @@
 package AlgorithmsTwo.LukuJarjestys;
 
-import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.util.ArrayList;
+
+import static AlgorithmsTwo.LukuJarjestys.Utils.viikonpaiva;
 
 public class Kalenteri {
     private Tapahtuma[][] tapahtumaKalenteri;
@@ -55,20 +56,6 @@ public class Kalenteri {
     }
 
 
-
-    /**
-     * Tarkistaa, että lisattavan tapahtuman tapahtuma-aikana kalenterissa ei jo ole tapahtumaa
-     */
-    private boolean tapahtumaPaikkaOnTyhja(Tapahtuma uusiTapahtuma) {
-        int paiva = viikonpaiva(uusiTapahtuma.paivamaara);
-
-        for (int i = uusiTapahtuma.ensimmainenAlkavaTunti; i <= uusiTapahtuma.viimeinenAlkavaTunti; i++) {
-            if (tapahtumaKalenteri[paiva][i] != null) {
-                return false;
-            }
-        }
-        return true;
-    }
 
     /**
      * Jos lisatty tapahtuma on samanniminen kuin sitä suoraan edeltävä tapahtuma tai siitä
@@ -136,23 +123,6 @@ public class Kalenteri {
         }
     }
 
-    /**
-     * Palauttaa tapahtuman paivamaaraa vastaavan viikonpaivan.
-     * @param pvm {String} jolle haetaan viikonpaiva
-     * @return viikonpaivan jarjestysnumero. Maanantai on 0, perjantai 5 ja vkloput -1.
-     */
-   public int viikonpaiva(LocalDate pvm) {
-
-      DayOfWeek dayOfWeek = pvm.getDayOfWeek();
-       return switch (dayOfWeek) {
-           case MONDAY -> 0;
-           case TUESDAY -> 1;
-           case WEDNESDAY -> 2;
-           case THURSDAY -> 3;
-           case FRIDAY -> 4;
-           default -> -1;
-       };
-   }
 
     /**
      * Palauttaa kalenterin aikaisimman tapahtuman kellonajan

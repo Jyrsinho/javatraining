@@ -1,10 +1,19 @@
 package AlgorithmsTwo.LukuJarjestys;
 
 
-/*
- * Vaiheessa 1 tuntia ja viikonpäi-
- * vää vastaava tieto on syötteessä ensimmäisenä sille tunnille ja viikonpäivälle osuvan tapahtuman nimi.
+/**
+ Lukujärjestykseen tulostetaan kunkin tunnin ja viikonpäivän (paitsi lauantain
+ ja sunnuntain) kohdalle niitä vastaava tieto kuitenkin siten, että jos epätyhjä tie-
+ to on sama kuin lähinnä ylemmässä lokerossa, niin lokeroita erottava viivanpätkä
+ jätetään tulostamatta ja lokero jätetään tyhjäksi. Vaiheessa 1 tuntia ja viikonpäi-
+ vää vastaava tieto on syötteessä ensimmäisenä sille tunnille ja viikonpäivälle osu-
+ van tapahtuman nimi. Vaiheessa 2 se on tunnin ja viikonpäivän kohdalla eniten
+ esiintyvä nimi tai tyhjä, jos tyhjä esiintyy useammin kuin mikään nimi. Jos eniten
+ esiintyvä tieto ei ole yksikäsitteinen, niin tulostetaan se eniten esiintyvä epätyhjä
+ tieto, jolla on varhaisin esiintymispäivä
+ *
  */
+
 
 import java.util.ArrayList;
 
@@ -31,9 +40,17 @@ public class LukuJarjestys {
         kalenteri.setOtsikkoRivi(parser.getOtsikko());
         ArrayList<Tapahtuma> tapahtumat = parser.annaTapahtumat();
 
+        //Poikkeustaja poikkeustaja = new Poikkeustaja();
+        //poikkeustaja.analysoiTapahtumat();
+
+        //ArrayList<String> poikkeukset = poikkeustaja.getPoikkeukset();
+        //ArrayList<Tapahtuma> saannollisetTapahtumat = poikkeustaja.getSaannollisetTapahtumat();
+
+        // kalenteri.paivitaKalenteri(saannollisetTapahtumat);
         kalenteri.paivitaKalenteri(tapahtumat);
         Tulostaja tulostaja = new Tulostaja();
         tulostaja.tulostaKalenteri(kalenteri);
+        // tulostaja.tulostaKalenteri(kalenteri, poikkeukset);
     }
 
 
