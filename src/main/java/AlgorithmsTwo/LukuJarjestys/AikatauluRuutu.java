@@ -1,5 +1,6 @@
 package AlgorithmsTwo.LukuJarjestys;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -79,11 +80,24 @@ public class AikatauluRuutu {
     }
 
     private void selvitaSaannollinen(ArrayList<String> saannolliset) {
-
-
-       // Haetaan Tapahtumat, joilla on sama nimi kuin saannollisilla
+        // Haetaan Tapahtumat, joilla on sama nimi kuin saannollisill
+        ArrayList<Tapahtuma> mahdolliset = new ArrayList<>();
+        for (Tapahtuma tapahtuma: tapahtumat) {
+            if (saannolliset.contains(tapahtuma.getNimi())) {
+                mahdolliset.add(tapahtuma);
+            }
+        }
         // Haetaan tapahtumista aikaisin
+        Tapahtuma aikaisinTapahtuma = mahdolliset.getFirst();
+        LocalDate aikaisinPVM = aikaisinTapahtuma.paivamaara;
+        for (Tapahtuma mahdollinen: mahdolliset) {
+            if (mahdollinen.paivamaara.isBefore(aikaisinPVM)){
+                aikaisinPVM = mahdollinen.paivamaara;
+                aikaisinTapahtuma = mahdollinen;
+            }
+        }
         // tallenetaan aikaisimman tapahtuman nimi saannolliseksi
+        this.saannollinen = aikaisinTapahtuma.getNimi();
     }
 
 

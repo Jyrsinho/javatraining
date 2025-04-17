@@ -44,18 +44,19 @@ public class LukuJarjestys {
         kalenteri.paivitaKalenteri(tapahtumat);
         Tulostaja tulostaja = new Tulostaja();
         tulostaja.tulostaKalenteri(kalenteri);
-        tulostaja.tulostaKalenteri(kalenteri);
     }
 
 
 
     public static void main(String[] args) {
         String testiSyote = """
-                Sekavia tapahtumia ja poikkeuksia
-                3.6.2026 9-10 kaksi
-                17.6.2026 8-10 yksi
-                4.6.2026 10-12 kolme
-                11.6.2026 11-13 neljä
+                Vauvauinti
+                2.4.2025 10-11 Vauvauinti
+                3.4.2025 17-19 Koodaamista
+                9.4.2025 10-11 Vauvauinti
+                10.4.2025 17-19 Koodaamista
+                16.4.2025 10-11 Vauvauinti
+                17.4.2025 17-19 Koodaamista
                 """;
 
         // 3.6. ja 17.6 on keskiviikko 4.6 ja 11.6 on torstai
