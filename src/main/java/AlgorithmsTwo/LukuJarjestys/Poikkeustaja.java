@@ -102,9 +102,10 @@ public class Poikkeustaja {
             int paiviaKalenterissa = getTapahtumaPaivanMaara(i);
             for (int j = 0; j < tunteja; j++) {
                 AikatauluRuutu tutkittava = kalenteri[i][j];
-                Tapahtuma saannollinenTapahtuma = tutkittava.saannollinenTapahtuma(paiviaKalenterissa);
+                tutkittava.analysoi(paiviaKalenterissa);
+                Tapahtuma saannollinenTapahtuma = tutkittava.getSaannollinen();
                 saannolliset.add(saannollinenTapahtuma);
-                ArrayList<Tapahtuma> poikkeukset = tutkittava.poikkeukset(paiviaKalenterissa);
+                ArrayList<Tapahtuma> poikkeukset = tutkittava.getPoikkeukset();
             }
         }
     }
