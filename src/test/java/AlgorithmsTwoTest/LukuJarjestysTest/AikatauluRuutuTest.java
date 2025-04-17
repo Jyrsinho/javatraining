@@ -18,34 +18,51 @@ public class AikatauluRuutuTest {
     AikatauluRuutu aikatauluRuutu;
     Tapahtuma tapahtuma1;
     Tapahtuma tapahtuma2;
+    Tapahtuma tapahtuma3;
+    Tapahtuma tapahtuma4;
 
     @BeforeEach
     public void setUp() {
-        aikatauluRuutu = new AikatauluRuutu();
+        aikatauluRuutu = new AikatauluRuutu(5);
         LocalDate tiistaiEnsimmainenHuhtikuuta = LocalDate.of(2025,4, 1);
+        LocalDate tiistaiKahdeksasHuhtikuuta = LocalDate.of(2025,4, 8);
+        LocalDate tiistaiViidestoistaHuhtikuuta = LocalDate.of(2025,4, 15);
+        LocalDate tiistaiKahdeskymmenestoinenHuhtikuuta = LocalDate.of(2025,4, 22);
         tapahtuma1 = new Tapahtuma(10, 12, tiistaiEnsimmainenHuhtikuuta, "saannollinenTapahtuma");
-        tapahtuma2 = new Tapahtuma(10,12, tiistaiEnsimmainenHuhtikuuta, "poiukkeusTapahtuma");
+        tapahtuma2 = new Tapahtuma(10,12, tiistaiKahdeksasHuhtikuuta, "saannollinenTapahtuma");
+        tapahtuma3 = new Tapahtuma(10,12, tiistaiViidestoistaHuhtikuuta, "saannollinenTapahtuma");
+        tapahtuma4 = new Tapahtuma(10, 12, tiistaiKahdeskymmenestoinenHuhtikuuta, "epasaannollinenTapahtuma");
     }
 
     @Test
-    public void testAikaTauluRuutuShouldReturnItsMostFrequentTapahtuma() {
-        int paivienMaara = 0;
+    public void testAikaTauluRuutuShouldReturnEiTapahtumaaWhenItsMostFrequentTapahtuma() {
+
         Tapahtuma tapahtuma = new Tapahtuma(10, 11, LocalDate.of(2025, 4, 16), "testitapahtuma");
         aikatauluRuutu.lisaa(tapahtuma);
-        aikatauluRuutu.analysoi(paivienMaara);
-        Tapahtuma saannollinenTapahtuma = aikatauluRuutu.getSaannollinen();
-        assertEquals(tapahtuma, saannollinenTapahtuma);
+        String expected = "EiTapahtumaa";
+        String actual = aikatauluRuutu.getSaannollinen();
+        assertEquals(expected, actual);
     }
 
     @Test
     public void testAikatauluRuutuShouldReturnMostFrequentTapahtumaWhenTwoDifferentTapahtuma() {
-        int toistojenMaara = 3;
-        aikatauluRuutu.lisaa(tapahtuma1);
         aikatauluRuutu.lisaa(tapahtuma1);
         aikatauluRuutu.lisaa(tapahtuma2);
-        aikatauluRuutu.analysoi(toistojenMaara);
-        Tapahtuma expected = aikatauluRuutu.getSaannollinen();
-        assertEquals(tapahtuma1, expected);
+        aikatauluRuutu.lisaa(tapahtuma3);
+        aikatauluRuutu.lisaa(tapahtuma4);
+        String actual = aikatauluRuutu.getSaannollinen();
+        assertEquals("saannollinenTapahtuma", actual);
 
     }
+
+    @Test
+    public void testAikatauluRuutuShouldRetunrTapahtumaWithEarlierDateWhenTwoTapahtumatAreAsFrequent() {
+        int toistejenMaara = 2;
+        AikatauluRuutu aikatauluRuutu2 = new AikatauluRuutu(toistejenMaara);
+        aikatauluRuutu2.lisaa(tapahtuma1);
+        aikatauluRuutu2.lisaa(tapahtuma4);
+        String actual = aikatauluRuutu2.getSaannollinen();
+        assertEquals(tapahtuma1.getNimi(), actual);
+    }
+
 }

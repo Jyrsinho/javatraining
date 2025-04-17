@@ -140,8 +140,8 @@ public class Tulostaja {
 
 
     private void tulostaRivit(PrintStream out, Kalenteri kalenteri) {
-        int ensimmainenAlkavaTunti = kalenteri.aikaisinTapahtuma();
-        int viimeinenAlkavaTunti = kalenteri.myohaisinTapahtuma();
+        int ensimmainenAlkavaTunti = kalenteri.aikaisinAlkavaTunti();
+        int viimeinenAlkavaTunti = kalenteri.myohaisinAlkavaTunti();
         if (ensimmainenAlkavaTunti > 8) {
             ensimmainenAlkavaTunti = 8;
         }
@@ -165,9 +165,9 @@ public class Tulostaja {
     private void tulostaTapahtumat(PrintStream out, int kellonaika, Kalenteri kalenteri) {
 
         for (int i = 0; i < kalenteri.getTapahtumaKalenteri().length; i++) {
-            Tapahtuma kalenteriSolu = kalenteri.getTapahtumaKalenteri()[i][kellonaika];
-            if (kalenteriSolu != null && !kalenteriSolu.getClass().getSimpleName().equals("TapahtumaJatkuu")  ) {
-                String tapahtumanNimi = kalenteri.getTapahtumaKalenteri()[i][kellonaika].getNimi();
+            String kalenteriSolu = kalenteri.getTapahtumaKalenteri()[i][kellonaika].saannollinen;
+            if (kalenteriSolu != null ) {
+                String tapahtumanNimi = kalenteri.getTapahtumaKalenteri()[i][kellonaika].getSaannollinen();
                 out.print(" ");
                 if (tapahtumanNimi.length() < 11) {
                     out.print(tapahtumanNimi);
@@ -187,6 +187,7 @@ public class Tulostaja {
             out.print("|");
         }
     }
+
 
     private void tulostaTuntiSolu(PrintStream out, int kellonaika) {
         if (kellonaika < 9) {

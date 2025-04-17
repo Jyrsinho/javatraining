@@ -40,17 +40,11 @@ public class LukuJarjestys {
         kalenteri.setOtsikkoRivi(parser.getOtsikko());
         ArrayList<Tapahtuma> tapahtumat = parser.annaTapahtumat();
 
-        //Poikkeustaja poikkeustaja = new Poikkeustaja();
-        //poikkeustaja.analysoiTapahtumat();
-
-        //ArrayList<String> poikkeukset = poikkeustaja.getPoikkeukset();
-        //ArrayList<Tapahtuma> saannollisetTapahtumat = poikkeustaja.getSaannollisetTapahtumat();
-
-        // kalenteri.paivitaKalenteri(saannollisetTapahtumat);
+        kalenteri.paivitaKalenteri(tapahtumat);
         kalenteri.paivitaKalenteri(tapahtumat);
         Tulostaja tulostaja = new Tulostaja();
         tulostaja.tulostaKalenteri(kalenteri);
-        // tulostaja.tulostaKalenteri(kalenteri, poikkeukset);
+        tulostaja.tulostaKalenteri(kalenteri);
     }
 
 

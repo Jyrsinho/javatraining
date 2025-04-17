@@ -2,125 +2,98 @@ package AlgorithmsTwo.LukuJarjestys;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Objects;
 
 import static AlgorithmsTwo.LukuJarjestys.Utils.viikonpaiva;
 
 public class Kalenteri {
-    private Tapahtuma[][] tapahtumaKalenteri;
+    private  AikatauluRuutu[][] tapahtumaKalenteri;
     private String otsikko;
     private int tapahtumienMaara;
     private LocalDate ensimmaisenTapahtumanPVM;
     private LocalDate viimeisenTapahtumanPVM;
 
+    int[] tapahtumientoistuvuusHistogrammi;
+
 
     public Kalenteri(int paivia, int tunteja) {
-        this.tapahtumaKalenteri = new Tapahtuma[paivia][tunteja];
+        this.tapahtumaKalenteri = new AikatauluRuutu[paivia][tunteja];
         this.otsikko = "";
-        this.tapahtumienMaara = 0;
         this.ensimmaisenTapahtumanPVM = LocalDate.MAX;
         this.viimeisenTapahtumanPVM = LocalDate.MIN;
-    }
+        this.tapahtumientoistuvuusHistogrammi = new int[paivia];
+        this.tapahtumienMaara = 0;
 
-
-    public void lisaaTapahtuma(Tapahtuma uusiTapahtuma) {
-        int paiva = viikonpaiva(uusiTapahtuma.paivamaara);
-
-        boolean alkanut = false;
-        for (int i = uusiTapahtuma.ensimmainenAlkavaTunti; i <= uusiTapahtuma.viimeinenAlkavaTunti ; i++) {
-            if (tapahtumaKalenteri[paiva][i] == null) {
-                if (!alkanut) {
-                    tapahtumaKalenteri[paiva][i] =uusiTapahtuma;
-                    alkanut = true;
-                    tapahtumienMaara++;
-                } else {
-                    tapahtumaKalenteri[paiva][i] =  new TapahtumaJatkuu(uusiTapahtuma.ensimmainenAlkavaTunti, uusiTapahtuma.viimeinenAlkavaTunti, uusiTapahtuma.paivamaara, uusiTapahtuma.nimi);
-                }
-            }
-        }
-
-            yhdistaJatkuvat(paiva, uusiTapahtuma);
-            paivitaEnsimmaisenTapahtumanPVM(uusiTapahtuma);
-            paivitaViimeisenTapahtumaPVM(uusiTapahtuma);
-    }
-
-    private void paivitaEnsimmaisenTapahtumanPVM(Tapahtuma uusiTapahtuma) {
-        if (uusiTapahtuma.paivamaara.isBefore(ensimmaisenTapahtumanPVM)) {
-            ensimmaisenTapahtumanPVM = uusiTapahtuma.getPaivamaara();
-        }
-    }
-
-    private void paivitaViimeisenTapahtumaPVM(Tapahtuma uusiTapahtuma) {
-        if (uusiTapahtuma.paivamaara.isAfter(viimeisenTapahtumanPVM)) {
-            viimeisenTapahtumanPVM = uusiTapahtuma.getPaivamaara();
-        }
-    }
-
-
-
-    /**
-     * Jos lisatty tapahtuma on samanniminen kuin sitä suoraan edeltävä tapahtuma tai siitä
-     * suoraan jatkuva tapahtuma. Yhdistetään ne yhdeksi tapahtumaksi.
-     * @return tehtiinko yhdistys
-     */
-    public boolean yhdistaJatkuvat (int paiva, Tapahtuma uusiTapahtuma) {
-        if (uusiTapahtuma.ensimmainenAlkavaTunti > 0) {
-        Tapahtuma edellinenTapahtuma = tapahtumaKalenteri[paiva][uusiTapahtuma.ensimmainenAlkavaTunti -1];
-        if (edellinenTapahtuma != null) {
-            String edellisenTapahtumanNimi = edellinenTapahtuma.getNimi();
-            if (edellisenTapahtumanNimi.equals(uusiTapahtuma.nimi)) {
-                yhdistaTapahtumaEdelliseen(paiva, uusiTapahtuma);
-                return true;
-            }
-        }
-        }
-        if (uusiTapahtuma.viimeinenAlkavaTunti < 23) {
-            Tapahtuma seuraavaTapahtuma = tapahtumaKalenteri[paiva][uusiTapahtuma.viimeinenAlkavaTunti + 1] ;
-            if (seuraavaTapahtuma != null) {
-                String seuraavanTapahtumanNimi = seuraavaTapahtuma.getNimi();
-                if (seuraavanTapahtumanNimi.equals(uusiTapahtuma.nimi)) {
-                    yhdistaTapahtumaSeuraavaan(paiva, uusiTapahtuma);
-                    return true;
-                }
-            }
-        }
-
-        return false;
-    }
-
-    private void yhdistaTapahtumaEdelliseen(int paiva, Tapahtuma uusiTapahtuma) {
-        Tapahtuma edellinenTapahtuma = tapahtumaKalenteri[paiva][uusiTapahtuma.ensimmainenAlkavaTunti -1];
-
-        tapahtumaKalenteri[paiva][uusiTapahtuma.ensimmainenAlkavaTunti] = new TapahtumaJatkuu(edellinenTapahtuma.ensimmainenAlkavaTunti, edellinenTapahtuma.viimeinenAlkavaTunti, edellinenTapahtuma.paivamaara, edellinenTapahtuma.nimi);
-    }
-
-
-    private void yhdistaTapahtumaSeuraavaan(int paiva, Tapahtuma uusiTapahtuma) {
-        Tapahtuma seuraavaTapahtuma = tapahtumaKalenteri[paiva][uusiTapahtuma.viimeinenAlkavaTunti + 1];
-        tapahtumaKalenteri[paiva][seuraavaTapahtuma.ensimmainenAlkavaTunti] = new TapahtumaJatkuu(uusiTapahtuma.ensimmainenAlkavaTunti, uusiTapahtuma.viimeinenAlkavaTunti, uusiTapahtuma.paivamaara, seuraavaTapahtuma.nimi);
     }
 
 
     public void paivitaKalenteri(ArrayList<Tapahtuma> tapahtumat) {
-       for (Tapahtuma tapahtuma: tapahtumat) {
-           lisaaTapahtuma(tapahtuma);
-       }
+        paivitaKalenterinEnsimmainenJaViimeinenPaiva(tapahtumat);
+        taytaPaivaHistogrammi();
+
+        alustaKalenteri();
+
+        for (Tapahtuma tapahtuma: tapahtumat) {
+            lisaaTapahtuma(tapahtuma);
+        }
+    }
+
+    private void paivitaKalenterinEnsimmainenJaViimeinenPaiva(ArrayList<Tapahtuma> tapahtumat) {
+        for (Tapahtuma tapahtuma: tapahtumat) {
+            if (tapahtuma.paivamaara.isBefore(ensimmaisenTapahtumanPVM)) {
+                ensimmaisenTapahtumanPVM = tapahtuma.paivamaara;
+            }
+            if (tapahtuma.paivamaara.isAfter(viimeisenTapahtumanPVM)){
+                viimeisenTapahtumanPVM = tapahtuma.paivamaara;
+            }
+        }
+    }
+
+    private void taytaPaivaHistogrammi() {
+        LocalDate current = this.ensimmaisenTapahtumanPVM;
+        while (current.isBefore(this.viimeisenTapahtumanPVM) || current.isEqual(this.viimeisenTapahtumanPVM)) {
+            int lisattavaVKPaiva = viikonpaiva(current);
+            if (lisattavaVKPaiva > 0) {
+                tapahtumientoistuvuusHistogrammi[lisattavaVKPaiva]++;
+            }
+            current = current.plusDays(1);
+        }
+    }
+
+    public void lisaaTapahtuma(Tapahtuma uusiTapahtuma) {
+        int paiva = viikonpaiva(uusiTapahtuma.paivamaara);
+
+        for (int i = uusiTapahtuma.ensimmainenAlkavaTunti; i <= uusiTapahtuma.viimeinenAlkavaTunti ; i++) {
+            tapahtumaKalenteri[paiva][i].lisaa(uusiTapahtuma);
+            tapahtumienMaara++;
+        }
+
     }
 
 
+    private void alustaKalenteri() {
+        for (int i = 0; i < tapahtumaKalenteri.length; i++) {
+            for (int j = 0; j < tapahtumaKalenteri[i].length; j++) {
+                tapahtumaKalenteri[i][j] = new AikatauluRuutu(tapahtumientoistuvuusHistogrammi[i]);
+            }
+        }
+    }
+
+
+
     /**
-     * Palauttaa parametrina annettua paivaa ja tuntia vastaavan tapahtuman kalenterista, jos siella sellainen on.
+     * Palauttaa parametrina annettua paivaa ja tuntia vastaavan saannollisen tapahtuman kalenterista, jos siella sellainen on.
+     * Jos ei ole saannollista tapahtumaa, palautetaan tyhja merkkijono
      * Maanantain indeksi on 0, perjantain 4.
      * Jos kyseisessä aikaikkunassa ei ole tapahtumaa palautetaan PoikkeusTapahtuma
      * @param paiva jolloin tapahtuma tapahtuu
      * @param tunti jolloin tapahtuma tapahtuu
      * @return Tapahtuma
      */
-    public Tapahtuma getTapahtuma(int paiva, int tunti) {
-        if (tapahtumaKalenteri[paiva][tunti] != null) {
-            return tapahtumaKalenteri[paiva][tunti];
-        }else {
-            return new TapahtumaEiOlemassa();
-        }
+    public String getTapahtuma(int paiva, int tunti) {
+        AikatauluRuutu valittu = tapahtumaKalenteri[paiva][tunti];
+
+        return valittu.getSaannollinen();
     }
 
 
@@ -128,13 +101,13 @@ public class Kalenteri {
      * Palauttaa kalenterin aikaisimman tapahtuman kellonajan
      * @return {int} aikaisimman tapahtuman kellonaika. Jos kalenterissa ei ole tapahtumia palauttaa 25
      */
-   public int aikaisinTapahtuma() {
+   public int aikaisinAlkavaTunti() {
        int aikaisinTapahtuma = 25;
 
        for (int i = 0; i < tapahtumaKalenteri.length; i++) {
            for (int j = 0; j < tapahtumaKalenteri[i].length; j++) {
-               if (tapahtumaKalenteri[i][j] != null && tapahtumaKalenteri[i][j].ensimmainenAlkavaTunti < aikaisinTapahtuma) {
-                   aikaisinTapahtuma = tapahtumaKalenteri[i][j].ensimmainenAlkavaTunti;
+               if (!Objects.equals(tapahtumaKalenteri[i][j].getSaannollinen(), "") && j < aikaisinTapahtuma) {
+                   aikaisinTapahtuma = j;
                }
            }
        }
@@ -146,12 +119,12 @@ public class Kalenteri {
      * Palauttaa kalenterin myohaisimman tapahtuman viimeisen alkavan tunnin
      * @return {int} myohaisimman tapahtuman kellonaika. Jos kalenterissa ei ole tapahtumia palauttaa -1
      */
-    public int myohaisinTapahtuma() {
+    public int myohaisinAlkavaTunti() {
        int myohaisinTapahtumanAlkavaTunti = -1;
 
        for (int i = 0; i < tapahtumaKalenteri.length; i++) {
            for (int j = 0; j < tapahtumaKalenteri[i].length; j++) {
-               if (tapahtumaKalenteri [i][j]!= null && j > myohaisinTapahtumanAlkavaTunti) {
+               if (!Objects.equals(tapahtumaKalenteri[i][j].saannollinen, "") && j > myohaisinTapahtumanAlkavaTunti) {
                    myohaisinTapahtumanAlkavaTunti =  j ;
                }
            }
@@ -190,7 +163,7 @@ public class Kalenteri {
        }
    }
 
-   public Tapahtuma[][] getTapahtumaKalenteri() {
+   public AikatauluRuutu[][] getTapahtumaKalenteri() {
         return tapahtumaKalenteri;
    }
 
@@ -198,9 +171,6 @@ public class Kalenteri {
         return this.otsikko;
    }
 
-   public int getTapahtumienMaara() {
-        return this.tapahtumienMaara;
-    }
 
    public void setOtsikkoRivi(String otsikko) {
         this.otsikko = otsikko;
@@ -212,5 +182,9 @@ public class Kalenteri {
 
    public LocalDate getViimeisenTapahtumanPVM() {
         return viimeisenTapahtumanPVM;
+   }
+
+   public int getTapahtumienMaara (){
+        return tapahtumienMaara;
    }
 }
