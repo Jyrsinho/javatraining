@@ -13,15 +13,12 @@ public class Kalenteri {
     private LocalDate ensimmaisenTapahtumanPVM;
     private LocalDate viimeisenTapahtumanPVM;
 
-    int[] tapahtumientoistuvuusHistogrammi;
-
 
     public Kalenteri(int paivia, int tunteja) {
         this.tapahtumaKalenteri = new AikatauluRuutu[paivia][tunteja];
         this.otsikko = "";
         this.ensimmaisenTapahtumanPVM = LocalDate.MAX;
         this.viimeisenTapahtumanPVM = LocalDate.MIN;
-        this.tapahtumientoistuvuusHistogrammi = new int[paivia];
         this.tapahtumienMaara = 0;
 
     }
@@ -29,7 +26,6 @@ public class Kalenteri {
 
     public void paivitaKalenteri(ArrayList<Tapahtuma> tapahtumat) {
         paivitaKalenterinEnsimmainenJaViimeinenPaiva(tapahtumat);
-        taytaPaivaHistogrammi();
 
         alustaKalenteri();
         lisaaTapahtumat(tapahtumat);
@@ -66,16 +62,7 @@ public class Kalenteri {
         }
     }
 
-    private void taytaPaivaHistogrammi() {
-        LocalDate current = this.ensimmaisenTapahtumanPVM;
-        while (current.isBefore(this.viimeisenTapahtumanPVM) || current.isEqual(this.viimeisenTapahtumanPVM)) {
-            int lisattavaVKPaiva = viikonpaiva(current);
-            if (lisattavaVKPaiva > 0) {
-                tapahtumientoistuvuusHistogrammi[lisattavaVKPaiva]++;
-            }
-            current = current.plusDays(1);
-        }
-    }
+
 
    private void lisaaTapahtuma(Tapahtuma uusiTapahtuma) {
         int paiva = viikonpaiva(uusiTapahtuma.paivamaara);
@@ -90,9 +77,11 @@ public class Kalenteri {
 
     private void alustaKalenteri() {
         for (int i = 0; i < tapahtumaKalenteri.length; i++) {
+            LocalDate paivanEnsimmainenToisto = etsiPaivanEnsimmainenToisto();
+            LocalDate paivanToinenToisto = etsiPaivanViimeinenToisto();
             for (int j = 0; j < tapahtumaKalenteri[i].length; j++) {
                 //TODO: TÄMÄ KORJATTAVA NIIN, ETTÄ KALENTERI ANTAA AIKATAULURUUDULLE SEN ENSIMMÄISEN PÄIVÄN JA VIIMEISEN PAIVAN sekä tunnin
-                //tapahtumaKalenteri[i][j] = new AikatauluRuutu(tapahtumientoistuvuusHistogrammi[i]);
+                tapahtumaKalenteri[i][j] = new AikatauluRuutu()
             }
         }
     }
