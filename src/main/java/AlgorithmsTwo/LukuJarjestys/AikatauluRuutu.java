@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import static AlgorithmsTwo.LukuJarjestys.Utils.viikonpaiva;
+
 /**
  * Lajittelee sisaltamansa tapahtumat saannolliseen tapahtumaan ja poikkeuksiin
  * Saannollinen tapahtuma Aikatauluruudussa eniten
@@ -17,27 +19,34 @@ public class AikatauluRuutu {
     ArrayList<Tapahtuma> tapahtumat;
     String saannollinen;
     ArrayList<Tapahtuma> poikkeukset;
-    int toistojenMaara;
+    LocalDate ensimmainenPv;
+    LocalDate viimeinenPv;
+
+    int ruudunVkPaiva;
 
 
-    public AikatauluRuutu(int toistojenMaara) {
+
+    public AikatauluRuutu(LocalDate kalenterinEnsimmainenPv, LocalDate kalenterinViimeinenPv, int viikonpaiva) {
         this.tapahtumat = new ArrayList<>();
         this.saannollinen = "";
-        this.toistojenMaara = toistojenMaara;
         this.poikkeukset = new ArrayList<>();
+        this.ruudunVkPaiva =  viikonpaiva;
+        this.ensimmainenPv = ruudunEnsimmainenPV(kalenterinEnsimmainenPv);
+        this.viimeinenPv = kalenterinViimeinenPv;
+
     }
 
 
     public void lisaa(Tapahtuma tapahtuma) {
         tapahtumat.add(tapahtuma);
-        analysoi();
     }
 
     /**
      * Jakaa aikatauluruudun tapahtumat saannolliseen tapahtumaan ja poikkeuksiin
      */
     public void analysoi() {
-        HashMap<String, Integer> tapahtumatJaMaarat = selvitaTapahtumienMaarat(toistojenMaara);
+        luoTyhjat();
+        HashMap<String, Integer> tapahtumatJaMaarat = selvitaTapahtumienMaarat();
 
         ArrayList<String> saannolliset = selvitaSaannolliset(tapahtumatJaMaarat);
 
@@ -48,6 +57,50 @@ public class AikatauluRuutu {
         }
 
         lisaaPoikkeukset();
+    }
+
+    private LocalDate ruudunEnsimmainenPV(LocalDate kalenterinEnsimmainenPv) {
+        LocalDate ruudunAloitusPV = kalenterinEnsimmainenPv;
+        int kalenterinAloituspaiva = viikonpaiva(kalenterinEnsimmainenPv);
+
+        if (kalenterinAloituspaiva == ruudunVkPaiva) {
+            return ruudunAloitusPV;
+        }else if (ruudunVkPaiva > kalenterinAloituspaiva) {
+            return ruudunAloitusPV.plusDays(kalenterinAloituspaiva - ruudunVkPaiva);
+        }else {
+            return ruudunAloitusPV.plusDays(+7 - ruudunVkPaiva);
+        }
+    }
+
+
+    /**
+     * Lisaa EiTapahtumaa objektin niille paiville, joissa Aikatauluruudussa ei ole tapahtumaa
+     */
+    private void luoTyhjat() {
+
+        LocalDate current = ensimmainenPv;
+        while (current.isBefore(viimeinenPv) || current.isEqual(viimeinenPv)) {
+            if (!paivalleOnTapahtuma(current)) {
+                luoTyhjaTapahtuma(current);
+            }
+            current = current.plusDays(7);
+
+        }
+    }
+
+    private boolean paivalleOnTapahtuma(LocalDate pvm) {
+
+        for (Tapahtuma tapahtuma: tapahtumat){
+            if (tapahtuma.paivamaara.equals(pvm)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private void luoTyhjaTapahtuma(LocalDate pvm) {
+        Tapahtuma eiTapahtumaa = new EiTapahtumaa(pvm);
+        tapahtumat.add(eiTapahtumaa);
     }
 
     /**
@@ -61,18 +114,16 @@ public class AikatauluRuutu {
                poikkeukset.add(tapahtuma);
            }
         }
+
     }
 
-    private HashMap<String, Integer> selvitaTapahtumienMaarat(int toistojenMaara) {
+
+    private HashMap<String, Integer> selvitaTapahtumienMaarat() {
         HashMap<String, Integer> tapahtumatJaMaarat = new HashMap<>();
 
         for (Tapahtuma tapahtuma: tapahtumat) {
             tapahtumatJaMaarat.merge(tapahtuma.getNimi(), 1, Integer::sum);
         }
-
-        //lisataan tyhjia tapahtumia
-        int tyhjienMaara = toistojenMaara - tapahtumat.size();
-        tapahtumatJaMaarat.put("EiTapahtumaa", tyhjienMaara);
 
         return tapahtumatJaMaarat;
     }

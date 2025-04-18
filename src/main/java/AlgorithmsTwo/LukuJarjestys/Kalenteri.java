@@ -13,7 +13,6 @@ public class Kalenteri {
     private LocalDate ensimmaisenTapahtumanPVM;
     private LocalDate viimeisenTapahtumanPVM;
 
-    int[] tapahtumientoistuvuusHistogrammi;
 
 
     public Kalenteri(int paivia, int tunteja) {
@@ -21,7 +20,6 @@ public class Kalenteri {
         this.otsikko = "";
         this.ensimmaisenTapahtumanPVM = LocalDate.MAX;
         this.viimeisenTapahtumanPVM = LocalDate.MIN;
-        this.tapahtumientoistuvuusHistogrammi = new int[paivia];
         this.tapahtumienMaara = 0;
 
     }
@@ -29,19 +27,46 @@ public class Kalenteri {
 
     public void paivitaKalenteri(ArrayList<Tapahtuma> tapahtumat) {
         paivitaKalenterinEnsimmainenJaViimeinenPaiva(tapahtumat);
-        taytaPaivaHistogrammi();
+        // lisataan aikatauluruutu kaikille tunneille joilla on tapahtumia
+        lisaaTapahtumat(tapahtumat);
+        // kaydaan lapi aikatauluruudut ja asetetaan nille oikeat arvot poikkeuksiin ja saannollisiin tapahtumiin
+        analysoiAikatauluRuudut();
 
-        alustaKalenteri();
+    }
 
+    public void lisaaTapahtuma(Tapahtuma uusiTapahtuma) {
+        int paiva = viikonpaiva(uusiTapahtuma.paivamaara);
+
+        for (int i = uusiTapahtuma.ensimmainenAlkavaTunti; i <= uusiTapahtuma.viimeinenAlkavaTunti ; i++) {
+            if (tapahtumaKalenteri [paiva][i] != null) {
+                tapahtumaKalenteri[paiva][i].lisaa(uusiTapahtuma);
+            } else {
+                tapahtumaKalenteri[paiva][i] = new AikatauluRuutu(ensimmaisenTapahtumanPVM, viimeisenTapahtumanPVM, paiva);
+            }
+            tapahtumienMaara++;
+
+        }
+
+    }
+
+
+
+    private void analysoiAikatauluRuudut() {
+        for (int i = 0; i < tapahtumaKalenteri.length; i++) {
+            for (int j = 0; j < tapahtumaKalenteri[i].length; j++) {
+                if (tapahtumaKalenteri[i][j] != null) {
+                    tapahtumaKalenteri[i][j].analysoi();
+                }
+            }
+        }
+    }
+
+    private void lisaaTapahtumat(ArrayList<Tapahtuma> tapahtumat) {
         for (Tapahtuma tapahtuma: tapahtumat) {
             lisaaTapahtuma(tapahtuma);
         }
     }
 
-   public ArrayList<Tapahtuma> poikkeukset() {
-        ArrayList<Tapahtuma> poikkeukset = new ArrayList<>();
-        return poikkeukset;
-   }
 
     private void paivitaKalenterinEnsimmainenJaViimeinenPaiva(ArrayList<Tapahtuma> tapahtumat) {
         for (Tapahtuma tapahtuma: tapahtumat) {
@@ -54,35 +79,8 @@ public class Kalenteri {
         }
     }
 
-    private void taytaPaivaHistogrammi() {
-        LocalDate current = this.ensimmaisenTapahtumanPVM;
-        while (current.isBefore(this.viimeisenTapahtumanPVM) || current.isEqual(this.viimeisenTapahtumanPVM)) {
-            int lisattavaVKPaiva = viikonpaiva(current);
-            if (lisattavaVKPaiva > 0) {
-                tapahtumientoistuvuusHistogrammi[lisattavaVKPaiva]++;
-            }
-            current = current.plusDays(1);
-        }
-    }
-
-    public void lisaaTapahtuma(Tapahtuma uusiTapahtuma) {
-        int paiva = viikonpaiva(uusiTapahtuma.paivamaara);
-
-        for (int i = uusiTapahtuma.ensimmainenAlkavaTunti; i <= uusiTapahtuma.viimeinenAlkavaTunti ; i++) {
-            tapahtumaKalenteri[paiva][i].lisaa(uusiTapahtuma);
-            tapahtumienMaara++;
-        }
-
-    }
 
 
-    private void alustaKalenteri() {
-        for (int i = 0; i < tapahtumaKalenteri.length; i++) {
-            for (int j = 0; j < tapahtumaKalenteri[i].length; j++) {
-                tapahtumaKalenteri[i][j] = new AikatauluRuutu(tapahtumientoistuvuusHistogrammi[i]);
-            }
-        }
-    }
 
 
 
@@ -111,8 +109,10 @@ public class Kalenteri {
 
        for (int i = 0; i < tapahtumaKalenteri.length; i++) {
            for (int j = 0; j < tapahtumaKalenteri[i].length; j++) {
-               if (!Objects.equals(tapahtumaKalenteri[i][j].getSaannollinen(), "") && j < aikaisinTapahtuma) {
-                   aikaisinTapahtuma = j;
+               if (tapahtumaKalenteri[i][j] != null) {
+                   if (!Objects.equals(tapahtumaKalenteri[i][j].getSaannollinen(), "") && j < aikaisinTapahtuma) {
+                       aikaisinTapahtuma = j;
+                   }
                }
            }
        }
@@ -129,8 +129,10 @@ public class Kalenteri {
 
        for (int i = 0; i < tapahtumaKalenteri.length; i++) {
            for (int j = 0; j < tapahtumaKalenteri[i].length; j++) {
-               if (!Objects.equals(tapahtumaKalenteri[i][j].saannollinen, "") && j > myohaisinTapahtumanAlkavaTunti) {
-                   myohaisinTapahtumanAlkavaTunti =  j ;
+               if (tapahtumaKalenteri[i][j] != null) {
+                   if (!Objects.equals(tapahtumaKalenteri[i][j].saannollinen, "") && j > myohaisinTapahtumanAlkavaTunti) {
+                       myohaisinTapahtumanAlkavaTunti = j;
+                   }
                }
            }
        }
@@ -155,6 +157,20 @@ public class Kalenteri {
 
    public AikatauluRuutu[][] getTapahtumaKalenteri() {
         return tapahtumaKalenteri;
+   }
+
+
+   public ArrayList<Tapahtuma> getPoikkeukset() {
+        ArrayList<Tapahtuma> poikkeukset = new ArrayList<>();
+        for (int i = 0; i < tapahtumaKalenteri.length; i++) {
+            for (int j = 0; j < tapahtumaKalenteri[i].length; j++) {
+                if (tapahtumaKalenteri[i][j] != null) {
+                    ArrayList<Tapahtuma> ruudunPoikkeukset = tapahtumaKalenteri[i][j].poikkeukset;
+                    poikkeukset.addAll(ruudunPoikkeukset);
+                }
+            }
+        }
+        return poikkeukset;
    }
 
    public String getOtsikko() {

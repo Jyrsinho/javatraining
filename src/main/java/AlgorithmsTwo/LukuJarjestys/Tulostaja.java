@@ -4,6 +4,7 @@ package AlgorithmsTwo.LukuJarjestys;
 import java.io.PrintStream;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 
 public class Tulostaja {
 
@@ -35,6 +36,7 @@ public class Tulostaja {
 
         out.println(kalenteri.getOtsikko());
         tulostaKalenterinKesto(out, kalenteri);
+        tulostaKalenterinPoikkeukset(out, kalenteri);
         tulostaOtsikkoRivi(out);
         tulostaValiRivi(out);
         tulostaRivit(out, kalenteri);
@@ -64,6 +66,13 @@ public class Tulostaja {
 
         out.printf("%s-%s", ensimmainenPaivaMJ, viimeinenPaivaMJ);
         out.println();
+    }
+
+    private void tulostaKalenterinPoikkeukset(PrintStream out, Kalenteri kalenteri) {
+        ArrayList<Tapahtuma> poikkeukset = kalenteri.getPoikkeukset();
+        for (int i = 0; i < poikkeukset.size(); i++) {
+            out.println(poikkeukset.get(i).getNimi());
+        }
     }
 
     /**

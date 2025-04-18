@@ -17,20 +17,26 @@ public class AikatauluRuutuTest {
 
     // Testataan että aikatauluruutu osaa palauttaa saannollisen tapahtumansa ja poikkeuksensa
     AikatauluRuutu aikatauluRuutu;
+    int tiistai;
     Tapahtuma tapahtuma1;
     Tapahtuma tapahtuma2;
     Tapahtuma tapahtuma3;
     Tapahtuma tapahtuma4;
+    LocalDate tiistaiEnsimmainenHuhtikuuta;
+    LocalDate tiistaiKahdeksasHuhtikuuta;
+    LocalDate tiistaiViidestoistaHuhtikuuta;
+    LocalDate tiistaiKahdeskymmenestoinenHuhtikuuta;
 
     @BeforeEach
     public void setUp() {
-        aikatauluRuutu = new AikatauluRuutu(5);
-        LocalDate tiistaiEnsimmainenHuhtikuuta = LocalDate.of(2025,4, 1);
-        LocalDate tiistaiKahdeksasHuhtikuuta = LocalDate.of(2025,4, 8);
-        LocalDate tiistaiViidestoistaHuhtikuuta = LocalDate.of(2025,4, 15);
-        LocalDate tiistaiKahdeskymmenestoinenHuhtikuuta = LocalDate.of(2025,4, 22);
+        tiistai = 1;
+        tiistaiEnsimmainenHuhtikuuta = LocalDate.of(2025,4, 1);
+        tiistaiKahdeksasHuhtikuuta = LocalDate.of(2025,4, 8);
+        tiistaiViidestoistaHuhtikuuta = LocalDate.of(2025,4, 15);
+        tiistaiKahdeskymmenestoinenHuhtikuuta = LocalDate.of(2025,4, 22);
+        aikatauluRuutu = new AikatauluRuutu(tiistaiEnsimmainenHuhtikuuta, tiistaiKahdeskymmenestoinenHuhtikuuta, 1);
         tapahtuma1 = new Tapahtuma(10, 12, tiistaiEnsimmainenHuhtikuuta, "saannollinenTapahtuma");
-        tapahtuma2 = new Tapahtuma(10,12, tiistaiKahdeksasHuhtikuuta,    "saannollinenTapahtuma");
+        tapahtuma2 = new Tapahtuma(10,12, tiistaiKahdeksasHuhtikuuta,    "epsaantap");
         tapahtuma3 = new Tapahtuma(10,12, tiistaiViidestoistaHuhtikuuta, "saannollinenTapahtuma");
         tapahtuma4 = new Tapahtuma(10, 12, tiistaiKahdeskymmenestoinenHuhtikuuta, "epasaannollinenTapahtuma");
     }
@@ -38,9 +44,9 @@ public class AikatauluRuutuTest {
     @Test
     public void testAikaTauluRuutuShouldReturnEiTapahtumaaWhenItsMostFrequentTapahtuma() {
 
-        Tapahtuma tapahtuma = new Tapahtuma(10, 11, LocalDate.of(2025, 4, 16), "testitapahtuma");
-        aikatauluRuutu.lisaa(tapahtuma);
-        String expected = "EiTapahtumaa";
+        aikatauluRuutu.lisaa(tapahtuma1);
+        aikatauluRuutu.analysoi();
+        String expected = "Ei Tapahtumaa";
         String actual = aikatauluRuutu.getSaannollinen();
         assertEquals(expected, actual);
     }
@@ -51,6 +57,7 @@ public class AikatauluRuutuTest {
         aikatauluRuutu.lisaa(tapahtuma2);
         aikatauluRuutu.lisaa(tapahtuma3);
         aikatauluRuutu.lisaa(tapahtuma4);
+        aikatauluRuutu.analysoi();
         String actual = aikatauluRuutu.getSaannollinen();
         assertEquals("saannollinenTapahtuma", actual);
 
@@ -58,24 +65,25 @@ public class AikatauluRuutuTest {
 
     @Test
     public void testAikatauluRuutuShouldRetunrTapahtumaWithEarlierDateWhenTwoTapahtumatAreAsFrequent() {
-        int toistejenMaara = 2;
-        AikatauluRuutu aikatauluRuutu2 = new AikatauluRuutu(toistejenMaara);
+        AikatauluRuutu aikatauluRuutu2 = new AikatauluRuutu(tiistaiEnsimmainenHuhtikuuta, tiistaiKahdeksasHuhtikuuta, tiistai);
         aikatauluRuutu2.lisaa(tapahtuma1);
         aikatauluRuutu2.lisaa(tapahtuma4);
+        aikatauluRuutu2.analysoi();
         String actual = aikatauluRuutu2.getSaannollinen();
         assertEquals(tapahtuma1.getNimi(), actual);
     }
 
     @Test
     public void testAikaTauluRuutuShouldKnowThatThereIsAPoikkeus() {
-        AikatauluRuutu aikatauluRuutu4 = new AikatauluRuutu(4);
-        aikatauluRuutu4.lisaa(tapahtuma1);
-        aikatauluRuutu4.lisaa(tapahtuma2);
-        aikatauluRuutu4.lisaa(tapahtuma3);
-        aikatauluRuutu4.lisaa(tapahtuma4);
+        AikatauluRuutu aikatauluRuutu4 = new AikatauluRuutu(tiistaiEnsimmainenHuhtikuuta,tiistaiKahdeskymmenestoinenHuhtikuuta,1);
+        aikatauluRuutu4.lisaa(tapahtuma1 );
+        aikatauluRuutu4.lisaa(tapahtuma2 );
+        aikatauluRuutu4.lisaa(tapahtuma3 );
+        aikatauluRuutu4.lisaa(tapahtuma4 );
+        aikatauluRuutu4.analysoi();
         ArrayList<Tapahtuma> poikkeukset = aikatauluRuutu4.getPoikkeukset();
-        String expected = "epasaannollinenTapahtuma";
-        String actual = poikkeukset.getFirst().getNimi();
+        int expected = 2;
+        int actual = poikkeukset.size();
         for (int i = 0; i < poikkeukset.size(); i++) {
             System.out.println(poikkeukset.get(i).getNimi());
         }
@@ -88,6 +96,7 @@ public class AikatauluRuutuTest {
         aikatauluRuutu.lisaa(tapahtuma2);
         aikatauluRuutu.lisaa(tapahtuma3);
         aikatauluRuutu.lisaa(tapahtuma4);
+        aikatauluRuutu.analysoi();
         ArrayList<Tapahtuma> poikkeukset = aikatauluRuutu.getPoikkeukset();
         int expected = 2;
         int actual = poikkeukset.size();
