@@ -91,7 +91,8 @@ public class Kalenteri {
     private void alustaKalenteri() {
         for (int i = 0; i < tapahtumaKalenteri.length; i++) {
             for (int j = 0; j < tapahtumaKalenteri[i].length; j++) {
-                tapahtumaKalenteri[i][j] = new AikatauluRuutu(tapahtumientoistuvuusHistogrammi[i]);
+                //TODO: TÄMÄ KORJATTAVA NIIN, ETTÄ KALENTERI ANTAA AIKATAULURUUDULLE SEN ENSIMMÄISEN PÄIVÄN JA VIIMEISEN PAIVAN sekä tunnin
+                //tapahtumaKalenteri[i][j] = new AikatauluRuutu(tapahtumientoistuvuusHistogrammi[i]);
             }
         }
     }

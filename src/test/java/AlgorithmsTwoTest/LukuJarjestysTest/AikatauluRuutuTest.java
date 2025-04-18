@@ -22,15 +22,21 @@ public class AikatauluRuutuTest {
     Tapahtuma tapahtuma3;
     Tapahtuma tapahtuma4;
 
+    LocalDate tiistaiEnsimmainenHuhtikuuta;
+    LocalDate tiistaiKahdeksasHuhtikuuta;
+    LocalDate tiistaiViidestoistaHuhtikuuta;
+    LocalDate tiistaiKahdeskymmenestoinenHuhtikuuta;
     @BeforeEach
     public void setUp() {
-        aikatauluRuutu = new AikatauluRuutu(5);
-        LocalDate tiistaiEnsimmainenHuhtikuuta = LocalDate.of(2025,4, 1);
-        LocalDate tiistaiKahdeksasHuhtikuuta = LocalDate.of(2025,4, 8);
-        LocalDate tiistaiViidestoistaHuhtikuuta = LocalDate.of(2025,4, 15);
-        LocalDate tiistaiKahdeskymmenestoinenHuhtikuuta = LocalDate.of(2025,4, 22);
+
+        tiistaiEnsimmainenHuhtikuuta = LocalDate.of(2025,4, 1);
+        tiistaiKahdeksasHuhtikuuta = LocalDate.of(2025,4, 8);
+        tiistaiViidestoistaHuhtikuuta = LocalDate.of(2025,4, 15);
+        tiistaiKahdeskymmenestoinenHuhtikuuta = LocalDate.of(2025,4, 22);
+
+        aikatauluRuutu = new AikatauluRuutu(tiistaiEnsimmainenHuhtikuuta, tiistaiKahdeskymmenestoinenHuhtikuuta);
         tapahtuma1 = new Tapahtuma(10, 12, tiistaiEnsimmainenHuhtikuuta, "saannollinenTapahtuma");
-        tapahtuma2 = new Tapahtuma(10,12, tiistaiKahdeksasHuhtikuuta,    "saannollinenTapahtuma");
+        tapahtuma2 = new Tapahtuma(10,12, tiistaiKahdeksasHuhtikuuta,    "randomTapahtuma");
         tapahtuma3 = new Tapahtuma(10,12, tiistaiViidestoistaHuhtikuuta, "saannollinenTapahtuma");
         tapahtuma4 = new Tapahtuma(10, 12, tiistaiKahdeskymmenestoinenHuhtikuuta, "epasaannollinenTapahtuma");
     }
@@ -60,10 +66,9 @@ public class AikatauluRuutuTest {
 
     @Test
     public void testAikatauluRuutuShouldRetunrTapahtumaWithEarlierDateWhenTwoTapahtumatAreAsFrequent() {
-        int toistejenMaara = 2;
-        AikatauluRuutu aikatauluRuutu2 = new AikatauluRuutu(toistejenMaara);
+        AikatauluRuutu aikatauluRuutu2 = new AikatauluRuutu(tiistaiEnsimmainenHuhtikuuta, tiistaiKahdeksasHuhtikuuta);
         aikatauluRuutu2.lisaa(tapahtuma1);
-        aikatauluRuutu2.lisaa(tapahtuma4);
+        aikatauluRuutu2.lisaa(tapahtuma2);
         aikatauluRuutu2.analysoi();
         String actual = aikatauluRuutu2.getSaannollinen();
         assertEquals(tapahtuma1.getNimi(), actual);
@@ -71,7 +76,7 @@ public class AikatauluRuutuTest {
 
     @Test
     public void testAikaTauluRuutuShouldKnowThatThereIsAPoikkeus() {
-        AikatauluRuutu aikatauluRuutu4 = new AikatauluRuutu(4);
+        AikatauluRuutu aikatauluRuutu4 = new AikatauluRuutu(tiistaiEnsimmainenHuhtikuuta, tiistaiKahdeskymmenestoinenHuhtikuuta);
         aikatauluRuutu4.lisaa(tapahtuma1);
         aikatauluRuutu4.lisaa(tapahtuma2);
         aikatauluRuutu4.lisaa(tapahtuma3);

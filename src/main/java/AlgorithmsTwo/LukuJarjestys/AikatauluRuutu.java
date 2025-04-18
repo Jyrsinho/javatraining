@@ -17,29 +17,32 @@ public class AikatauluRuutu {
     ArrayList<Tapahtuma> tapahtumat;
     String saannollinen;
     ArrayList<Tapahtuma> poikkeukset;
-    int toistojenMaara
+    LocalDate ensimmainenPaiva;
+    LocalDate viimeinenPaiva;
+    int tunti;
 
 
-    public AikatauluRuutu(int toistojenMaara) {
+    public AikatauluRuutu(LocalDate ensimmainenPaiva, LocalDate viimeinenPaiva, int tunti) {
         this.tapahtumat = new ArrayList<>();
         this.saannollinen = "";
-        this.toistojenMaara = toistojenMaara;
         this.poikkeukset = new ArrayList<>();
+        this.ensimmainenPaiva = ensimmainenPaiva;
+        this.viimeinenPaiva = viimeinenPaiva;
+        this.tunti = tunti;
     }
 
 
     public void lisaa(Tapahtuma tapahtuma) {
         tapahtumat.add(tapahtuma);
-
     }
-
 
 
     /**
      * Jakaa aikatauluruudun tapahtumat saannolliseen tapahtumaan ja poikkeuksiin
      */
     public void analysoi() {
-        HashMap<String, Integer> tapahtumatJaMaarat = selvitaTapahtumienMaarat(toistojenMaara);
+        lisaaOlemattomatTapahtumat();
+        HashMap<String, Integer> tapahtumatJaMaarat = selvitaTapahtumienMaarat();
 
         ArrayList<String> saannolliset = selvitaSaannolliset(tapahtumatJaMaarat);
 
@@ -51,6 +54,23 @@ public class AikatauluRuutu {
 
         lisaaPoikkeukset();
     }
+
+
+    /**
+     * Kaydaan lapi kaikki AikatauluRuudun sisaltamat paivamaarat ja lisataan tyhja tapahtuma jos
+     * kyseiselle paivamaaralle ei ole lisatty tapahtumaa
+     */
+    private void lisaaOlemattomatTapahtumat(){
+        LocalDate current = ensimmainenPaiva;
+
+        while (current.isBefore(viimeinenPaiva)) {
+            (!kyseisellePaivalleOnTapahtuma) {
+                luoTyhjaTapahtuma(current);
+            }
+            current.plusDays(7);
+        }
+    }
+
 
     /**
      * Tapahtumat joiden nimi ei ole sama kuin saannollisen tapahtuman lisataan poikkeuksien listaan
@@ -65,16 +85,13 @@ public class AikatauluRuutu {
         }
     }
 
-    private HashMap<String, Integer> selvitaTapahtumienMaarat(int toistojenMaara) {
+    private HashMap<String, Integer> selvitaTapahtumienMaarat() {
         HashMap<String, Integer> tapahtumatJaMaarat = new HashMap<>();
 
         for (Tapahtuma tapahtuma: tapahtumat) {
             tapahtumatJaMaarat.merge(tapahtuma.getNimi(), 1, Integer::sum);
         }
 
-        //lisataan tyhjia tapahtumia
-        int tyhjienMaara = toistojenMaara - tapahtumat.size();
-        tapahtumatJaMaarat.put("EiTapahtumaa", tyhjienMaara);
 
         return tapahtumatJaMaarat;
     }
