@@ -123,14 +123,16 @@ public class Tulostaja {
         tulostaEnsimmaisenSolunAlaviiva(out);
 
         for (int i = 0; i < kalenteri.getTapahtumaKalenteri().length; i++) {
+            String tulostettavanNimi = kalenteri.getTapahtumaKalenteri()[i][kellonAika].saannollinen;
+            String seuraavanNimi = kalenteri.getTapahtumaKalenteri()[i][kellonAika+1].saannollinen;
 
-            if (kalenteri.tapahtumaJatkuu(i, kellonAika  )) {
+            if (tulostettavanNimi.isEmpty() || !seuraavanNimi.equals(tulostettavanNimi)) {
                 for (int j = 0; j < merkkejaSolussa; j++) {
-                    out.print(" ");
-                }
-            }else {
-                for (int k = 0; k < merkkejaSolussa; k++) {
                     out.print("-");
+                }
+            } else  {
+                for (int k = 0; k < merkkejaSolussa; k++) {
+                    out.print(" ");
                 }
             }
             out.print("+");

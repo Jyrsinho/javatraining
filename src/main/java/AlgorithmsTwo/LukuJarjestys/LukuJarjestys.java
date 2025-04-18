@@ -51,11 +51,11 @@ public class LukuJarjestys {
     public static void main(String[] args) {
         String testiSyote = """
                 Vauvauinti
-                2.4.2025 10-11 Vauvauinti
+                2.4.2025 10-12 Vauvauinti
                 3.4.2025 17-19 Koodaamista
-                9.4.2025 10-11 Vauvauinti
+                9.4.2025 10-12 Vauvauinti
                 10.4.2025 17-19 Koodaamista
-                16.4.2025 10-11 Vauvauinti
+                16.4.2025 10-12 Vauvauinti
                 17.4.2025 17-19 Koodaamista
                 """;
 
