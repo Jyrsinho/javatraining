@@ -6,6 +6,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -29,7 +30,7 @@ public class AikatauluRuutuTest {
         LocalDate tiistaiViidestoistaHuhtikuuta = LocalDate.of(2025,4, 15);
         LocalDate tiistaiKahdeskymmenestoinenHuhtikuuta = LocalDate.of(2025,4, 22);
         tapahtuma1 = new Tapahtuma(10, 12, tiistaiEnsimmainenHuhtikuuta, "saannollinenTapahtuma");
-        tapahtuma2 = new Tapahtuma(10,12, tiistaiKahdeksasHuhtikuuta, "saannollinenTapahtuma");
+        tapahtuma2 = new Tapahtuma(10,12, tiistaiKahdeksasHuhtikuuta,    "saannollinenTapahtuma");
         tapahtuma3 = new Tapahtuma(10,12, tiistaiViidestoistaHuhtikuuta, "saannollinenTapahtuma");
         tapahtuma4 = new Tapahtuma(10, 12, tiistaiKahdeskymmenestoinenHuhtikuuta, "epasaannollinenTapahtuma");
     }
@@ -63,6 +64,38 @@ public class AikatauluRuutuTest {
         aikatauluRuutu2.lisaa(tapahtuma4);
         String actual = aikatauluRuutu2.getSaannollinen();
         assertEquals(tapahtuma1.getNimi(), actual);
+    }
+
+    @Test
+    public void testAikaTauluRuutuShouldKnowThatThereIsAPoikkeus() {
+        AikatauluRuutu aikatauluRuutu4 = new AikatauluRuutu(4);
+        aikatauluRuutu4.lisaa(tapahtuma1);
+        aikatauluRuutu4.lisaa(tapahtuma2);
+        aikatauluRuutu4.lisaa(tapahtuma3);
+        aikatauluRuutu4.lisaa(tapahtuma4);
+        ArrayList<Tapahtuma> poikkeukset = aikatauluRuutu4.getPoikkeukset();
+        String expected = "epasaannollinenTapahtuma";
+        String actual = poikkeukset.getFirst().getNimi();
+        for (int i = 0; i < poikkeukset.size(); i++) {
+            System.out.println(poikkeukset.get(i).getNimi());
+        }
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    public void testAikatauluRuutuShouldKnowThatNoEventIsAPoikkeus(){
+        aikatauluRuutu.lisaa(tapahtuma1);
+        aikatauluRuutu.lisaa(tapahtuma2);
+        aikatauluRuutu.lisaa(tapahtuma3);
+        aikatauluRuutu.lisaa(tapahtuma4);
+        ArrayList<Tapahtuma> poikkeukset = aikatauluRuutu.getPoikkeukset();
+        int expected = 2;
+        int actual = poikkeukset.size();
+        for (int i = 0; i <poikkeukset.size() ; i++) {
+            System.out.println(poikkeukset.get(i).getNimi());
+        }
+        assertEquals(expected, actual);
+
     }
 
 }

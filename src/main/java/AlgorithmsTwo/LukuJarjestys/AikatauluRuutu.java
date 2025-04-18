@@ -19,11 +19,14 @@ public class AikatauluRuutu {
     ArrayList<Tapahtuma> poikkeukset;
     int toistojenMaara;
 
+
     public AikatauluRuutu(int toistojenMaara) {
         this.tapahtumat = new ArrayList<>();
         this.saannollinen = "";
         this.toistojenMaara = toistojenMaara;
+        this.poikkeukset = new ArrayList<>();
     }
+
 
     public void lisaa(Tapahtuma tapahtuma) {
         tapahtumat.add(tapahtuma);
@@ -42,6 +45,21 @@ public class AikatauluRuutu {
             saannollinen = saannolliset.getFirst();
         } else {
             selvitaSaannollinen(saannolliset);
+        }
+
+        lisaaPoikkeukset();
+    }
+
+    /**
+     * Tapahtumat joiden nimi ei ole sama kuin saannollisen tapahtuman lisataan poikkeuksien listaan
+     */
+    private void lisaaPoikkeukset() {
+        poikkeukset.clear();
+        for (Tapahtuma tapahtuma: tapahtumat) {
+           String tapahtumanNimi = tapahtuma.getNimi();
+           if (!tapahtumanNimi.equals(saannollinen)) {
+               poikkeukset.add(tapahtuma);
+           }
         }
     }
 

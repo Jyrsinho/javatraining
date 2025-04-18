@@ -38,6 +38,11 @@ public class Kalenteri {
         }
     }
 
+   public ArrayList<Tapahtuma> poikkeukset() {
+        ArrayList<Tapahtuma> poikkeukset = new ArrayList<>();
+        return poikkeukset;
+   }
+
     private void paivitaKalenterinEnsimmainenJaViimeinenPaiva(ArrayList<Tapahtuma> tapahtumat) {
         for (Tapahtuma tapahtuma: tapahtumat) {
             if (tapahtuma.paivamaara.isBefore(ensimmaisenTapahtumanPVM)) {
@@ -131,21 +136,6 @@ public class Kalenteri {
        }
 
         return myohaisinTapahtumanAlkavaTunti;
-    }
-
-
-    /**
-     * True jos annetun kellonajan aikana on jo olemassaoleva tapahtuma
-     * @param paiva jota tutkitaan
-     * @param kellonaika jota tutkitaan
-     * @return True jos annetun kellonajan aikana on jo olemassaoleva tapahtuma
-     */
-    public boolean tapahtumaJatkuu(int paiva, int kellonaika) {
-        if (tapahtumaKalenteri[paiva][kellonaika] == null) {
-            return false;
-        }
-
-        return tapahtumaKalenteri[paiva][kellonaika].getClass().getSimpleName().equals("TapahtumaJatkuu");
     }
 
 
