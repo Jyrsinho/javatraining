@@ -63,12 +63,26 @@ public class AikatauluRuutu {
     private void lisaaOlemattomatTapahtumat(){
         LocalDate current = ensimmainenPaiva;
 
-        while (current.isBefore(viimeinenPaiva)) {
-            (!kyseisellePaivalleOnTapahtuma) {
+        while (current.isBefore(viimeinenPaiva) || current.equals(viimeinenPaiva) ) {
+            if (!kyseisellePaivalleOnTapahtuma(current)) {
                 luoTyhjaTapahtuma(current);
             }
-            current.plusDays(7);
+            current = current.plusDays(7);
         }
+    }
+
+    private boolean kyseisellePaivalleOnTapahtuma(LocalDate pvm) {
+        for (Tapahtuma tapahtuma: tapahtumat) {
+            if (tapahtuma.paivamaara.equals(pvm)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private void luoTyhjaTapahtuma(LocalDate pvm) {
+        Tapahtuma tyhjaTapahtuma = new TapahtumaEiOlemassa(pvm, tunti);
+        tapahtumat.add(tyhjaTapahtuma);
     }
 
 
