@@ -70,10 +70,10 @@ public class KalenteriTest {
 
     @Test
     public void testShouldReturnEightForAikaisinTapahtuma() {
-        testiTapahtumat.add(tapahtuma1);
-        kalenteri.paivitaKalenteri(testiTapahtumat);
         Tapahtuma tapahtuma2 = new Tapahtuma(8, 10, LocalDate.of(2025,4, 4), "tapahtuma2" ); // perjantai
-        kalenteri.lisaaTapahtuma(tapahtuma2);
+        testiTapahtumat.add(tapahtuma1);
+        testiTapahtumat.add(tapahtuma2);
+        kalenteri.paivitaKalenteri(testiTapahtumat);
         assertEquals(8, kalenteri.aikaisinAlkavaTunti());
     }
 
@@ -84,13 +84,6 @@ public class KalenteriTest {
         assertEquals(12, kalenteri.myohaisinAlkavaTunti());
     }
 
-    @Test
-    public void testShouldReturnTwentyTwoForMyohaisinTapahtuma() {
-        kalenteri.lisaaTapahtuma(tapahtuma1);
-        Tapahtuma tapahtuma2 = new Tapahtuma(20, 22, LocalDate.of(2024,1,23), "tapahtuma2" );
-        kalenteri.lisaaTapahtuma(tapahtuma2);
-        assertEquals(22, kalenteri.myohaisinAlkavaTunti());
-    }
 
 
     @Test

@@ -40,6 +40,7 @@ public class AikatauluRuutuTest {
 
         Tapahtuma tapahtuma = new Tapahtuma(10, 11, LocalDate.of(2025, 4, 16), "testitapahtuma");
         aikatauluRuutu.lisaa(tapahtuma);
+        aikatauluRuutu.analysoi();
         String expected = "EiTapahtumaa";
         String actual = aikatauluRuutu.getSaannollinen();
         assertEquals(expected, actual);
@@ -51,6 +52,7 @@ public class AikatauluRuutuTest {
         aikatauluRuutu.lisaa(tapahtuma2);
         aikatauluRuutu.lisaa(tapahtuma3);
         aikatauluRuutu.lisaa(tapahtuma4);
+        aikatauluRuutu.analysoi();
         String actual = aikatauluRuutu.getSaannollinen();
         assertEquals("saannollinenTapahtuma", actual);
 
@@ -62,6 +64,7 @@ public class AikatauluRuutuTest {
         AikatauluRuutu aikatauluRuutu2 = new AikatauluRuutu(toistejenMaara);
         aikatauluRuutu2.lisaa(tapahtuma1);
         aikatauluRuutu2.lisaa(tapahtuma4);
+        aikatauluRuutu2.analysoi();
         String actual = aikatauluRuutu2.getSaannollinen();
         assertEquals(tapahtuma1.getNimi(), actual);
     }
@@ -73,6 +76,7 @@ public class AikatauluRuutuTest {
         aikatauluRuutu4.lisaa(tapahtuma2);
         aikatauluRuutu4.lisaa(tapahtuma3);
         aikatauluRuutu4.lisaa(tapahtuma4);
+        aikatauluRuutu4.analysoi();
         ArrayList<Tapahtuma> poikkeukset = aikatauluRuutu4.getPoikkeukset();
         String expected = "epasaannollinenTapahtuma";
         String actual = poikkeukset.getFirst().getNimi();
@@ -88,6 +92,7 @@ public class AikatauluRuutuTest {
         aikatauluRuutu.lisaa(tapahtuma2);
         aikatauluRuutu.lisaa(tapahtuma3);
         aikatauluRuutu.lisaa(tapahtuma4);
+        aikatauluRuutu.analysoi();
         ArrayList<Tapahtuma> poikkeukset = aikatauluRuutu.getPoikkeukset();
         int expected = 2;
         int actual = poikkeukset.size();

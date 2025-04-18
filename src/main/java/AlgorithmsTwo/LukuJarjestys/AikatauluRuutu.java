@@ -17,7 +17,7 @@ public class AikatauluRuutu {
     ArrayList<Tapahtuma> tapahtumat;
     String saannollinen;
     ArrayList<Tapahtuma> poikkeukset;
-    int toistojenMaara;
+    int toistojenMaara
 
 
     public AikatauluRuutu(int toistojenMaara) {
@@ -30,8 +30,10 @@ public class AikatauluRuutu {
 
     public void lisaa(Tapahtuma tapahtuma) {
         tapahtumat.add(tapahtuma);
-        analysoi();
+
     }
+
+
 
     /**
      * Jakaa aikatauluruudun tapahtumat saannolliseen tapahtumaan ja poikkeuksiin

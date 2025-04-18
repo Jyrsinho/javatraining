@@ -32,15 +32,27 @@ public class Kalenteri {
         taytaPaivaHistogrammi();
 
         alustaKalenteri();
-
-        for (Tapahtuma tapahtuma: tapahtumat) {
-            lisaaTapahtuma(tapahtuma);
-        }
+        lisaaTapahtumat(tapahtumat);
+        analysoiRuudut();
     }
 
    public ArrayList<Tapahtuma> poikkeukset() {
         ArrayList<Tapahtuma> poikkeukset = new ArrayList<>();
         return poikkeukset;
+   }
+
+   private void analysoiRuudut() {
+       for (int i = 0; i < tapahtumaKalenteri.length; i++) {
+           for (int j = 0; j < tapahtumaKalenteri[i].length; j++) {
+               tapahtumaKalenteri[i][j].analysoi();
+           }
+       }
+   }
+
+   private void lisaaTapahtumat(ArrayList<Tapahtuma> tapahtumat) {
+       for (Tapahtuma tapahtuma: tapahtumat) {
+           lisaaTapahtuma(tapahtuma);
+       }
    }
 
     private void paivitaKalenterinEnsimmainenJaViimeinenPaiva(ArrayList<Tapahtuma> tapahtumat) {
@@ -65,7 +77,7 @@ public class Kalenteri {
         }
     }
 
-    public void lisaaTapahtuma(Tapahtuma uusiTapahtuma) {
+   private void lisaaTapahtuma(Tapahtuma uusiTapahtuma) {
         int paiva = viikonpaiva(uusiTapahtuma.paivamaara);
 
         for (int i = uusiTapahtuma.ensimmainenAlkavaTunti; i <= uusiTapahtuma.viimeinenAlkavaTunti ; i++) {
@@ -111,7 +123,7 @@ public class Kalenteri {
 
        for (int i = 0; i < tapahtumaKalenteri.length; i++) {
            for (int j = 0; j < tapahtumaKalenteri[i].length; j++) {
-               if (!Objects.equals(tapahtumaKalenteri[i][j].getSaannollinen(), "") && j < aikaisinTapahtuma) {
+               if (!Objects.equals(tapahtumaKalenteri[i][j].getSaannollinen(), "EiTapahtumaa") && j < aikaisinTapahtuma) {
                    aikaisinTapahtuma = j;
                }
            }
@@ -129,7 +141,7 @@ public class Kalenteri {
 
        for (int i = 0; i < tapahtumaKalenteri.length; i++) {
            for (int j = 0; j < tapahtumaKalenteri[i].length; j++) {
-               if (!Objects.equals(tapahtumaKalenteri[i][j].saannollinen, "") && j > myohaisinTapahtumanAlkavaTunti) {
+               if (!Objects.equals(tapahtumaKalenteri[i][j].saannollinen, "EiTapahtumaa") && j > myohaisinTapahtumanAlkavaTunti) {
                    myohaisinTapahtumanAlkavaTunti =  j ;
                }
            }
