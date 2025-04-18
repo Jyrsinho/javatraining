@@ -36,8 +36,8 @@ public class Tulostaja {
         out.println(kalenteri.getOtsikko());
         tulostaKalenterinKesto(out, kalenteri);
         tulostaOtsikkoRivi(out);
-        tulostaRivit(out, kalenteri);
         tulostaValiRivi(out);
+        tulostaRivit(out, kalenteri);
     }
 
 
@@ -112,6 +112,13 @@ public class Tulostaja {
     }
 
 
+    /**
+     * Tulostetaan solu kerrallaan jos solun ylempi solu ja alempi solu sisältävät Kalenterissa saman tekstin
+     * ei tulostetan solua
+     * @param out
+     * @param kalenteri
+     * @param kellonAika
+     */
     private void tulostaValiRivi(PrintStream out, Kalenteri kalenteri, int kellonAika) {
         tulostaEnsimmaisenSolunAlaviiva(out);
 
@@ -154,10 +161,8 @@ public class Tulostaja {
     }
 
     private void tulostaRivi(Kalenteri kalenteri, int kellonaika, PrintStream out) {
-            tulostaValiRivi(out,kalenteri, kellonaika);
             tulostaTuntiSolu(out, kellonaika);
             tulostaTapahtumat(out, kellonaika, kalenteri);
-            out.println();
 
     }
 
@@ -165,26 +170,42 @@ public class Tulostaja {
     private void tulostaTapahtumat(PrintStream out, int kellonaika, Kalenteri kalenteri) {
 
         for (int i = 0; i < kalenteri.getTapahtumaKalenteri().length; i++) {
+            String tuntiaAiempiKalenteriSolu = kalenteri.getTapahtumaKalenteri()[i][kellonaika-1].saannollinen;
             String kalenteriSolu = kalenteri.getTapahtumaKalenteri()[i][kellonaika].saannollinen;
-            if (kalenteriSolu != null ) {
-                String tapahtumanNimi = kalenteri.getTapahtumaKalenteri()[i][kellonaika].getSaannollinen();
-                out.print(" ");
-                if (tapahtumanNimi.length() < 11) {
-                    out.print(tapahtumanNimi);
-                    for (int j = 0; j < merkkejaSolussa - tapahtumanNimi.length() -2; j++) {
-                        out.print(" ");
-                    }
-                } else {
-                    out.print(tapahtumanNimi.substring(0, 11));
-                }
-                out.print(" ");
-            } else {
-                for (int j = 0; j < merkkejaSolussa; j++) {
-                    out.print(" ");
+            boolean tapahtumaJatkuu = kalenteriSolu.equals(tuntiaAiempiKalenteriSolu);
 
-                }
+            String tapahtumanNimi = kalenteri.getTapahtumaKalenteri()[i][kellonaika].getSaannollinen();
+            out.print(" ");
+            if (!tapahtumaJatkuu) {
+                tulostaTapahtumanNimi(tapahtumanNimi, out);
+            }else {
+               tulostaTyhjaTapahtumaSolu(out);
             }
+
+            out.print(" ");
             out.print("|");
+        }
+        out.println();
+        tulostaValiRivi(out,kalenteri, kellonaika);
+    }
+
+    private void tulostaTapahtumanNimi(String tapahtumanNimi, PrintStream out) {
+        // Tulosta tapahtumanNimi
+        if (tapahtumanNimi.length() < 11) {
+            out.print(tapahtumanNimi);
+            for (int j = 0; j < merkkejaSolussa - tapahtumanNimi.length() -2; j++) {
+                out.print(" ");
+            }
+        } else {
+            out.print(tapahtumanNimi.substring(0, 11));
+        }
+    }
+
+
+    private void tulostaTyhjaTapahtumaSolu(PrintStream out) {
+        for (int i = 0; i < merkkejaSolussa -2 ; i++) {
+            out.print(" ");
+
         }
     }
 
