@@ -83,7 +83,7 @@ public class Kalenteri {
             LocalDate paivanEnsimmainenToisto = etsiPaivanSeuraavaToisto(ensimmaisenTapahtumanPVM, i);
             LocalDate paivanViimeinenToisto = etsiPaivanEdellinenToisto(viimeisenTapahtumanPVM, i);
            // Jotenkin on skipattava paivat, jotka eivat sisalla lainkaan tapahtumia
-            if (paivanEnsimmainenToisto.isAfter(this.ensimmaisenTapahtumanPVM) || (paivanViimeinenToisto.isBefore(this.viimeisenTapahtumanPVM))) {
+            if (paivanEnsimmainenToisto.isAfter(paivanViimeinenToisto)) {
                 taytaPaivaPoikkeusAikatauluRuuduilla(i);
             }else {
                 taytaPaivaAikaTauluRuuduilla(i, paivanEnsimmainenToisto, paivanViimeinenToisto);
@@ -96,6 +96,7 @@ public class Kalenteri {
             tapahtumaKalenteri[paivanIndeksi][i] = new AikatauluRuutu(paivanEnsimmainenToisto, paivanViimeinenToisto, i);
         }
     }
+
 
     private void taytaPaivaPoikkeusAikatauluRuuduilla(int paivanIndeksi) {
         for (int i = 0; i < tapahtumaKalenteri[paivanIndeksi].length; i++) {

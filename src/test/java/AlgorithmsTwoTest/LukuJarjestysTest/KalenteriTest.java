@@ -46,9 +46,9 @@ public class KalenteriTest {
 
     @Test
     public void testShouldReturnEightForAikaisinTapahtuma() {
-        Tapahtuma tapahtuma2 = new Tapahtuma(8, 10, LocalDate.of(2025,4, 4), "tapahtuma2" ); // perjantai
+        Tapahtuma perjantaiHuhtikuunNeljasKlo_8__10 = new Tapahtuma(8, 10, LocalDate.of(2025,4, 4), "perjantaiHuhtikuunNeljasKlo_8__10" ); // perjantai
         testiTapahtumat.add(tiistaiHuhtikuunEnsimmainenKlo10_12);
-        testiTapahtumat.add(tapahtuma2);
+        testiTapahtumat.add(perjantaiHuhtikuunNeljasKlo_8__10);
         kalenteri.paivitaKalenteri(testiTapahtumat);
         assertEquals(8, kalenteri.aikaisinAlkavaTunti());
     }
