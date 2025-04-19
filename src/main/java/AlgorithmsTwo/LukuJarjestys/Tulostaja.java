@@ -126,13 +126,13 @@ public class Tulostaja {
             String tulostettavanNimi = kalenteri.getTapahtumaKalenteri()[i][kellonAika].saannollinen;
             String seuraavanNimi = kalenteri.getTapahtumaKalenteri()[i][kellonAika+1].saannollinen;
 
-            if (tulostettavanNimi.isEmpty() || !seuraavanNimi.equals(tulostettavanNimi)) {
+            if (tulostettavanNimi.equals(seuraavanNimi) && !tulostettavanNimi.equals("Ei Tapahtumaa")) {
                 for (int j = 0; j < merkkejaSolussa; j++) {
-                    out.print("-");
+                    out.print(" ");
                 }
             } else  {
                 for (int k = 0; k < merkkejaSolussa; k++) {
-                    out.print(" ");
+                    out.print("-");
                 }
             }
             out.print("+");
@@ -178,10 +178,12 @@ public class Tulostaja {
 
             String tapahtumanNimi = kalenteri.getTapahtumaKalenteri()[i][kellonaika].getSaannollinen();
             out.print(" ");
-            if (!tapahtumaJatkuu) {
-                tulostaTapahtumanNimi(tapahtumanNimi, out);
-            }else {
+            if (tapahtumaJatkuu) {
+                tulostaTyhjaTapahtumaSolu(out);
+            }else if (tapahtumanNimi.equals("Ei Tapahtumaa")) {
                tulostaTyhjaTapahtumaSolu(out);
+            } else {
+                tulostaTapahtumanNimi(tapahtumanNimi, out);
             }
 
             out.print(" ");
