@@ -5,8 +5,8 @@ import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
 
-import static AlgorithmsTwo.LukuJarjestys.Utils.etsiPaivanEdellinenToisto;
-import static AlgorithmsTwo.LukuJarjestys.Utils.etsiPaivanSeuraavaToisto;
+import static AlgorithmsTwo.LukuJarjestys.Utils.*;
+import static AlgorithmsTwo.LukuJarjestys.Utils.viikonpaiva;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class UtilsTest {
@@ -30,6 +30,32 @@ public class UtilsTest {
     }
 
 
+
+    @Test
+    public void testShouldReturnZeroForDateThatIsMOnday() {
+        LocalDate pvm = LocalDate.of(2025, 3,31);
+        assertEquals(0, viikonpaiva(pvm));
+    }
+
+    @Test
+    public void testShouldReturnOneForDateThatIsTuesday() {
+        LocalDate pvm = LocalDate.of(2025, 4, 1);
+        assertEquals(1, viikonpaiva(pvm));
+    }
+
+    @Test
+    public void testShouldReturnOneForDateThatIsWednesday() {
+        LocalDate pvm = LocalDate.of(2025,4,2);
+        assertEquals(2, viikonpaiva(pvm));
+    }
+
+    @Test
+    public void testShouldReturnNegativeValueForWeekend() {
+        LocalDate pvm = LocalDate.of(2025, 4, 5);
+        assertEquals(-1, viikonpaiva(pvm));
+    }
+
+
     @Test
     public void testShouldGiveNextTuesdayWhenStartingDayIsMonday() {
         LocalDate expected = tiistaiKahdeksasHuhtikuuta;
@@ -38,9 +64,16 @@ public class UtilsTest {
         }
 
     @Test
-    public void testShouldGiveNextWeeksTuesdayWhenStartingDayIsWednesday() {
+    public void testEtsiSeuraavaShouldGiveNextWeeksTuesdayWhenStartingDayIsWednesday() {
         LocalDate expected = tiistaiviidestoistaHuhtikuuta;
         LocalDate actual = etsiPaivanSeuraavaToisto(keskiviikkoYhdeksasHuhtikuuta, tiistai);
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    public void testEtsiSeuraavaShouldReturnGivenDayWhenStartingDayIsTuesday() {
+        LocalDate expected = tiistaiviidestoistaHuhtikuuta;
+        LocalDate actual = etsiPaivanSeuraavaToisto(tiistaiviidestoistaHuhtikuuta, tiistai);
         assertEquals(expected, actual);
     }
 
@@ -55,6 +88,13 @@ public class UtilsTest {
     public void testEtsiEdellinenShouldGivePreviousWeeksTuesdayWhenGivenMonday() {
         LocalDate expected = tiistaiKahdeksasHuhtikuuta ;
         LocalDate actual  = etsiPaivanEdellinenToisto(maanantaiNeljastoistaHuhtikuuta, tiistai);
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    public void testEtsiEdellinenShouldGiveSameTuesdayWhenSearchingNextTuesday() {
+        LocalDate expected = tiistaiKahdeksasHuhtikuuta;
+        LocalDate actual = etsiPaivanEdellinenToisto(tiistaiKahdeksasHuhtikuuta, tiistai);
         assertEquals(expected, actual);
     }
 

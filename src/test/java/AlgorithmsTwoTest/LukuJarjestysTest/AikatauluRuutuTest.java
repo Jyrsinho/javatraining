@@ -16,7 +16,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class AikatauluRuutuTest {
 
     // Testataan että aikatauluruutu osaa palauttaa saannollisen tapahtumansa ja poikkeuksensa
-    AikatauluRuutu aikatauluRuutu;
+    AikatauluRuutu aikatauluRuutu1_4__22_4;
     Tapahtuma tiistaiEnsimmainenHuhtikuutaTap;
     Tapahtuma tiistaiKahdeksasHuhtikuutaTap;
     Tapahtuma tiistaiViidestoistaHuhtikuutaTap;
@@ -34,7 +34,7 @@ public class AikatauluRuutuTest {
         tiistaiViidestoistaHuhtikuuta = LocalDate.of(2025,4, 15);
         tiistaiKahdeskymmenestoinenHuhtikuuta = LocalDate.of(2025,4, 22);
 
-        aikatauluRuutu = new AikatauluRuutu(tiistaiEnsimmainenHuhtikuuta, tiistaiKahdeskymmenestoinenHuhtikuuta, 10);
+        aikatauluRuutu1_4__22_4 = new AikatauluRuutu(tiistaiEnsimmainenHuhtikuuta, tiistaiKahdeskymmenestoinenHuhtikuuta, 10);
         tiistaiEnsimmainenHuhtikuutaTap = new Tapahtuma(10, 12, tiistaiEnsimmainenHuhtikuuta, "saannollinenTapahtuma");
         tiistaiKahdeksasHuhtikuutaTap = new Tapahtuma(10,12, tiistaiKahdeksasHuhtikuuta,    "randomTapahtuma");
         tiistaiViidestoistaHuhtikuutaTap = new Tapahtuma(10,12, tiistaiViidestoistaHuhtikuuta, "saannollinenTapahtuma");
@@ -45,21 +45,21 @@ public class AikatauluRuutuTest {
     public void testAikaTauluRuutuShouldReturnEiTapahtumaaWhenItsMostFrequentTapahtuma() {
 
         Tapahtuma tapahtuma = new Tapahtuma(10, 11, LocalDate.of(2025, 4, 16), "testitapahtuma");
-        aikatauluRuutu.lisaa(tapahtuma);
-        aikatauluRuutu.analysoi();
+        aikatauluRuutu1_4__22_4.lisaa(tapahtuma);
+        aikatauluRuutu1_4__22_4.analysoi();
         String expected = "Ei Tapahtumaa";
-        String actual = aikatauluRuutu.getSaannollinen();
+        String actual = aikatauluRuutu1_4__22_4.getSaannollinen();
         assertEquals(expected, actual);
     }
 
     @Test
     public void testAikatauluRuutuShouldReturnMostFrequentTapahtumaWhenTwoDifferentTapahtuma() {
-        aikatauluRuutu.lisaa(tiistaiEnsimmainenHuhtikuutaTap);
-        aikatauluRuutu.lisaa(tiistaiKahdeksasHuhtikuutaTap);
-        aikatauluRuutu.lisaa(tiistaiViidestoistaHuhtikuutaTap);
-        aikatauluRuutu.lisaa(tiistaiKahdesKymmenesToinenHuhtikuutaTap);
-        aikatauluRuutu.analysoi();
-        String actual = aikatauluRuutu.getSaannollinen();
+        aikatauluRuutu1_4__22_4.lisaa(tiistaiEnsimmainenHuhtikuutaTap);
+        aikatauluRuutu1_4__22_4.lisaa(tiistaiKahdeksasHuhtikuutaTap);
+        aikatauluRuutu1_4__22_4.lisaa(tiistaiViidestoistaHuhtikuutaTap);
+        aikatauluRuutu1_4__22_4.lisaa(tiistaiKahdesKymmenesToinenHuhtikuutaTap);
+        aikatauluRuutu1_4__22_4.analysoi();
+        String actual = aikatauluRuutu1_4__22_4.getSaannollinen();
         assertEquals("saannollinenTapahtuma", actual);
 
     }
@@ -78,12 +78,12 @@ public class AikatauluRuutuTest {
 
     @Test
     public void testAikatauluRuutuShouldKnowThatThereIsTwoPoikkeus(){
-        aikatauluRuutu.lisaa(tiistaiEnsimmainenHuhtikuutaTap);
-        aikatauluRuutu.lisaa(tiistaiKahdeksasHuhtikuutaTap);
-        aikatauluRuutu.lisaa(tiistaiViidestoistaHuhtikuutaTap);
-        aikatauluRuutu.lisaa(tiistaiKahdesKymmenesToinenHuhtikuutaTap);
-        aikatauluRuutu.analysoi();
-        ArrayList<Tapahtuma> poikkeukset = aikatauluRuutu.getPoikkeukset();
+        aikatauluRuutu1_4__22_4.lisaa(tiistaiEnsimmainenHuhtikuutaTap);
+        aikatauluRuutu1_4__22_4.lisaa(tiistaiKahdeksasHuhtikuutaTap);
+        aikatauluRuutu1_4__22_4.lisaa(tiistaiViidestoistaHuhtikuutaTap);
+        aikatauluRuutu1_4__22_4.lisaa(tiistaiKahdesKymmenesToinenHuhtikuutaTap);
+        aikatauluRuutu1_4__22_4.analysoi();
+        ArrayList<Tapahtuma> poikkeukset = aikatauluRuutu1_4__22_4.getPoikkeukset();
         int expected = 2;
         int actual = poikkeukset.size();
         for (int i = 0; i <poikkeukset.size() ; i++) {
@@ -102,4 +102,14 @@ public class AikatauluRuutuTest {
         String actual = aikatauluRuutu2.getSaannollinen();
         assertEquals(expected, actual);
     }
+
+    @Test
+    public void testAikatauluRuutuShouldUpdateItsSaannollinenToEiTapahtumaaWhenAikaTauluRuutuHasNoEvents() {
+       aikatauluRuutu1_4__22_4.analysoi();
+       String expected = "Ei Tapahtumaa";
+       String actual = aikatauluRuutu1_4__22_4.getSaannollinen();
+       assertEquals(expected, actual);
+
+    }
+
 }

@@ -25,8 +25,8 @@ public class Utils {
 
 
     /**
-     * Selvittaa kalenterin ensimmaisesta paivasta, milloin annetun viikonpaivan ensimmainen esiintyma on
-     * kalenterissa
+     * Palauttaa annetusta LocalDatesta seuraavan LocalDaten joka on annettua viikonpaivan indeksia vastaava.
+     * Jos annettu LocalDate on tiistai ja haetaan tiistaita palautetaan kyseinen LocalDate.
      * @return annetun viikonpaivan ensimmainen esiintyma kalenterissa
      */
     public static LocalDate etsiPaivanSeuraavaToisto(LocalDate paiva, int vkpaivanIndeksi) {
@@ -34,20 +34,32 @@ public class Utils {
         int lahtoPaivanIndeksi = viikonpaiva(paiva);
         if (vkpaivanIndeksi > lahtoPaivanIndeksi) {
            offset = vkpaivanIndeksi - lahtoPaivanIndeksi;
-        } else {
+        } else if (vkpaivanIndeksi == lahtoPaivanIndeksi){
+            return paiva;
+        }
+        else {
             offset = 7 - (lahtoPaivanIndeksi - vkpaivanIndeksi);
         }
 
         return paiva.plusDays(offset);
     }
 
+    /**
+     * Palauttaa annetusta LocalDatesta edellisen LocalDaten joka vastaa annetun viikonpaivan indeksia.
+     * Jos annettu LocalDate on tiistai ja haetaan tiistaita palautetaan annettu LocalDate.
+     * @param paiva LocalDate josta seuraavaa haluttua viikonpaivaa etsitaan
+     * @param vkpaivanIndeksi haetun viikonpaivan indeksi
+     * @return LocalDate
+     */
     public static LocalDate etsiPaivanEdellinenToisto(LocalDate paiva, int vkpaivanIndeksi) {
         int offset = 0;
         int lahtoPaivanIndeksi = viikonpaiva(paiva);
 
         if (vkpaivanIndeksi < lahtoPaivanIndeksi) {
             offset = lahtoPaivanIndeksi - vkpaivanIndeksi;
-        } else {
+        }else if (lahtoPaivanIndeksi == vkpaivanIndeksi) {
+            return paiva;
+        }else {
             offset = 7 - (vkpaivanIndeksi - lahtoPaivanIndeksi);
         }
 
