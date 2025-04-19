@@ -47,8 +47,10 @@ public class Utils {
 
         if (vkpaivanIndeksi < lahtoPaivanIndeksi) {
             offset = lahtoPaivanIndeksi - vkpaivanIndeksi;
+        } else {
+            offset = 7 - (vkpaivanIndeksi - lahtoPaivanIndeksi);
         }
 
-        return paiva.plusDays(offset);
+        return paiva.minusDays(offset);
     }
 }
