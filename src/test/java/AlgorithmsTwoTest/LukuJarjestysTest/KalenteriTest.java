@@ -3,7 +3,6 @@ package AlgorithmsTwoTest.LukuJarjestysTest;
 import AlgorithmsTwo.LukuJarjestys.Kalenteri;
 import AlgorithmsTwo.LukuJarjestys.Tapahtuma;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
@@ -53,7 +52,7 @@ public class KalenteriTest {
         assertEquals(8, kalenteri.aikaisinAlkavaTunti());
     }
 
-    @Disabled
+    @Test
     public void testShouldReturnTvelweForMyohaisinTapahtuma() {
         testiTapahtumat.add(tiistaiHuhtikuunEnsimmainenKlo10_12);
         kalenteri.paivitaKalenteri(testiTapahtumat);
@@ -62,14 +61,14 @@ public class KalenteriTest {
 
 
 
-    @Disabled
+    @Test
     public void testShouldUpdateMyohaisinTapahtumaWhenAddingToKalenteri() {
         testiTapahtumat.add(tiistaiHuhtikuunEnsimmainenKlo10_12);
         kalenteri.paivitaKalenteri(testiTapahtumat);
         assertEquals(kalenteri.getViimeisenTapahtumanPVM(), tiistaiHuhtikuunEnsimmainenKlo10_12.getPaivamaara());
     }
 
-    @Disabled
+    @Test
     public void testKalenteriShouldNotUpdateVarhaisinTapahtumaWhenAddingSecondTapahtuma() {
         Tapahtuma tapahtuma2 = new Tapahtuma(10, 12, LocalDate.of(2025, 4,11), "tapahtuma2" );
         testiTapahtumat.add(tiistaiHuhtikuunEnsimmainenKlo10_12);
@@ -78,7 +77,7 @@ public class KalenteriTest {
         assertEquals(kalenteri.getEnsimmaisenTapahtumanPVM(), tiistaiHuhtikuunEnsimmainenKlo10_12.getPaivamaara());
     }
 
-    @Disabled
+    @Test
     public void testKalenteriShouldUpdateVarhaisinTapahtumaWhenAddingSecondTapahtuma() {
         Tapahtuma tapahtuma2 = new Tapahtuma(10, 12, LocalDate.of(2025, 1,1), "tapahtuma2" );
         testiTapahtumat.add(tiistaiHuhtikuunEnsimmainenKlo10_12);
@@ -88,14 +87,14 @@ public class KalenteriTest {
         assertEquals(kalenteri.getEnsimmaisenTapahtumanPVM(), tapahtuma2.getPaivamaara());
     }
 
-    @Disabled
+    @Test
     public void testKalenteriShouldUpdateMyohaisinTapahtuma() {
         testiTapahtumat.add(tiistaiHuhtikuunEnsimmainenKlo10_12);
         kalenteri.paivitaKalenteri(testiTapahtumat);
         assertEquals(kalenteri.getViimeisenTapahtumanPVM(), tiistaiHuhtikuunEnsimmainenKlo10_12.getPaivamaara());
     }
 
-    @Disabled
+    @Test
     public void testKalenteriShouldUpdateMyohaisinTapahtuma2() {
         Tapahtuma tapahtuma2 = new Tapahtuma(12, 14, LocalDate.of(2025, 4,11), "tapahtuma2" );
         testiTapahtumat.add(tiistaiHuhtikuunEnsimmainenKlo10_12);

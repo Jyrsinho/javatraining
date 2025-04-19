@@ -153,7 +153,11 @@ public class Kalenteri {
 
        for (int i = 0; i < tapahtumaKalenteri.length; i++) {
            for (int j = 0; j < tapahtumaKalenteri[i].length; j++) {
-               if (!Objects.equals(tapahtumaKalenteri[i][j].saannollinen, "EiTapahtumaa") && j > myohaisinTapahtumanAlkavaTunti) {
+               AikatauluRuutu analysoitava = tapahtumaKalenteri[i][j];
+               if (analysoitava.getClass().getSimpleName().equals("PoikkeusAikaTauluRuutu")){
+                   continue;
+               }
+               if (!Objects.equals(analysoitava.saannollinen, "Ei Tapahtumaa") && j > myohaisinTapahtumanAlkavaTunti) {
                    myohaisinTapahtumanAlkavaTunti =  j ;
                }
            }
