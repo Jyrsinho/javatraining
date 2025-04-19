@@ -4,7 +4,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Objects;
 
-import static AlgorithmsTwo.LukuJarjestys.Utils.viikonpaiva;
+import static AlgorithmsTwo.LukuJarjestys.Utils.*;
 
 public class Kalenteri {
     private  AikatauluRuutu[][] tapahtumaKalenteri;
@@ -77,15 +77,14 @@ public class Kalenteri {
 
     private void alustaKalenteri() {
         for (int i = 0; i < tapahtumaKalenteri.length; i++) {
-            LocalDate paivanEnsimmainenToisto = etsiPaivanEnsimmainenToisto();
-            LocalDate paivanToinenToisto = etsiPaivanViimeinenToisto();
+            LocalDate paivanEnsimmainenToisto = etsiPaivanSeuraavaToisto(ensimmaisenTapahtumanPVM, i);
+            LocalDate paivanViimeinenToisto = etsiPaivanEdellinenToisto(viimeisenTapahtumanPVM, i);
             for (int j = 0; j < tapahtumaKalenteri[i].length; j++) {
                 //TODO: TÄMÄ KORJATTAVA NIIN, ETTÄ KALENTERI ANTAA AIKATAULURUUDULLE SEN ENSIMMÄISEN PÄIVÄN JA VIIMEISEN PAIVAN sekä tunnin
-                tapahtumaKalenteri[i][j] = new AikatauluRuutu()
+                tapahtumaKalenteri[i][j] = new AikatauluRuutu(paivanEnsimmainenToisto, paivanViimeinenToisto, j);
             }
         }
     }
-
 
 
     /**
