@@ -14,12 +14,12 @@ import java.util.Map;
  */
 public class AikatauluRuutu {
 
-    ArrayList<Tapahtuma> tapahtumat;
-    String saannollinen;
-    ArrayList<Tapahtuma> poikkeukset;
-    LocalDate ensimmainenPaiva;
-    LocalDate viimeinenPaiva;
-    int tunti;
+   private ArrayList<Tapahtuma> tapahtumat;
+   private String saannollinen;
+   private ArrayList<Tapahtuma> poikkeukset;
+   private LocalDate ensimmainenPaiva;
+   private LocalDate viimeinenPaiva;
+   private int tunti;
 
 
     public AikatauluRuutu(LocalDate ensimmainenPaiva, LocalDate viimeinenPaiva, int tunti) {

@@ -4,12 +4,18 @@ package AlgorithmsTwo.LukuJarjestys;
 import java.io.PrintStream;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 
 public class Tulostaja {
 
     String[] viikonPaivat = {"Maanantai", "Tiistai", "Keskiviikko", "Torstai", "Perjantai"};
     int merkkejaSolussa = 13;
     int ensimmaisenSolunMerkkiMaara= 6;
+
+
+    public void tulostaPoikkeukset(ArrayList<Tapahtuma> poikkeukset) {
+
+    }
 
     /**
      * Lukujärjestykseen tulostetaan rivi jokaiselle tunnille alkaen päivän ensimmäi-
@@ -123,8 +129,8 @@ public class Tulostaja {
         tulostaEnsimmaisenSolunAlaviiva(out);
 
         for (int i = 0; i < kalenteri.getTapahtumaKalenteri().length; i++) {
-            String tulostettavanNimi = kalenteri.getTapahtumaKalenteri()[i][kellonAika].saannollinen;
-            String seuraavanNimi = kalenteri.getTapahtumaKalenteri()[i][kellonAika+1].saannollinen;
+            String tulostettavanNimi = kalenteri.getTapahtumaKalenteri()[i][kellonAika].getSaannollinen();
+            String seuraavanNimi = kalenteri.getTapahtumaKalenteri()[i][kellonAika+1].getSaannollinen();
 
             if (tulostettavanNimi.equals(seuraavanNimi) && !tulostettavanNimi.equals("Ei Tapahtumaa")) {
                 for (int j = 0; j < merkkejaSolussa; j++) {
@@ -172,8 +178,8 @@ public class Tulostaja {
     private void tulostaTapahtumat(PrintStream out, int kellonaika, Kalenteri kalenteri) {
 
         for (int i = 0; i < kalenteri.getTapahtumaKalenteri().length; i++) {
-            String tuntiaAiempiKalenteriSolu = kalenteri.getTapahtumaKalenteri()[i][kellonaika-1].saannollinen;
-            String kalenteriSolu = kalenteri.getTapahtumaKalenteri()[i][kellonaika].saannollinen;
+            String tuntiaAiempiKalenteriSolu = kalenteri.getTapahtumaKalenteri()[i][kellonaika-1].getSaannollinen();
+            String kalenteriSolu = kalenteri.getTapahtumaKalenteri()[i][kellonaika].getSaannollinen();
             boolean tapahtumaJatkuu = kalenteriSolu.equals(tuntiaAiempiKalenteriSolu);
 
             String tapahtumanNimi = kalenteri.getTapahtumaKalenteri()[i][kellonaika].getSaannollinen();

@@ -43,6 +43,10 @@ public class LukuJarjestys {
         kalenteri.paivitaKalenteri(tapahtumat);
         kalenteri.paivitaKalenteri(tapahtumat);
         Tulostaja tulostaja = new Tulostaja();
+        Poikkeustaja poikkeustaja = new Poikkeustaja(kalenteri);
+        ArrayList<Tapahtuma> poikkeukset = poikkeustaja.annaPoikkeukset();
+
+        tulostaja.tulostaPoikkeukset(poikkeukset);
         tulostaja.tulostaKalenteri(kalenteri);
     }
 
