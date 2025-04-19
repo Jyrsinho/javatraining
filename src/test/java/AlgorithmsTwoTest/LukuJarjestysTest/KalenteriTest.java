@@ -37,14 +37,14 @@ public class KalenteriTest {
 
     }
 
-    @Disabled
+    @Test
     public void testShouldReturnTenForAikaisinTapahtuma() {
         testiTapahtumat.add(tiistaiHuhtikuunEnsimmainenKlo10_12);
         kalenteri.paivitaKalenteri(testiTapahtumat);
         assertEquals(10,kalenteri.aikaisinAlkavaTunti());
     }
 
-    @Disabled
+    @Test
     public void testShouldReturnEightForAikaisinTapahtuma() {
         Tapahtuma tapahtuma2 = new Tapahtuma(8, 10, LocalDate.of(2025,4, 4), "tapahtuma2" ); // perjantai
         testiTapahtumat.add(tiistaiHuhtikuunEnsimmainenKlo10_12);

@@ -129,7 +129,12 @@ public class Kalenteri {
 
        for (int i = 0; i < tapahtumaKalenteri.length; i++) {
            for (int j = 0; j < tapahtumaKalenteri[i].length; j++) {
-               if (!Objects.equals(tapahtumaKalenteri[i][j].getSaannollinen(), "EiTapahtumaa") && j < aikaisinTapahtuma) {
+               AikatauluRuutu analysoitava = tapahtumaKalenteri[i][j];
+               // skipataan aikatauluruudut joissa on PoikkeusAikaTauluRuutu
+               if (analysoitava.getClass().getSimpleName().equals("PoikkeusAikaTauluRuutu")) {
+                   continue;
+               }
+               if (!Objects.equals(analysoitava.getSaannollinen(), "Ei Tapahtumaa") && j < aikaisinTapahtuma) {
                    aikaisinTapahtuma = j;
                }
            }
