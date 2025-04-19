@@ -40,7 +40,10 @@ public class Kalenteri {
    private void analysoiRuudut() {
        for (int i = 0; i < tapahtumaKalenteri.length; i++) {
            for (int j = 0; j < tapahtumaKalenteri[i].length; j++) {
-               tapahtumaKalenteri[i][j].analysoi();
+               AikatauluRuutu analysoitava = tapahtumaKalenteri[i][j];
+               if (!analysoitava.getClass().getSimpleName().equals("PoikkeusAikaTauluRuutu")) {
+                    analysoitava.analysoi();
+               }
            }
        }
    }
@@ -79,10 +82,24 @@ public class Kalenteri {
         for (int i = 0; i < tapahtumaKalenteri.length; i++) {
             LocalDate paivanEnsimmainenToisto = etsiPaivanSeuraavaToisto(ensimmaisenTapahtumanPVM, i);
             LocalDate paivanViimeinenToisto = etsiPaivanEdellinenToisto(viimeisenTapahtumanPVM, i);
-            for (int j = 0; j < tapahtumaKalenteri[i].length; j++) {
-                //TODO: TÄMÄ KORJATTAVA NIIN, ETTÄ KALENTERI ANTAA AIKATAULURUUDULLE SEN ENSIMMÄISEN PÄIVÄN JA VIIMEISEN PAIVAN sekä tunnin
-                tapahtumaKalenteri[i][j] = new AikatauluRuutu(paivanEnsimmainenToisto, paivanViimeinenToisto, j);
+           // Jotenkin on skipattava paivat, jotka eivat sisalla lainkaan tapahtumia
+            if (paivanEnsimmainenToisto.isAfter(this.ensimmaisenTapahtumanPVM) || (paivanViimeinenToisto.isBefore(this.viimeisenTapahtumanPVM))) {
+                taytaPaivaPoikkeusAikatauluRuuduilla(i);
+            }else {
+                taytaPaivaAikaTauluRuuduilla(i, paivanEnsimmainenToisto, paivanViimeinenToisto);
             }
+        }
+    }
+
+    private void taytaPaivaAikaTauluRuuduilla(int paivanIndeksi, LocalDate paivanEnsimmainenToisto, LocalDate paivanViimeinenToisto) {
+        for (int i = 0; i < tapahtumaKalenteri[paivanIndeksi].length; i++) {
+            tapahtumaKalenteri[paivanIndeksi][i] = new AikatauluRuutu(paivanEnsimmainenToisto, paivanViimeinenToisto, i);
+        }
+    }
+
+    private void taytaPaivaPoikkeusAikatauluRuuduilla(int paivanIndeksi) {
+        for (int i = 0; i < tapahtumaKalenteri[paivanIndeksi].length; i++) {
+            tapahtumaKalenteri[paivanIndeksi][i] = new PoikkeusAikaTauluRuutu();
         }
     }
 
