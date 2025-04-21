@@ -63,6 +63,11 @@ public class LukuJarjestys {
                 2.04.2024 18-24 koodausta
                 03.4.2024 00-7 koodausta
                 """;
+        String testiSyote4 = """
+                Koodausta eri viikkoina
+                2.4.2024 18-24 koodausta
+                10.4.2024 00-7 koodausta
+                """;
 /*
         Scanner sc = new Scanner(System.in);
         StringBuilder sb = new StringBuilder();
@@ -88,6 +93,14 @@ public class LukuJarjestys {
         System.out.println();
         LukuJarjestys lukuJarjestys2 = new LukuJarjestys(testiSyote3);
         lukuJarjestys2.teeLuettavaKalenteri();
+
+
+
+        System.out.println();
+        System.out.println("................................................................................................");
+        System.out.println();
+        LukuJarjestys lukuJarjestys3 = new LukuJarjestys(testiSyote4);
+        lukuJarjestys3.teeLuettavaKalenteri();
     }
 }
 

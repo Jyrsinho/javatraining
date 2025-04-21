@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 /**
  * Lajittelee sisaltamansa tapahtumat saannolliseen tapahtumaan ja poikkeuksiin
@@ -131,10 +132,10 @@ public class AikatauluRuutu {
     }
 
     private void selvitaSaannollinen(ArrayList<String> saannolliset) {
-        // Haetaan Tapahtumat, joilla on sama nimi kuin saannollisill
+        // Haetaan Tapahtumat, joilla on sama nimi kuin saannollisill, mutta ei lisata tyhjia
         ArrayList<Tapahtuma> mahdolliset = new ArrayList<>();
         for (Tapahtuma tapahtuma: tapahtumat) {
-            if (saannolliset.contains(tapahtuma.getNimi())) {
+            if (saannolliset.contains(tapahtuma.getNimi()) && !Objects.equals(tapahtuma.getNimi(), "ei tapahtumaa")) {
                 mahdolliset.add(tapahtuma);
             }
         }
