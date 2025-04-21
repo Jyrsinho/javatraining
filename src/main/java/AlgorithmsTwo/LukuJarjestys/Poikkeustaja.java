@@ -52,20 +52,37 @@ public class Poikkeustaja {
         int i = 0;
         int j = 1;
 
-        while (i < poikkeukset.size() -1) {
-            if (poikkeukset.get(i).getNimi().equals("ei tapahtumaa") && poikkeukset.get(j).getNimi().equals("ei tapahtumaa")) {
-                if (poikkeukset.get(i).getEnsimmainenAlkavaTunti() == poikkeukset.get(j).getEnsimmainenAlkavaTunti()-1 ) {
-                    poikkeukset.remove(j);
-                    poikkeukset.get(i).viimeinenAlkavaTunti++;
-                }
-            }
+        boolean samaaTapahtumaa = false;
 
-            i++;
-            j++;
+        while (i < poikkeukset.size() - 1) {
+            Tapahtuma ensimmainenPoikkeus = poikkeukset.get(i);
+            Tapahtuma verrattavaPoikkeus = poikkeukset.get(j);
+
+            samaaTapahtumaa = ovatSamaaTapahtumaa(ensimmainenPoikkeus, verrattavaPoikkeus);
+
+            if (samaaTapahtumaa) {
+                poikkeukset.remove(j);
+                poikkeukset.get(i).viimeinenAlkavaTunti++;
+            }else {
+                i++;
+                j++;
+            }
         }
 
 
         return poikkeukset;
+    }
+
+
+    private boolean ovatSamaaTapahtumaa(Tapahtuma a, Tapahtuma b) {
+        if (!a.paivamaara.equals(b.paivamaara)){
+            return false;
+        }
+        if (!a.getNimi().equals(b.getNimi())) {
+            return false;
+        }
+
+        return true;
     }
 
 
