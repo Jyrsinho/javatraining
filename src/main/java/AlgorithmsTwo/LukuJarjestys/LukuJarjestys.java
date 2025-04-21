@@ -16,6 +16,7 @@ package AlgorithmsTwo.LukuJarjestys;
 
 
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class LukuJarjestys {
     Kalenteri kalenteri;
@@ -56,18 +57,6 @@ public class LukuJarjestys {
                 17.4.2025 17-19 Koodaamista
                 """;
 
-        // 3.6. ja 17.6 on keskiviikko 4.6 ja 11.6 on torstai
-
-        /*ERROR: Syötteellä numero 3
-        ohjelmasi vastasi
-        Syöte puuttuu⤶
-        Ei tapahtumia⤶
-        olisi pitänyt vastata
-        Syöte puuttuu⤶
-
-         */
-
-        /*
 
         Scanner sc = new Scanner(System.in);
         StringBuilder sb = new StringBuilder();
@@ -77,7 +66,6 @@ public class LukuJarjestys {
             sb.append("\n");
         }
 
-         */
 
         LukuJarjestys lukuJarjestys = new LukuJarjestys(testiSyote);
         lukuJarjestys.teeLuettavaKalenteri();
