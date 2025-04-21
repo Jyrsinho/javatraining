@@ -148,10 +148,13 @@ public class Tulostaja {
      */
     private void tulostaValiRivi(PrintStream out, Kalenteri kalenteri, int kellonAika) {
         tulostaEnsimmaisenSolunAlaviiva(out);
+        String seuraavanNimi = "";
 
         for (int i = 0; i < kalenteri.getTapahtumaKalenteri().length; i++) {
             String tulostettavanNimi = kalenteri.getTapahtumaKalenteri()[i][kellonAika].getSaannollinen();
-            String seuraavanNimi = kalenteri.getTapahtumaKalenteri()[i][kellonAika+1].getSaannollinen();
+            if (kellonAika < 23) {
+                seuraavanNimi = kalenteri.getTapahtumaKalenteri()[i][kellonAika + 1].getSaannollinen();
+            }
 
             if (tulostettavanNimi.isEmpty()) {
                 for (int k = 0; k < merkkejaSolussa; k++) {
@@ -201,11 +204,13 @@ public class Tulostaja {
 
 
     private void tulostaTapahtumat(PrintStream out, int kellonaika, Kalenteri kalenteri) {
-
+        boolean tapahtumaJatkuu = false;
         for (int i = 0; i < kalenteri.getTapahtumaKalenteri().length; i++) {
-            String tuntiaAiempiKalenteriSolu = kalenteri.getTapahtumaKalenteri()[i][kellonaika-1].getSaannollinen();
-            String kalenteriSolu = kalenteri.getTapahtumaKalenteri()[i][kellonaika].getSaannollinen();
-            boolean tapahtumaJatkuu = kalenteriSolu.equals(tuntiaAiempiKalenteriSolu);
+            if (kellonaika > 0) {
+                String tuntiaAiempiKalenteriSolu = kalenteri.getTapahtumaKalenteri()[i][kellonaika - 1].getSaannollinen();
+                String kalenteriSolu = kalenteri.getTapahtumaKalenteri()[i][kellonaika].getSaannollinen();
+                tapahtumaJatkuu = kalenteriSolu.equals(tuntiaAiempiKalenteriSolu);
+            }
 
             String tapahtumanNimi = kalenteri.getTapahtumaKalenteri()[i][kellonaika].getSaannollinen();
             out.print(" ");
