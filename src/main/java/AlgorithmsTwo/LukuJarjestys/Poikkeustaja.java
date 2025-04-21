@@ -16,7 +16,7 @@ public class Poikkeustaja {
         ArrayList<Tapahtuma> kaikkiPoikkeukset = haePoikkeukset();
         ArrayList<Tapahtuma> uniikitPoikkeukset = poistaDuplikaatit(kaikkiPoikkeukset);
         ArrayList<Tapahtuma> jarjestetytPoikkeukset = jarjestaPoikkeukset(uniikitPoikkeukset);
-        return uniikitPoikkeukset;
+        return jarjestetytPoikkeukset;
     }
 
 
@@ -39,14 +39,43 @@ public class Poikkeustaja {
                 uniikitPoikkeukset.add(tapahtuma);
             }
         }
+       uniikitPoikkeukset = yhdistaJatkuvatPoikkeusTapaukset(uniikitPoikkeukset);
         return uniikitPoikkeukset;
     }
+
+    /**
+     * Yhdistaa perkkaiset Ei Tapahtumaa- poikkeustapaukset toisiinsa.
+     * Kaytetaan hyvaksi sita etta tassa vaiheessa poikkeustapaukset on jarjestetty paivamaaran ja ajan perusteella
+     */
+    private ArrayList<Tapahtuma> yhdistaJatkuvatPoikkeusTapaukset(ArrayList<Tapahtuma> poikkeukset) {
+
+        int i = 0;
+        int j = 1;
+
+        while (i < poikkeukset.size() -1) {
+            if (poikkeukset.get(i).getNimi().equals("Ei Tapahtumaa") && poikkeukset.get(j).getNimi().equals("Ei Tapahtumaa")) {
+                if (poikkeukset.get(i).getEnsimmainenAlkavaTunti() == poikkeukset.get(j).getEnsimmainenAlkavaTunti()-1 ) {
+                    poikkeukset.remove(j);
+                    poikkeukset.get(i).viimeinenAlkavaTunti++;
+                }
+            }
+
+            i++;
+            j++;
+        }
+
+
+        return poikkeukset;
+    }
+
 
     /**
      *     jarjestaa Tapahtumat ensin paivamaaran ja sitten kellonajan mukaan
      */
     private ArrayList<Tapahtuma> jarjestaPoikkeukset(ArrayList<Tapahtuma> poikkeukset) {
-        poikkeukset.sort(Comparator.comparing(Tapahtuma::getPaivamaara));
+        poikkeukset.sort(Comparator.comparing(Tapahtuma::getPaivamaara)
+                .thenComparing(Tapahtuma::getEnsimmainenAlkavaTunti)
+        );
         return poikkeukset;
 
     }

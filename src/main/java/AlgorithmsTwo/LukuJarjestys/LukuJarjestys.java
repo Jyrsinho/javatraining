@@ -54,7 +54,6 @@ public class LukuJarjestys {
                 2.4.2025 14-16 Vauvauinti
                 2.4.2025 10-12 Vauvauinti
                 3.4.2025 17-19 Koodaamista
-                10.4.2025 17-19 Koodaamista
                 17.4.2025 17-19 Koodaamista
                 """;
 
