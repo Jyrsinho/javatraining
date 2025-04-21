@@ -153,7 +153,11 @@ public class Tulostaja {
             String tulostettavanNimi = kalenteri.getTapahtumaKalenteri()[i][kellonAika].getSaannollinen();
             String seuraavanNimi = kalenteri.getTapahtumaKalenteri()[i][kellonAika+1].getSaannollinen();
 
-            if (tulostettavanNimi.equals(seuraavanNimi) && !tulostettavanNimi.equals("ei tapahtumaa")) {
+            if (tulostettavanNimi.isEmpty()) {
+                for (int k = 0; k < merkkejaSolussa; k++) {
+                    out.print("-");
+                }
+            } else if (tulostettavanNimi.equals(seuraavanNimi) && !tulostettavanNimi.equals("ei tapahtumaa")) {
                 for (int j = 0; j < merkkejaSolussa; j++) {
                     out.print(" ");
                 }
