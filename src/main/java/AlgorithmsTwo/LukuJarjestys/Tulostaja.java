@@ -5,6 +5,7 @@ import java.io.PrintStream;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class Tulostaja {
 
@@ -38,9 +39,11 @@ public class Tulostaja {
         out.println(kalenteri.getOtsikko());
         tulostaKalenterinKesto(out, kalenteri);
         tulostaPoikkeukset(kalenteri, out);
-        tulostaOtsikkoRivi(out);
-        tulostaValiRivi(out);
-        tulostaRivit(out, kalenteri);
+        if (kalenterissaOnTapahtumia(kalenteri)) {
+            tulostaOtsikkoRivi(out);
+            tulostaValiRivi(out);
+            tulostaRivit(out, kalenteri);
+        } else out.println("Ei muita tapahtumia");
     }
 
     public void tulostaPoikkeukset(Kalenteri kalenteri, PrintStream out) {
@@ -272,5 +275,17 @@ public class Tulostaja {
             out.print(" ");
         }
         out.print("|");
+    }
+
+    private boolean kalenterissaOnTapahtumia (Kalenteri kalenteri) {
+        for (int i = 0; i < kalenteri.getTapahtumaKalenteri().length; i++) {
+            for (int j = 0; j < kalenteri.getTapahtumaKalenteri()[i].length; j++) {
+                AikatauluRuutu analysoitava = kalenteri.getTapahtumaKalenteri()[i][j];
+                if (!Objects.equals(analysoitava.getSaannollinen(), "ei tapahtumaa") && !analysoitava.getSaannollinen().isEmpty()) {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 }
