@@ -16,7 +16,8 @@ public class Poikkeustaja {
         for (int i = 0; i <kalenteri.getTapahtumaKalenteri().length; i++) {
             for (int j = 0; j < kalenteri.getTapahtumaKalenteri()[i].length; j++) {
                 AikatauluRuutu tutkittava = kalenteri.getTapahtumaKalenteri()[i][j];
-                tutkittava.getPoikkeukset();
+                ArrayList<Tapahtuma> aikatauluRuudunPoikkeukset = tutkittava.getPoikkeukset();
+                poikkeukset.addAll(aikatauluRuudunPoikkeukset);
             }
         }
 

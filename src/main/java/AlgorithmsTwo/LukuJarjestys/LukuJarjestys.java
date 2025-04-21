@@ -43,10 +43,6 @@ public class LukuJarjestys {
         kalenteri.paivitaKalenteri(tapahtumat);
         kalenteri.paivitaKalenteri(tapahtumat);
         Tulostaja tulostaja = new Tulostaja();
-        Poikkeustaja poikkeustaja = new Poikkeustaja(kalenteri);
-        ArrayList<Tapahtuma> poikkeukset = poikkeustaja.annaPoikkeukset();
-
-        tulostaja.tulostaPoikkeukset(poikkeukset);
         tulostaja.tulostaKalenteri(kalenteri);
     }
 
@@ -57,9 +53,7 @@ public class LukuJarjestys {
                 Vauvauinti
                 2.4.2025 10-12 Vauvauinti
                 3.4.2025 17-19 Koodaamista
-                9.4.2025 10-12 Vauvauinti
                 10.4.2025 17-19 Koodaamista
-                16.4.2025 10-12 Vauvauinti
                 17.4.2025 17-19 Koodaamista
                 """;
 

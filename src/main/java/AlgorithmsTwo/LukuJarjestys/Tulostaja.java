@@ -13,10 +13,6 @@ public class Tulostaja {
     int ensimmaisenSolunMerkkiMaara= 6;
 
 
-    public void tulostaPoikkeukset(ArrayList<Tapahtuma> poikkeukset) {
-
-    }
-
     /**
      * Lukujärjestykseen tulostetaan rivi jokaiselle tunnille alkaen päivän ensimmäi-
      * sestä tapahtumasta tai tunnista 8–9 sen mukaan kumpi on varhaisempi, ja päättyen
@@ -41,9 +37,32 @@ public class Tulostaja {
 
         out.println(kalenteri.getOtsikko());
         tulostaKalenterinKesto(out, kalenteri);
+        tulostaPoikkeukset(kalenteri, out);
         tulostaOtsikkoRivi(out);
         tulostaValiRivi(out);
         tulostaRivit(out, kalenteri);
+    }
+
+    public void tulostaPoikkeukset(Kalenteri kalenteri, PrintStream out) {
+        Poikkeustaja poikkeustaja = new Poikkeustaja(kalenteri);
+        ArrayList<Tapahtuma> poikkeukset = poikkeustaja.annaPoikkeukset();
+        out = System.out;
+        out.println("Poikkeukset:");
+        for (int i = 0; i < poikkeukset.size(); i++) {
+            Tapahtuma poikkkeusTapahtuma = poikkeukset.get(i);
+            tulostaPoikkeusTapahtumanTiedot(poikkkeusTapahtuma, out);
+        }
+    }
+
+
+    private void tulostaPoikkeusTapahtumanTiedot(Tapahtuma poikkeusTapahtuma, PrintStream out) {
+        // haluttu output esimerkki: 4.4.2023 10-12 ei tapahtumaa
+        String tapahtumanPvm = poikkeusTapahtuma.paivamaara.toString();
+        String tapahtumanKellonAIka = String.format("%d-%d", poikkeusTapahtuma.ensimmainenAlkavaTunti, poikkeusTapahtuma.viimeinenAlkavaTunti +1);
+
+
+        String tapahtumaRivi = String.format("%s %s %s", tapahtumanPvm, tapahtumanKellonAIka, poikkeusTapahtuma.getNimi());
+        out.println(tapahtumaRivi);
     }
 
 
