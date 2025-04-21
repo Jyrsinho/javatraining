@@ -57,7 +57,8 @@ public class Tulostaja {
 
     private void tulostaPoikkeusTapahtumanTiedot(Tapahtuma poikkeusTapahtuma, PrintStream out) {
         // haluttu output esimerkki: 4.4.2023 10-12 ei tapahtumaa
-        String tapahtumanPvm = poikkeusTapahtuma.paivamaara.toString();
+        DateTimeFormatter dtFormatter = DateTimeFormatter.ofPattern("d.M.yyyy");
+        String tapahtumanPvm = poikkeusTapahtuma.paivamaara.format(dtFormatter);
         String tapahtumanKellonAIka = String.format("%d-%d", poikkeusTapahtuma.ensimmainenAlkavaTunti, poikkeusTapahtuma.viimeinenAlkavaTunti +1);
 
 
