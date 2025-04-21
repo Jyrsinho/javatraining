@@ -9,7 +9,7 @@ public class TapahtumaEiOlemassa extends Tapahtuma{
     }
 
     public TapahtumaEiOlemassa(LocalDate pvm, int tunti){
-        super(tunti, tunti, pvm, "Ei Tapahtumaa");
+        super(tunti, tunti, pvm, "ei tapahtumaa");
     }
 
 }

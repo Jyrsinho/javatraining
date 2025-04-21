@@ -53,7 +53,7 @@ public class Poikkeustaja {
         int j = 1;
 
         while (i < poikkeukset.size() -1) {
-            if (poikkeukset.get(i).getNimi().equals("Ei Tapahtumaa") && poikkeukset.get(j).getNimi().equals("Ei Tapahtumaa")) {
+            if (poikkeukset.get(i).getNimi().equals("ei tapahtumaa") && poikkeukset.get(j).getNimi().equals("ei tapahtumaa")) {
                 if (poikkeukset.get(i).getEnsimmainenAlkavaTunti() == poikkeukset.get(j).getEnsimmainenAlkavaTunti()-1 ) {
                     poikkeukset.remove(j);
                     poikkeukset.get(i).viimeinenAlkavaTunti++;

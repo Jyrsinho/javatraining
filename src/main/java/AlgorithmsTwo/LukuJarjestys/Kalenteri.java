@@ -135,7 +135,7 @@ public class Kalenteri {
                if (analysoitava.getClass().getSimpleName().equals("PoikkeusAikaTauluRuutu")) {
                    continue;
                }
-               if (!Objects.equals(analysoitava.getSaannollinen(), "Ei Tapahtumaa") && j < aikaisinTapahtuma) {
+               if (!Objects.equals(analysoitava.getSaannollinen(), "ei tapahtumaa") && j < aikaisinTapahtuma) {
                    aikaisinTapahtuma = j;
                }
            }
@@ -157,7 +157,7 @@ public class Kalenteri {
                if (analysoitava.getClass().getSimpleName().equals("PoikkeusAikaTauluRuutu")){
                    continue;
                }
-               if (!Objects.equals(tapahtumaKalenteri[i][j].getSaannollinen(), "Ei Tapahtumaa") && j > myohaisinTapahtumanAlkavaTunti) {
+               if (!Objects.equals(tapahtumaKalenteri[i][j].getSaannollinen(), "ei tapahtumaa") && j > myohaisinTapahtumanAlkavaTunti) {
                    myohaisinTapahtumanAlkavaTunti =  j ;
                }
            }
