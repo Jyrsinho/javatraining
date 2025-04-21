@@ -40,9 +40,10 @@ public class LukuJarjestys {
 
         kalenteri.setOtsikkoRivi(parser.getOtsikko());
         ArrayList<Tapahtuma> tapahtumat = parser.annaTapahtumat();
-
-        kalenteri.paivitaKalenteri(tapahtumat);
-        kalenteri.paivitaKalenteri(tapahtumat);
+        if (!tapahtumat.isEmpty()) {
+            kalenteri.paivitaKalenteri(tapahtumat);
+            kalenteri.paivitaKalenteri(tapahtumat);
+        }
         Tulostaja tulostaja = new Tulostaja();
         tulostaja.tulostaKalenteri(kalenteri);
     }
@@ -51,20 +52,19 @@ public class LukuJarjestys {
 
     public static void main(String[] args) {
         String testiSyote = """
-                Vauvauinti
-                3.4.2025 17-19 Koodaamista
-                10.4.2025 17-19 Koodaamista
-                17.4.2025 17-19 Koodaamista
+                Syöte vailla tapahtumia
                 """;
 
 
         Scanner sc = new Scanner(System.in);
         StringBuilder sb = new StringBuilder();
-
+/*
         while (sc.hasNextLine()) {
             sb.append(sc.nextLine());
             sb.append("\n");
         }
+
+ */
 
 
         LukuJarjestys lukuJarjestys = new LukuJarjestys(testiSyote);
