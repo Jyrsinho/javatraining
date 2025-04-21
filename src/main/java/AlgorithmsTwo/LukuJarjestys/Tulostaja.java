@@ -46,11 +46,12 @@ public class Tulostaja {
     public void tulostaPoikkeukset(Kalenteri kalenteri, PrintStream out) {
         Poikkeustaja poikkeustaja = new Poikkeustaja(kalenteri);
         ArrayList<Tapahtuma> poikkeukset = poikkeustaja.annaPoikkeukset();
-        out = System.out;
-        out.println("Poikkeukset:");
-        for (int i = 0; i < poikkeukset.size(); i++) {
-            Tapahtuma poikkkeusTapahtuma = poikkeukset.get(i);
-            tulostaPoikkeusTapahtumanTiedot(poikkkeusTapahtuma, out);
+        if (!poikkeukset.isEmpty()) {
+            out.println("Poikkeukset:");
+            for (int i = 0; i < poikkeukset.size(); i++) {
+                Tapahtuma poikkkeusTapahtuma = poikkeukset.get(i);
+                tulostaPoikkeusTapahtumanTiedot(poikkkeusTapahtuma, out);
+            }
         }
     }
 
