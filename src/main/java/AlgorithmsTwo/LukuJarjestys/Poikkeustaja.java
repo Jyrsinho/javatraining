@@ -81,6 +81,9 @@ public class Poikkeustaja {
         if (!a.getNimi().equals(b.getNimi())) {
             return false;
         }
+        if (a.getViimeinenAlkavaTunti() + 1 != b.getEnsimmainenAlkavaTunti()) {
+            return false;
+        }
 
         return true;
     }
