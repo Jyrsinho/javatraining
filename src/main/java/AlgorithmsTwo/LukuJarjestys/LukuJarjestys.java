@@ -77,6 +77,14 @@ public class LukuJarjestys {
                 2.4.2024 22-23 koodausta
                 2.4.2024 20-21 koodausta
                 """;
+
+        String testiSyote6 = """
+                Sekavia tapahtumia ja poikkeuksia
+                3.6.2026 9-10 kaksi
+                17.6.2026 8-10 yksi
+                4.6.2026 10-12 kolme
+                11.6.2026 11-13 neljä
+                """;
 /*
         Scanner sc = new Scanner(System.in);
         StringBuilder sb = new StringBuilder();
@@ -116,6 +124,13 @@ public class LukuJarjestys {
         System.out.println();
         LukuJarjestys lukuJarjestys4 = new LukuJarjestys(testiSyote5);
         lukuJarjestys4.teeLuettavaKalenteri();
+
+
+        System.out.println();
+        System.out.println("................................................................................................");
+        System.out.println();
+        LukuJarjestys lukuJarjestys5 = new LukuJarjestys(testiSyote6);
+        lukuJarjestys5.teeLuettavaKalenteri();
     }
 }
 
