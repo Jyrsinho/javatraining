@@ -1,31 +1,41 @@
 package AlgorithmsTwo.CountIslands;
 
-import java.util.Arrays;
-
 public class IslandCounter {
-    private int saartenMaara;
+    private int[][] grid;
+    private boolean[][] visited;
+    private int amoutOfIslands;
 
-    public IslandCounter() {
-        this.saartenMaara = 0;
+    public IslandCounter(int[][] grid) {
+        this.grid = grid;
+        visited = new boolean[grid.length][grid[0].length];
+        amoutOfIslands = 0;
+
     }
 
-    public int countIslands(int[][] grid) {
+    public void countIslands() {
         if (grid.length == 0) {
-            return 0;
+            return;
         }
 
-       int saartenMaara = 0;
+        visit(0,0 );
 
-       boolean [][] visited = initializeVisitedArray(grid.length,  grid[0].length);
-
-       return saartenMaara;
     }
 
-    private boolean[][] initializeVisitedArray(int a, int b) {
-        boolean[][] visited = new boolean[a][b];
-        for (int i = 0; i < visited.length; i++) {
-            Arrays.fill(visited[i], false);
+    private void visit(int row, int col) {
+        if (visited[row][col]) {
+            return;
         }
-        return visited;
+        if (grid[row][col] == 0) {
+            return;
+        }
+        visited[row][col] = true;
+        visit(row+1, col);
+        visit(row, col+1);
+
     }
+
+    public int getAmoutOfIslands() {
+        return amoutOfIslands;
+    }
+
 }

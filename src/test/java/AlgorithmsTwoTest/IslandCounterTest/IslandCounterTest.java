@@ -12,12 +12,13 @@ public class IslandCounterTest {
 
     @BeforeEach
     public void setUp() {
-        islandCounter = new IslandCounter();
+
     }
 
     @Test
     public void testCountIslandsShouldReturnZeroForEmptyInput() {
         int[][] testInput = new int[][]{};
+        IslandCounter islandCounter = new IslandCounter(testInput);
         int expected = 0;
         int actual =  islandCounter.countIslands(testInput);
         assertEquals(expected, actual);
@@ -26,6 +27,7 @@ public class IslandCounterTest {
     @Test
     public void testCountIslandsShouldRetunrOneForWhenThereIsOneOne(){
         int[][] testInput = new int[][]{{1}};
+        IslandCounter islandCounter = new IslandCounter(testInput);
         int expected = 1;
         int actual =  islandCounter.countIslands(testInput);
         assertEquals(expected, actual);
@@ -37,6 +39,8 @@ public class IslandCounterTest {
                                         {0,0},
                                         {0,0}
                                             };
+        IslandCounter islandCounter = new IslandCounter(testInput);
+        islandCounter.countIslands();
         int expected = 0;
         int actual =  islandCounter.countIslands(testInput);
         assertEquals(expected, actual);
@@ -48,6 +52,7 @@ public class IslandCounterTest {
                 { 0 , 1 , 1 },
                 { 0 , 0 , 0 }
         };
+        IslandCounter islandCounter = new IslandCounter(testInput);
         int expected = 1;
         int actual =  islandCounter.countIslands(testInput);
         assertEquals(expected, actual);
