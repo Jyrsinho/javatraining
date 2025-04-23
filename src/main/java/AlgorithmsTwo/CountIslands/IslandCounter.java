@@ -7,7 +7,9 @@ public class IslandCounter {
 
     public IslandCounter(int[][] grid) {
         this.grid = grid;
-        visited = new boolean[grid.length][grid[0].length];
+        if (grid.length != 0) {
+            visited = new boolean[grid.length][grid[0].length];
+        }
         amoutOfIslands = 0;
 
     }
@@ -17,9 +19,29 @@ public class IslandCounter {
             return;
         }
 
-        visit(0,0 );
+        while (true) {
+            int[] seuraavaSaari = etsiSeuraavaSaari();
+
+            if (seuraavaSaari[0] == -1) {
+                break;
+            }
+            this.amoutOfIslands++;
+            visit(seuraavaSaari[0], seuraavaSaari[1]);
+        }
 
     }
+
+    private int[] etsiSeuraavaSaari() {
+        for (int i = 0; i < grid.length; i++) {
+            for (int j = 0; j < grid[0].length; j++) {
+                if (grid[i][j] == 1 && visited[i][j] == false) {
+                    return new int[]{i, j};
+                }
+            }
+        }
+        return new int[]{-1, -1};
+    }
+
 
     private void visit(int row, int col) {
         if (visited[row][col]) {
@@ -29,8 +51,10 @@ public class IslandCounter {
             return;
         }
         visited[row][col] = true;
-        visit(row+1, col);
-        visit(row, col+1);
+        visit(row + 1, col);
+        visit(row - 1, col);
+        visit(row, col - 1);
+        visit(row, col + 1);
 
     }
 

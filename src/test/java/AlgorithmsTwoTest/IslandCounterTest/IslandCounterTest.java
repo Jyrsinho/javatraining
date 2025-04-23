@@ -20,7 +20,8 @@ public class IslandCounterTest {
         int[][] testInput = new int[][]{};
         IslandCounter islandCounter = new IslandCounter(testInput);
         int expected = 0;
-        int actual =  islandCounter.countIslands(testInput);
+        islandCounter.countIslands();
+        int actual = islandCounter.getAmoutOfIslands();
         assertEquals(expected, actual);
     }
 
@@ -29,7 +30,8 @@ public class IslandCounterTest {
         int[][] testInput = new int[][]{{1}};
         IslandCounter islandCounter = new IslandCounter(testInput);
         int expected = 1;
-        int actual =  islandCounter.countIslands(testInput);
+        islandCounter.countIslands();
+        int actual = islandCounter.getAmoutOfIslands();
         assertEquals(expected, actual);
     }
 
@@ -42,7 +44,9 @@ public class IslandCounterTest {
         IslandCounter islandCounter = new IslandCounter(testInput);
         islandCounter.countIslands();
         int expected = 0;
-        int actual =  islandCounter.countIslands(testInput);
+        islandCounter.countIslands();
+        int actual = islandCounter.getAmoutOfIslands();
+
         assertEquals(expected, actual);
     }
 
@@ -54,7 +58,8 @@ public class IslandCounterTest {
         };
         IslandCounter islandCounter = new IslandCounter(testInput);
         int expected = 1;
-        int actual =  islandCounter.countIslands(testInput);
+        islandCounter.countIslands();
+        int actual = islandCounter.getAmoutOfIslands();
         assertEquals(expected, actual);
     }
 }
