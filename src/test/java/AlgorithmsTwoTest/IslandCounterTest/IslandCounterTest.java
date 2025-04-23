@@ -30,5 +30,27 @@ public class IslandCounterTest {
         int actual =  islandCounter.countIslands(testInput);
         assertEquals(expected, actual);
     }
+
+    @Test
+    public void testCountIslandsShouldReturnZeroWhenThereIsOnlyZeroes() {
+        int[][] testInput = new int[][]{
+                                        {0,0},
+                                        {0,0}
+                                            };
+        int expected = 0;
+        int actual =  islandCounter.countIslands(testInput);
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    public void testCountIslandsShouldReturnOneWhenThereIsTwoAdjacentOnes() {
+        int [][] testInput = new int[][]{
+                { 0 , 1 , 1 },
+                { 0 , 0 , 0 }
+        };
+        int expected = 1;
+        int actual =  islandCounter.countIslands(testInput);
+        assertEquals(expected, actual);
+    }
 }
 
