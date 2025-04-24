@@ -60,7 +60,9 @@ public class IslandCounterTest {
         int expected = 1;
         islandCounter.countIslands();
         int actual = islandCounter.getAmoutOfIslands();
+        islandCounter.printVisited();
         assertEquals(expected, actual);
+
     }
 }
 

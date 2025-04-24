@@ -34,7 +34,7 @@ public class IslandCounter {
     private int[] etsiSeuraavaSaari() {
         for (int i = 0; i < grid.length; i++) {
             for (int j = 0; j < grid[0].length; j++) {
-                if (grid[i][j] == 1 && visited[i][j] == false) {
+                if (grid[i][j] == 1 && !visited[i][j]) {
                     return new int[]{i, j};
                 }
             }
@@ -51,15 +51,61 @@ public class IslandCounter {
             return;
         }
         visited[row][col] = true;
-        visit(row + 1, col);
-        visit(row - 1, col);
-        visit(row, col - 1);
-        visit(row, col + 1);
 
+        if (isVisitable(row +1, col)){
+            visit(row + 1, col);
+        }
+        if (isVisitable(row - 1, col)) {
+            visit(row - 1, col);
+        }
+        if (isVisitable(row, col + 1)) {
+            visit(row, col + 1);
+        }
+        if (isVisitable(row, col - 1)) {
+            visit(row, col - 1);
+        }
     }
+
+    /**
+     * returns true if given row and column combination in an island is visitable.
+     * Index is visitable when it is within the bounds of grid, is not already visited and does not
+     * contain value zero
+     * @param row
+     * @param col
+     * @return true if index is visitable, false if not
+     */
+    private boolean isVisitable(int row, int col) {
+       if (row < 0 || col < 0) {
+           return false;
+       }
+
+       if (row >= grid.length) {
+           return false;
+       }
+       if (col >= grid[0].length) {
+           return false;
+       }
+       if (grid[row][col] == 0) {
+           return false;
+       }
+       if (visited[row][col]) {
+           return false;
+       }
+            return true;
+    }
+
 
     public int getAmoutOfIslands() {
         return amoutOfIslands;
+    }
+
+    public void printVisited() {
+        for (int i = 0; i < grid.length; i++) {
+            for (int j = 0; j < grid[0].length; j++) {
+                System.out.print(visited[i][j] + " ");
+            }
+            System.out.println();
+        }
     }
 
 }
