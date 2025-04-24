@@ -8,9 +8,9 @@ public class Aikataulu {
         Parser parser = new Parser();
 
         parser.kasitteleSyote(syote);
-        ArrayList<Tapaus> tapaukset = parser.annaTapaukset();
+        ArrayList<AikaTaulutus> tapaukset = parser.annaTapaukset();
 
-        for (Tapaus tapaus: tapaukset) {
+        for (AikaTaulutus tapaus: tapaukset) {
             ATMatcher matseri = new ATMatcher();
             String matsit = matseri.jaaAikataulu(tapaus);
             System.out.println(matsit);

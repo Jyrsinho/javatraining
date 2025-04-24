@@ -2,7 +2,7 @@ package AlgorithmsTwo.Aikataulu;
 
 public class ATMatcher {
 
-    public String jaaAikataulu(Tapaus tapaus) {
+    public String jaaAikataulu(AikaTaulutus tapaus) {
         return "";
     }
 }
