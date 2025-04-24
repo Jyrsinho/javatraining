@@ -64,5 +64,35 @@ public class IslandCounterTest {
         assertEquals(expected, actual);
 
     }
+
+    @Test
+    public void testCountIslandsShouldReturnTwoWhenThereIsTwoIslands() {
+        int [][] testInput = new int [][]{
+                {0, 1, 1},
+                {1, 0, 1},
+                {1, 0, 0}
+        };
+        IslandCounter islandCounter = new IslandCounter(testInput);
+        int expected = 2;
+        islandCounter.countIslands();
+        int actual = islandCounter.getAmoutOfIslands();
+        islandCounter.printVisited();
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    public void testShouldReturnSixForSixLonelyOneIslands() {
+        int [][] testInput = new int[][]{
+                {1, 0, 1, 0},
+                {0, 1, 0, 1},
+                {1, 0, 1, 0}
+        };
+        IslandCounter islandCounter = new IslandCounter(testInput);
+        int expected = 6;
+        islandCounter.countIslands();
+        int actual = islandCounter.getAmoutOfIslands();
+        islandCounter.printVisited();
+        assertEquals(expected, actual);
+    }
 }
 
