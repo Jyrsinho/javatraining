@@ -3,13 +3,18 @@ package AlgorithmsTwo.Aikataulu;
 import java.util.ArrayList;
 
 public class Kayttaja {
-    int kayttajaID;
-    ArrayList<Integer> toiveet;
+    private int kayttajaID;
+    private ArrayList<Integer> toiveet;
+    private int matsi;
 
 
     public Kayttaja(int kayttajaID, ArrayList<Integer> toiveet) {
         this.kayttajaID = kayttajaID;
         this.toiveet = toiveet;
+    }
+
+    public void asetaMatsi(int aika) {
+        this.matsi = aika;
     }
 
     public String toString() {
@@ -19,7 +24,18 @@ public class Kayttaja {
         return sb.toString();
     }
 
+    public int getMatsi() {
+        return matsi;
+    }
+
     public ArrayList<Integer> getToiveet() {
         return toiveet;
     }
+
+    public int getId() {
+        return kayttajaID;
+    }
+
+
+
 }

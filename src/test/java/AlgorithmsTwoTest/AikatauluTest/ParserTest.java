@@ -1,7 +1,5 @@
 package AlgorithmsTwoTest.AikatauluTest;
 
-import AlgorithmsTwo.Aikataulu.AikaTaulutus;
-import AlgorithmsTwo.Aikataulu.Kayttaja;
 import AlgorithmsTwo.Aikataulu.Parser;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -29,17 +27,4 @@ public class ParserTest {
         assertEquals(1, parser.annaTapaukset().size());
     }
 
-    @Test
-    public void testShouldCreateAikaTaulutusWithKayttajaWithPreferencesThreeTwoAndOne() {
-        String testiSyote = """
-                3 1 2 0
-                3 0
-                3 1 0
-                0 0
-                """;
-        parser.kasitteleSyote(testiSyote);
-        parser.tulostaAikataulutukset();
-        AikaTaulutus aikaTaulutus = parser.annaTapaukset().getFirst();
-        Kayttaja ekaKayttaja = aikaTaulutus.getKayttajat().getFirst();
-    }
 }

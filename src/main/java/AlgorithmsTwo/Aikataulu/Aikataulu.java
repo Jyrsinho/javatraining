@@ -11,8 +11,7 @@ public class Aikataulu {
         ArrayList<AikaTaulutus> tapaukset = parser.annaTapaukset();
 
         for (AikaTaulutus tapaus: tapaukset) {
-            ATMatcher matseri = new ATMatcher();
-            String matsit = matseri.jaaAikataulu(tapaus);
+            String matsit = tapaus.jaaAikataulu();
             System.out.println(matsit);
         }
 
