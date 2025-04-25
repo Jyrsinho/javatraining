@@ -26,7 +26,7 @@ public class DFSMatching {
             if (visited[book]) continue;
             visited[book] = true;
 
-            //tarkistetaan onko kyseinen kirja vapaa
+            //tarkistetaan onko kyseinen kirja vapaa tai voiko kyseiselle kirjalle maaratylle kayttajalle antaa uuden ajan
             if (matchTo[book] == -1 || dfs(matchTo[book])) {
                 matchTo[book] = person;
                 return true;
