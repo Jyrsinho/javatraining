@@ -57,14 +57,10 @@ public class AikaTaulutus {
         StringBuilder sb = new StringBuilder();
 
         for (int i = 0; i < kayttajat.size(); i++) {
+            sb.append("    ");
             sb.append(kayttajat.get(i).getMatsi());
         }
         return sb.toString();
-    }
-
-
-    public void lisaaKayttaja(Kayttaja uusiKayttaja) {
-        kayttajat.add(uusiKayttaja);
     }
 
 
@@ -74,6 +70,30 @@ public class AikaTaulutus {
             sb.append(kayttaja.toString());
         }
         return sb.toString();
+    }
+
+    private void asetaKayttajilleAjat() {
+        for (int i = 0; i < kayttajat.size(); i++) {
+            Kayttaja kayttaja = kayttajat.get(i);
+
+            int kayttajanAika = etsiKayttajanMatsi(kayttaja.getId());
+            kayttaja.setMatsi(kayttajanAika);
+        }
+    }
+
+
+    /**
+     * Antaa kayttajan matsin. Jos matsia ei ole antaa nollan,
+     * @param kayttajanID
+     * @return Antaa kayttajan matsin. Jos matsia ei ole antaa nollan,
+     */
+    private int etsiKayttajanMatsi(int kayttajanID) {
+        for (int i = 0; i <matsatyt.length ; i++) {
+            if (matsatyt[i] == kayttajanID) {
+                return i;
+            }
+        }
+        return 0;
     }
 
     private int etsiSuurinAika() {

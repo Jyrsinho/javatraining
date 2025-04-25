@@ -13,9 +13,6 @@ public class Kayttaja {
         this.toiveet = toiveet;
     }
 
-    public void asetaMatsi(int aika) {
-        this.matsi = aika;
-    }
 
     public String toString() {
         StringBuilder sb = new StringBuilder();
@@ -30,6 +27,10 @@ public class Kayttaja {
 
     public ArrayList<Integer> getToiveet() {
         return toiveet;
+    }
+
+    public  void setMatsi(int matsi) {
+        this.matsi = matsi;
     }
 
     public int getId() {

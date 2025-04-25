@@ -27,4 +27,19 @@ public class ParserTest {
         assertEquals(1, parser.annaTapaukset().size());
     }
 
+    @Test
+    public void testParseShouldCreateNewTapauksetFromSyote() {
+        String testiSyote = """
+                3 1 2 0
+                3 0
+                3 1 0
+                0
+                4 2 5 0 2 4 0 4 2 0 0
+                1 2 4 0 1 0 1 3 5 0 4 0 1 4 0 0
+                0
+                """;
+        parser.kasitteleSyote(testiSyote);
+        parser.tulostaAikataulutukset();
+        assertEquals(3, parser.annaTapaukset().size());
+    }
 }

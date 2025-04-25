@@ -26,7 +26,7 @@ public class Parser {
     }
 
     private String siivoaSyotteestaHanta(String syote) {
-        String regex =" (0\\s*0\\s* 0)";
+        String regex =" (0\\s*0\\s*0)";
         String[] osat = syote.split(regex);
         return osat[0];
 
