@@ -6,8 +6,8 @@ public class AikaTaulutus {
 
     ArrayList<Kayttaja> kayttajat;
 
-    public AikaTaulutus() {
-        this.kayttajat = new ArrayList<>();
+    public AikaTaulutus(ArrayList<Kayttaja> kayttajat) {
+        this.kayttajat = kayttajat;
     }
 
 

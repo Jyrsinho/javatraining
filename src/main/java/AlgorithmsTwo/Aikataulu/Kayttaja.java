@@ -4,10 +4,10 @@ import java.util.ArrayList;
 
 public class Kayttaja {
     int kayttajaID;
-    ArrayList<String> toiveet;
+    ArrayList<Integer> toiveet;
 
 
-    public Kayttaja(int kayttajaID, ArrayList<String > toiveet) {
+    public Kayttaja(int kayttajaID, ArrayList<Integer> toiveet) {
         this.kayttajaID = kayttajaID;
         this.toiveet = toiveet;
     }
@@ -17,5 +17,9 @@ public class Kayttaja {
         sb.append("Kayttaja ID: " + kayttajaID + "\n");
         sb.append("Toiveet: " + toiveet + "\n");
         return sb.toString();
+    }
+
+    public ArrayList<Integer> getToiveet() {
+        return toiveet;
     }
 }

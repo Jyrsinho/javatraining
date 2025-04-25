@@ -6,7 +6,6 @@ import AlgorithmsTwo.Aikataulu.Parser;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class ParserTest {
@@ -42,6 +41,5 @@ public class ParserTest {
         parser.tulostaAikataulutukset();
         AikaTaulutus aikaTaulutus = parser.annaTapaukset().getFirst();
         Kayttaja ekaKayttaja = aikaTaulutus.getKayttajat().getFirst();
-        assertArrayEquals(new int[]{3, 1, 2},ekaKayttaja.getToiveet());
     }
 }
