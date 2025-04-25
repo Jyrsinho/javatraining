@@ -42,4 +42,23 @@ public class ParserTest {
         parser.tulostaAikataulutukset();
         assertEquals(3, parser.annaTapaukset().size());
     }
+
+    @Test
+    public void testParserShouldNotChopTens() {
+        String testiSyote = """
+                3 7 0
+                4 6 7 9 0
+                9 0
+                10 0
+                0
+                2 5 0
+                11 0
+                9 0
+                0
+                0
+                """;
+        parser.kasitteleSyote(testiSyote);
+        parser.tulostaAikataulutukset();
+        assertEquals(2, parser.annaTapaukset().size());
+    }
 }

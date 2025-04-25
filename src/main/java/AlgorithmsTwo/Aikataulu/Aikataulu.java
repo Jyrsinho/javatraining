@@ -1,7 +1,6 @@
 package AlgorithmsTwo.Aikataulu;
 
 import java.util.ArrayList;
-import java.util.Scanner;
 
 public class Aikataulu {
 
@@ -21,8 +20,8 @@ public class Aikataulu {
 
     public static void main(String[] args) {
 
-        /*
-        String testiSyote = """
+
+        String testiSyote1 = """
                 3 1 2 0
                 3 0
                 3 1 0
@@ -32,8 +31,20 @@ public class Aikataulu {
                 0
                 """;
 
-         */
 
+        String testiSyote2 = """
+                3 7 0
+                4 6 7 9 0
+                9 0
+                10 0
+                1 0
+                2 5 0
+                11 0
+                9 0
+                0
+                0
+                """;
+        /*
         Scanner scanner = new Scanner(System.in);
         StringBuilder sb = new StringBuilder();
         while (scanner.hasNextLine()) {
@@ -41,7 +52,12 @@ public class Aikataulu {
             sb.append(nextLine);
         }
 
+         */
+
         Aikataulu aikataulu = new Aikataulu();
-        aikataulu.kasitteleSyote(sb.toString());
+        aikataulu.kasitteleSyote(testiSyote1);
+        System.out.println();
+        System.out.println("------------------------------------------------------------------------------------------------");
+        aikataulu.kasitteleSyote(testiSyote2);
     }
 }
