@@ -21,6 +21,7 @@ public class ParserTest {
                 3 0
                 3 1 0
                 0 0
+                1 2 3
                 """;
         parser.kasitteleSyote(testiSyote);
         parser.tulostaAikataulutukset();
@@ -43,13 +44,14 @@ public class ParserTest {
         assertEquals(3, parser.annaTapaukset().size());
     }
 
+    //TODO: TÄÄLLÄ ON ONGELMA MITEN KÄSITELLÄÄN TUO SYOTTEEN KYMPPI
     @Test
     public void testParserShouldNotChopTens() {
         String testiSyote = """
                 3 7 0
                 4 6 7 9 0
                 9 0
-                10 0
+                        10 0
                 0
                 2 5 0
                 11 0
@@ -59,6 +61,7 @@ public class ParserTest {
                 """;
         parser.kasitteleSyote(testiSyote);
         parser.tulostaAikataulutukset();
+
         assertEquals(2, parser.annaTapaukset().size());
     }
 }

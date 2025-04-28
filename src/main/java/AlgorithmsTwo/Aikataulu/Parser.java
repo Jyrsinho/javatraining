@@ -20,22 +20,39 @@ public class Parser {
      * Luodaan syotteesta ArrayList Tapauksista
      */
     public void kasitteleSyote(String syote) {
+        syote = poistaRivinVaihdot(syote);
         syote = siivoaSyotteestaHanta(syote);
         String[] aikaTaulutusSyotteet = jaaAikaTaulutuksiin(syote);
         luoAikaTaulutukset(aikaTaulutusSyotteet);
     }
 
+    private String poistaRivinVaihdot(String syote) {
+        String regex = "\n";
+        syote = syote.replaceAll(regex, " ");
+        return syote;
+    }
+
     private String siivoaSyotteestaHanta(String syote) {
-        String regex =" (\\s*0\\s*0\\s*0)";
+        String regex ="(\\s+0\\s+0\\s+0)";
         String[] osat = syote.split(regex);
+        System.out.println("Syote ilman hantaa: " + osat[0]);
+        System.out.println("loppuosa : " + osat[1]);
         return osat[0];
 
     }
 
     private String[] jaaAikaTaulutuksiin(String syote) {
        // jaetaan kahden nollan kohdalta
-        String regex = "(0\\s*0)";
+        String regex = "(\\s+0\\s+0)";
         String[] osat = syote.split(regex);
+
+        System.out.println();
+        System.out.println("osat: ");
+
+        for (int i = 0; i < osat.length; i++) {
+            System.out.println(osat[i]);
+        }
+
         return osat;
     }
 
@@ -49,10 +66,16 @@ public class Parser {
 
         ArrayList<Kayttaja> kayttajat = new ArrayList<>();
         //kayttajan syote vaihtuu aina 0 kohdalla
-        String[] kayttajienToiveet = aikataulutuksenSyote.split("0");
+        String[] kayttajienToiveet = aikataulutuksenSyote.split("(\\s+0\\s+)");
         for (int i = 0; i < kayttajienToiveet.length; i++) {
            Kayttaja uusiKayttaja = luoUusiKayttajaSyotteesta(i + 1,kayttajienToiveet[i]);
            kayttajat.add(uusiKayttaja);
+        }
+
+        System.out.println("kayttajien toiveet");
+
+        for (int i = 0; i < kayttajat.size(); i++) {
+            System.out.println(kayttajat.get(i).getToiveet());
         }
 
         AikaTaulutus uusiAikataulutus = new AikaTaulutus(kayttajat);
