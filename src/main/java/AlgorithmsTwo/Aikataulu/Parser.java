@@ -35,8 +35,6 @@ public class Parser {
     private String siivoaSyotteestaHanta(String syote) {
         String regex ="(\\s+0\\s+0\\s+0)";
         String[] osat = syote.split(regex);
-        System.out.println("Syote ilman hantaa: " + osat[0]);
-        System.out.println("loppuosa : " + osat[1]);
         return osat[0];
 
     }
@@ -45,13 +43,6 @@ public class Parser {
        // jaetaan kahden nollan kohdalta
         String regex = "(\\s+0\\s+0)";
         String[] osat = syote.split(regex);
-
-        System.out.println();
-        System.out.println("osat: ");
-
-        for (int i = 0; i < osat.length; i++) {
-            System.out.println(osat[i]);
-        }
 
         return osat;
     }
@@ -70,12 +61,6 @@ public class Parser {
         for (int i = 0; i < kayttajienToiveet.length; i++) {
            Kayttaja uusiKayttaja = luoUusiKayttajaSyotteesta(i + 1,kayttajienToiveet[i]);
            kayttajat.add(uusiKayttaja);
-        }
-
-        System.out.println("kayttajien toiveet");
-
-        for (int i = 0; i < kayttajat.size(); i++) {
-            System.out.println(kayttajat.get(i).getToiveet());
         }
 
         AikaTaulutus uusiAikataulutus = new AikaTaulutus(kayttajat);
