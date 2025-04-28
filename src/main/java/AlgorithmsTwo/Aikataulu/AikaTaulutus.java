@@ -1,5 +1,6 @@
 package AlgorithmsTwo.Aikataulu;
 
+import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -29,6 +30,8 @@ public class AikaTaulutus {
 
         asetaKayttajilleAjat();
         String tulos = tulkitsetulos();
+        PrintStream ps = new PrintStream(System.out);
+        ps.println(tulos);
         return tulos;
     }
 
