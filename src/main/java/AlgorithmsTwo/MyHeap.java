@@ -60,7 +60,23 @@ public class MyHeap {
 
 
     private void heapify (int comparableIndex) {
+        int smallerChildIndex;
+        int firstChildIndex = comparableIndex * 2 + 1;
+        int secondChildIndex = comparableIndex * 2 + 2;
 
+        if (firstChildIndex > size || secondChildIndex > size) {
+            return;
+        }
+
+        if (heap[firstChildIndex] < heap[secondChildIndex]) {
+           smallerChildIndex = firstChildIndex;
+        } else {
+            smallerChildIndex = secondChildIndex;
+        }
+
+        if (heap[smallerChildIndex] < heap[comparableIndex]) {
+            swap(smallerChildIndex, comparableIndex);
+        }
     }
 
     private void addSpaceToHeap() {

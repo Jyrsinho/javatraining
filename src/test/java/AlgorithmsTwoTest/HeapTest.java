@@ -89,7 +89,11 @@ public class HeapTest {
         System.out.println();
         myHeap.printHeap();
         assertEquals(2, myHeap.extract());
+        assertEquals(3, myHeap.extract());
 
     }
+
+    @Test
+
 
 }
