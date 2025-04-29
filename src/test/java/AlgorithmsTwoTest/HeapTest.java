@@ -43,4 +43,18 @@ public class HeapTest {
         assertEquals(1, myHeap.peek());
     }
 
+    @Test
+    public void testHeapShouldAllocateNewSpace() {
+        myHeap.insert(6);
+        myHeap.insert(5);
+        myHeap.insert(3);
+        myHeap.insert(2);
+        myHeap.insert(1);
+        myHeap.insert(4);
+        assertEquals(10, myHeap.getCapacity());
+        assertEquals(1, myHeap.peek());
+
+
+    }
+
 }

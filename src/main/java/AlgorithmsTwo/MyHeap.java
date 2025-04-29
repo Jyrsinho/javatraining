@@ -19,6 +19,10 @@ public class MyHeap {
        heap[size] = value;
        bubbleUp(size);
        size++;
+
+       if (size == heap.length) {
+           addSpaceToHeap();
+       }
     }
 
     public int extract() {
@@ -40,12 +44,25 @@ public class MyHeap {
         }
     }
 
+    public int getCapacity() {
+        return heap.length;
+    }
+
+
+    private void addSpaceToHeap() {
+        int[] newHeap = new int[heap.length * 2];
+        System.arraycopy(heap, 0, newHeap, 0, heap.length);
+        heap = newHeap;
+    }
+
+
     private void swap(int parentIndex, int comparableIndex) {
         int temp = heap[parentIndex];
         heap[parentIndex] = heap[comparableIndex];
         heap[comparableIndex] = temp;
 
     }
+
 
     public void printHeap() {
         int amountOfNodes = 1;
