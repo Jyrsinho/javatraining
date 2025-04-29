@@ -30,7 +30,13 @@ public class MyHeap {
             return -1;
         }
         size--;
-        return heap[0];
+        int top = heap[0];
+        heap[0] = heap[size];
+        heap[size] = 0;
+
+        heapify(0);
+
+        return top;
 
     }
 
@@ -48,6 +54,14 @@ public class MyHeap {
         return heap.length;
     }
 
+    public int getSize() {
+        return size;
+    }
+
+
+    private void heapify (int comparableIndex) {
+
+    }
 
     private void addSpaceToHeap() {
         int[] newHeap = new int[heap.length * 2];

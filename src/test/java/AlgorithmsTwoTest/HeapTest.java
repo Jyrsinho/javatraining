@@ -54,6 +54,41 @@ public class HeapTest {
         assertEquals(10, myHeap.getCapacity());
         assertEquals(1, myHeap.peek());
 
+    }
+
+    @Test
+    public void testHeapShouldReturnNegativeOneWhenTryingToRemoveFromEmptyHeap() {
+        assertEquals(-1, myHeap.extract());
+    }
+
+    @Test
+    public void testHeapShouldRemoveOnlyElementFromHeap(){
+        myHeap.insert(1);
+        assertEquals(1, myHeap.extract());
+        assertEquals(0, myHeap.getSize());
+
+    }
+
+    @Test
+    public void testHeapShouldRemoveElementFromHeapAndSetNewTop(){
+        myHeap.insert(1);
+        myHeap.insert(2);
+        assertEquals(1, myHeap.extract());
+        assertEquals(2, myHeap.peek());
+    }
+
+    @Test
+    public void testHeapShouldRemoveElementFromHeapAndSetNewTop2(){
+        myHeap.insert(5);
+        myHeap.insert(4);
+        myHeap.insert(3);
+        myHeap.insert(2);
+        myHeap.insert(1);
+        myHeap.printHeap();
+        assertEquals(1,myHeap.extract());
+        System.out.println();
+        myHeap.printHeap();
+        assertEquals(2, myHeap.extract());
 
     }
 
