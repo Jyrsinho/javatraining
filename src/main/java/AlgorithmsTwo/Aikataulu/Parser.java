@@ -3,6 +3,7 @@ package AlgorithmsTwo.Aikataulu;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+
 public class Parser {
     ArrayList<AikaTaulutus> aikataulutukset;
 
@@ -10,11 +11,6 @@ public class Parser {
         this.aikataulutukset = new ArrayList<>();
     }
 
-    //TODO: Refaktoroidaan tämä niin, että käyttää pelkkiä RegExpejä.
-    // nollat eivät ole tarpeellisia joten voidaan käyttää array.split metodia
-    // kolme nollaa jakaa syötteen ja siihen kuulumattoman osan
-    // kaksi nollaa jakaa Aikataulutukset
-    // yksi nolla jakaaa yksittäiset käyttäjät
 
     /**
      * Luodaan syotteesta ArrayList Tapauksista
@@ -55,12 +51,12 @@ public class Parser {
 
     private void luoAikaTaulutus(String aikataulutuksenSyote){
 
-        ArrayList<Kayttaja> kayttajat = new ArrayList<>();
+        ArrayList<ArrayList<Integer>> kayttajat = new ArrayList<>();
         //kayttajan syote vaihtuu aina 0 kohdalla
         String[] kayttajienToiveet = aikataulutuksenSyote.split("(\\s+0\\s+)");
         for (int i = 0; i < kayttajienToiveet.length; i++) {
-           Kayttaja uusiKayttaja = luoUusiKayttajaSyotteesta(i + 1,kayttajienToiveet[i]);
-           kayttajat.add(uusiKayttaja);
+            ArrayList<Integer> kayttajanToiveet = luoKayttajanLista(kayttajienToiveet[i]);
+            kayttajat.add(kayttajanToiveet);
         }
 
         AikaTaulutus uusiAikataulutus = new AikaTaulutus(kayttajat);
@@ -68,15 +64,16 @@ public class Parser {
     }
 
 
-    private Kayttaja luoUusiKayttajaSyotteesta(int kayttajanID, String kayttajanSyote) {
-        ArrayList<Integer> kayttajanToiveet = new ArrayList<>();
-        Scanner scanner = new Scanner(kayttajanSyote);
-        while (scanner.hasNext()) {
-            int toive = scanner.nextInt();
+    private ArrayList<Integer> luoKayttajanLista (String kayttajanToiveet) {
+        ArrayList<Integer> kayttajanToiveLista = new ArrayList<>();
 
-            kayttajanToiveet.add(toive);
+        Scanner scanner = new Scanner(kayttajanToiveet);
+        while (scanner.hasNextInt()) {
+            int toive = scanner.nextInt();
+            kayttajanToiveLista.add(toive);
         }
-        return new Kayttaja(kayttajanID, kayttajanToiveet);
+
+        return kayttajanToiveLista;
     }
 
 

@@ -1,7 +1,6 @@
 package AlgorithmsTwo.Aikataulu;
 
 import java.util.ArrayList;
-import java.util.Scanner;
 
 public class Aikataulu {
 
@@ -9,11 +8,12 @@ public class Aikataulu {
         Parser parser = new Parser();
 
         parser.kasitteleSyote(syote);
-        ArrayList<AikaTaulutus> tapaukset = parser.annaTapaukset();
+        ArrayList<AikaTaulutus> aikaTaulutukset= parser.annaTapaukset();
 
-        for (AikaTaulutus tapaus: tapaukset) {
-            String matsit = tapaus.jaaAikataulu();
-            System.out.println(matsit);
+        for (AikaTaulutus aikaTaulutus: aikaTaulutukset) {
+            int[] matsit = aikaTaulutus.jaaAikataulu();
+            Tulostaja tulosta = new Tulostaja();
+            tulosta.tulostaAikataulutus(matsit);
         }
 
     }
@@ -1061,7 +1061,7 @@ public class Aikataulu {
                 0
                 0
                 """;
-
+/*
         Scanner scanner = new Scanner(System.in);
         StringBuilder sb = new StringBuilder();
         while (scanner.hasNextLine()) {
@@ -1069,6 +1069,8 @@ public class Aikataulu {
             sb.append(nextLine);
             sb.append("\n");
         }
+
+ */
 
 
         Aikataulu aikataulu = new Aikataulu();
