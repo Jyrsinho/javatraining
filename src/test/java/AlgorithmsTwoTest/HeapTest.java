@@ -4,6 +4,7 @@ import AlgorithmsTwo.MyHeap;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class HeapTest {
@@ -94,6 +95,12 @@ public class HeapTest {
     }
 
     @Test
+    public void testHeapSortShouldReturnEmptyArrayWhenGivenEmptyArray() {
+        int[] testArray = {};
+        int[] sortedArray = myHeap.heapsort(testArray);
+        int[] expected = {};
+        assertArrayEquals(expected, sortedArray);
 
+    }
 
 }

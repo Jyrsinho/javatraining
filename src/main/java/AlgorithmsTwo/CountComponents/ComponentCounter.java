@@ -21,7 +21,12 @@ public class ComponentCounter {
         Vertex current = graph.getVertexById(nextUnvisited);
 
         while (current!= null) {
+            numberOfComponents++;
             dfs(current);
+            int nextUnvisitedIndex = findNextUnvisited();
+            if (nextUnvisitedIndex == -1) {
+                break;
+            }
             current= graph.getVertexById(findNextUnvisited());
 
         }

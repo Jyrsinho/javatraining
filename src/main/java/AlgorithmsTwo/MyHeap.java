@@ -59,6 +59,11 @@ public class MyHeap {
     }
 
 
+    public int[] heapsort(int[] array){
+        return new int[0];
+    }
+
+
     private void heapify (int comparableIndex) {
         int smallerChildIndex;
         int firstChildIndex = comparableIndex * 2 + 1;

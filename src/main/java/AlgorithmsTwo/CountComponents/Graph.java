@@ -42,6 +42,9 @@ public class Graph {
     }
 
     public Vertex getVertexById(int vertexId) {
+        if (vertexId > vertices.size()) {
+            return null;
+        }
         return vertices.get(vertexId);
     }
 
