@@ -13,7 +13,7 @@ public class AikaTaulutus {
     private ArrayList<ArrayList<Integer>> kayttajienToiveet;    // kayttajat taulukkoon jossa on kunkin kayttajan indeksissa lista hanen toiveisiinsa
     private int[] asiakkaidenAjat; //merkataan kayttajan aika kayttajan indeksiin
     private int asiakkaidenMaara;
-    private Map<Integer, Integer> aikaAsiakkaalle = new HashMap<>();
+    private Map<Integer, Integer> aikaAsiakasMap = new HashMap<>();
 
     /**
      * Luodaan uusi aikataulutus Arraylistista joka sisaltaa kayttajat ja heidan aikatoiveensa
@@ -37,26 +37,25 @@ public class AikaTaulutus {
 
 
         for (int asiakasNumero = 0; asiakasNumero < asiakkaidenMaara; asiakasNumero++) {
-            annaAika(asiakasNumero);
+            boolean[] vierailtuAsiakas = new boolean[asiakkaidenMaara];
+            annaAika(asiakasNumero, vierailtuAsiakas);
         }
+
+        taytaTulosTaulukko();
     }
 
     private void alustaTulosTaulukko() {
         Arrays.fill(asiakkaidenAjat, 0);
     }
 
-    private boolean annaAika(int asiakasNumero) {
-        boolean[] vierailtu = new boolean[1000];
+    private boolean annaAika(int asiakasNumero, boolean []vierailtuasiakas) {
+        if (vierailtuasiakas[asiakasNumero] == true) return false;
+        vierailtuasiakas[asiakasNumero] = true;
         ArrayList<Integer> asiakkaanToiveet = kayttajienToiveet.get(asiakasNumero);
 
         for (int aika : asiakkaanToiveet) {
-            if (vierailtu[aika]) {
-                continue;
-            }
-            vierailtu[aika] = true;
-
-             if (!aikaAsiakkaalle.containsKey(aika) || annaAika(aikaAsiakkaalle.get(aika))){
-                aikaAsiakkaalle.put(aika, asiakasNumero);
+             if (!aikaAsiakasMap.containsKey(aika) || annaAika(aikaAsiakasMap.get(aika), vierailtuasiakas)) {
+                aikaAsiakasMap.put(aika, asiakasNumero);
                 return true;
             }
         }
@@ -65,6 +64,14 @@ public class AikaTaulutus {
 
     public int[] annaAsiakkaidenAjat() {
         return asiakkaidenAjat;
+    }
+
+    private void taytaTulosTaulukko() {
+        for (Map.Entry<Integer, Integer> entry : aikaAsiakasMap.entrySet()) {
+            int aika = entry.getKey();
+            int customer = entry.getValue();
+            asiakkaidenAjat[customer] = aika;
+        }
     }
 
     public void tulostaAjat() {

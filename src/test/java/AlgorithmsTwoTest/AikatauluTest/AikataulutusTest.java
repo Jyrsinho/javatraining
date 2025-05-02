@@ -32,7 +32,7 @@ public class AikataulutusTest {
         AikaTaulutus aikaTaulutus = new AikaTaulutus(kayttajienToiveet);
         aikaTaulutus.jaaAikataulu();
         int [] actual = aikaTaulutus.annaAsiakkaidenAjat();
-        int []expected = new int[1];
+        int []expected = new int[]{1};
         aikaTaulutus.tulostaAjat();
         assertArrayEquals(expected,actual);
 
