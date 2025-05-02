@@ -67,5 +67,11 @@ public class AikaTaulutus {
         return asiakkaidenAjat;
     }
 
+    public void tulostaAjat() {
+        for (int i = 0; i <asiakkaidenAjat.length; i++) {
+            System.out.println(asiakkaidenAjat[i]);
+        }
+    }
+
 
 }

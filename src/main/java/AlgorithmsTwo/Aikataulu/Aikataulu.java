@@ -1084,6 +1084,10 @@ public class Aikataulu {
         aikataulu.kasitteleSyote(testiSyote3);
         System.out.println();
         System.out.println("------------------------------------------------------------------------------------------------");
+        /*
         aikataulu.kasitteleSyote(testiSyote4);
+
+
+         */
     }
 }
