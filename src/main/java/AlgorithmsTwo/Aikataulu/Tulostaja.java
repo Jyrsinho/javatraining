@@ -9,6 +9,9 @@ public class Tulostaja {
         for (int i = 0; i < aikataulutus.length; i++) {
             out.print("    ");
             out.print(aikataulutus[i]);
+            if (i % 10 == 0) {
+                out.println();
+            }
         }
         out.println();
     }
