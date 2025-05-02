@@ -10,10 +10,10 @@ import java.util.Map;
  */
 public class AikaTaulutus {
 
-    private ArrayList<ArrayList<Integer>> kayttajienToiveet;    // kayttajat taulukkoon jossa on kunkin kayttajan indeksissa lista hanen toiveisiinsa
-    private int[] asiakkaidenAjat; //merkataan kayttajan aika kayttajan indeksiin
-    private int asiakkaidenMaara;
-    private Map<Integer, Integer> aikaAsiakasMap = new HashMap<>();
+    private final ArrayList<ArrayList<Integer>> kayttajienToiveet;    // kayttajat taulukkoon jossa on kunkin kayttajan indeksissa lista hanen toiveisiinsa
+    private final int[] asiakkaidenAjat; //merkataan kayttajan aika kayttajan indeksiin
+    private final int asiakkaidenMaara;
+    private final Map<Integer, Integer> aikaAsiakasMap = new HashMap<>();
 
     /**
      * Luodaan uusi aikataulutus Arraylistista joka sisaltaa kayttajat ja heidan aikatoiveensa
@@ -49,7 +49,7 @@ public class AikaTaulutus {
     }
 
     private boolean annaAika(int asiakasNumero, boolean []vierailtuasiakas) {
-        if (vierailtuasiakas[asiakasNumero] == true) return false;
+        if (vierailtuasiakas[asiakasNumero]) return false;
         vierailtuasiakas[asiakasNumero] = true;
         ArrayList<Integer> asiakkaanToiveet = kayttajienToiveet.get(asiakasNumero);
 
