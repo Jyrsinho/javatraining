@@ -11,9 +11,9 @@ import java.util.Map;
 public class AikaTaulutus {
 
     private ArrayList<ArrayList<Integer>> kayttajienToiveet;    // kayttajat taulukkoon jossa on kunkin kayttajan indeksissa lista hanen toiveisiinsa
-    private boolean[] vierailtu;
-    private int[] matsatyt; //merkataan aika kayttajan indeksiin aika
-
+    private int[] asiakkaidenAjat; //merkataan kayttajan aika kayttajan indeksiin
+    private int asiakkaidenMaara;
+    private Map<Integer, Integer> aikaAsiakkaalle = new HashMap<>();
 
     /**
      * Luodaan uusi aikataulutus Arraylistista joka sisaltaa kayttajat ja heidan aikatoiveensa
@@ -22,8 +22,9 @@ public class AikaTaulutus {
      */
     public AikaTaulutus(ArrayList<ArrayList<Integer>> kayttajat) {
         this.kayttajienToiveet= kayttajat;
-        Map<Integer, Integer> aikaKayttajalle = new HashMap<>(); //aika --> asiakas
-        Arrays.fill(matsatyt, -1);
+        asiakkaidenMaara = kayttajat.size();
+        asiakkaidenAjat = new int[asiakkaidenMaara];
+
     }
 
 
@@ -31,16 +32,40 @@ public class AikaTaulutus {
      * Palauttaa taulukon
      *
      */
-    public int[] jaaAikataulu() {
-        int asikasluku = kayttajienToiveet.size();
-        assignedTimeForCustomer = new int[customerCount];
-        Arrays.fill(assignedTimeForCustomer, 0);
-        timeAssignedTo.clear();
+    public void jaaAikataulu() {
+        alustaTulosTaulukko();
 
-        return matsatyt;
+
+        for (int asiakasNumero = 0; asiakasNumero < asiakkaidenMaara; asiakasNumero++) {
+            annaAika(asiakasNumero);
+        }
     }
 
+    private void alustaTulosTaulukko() {
+        Arrays.fill(asiakkaidenAjat, 0);
+    }
 
+    private boolean annaAika(int asiakasNumero) {
+        boolean[] vierailtu = new boolean[1000];
+        ArrayList<Integer> asiakkaanToiveet = kayttajienToiveet.get(asiakasNumero);
+
+        for (int aika : asiakkaanToiveet) {
+            if (vierailtu[aika]) {
+                continue;
+            }
+            vierailtu[aika] = true;
+
+             if (!aikaAsiakkaalle.containsKey(aika) || annaAika(aikaAsiakkaalle.get(aika))){
+                aikaAsiakkaalle.put(aika, asiakasNumero);
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public int[] annaAsiakkaidenAjat() {
+        return asiakkaidenAjat;
+    }
 
 
 }

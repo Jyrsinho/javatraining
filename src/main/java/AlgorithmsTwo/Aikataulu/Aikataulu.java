@@ -11,9 +11,10 @@ public class Aikataulu {
         ArrayList<AikaTaulutus> aikaTaulutukset= parser.annaTapaukset();
 
         for (AikaTaulutus aikaTaulutus: aikaTaulutukset) {
-            int[] matsit = aikaTaulutus.jaaAikataulu();
+            aikaTaulutus.jaaAikataulu();
+            int [] tulos = aikaTaulutus.annaAsiakkaidenAjat();
             Tulostaja tulosta = new Tulostaja();
-            tulosta.tulostaAikataulutus(matsit);
+            tulosta.tulostaAikataulutus(tulos);
         }
 
     }

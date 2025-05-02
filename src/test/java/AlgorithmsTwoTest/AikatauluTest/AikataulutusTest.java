@@ -10,7 +10,6 @@ import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 
 public class AikataulutusTest {
 
-    AikaTaulutus aikaTaulutus;
     ArrayList<ArrayList<Integer>> kayttajienToiveet;
     ArrayList<Integer> kayttajan1Toiveet;
 
@@ -27,9 +26,10 @@ public class AikataulutusTest {
         kayttajan1Toiveet.add(1);
         kayttajienToiveet.add(kayttajan1Toiveet);
         AikaTaulutus aikaTaulutus = new AikaTaulutus(kayttajienToiveet);
-        int [] matsatyt = aikaTaulutus.jaaAikataulu();
+        aikaTaulutus.jaaAikataulu();
+        int [] actual = aikaTaulutus.annaAsiakkaidenAjat();
         int []expected = new int[1];
-        assertArrayEquals(expected, matsatyt);
+        assertArrayEquals(expected,actual);
 
     }
 }
