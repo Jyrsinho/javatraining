@@ -121,4 +121,25 @@ public class AikataulutusTest {
         assertArrayEquals(expected,actual);
 
     }
+
+    @Test
+    public void testCaseOne() {
+        kayttajan1Toiveet.add(3);
+        kayttajan1Toiveet.add(1);
+        kayttajan1Toiveet.add(2);
+        kayttajan2Toiveet.add(3);
+        kayttajan3Toiveet.add(3);
+        kayttajan3Toiveet.add(1);
+
+        kayttajienToiveet.add(kayttajan1Toiveet);
+        kayttajienToiveet.add(kayttajan2Toiveet);
+        kayttajienToiveet.add(kayttajan3Toiveet);
+
+        AikaTaulutus aikaTaulutus = new AikaTaulutus(kayttajienToiveet);
+        aikaTaulutus.jaaAikataulu();
+        int [] actual = aikaTaulutus.annaAsiakkaidenAjat();
+        int [] expected = {0, 2,3,1};
+        aikaTaulutus.tulostaAjat();
+        assertArrayEquals(expected,actual);
+    }
 }

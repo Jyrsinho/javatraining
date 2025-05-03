@@ -47,13 +47,15 @@ public class AikaTaulutus {
     public void jaaAikataulu() {
         while (bfs()) {
             for(int asiakas = 1; asiakas <= asiakkaidenMaara; asiakas++)
-                dfs(asiakas);
+                if (uParit[asiakas] == NIL) {
+                    dfs(asiakas);
+                }
         }
     }
 
     private boolean bfs() {
 
-        PriorityQueue<Integer> jono = new PriorityQueue<>(Comparator.naturalOrder());
+        Queue<Integer> jono = new LinkedList<>();
 
         for(int asiakas = 1; asiakas <= asiakkaidenMaara; asiakas++)
         {
@@ -73,13 +75,12 @@ public class AikaTaulutus {
             int asiakas = jono.poll();
             if (etaisyydet[asiakas] < etaisyydet[NIL])
             {
-                for(int i : kayttajienToiveet.get(asiakas - 1))
+                for(int aika : kayttajienToiveet.get(asiakas - 1))
                 {
-                    int v = i;
-                    if (etaisyydet[vParit[v]] == INF)
+                    if (etaisyydet[vParit[aika]] == INF)
                     {
-                        etaisyydet[vParit[v]] = etaisyydet[asiakas] + 1;
-                        jono.add(vParit[v]);
+                        etaisyydet[vParit[aika]] = etaisyydet[asiakas] + 1;
+                        jono.add(vParit[aika]);
                     }
                 }
             }
@@ -93,7 +94,7 @@ public class AikaTaulutus {
         if (asiakas != NIL)
         {
             for(int aika : kayttajienToiveet.get(asiakas - 1)) {
-                if (etaisyydet[vParit[aika]] == etaisyydet[asiakas] + 1)
+                if (etaisyydet[vParit[aika]] == etaisyydet[asiakas] +1 )
                 {
                     if (dfs(vParit[aika]))
                     {
