@@ -39,6 +39,9 @@ public class AikaTaulutus {
         Arrays.fill(uParit, NIL);
         Arrays.fill(vParit, NIL);
 
+        for (ArrayList<Integer> toiveet : kayttajienToiveet) {
+            Collections.sort(toiveet);
+        }
     }
 
 
@@ -48,9 +51,9 @@ public class AikaTaulutus {
      */
     public void jaaAikataulu() {
         while (bfs()) {
-            for(int u = 1; u <= asiakkaidenMaara; u++)
+            for(int asiakas = 1; asiakas <= asiakkaidenMaara; asiakas++)
 
-                if (uParit[u] == NIL && dfs(u))
+                if (uParit[asiakas] == NIL && dfs(asiakas))
                     matsienMaara++;
         }
     }
