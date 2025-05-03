@@ -18,7 +18,6 @@ public class AikaTaulutus {
     private int[] vParit;
     private int[] etaisyydet;
 
-    private int matsienMaara;
 
     /**
      * Luodaan uusi aikataulutus Arraylistista joka sisaltaa kayttajat ja heidan aikatoiveensa
@@ -26,7 +25,6 @@ public class AikaTaulutus {
      * @param kayttajat kaksiulotteinen taulukko kayttajista ja heidan toiveistaan
      */
     public AikaTaulutus(ArrayList<ArrayList<Integer>> kayttajat) {
-        matsienMaara = 0;
         asiakkaidenMaara = kayttajat.size();
         aikojenMaara = 1000;
 
@@ -49,9 +47,7 @@ public class AikaTaulutus {
     public void jaaAikataulu() {
         while (bfs()) {
             for(int asiakas = 1; asiakas <= asiakkaidenMaara; asiakas++)
-
-                if (uParit[asiakas] == NIL && dfs(asiakas))
-                    matsienMaara++;
+                dfs(asiakas);
         }
     }
 
@@ -96,11 +92,10 @@ public class AikaTaulutus {
     {
         if (asiakas != NIL)
         {
-            for(int i : kayttajienToiveet.get(asiakas - 1)) {
-                int aika = i;
+            for(int aika : kayttajienToiveet.get(asiakas - 1)) {
                 if (etaisyydet[vParit[aika]] == etaisyydet[asiakas] + 1)
                 {
-                    if (dfs(vParit[aika]) == true)
+                    if (dfs(vParit[aika]))
                     {
                         vParit[aika] = asiakas;
                         uParit[asiakas] = aika;
@@ -116,8 +111,8 @@ public class AikaTaulutus {
 
 
     public void tulostaAjat() {
-        for (int i = 0; i <uParit.length; i++) {
-            System.out.println(uParit[i]);
+        for (int j : uParit) {
+            System.out.println(j);
         }
     }
 
