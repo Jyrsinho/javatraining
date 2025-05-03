@@ -6,7 +6,7 @@ public class Tulostaja {
 
     public void tulostaAikataulutus(int [] aikataulutus) {
         PrintStream out = System.out;
-        for (int i = 0; i < aikataulutus.length; i++) {
+        for (int i = 1; i < aikataulutus.length; i++) {
             out.print("    ");
             out.print(aikataulutus[i]);
             if (i % 10 == 0) {

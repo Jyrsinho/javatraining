@@ -3,7 +3,8 @@ package AlgorithmsTwo.Aikataulu;
 import java.util.*;
 
 /**
- * Aikataulutus on vastuussa algoritmin ajamisesta
+ * Aikataulutus palauttaa kayttajien aikatoiveista taulukon, jossa kullekin kayttajalle on annettu aika.
+ * Ensimmainen indeksi on 0
  */
 public class AikaTaulutus {
     static final int NIL = 0;
@@ -76,7 +77,7 @@ public class AikaTaulutus {
             int asiakas = jono.poll();
             if (etaisyydet[asiakas] < etaisyydet[NIL])
             {
-                for(int i : kayttajienToiveet.get(asiakas))
+                for(int i : kayttajienToiveet.get(asiakas - 1))
                 {
                     int v = i;
                     if (etaisyydet[vParit[v]] == INF)
@@ -95,7 +96,7 @@ public class AikaTaulutus {
     {
         if (asiakas != NIL)
         {
-            for(int i : kayttajienToiveet.get(asiakas)) {
+            for(int i : kayttajienToiveet.get(asiakas - 1)) {
                 int aika = i;
                 if (etaisyydet[vParit[aika]] == etaisyydet[asiakas] + 1)
                 {

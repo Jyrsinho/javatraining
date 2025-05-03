@@ -32,7 +32,7 @@ public class AikataulutusTest {
         AikaTaulutus aikaTaulutus = new AikaTaulutus(kayttajienToiveet);
         aikaTaulutus.jaaAikataulu();
         int [] actual = aikaTaulutus.annaAsiakkaidenAjat();
-        int []expected = new int[]{1};
+        int []expected = new int[]{0, 1};
         aikaTaulutus.tulostaAjat();
         assertArrayEquals(expected,actual);
 
@@ -50,7 +50,7 @@ public class AikataulutusTest {
        AikaTaulutus aikaTaulutus = new AikaTaulutus(kayttajienToiveet);
        aikaTaulutus.jaaAikataulu();
        int [] actual = aikaTaulutus.annaAsiakkaidenAjat();
-       int []expected =  {1,2,3};
+       int []expected =  {0, 1, 2, 3};
        aikaTaulutus.tulostaAjat();
        assertArrayEquals(expected,actual);
     }
@@ -70,7 +70,7 @@ public class AikataulutusTest {
         AikaTaulutus aikaTaulutus = new AikaTaulutus(kayttajienToiveet);
         aikaTaulutus.jaaAikataulu();
         int [] actual = aikaTaulutus.annaAsiakkaidenAjat();
-        int [] expected = {1,2,0};
+        int [] expected = {0, 1, 2, 0};
         aikaTaulutus.tulostaAjat();
         assertArrayEquals(expected,actual);
 
