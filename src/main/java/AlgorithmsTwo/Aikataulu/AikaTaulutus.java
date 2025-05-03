@@ -1,19 +1,23 @@
 package AlgorithmsTwo.Aikataulu;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Aikataulutus on vastuussa algoritmin ajamisesta
  */
 public class AikaTaulutus {
+    static final int NIL = 0;
+    static final int INF = Integer.MAX_VALUE;
 
-    private final ArrayList<ArrayList<Integer>> kayttajienToiveet;    // kayttajat taulukkoon jossa on kunkin kayttajan indeksissa lista hanen toiveisiinsa
-    private final int[] asiakkaidenAjat; //merkataan kayttajan aika kayttajan indeksiin
     private final int asiakkaidenMaara;
-    private final Map<Integer, Integer> aikaAsiakasMap = new HashMap<>();
+    private final int aikojenMaara;
+    private ArrayList<ArrayList<Integer>> kayttajienToiveet;
+
+    private int[] uParit;
+    private int[] vParit;
+    private int[] etaisyydet;
+
+    private int matsienMaara;
 
     /**
      * Luodaan uusi aikataulutus Arraylistista joka sisaltaa kayttajat ja heidan aikatoiveensa
@@ -21,9 +25,18 @@ public class AikaTaulutus {
      * @param kayttajat kaksiulotteinen taulukko kayttajista ja heidan toiveistaan
      */
     public AikaTaulutus(ArrayList<ArrayList<Integer>> kayttajat) {
-        this.kayttajienToiveet= kayttajat;
+        matsienMaara = 0;
         asiakkaidenMaara = kayttajat.size();
-        asiakkaidenAjat = new int[asiakkaidenMaara];
+        aikojenMaara = 1000;
+
+        kayttajienToiveet = kayttajat;
+
+        uParit = new int[asiakkaidenMaara + 1 ];
+        vParit = new int[aikojenMaara + 1 ];
+        etaisyydet = new int[asiakkaidenMaara + 1 ];
+
+        Arrays.fill(uParit, NIL);
+        Arrays.fill(vParit, NIL);
 
     }
 
@@ -33,52 +46,82 @@ public class AikaTaulutus {
      *
      */
     public void jaaAikataulu() {
-        alustaTulosTaulukko();
+        while (bfs()) {
+            for(int u = 1; u <= asiakkaidenMaara; u++)
 
-
-        for (int asiakasNumero = 0; asiakasNumero < asiakkaidenMaara; asiakasNumero++) {
-            boolean[] vierailtuAsiakas = new boolean[asiakkaidenMaara];
-            annaAika(asiakasNumero, vierailtuAsiakas);
+                if (uParit[u] == NIL && dfs(u))
+                    matsienMaara++;
         }
-
-        taytaTulosTaulukko();
     }
 
-    private void alustaTulosTaulukko() {
-        Arrays.fill(asiakkaidenAjat, 0);
-    }
+    private boolean bfs() {
 
-    private boolean annaAika(int asiakasNumero, boolean []vierailtuasiakas) {
-        if (vierailtuasiakas[asiakasNumero]) return false;
-        vierailtuasiakas[asiakasNumero] = true;
-        ArrayList<Integer> asiakkaanToiveet = kayttajienToiveet.get(asiakasNumero);
+        Queue<Integer> jono = new LinkedList<>();
 
-        for (int aika : asiakkaanToiveet) {
-             if (!aikaAsiakasMap.containsKey(aika) || annaAika(aikaAsiakasMap.get(aika), vierailtuasiakas)) {
-                aikaAsiakasMap.put(aika, asiakasNumero);
-                return true;
+        for(int asiakas = 1; asiakas <= asiakkaidenMaara; asiakas++)
+        {
+            if (uParit[asiakas] == NIL)
+            {
+                etaisyydet[asiakas] = 0;
+                jono.add(asiakas);
+            }
+
+            else
+                etaisyydet[asiakas] = INF;
+        }
+       etaisyydet[NIL] = INF;
+
+        while (!jono.isEmpty())
+        {
+            int asiakas = jono.poll();
+            if (etaisyydet[asiakas] < etaisyydet[NIL])
+            {
+                for(int i : kayttajienToiveet.get(asiakas))
+                {
+                    int v = i;
+                    if (etaisyydet[vParit[v]] == INF)
+                    {
+                        etaisyydet[vParit[v]] = etaisyydet[asiakas] + 1;
+                        jono.add(vParit[v]);
+                    }
+                }
             }
         }
-        return false;
+        return (etaisyydet[NIL] != INF);
+    }
+
+
+    boolean dfs(int asiakas)
+    {
+        if (asiakas != NIL)
+        {
+            for(int i : kayttajienToiveet.get(asiakas)) {
+                int aika = i;
+                if (etaisyydet[vParit[aika]] == etaisyydet[asiakas] + 1)
+                {
+                    if (dfs(vParit[aika]) == true)
+                    {
+                        vParit[aika] = asiakas;
+                        uParit[asiakas] = aika;
+                        return true;
+                    }
+                }
+            }
+            etaisyydet[asiakas] = INF;
+            return false;
+        }
+        return true;
+    }
+
+
+    public void tulostaAjat() {
+        for (int i = 0; i <uParit.length; i++) {
+            System.out.println(uParit[i]);
+        }
     }
 
     public int[] annaAsiakkaidenAjat() {
-        return asiakkaidenAjat;
+        return uParit;
     }
-
-    private void taytaTulosTaulukko() {
-        for (Map.Entry<Integer, Integer> entry : aikaAsiakasMap.entrySet()) {
-            int aika = entry.getKey();
-            int customer = entry.getValue();
-            asiakkaidenAjat[customer] = aika;
-        }
-    }
-
-    public void tulostaAjat() {
-        for (int i = 0; i <asiakkaidenAjat.length; i++) {
-            System.out.println(asiakkaidenAjat[i]);
-        }
-    }
-
 
 }
