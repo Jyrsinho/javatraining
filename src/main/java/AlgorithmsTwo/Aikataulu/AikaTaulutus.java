@@ -39,9 +39,6 @@ public class AikaTaulutus {
         Arrays.fill(uParit, NIL);
         Arrays.fill(vParit, NIL);
 
-        for (ArrayList<Integer> toiveet : kayttajienToiveet) {
-            Collections.sort(toiveet);
-        }
     }
 
 
