@@ -57,7 +57,7 @@ public class AikaTaulutus {
 
     private boolean bfs() {
 
-        Queue<Integer> jono = new LinkedList<>();
+        PriorityQueue<Integer> jono = new PriorityQueue<>(Comparator.naturalOrder());
 
         for(int asiakas = 1; asiakas <= asiakkaidenMaara; asiakas++)
         {
