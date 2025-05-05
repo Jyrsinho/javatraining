@@ -57,6 +57,7 @@ public class AikaTaulutus {
 
         Queue<Integer> jono = new LinkedList<>();
 
+
         for(int asiakas = 1; asiakas <= asiakkaidenMaara; asiakas++)
         {
             if (uParit[asiakas] == NIL)
