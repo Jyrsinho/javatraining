@@ -67,8 +67,8 @@ public class DungeonMaster {
 
     private void visitNeighbours(int r, int c) {
         for (int i = 0; i< 4; i++) {
-            int rr = DR[i];
-            int cc = DC[i];
+            int rr = r + DR[i];
+            int cc = c + DC[i];
 
             // tarkistetaan ettei vierailla gridin ulkopuolisissa soluissa eika soluissa joissa on 0
             if (rr < 0  || cc < 0) {
@@ -85,13 +85,12 @@ public class DungeonMaster {
                 continue;
             }
 
-
-            visited[rr][cc] = true;
-
             if (maze[r][c] == 3) {
                 reachedEnd = true;
                 break;
             }
+
+            visited[rr][cc] = true;
 
             rowQueue.add(rr);
             colQueue.add(cc);
