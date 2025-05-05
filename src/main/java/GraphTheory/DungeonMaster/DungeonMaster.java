@@ -55,10 +55,15 @@ public class DungeonMaster {
 
         rowQueue.add(startingRow);
         colQueue.add(startingCol);
+        nodesLeftInLayer = 0;
 
         while (!rowQueue.isEmpty() ) {
             int r = rowQueue.poll();
             int c = colQueue.poll();
+            nodesLeftInLayer--;
+            if (nodesLeftInLayer == 0) {
+                amountOfSteps++;
+            }
 
             visitNeighbours(r, c);
         }
@@ -94,7 +99,10 @@ public class DungeonMaster {
 
             rowQueue.add(rr);
             colQueue.add(cc);
+            nodesInNextLayer++;
         }
+        nodesLeftInLayer = nodesInNextLayer;
+        nodesInNextLayer = 0;
 
 
     }

@@ -31,13 +31,13 @@ public class DungeonMasterTest {
     }
 
     @Test
-    public void testDungeonMasterShouldReturnOneWhenSolvingMazeTakesOneStep() {
+    public void testDungeonMasterShouldReturnTwoWhenSolvingMazeTakesTwoSteps() {
         int [][] maze = {
                 {2, 1, 3}
         };
         DungeonMaster dungeonMaster = new DungeonMaster(maze);
         dungeonMaster.solveMazeBFS();
-        int expected = 1;
+        int expected = 2;
         int actual = dungeonMaster.getAmountOfSteps();
         dungeonMaster.printVisited();
         assertEquals(expected, actual);
