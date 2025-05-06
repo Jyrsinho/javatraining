@@ -47,7 +47,7 @@ public class DungeonMaster {
     }
 
 
-    public void solveMazeBFS() {
+    public boolean solveMazeBFS() {
         int [] startingPosition = findStartingPosition(maze);
         startingRow = startingPosition[0];
         startingCol = startingPosition[1];
@@ -55,18 +55,28 @@ public class DungeonMaster {
 
         rowQueue.add(startingRow);
         colQueue.add(startingCol);
-        nodesLeftInLayer = 0;
+        nodesLeftInLayer = 1;
 
         while (!rowQueue.isEmpty() ) {
             int r = rowQueue.poll();
             int c = colQueue.poll();
-            nodesLeftInLayer--;
-            if (nodesLeftInLayer == 0) {
-                amountOfSteps++;
+
+            if (maze[r][c] == 3) {
+               reachedEnd = true;
+               return reachedEnd;
             }
 
             visitNeighbours(r, c);
+            nodesLeftInLayer --;
+
+            // End of current BFS layer
+            if (nodesLeftInLayer == 0) {
+                nodesLeftInLayer = nodesInNextLayer;
+                nodesInNextLayer = 0;
+                amountOfSteps++;
+            }
         }
+        return reachedEnd;
     }
 
 
@@ -90,20 +100,11 @@ public class DungeonMaster {
                 continue;
             }
 
-            if (maze[r][c] == 3) {
-                reachedEnd = true;
-                break;
-            }
-
             visited[rr][cc] = true;
-
             rowQueue.add(rr);
             colQueue.add(cc);
             nodesInNextLayer++;
         }
-        nodesLeftInLayer = nodesInNextLayer;
-        nodesInNextLayer = 0;
-
 
     }
 
@@ -122,8 +123,10 @@ public class DungeonMaster {
         return startingPosition;
     }
 
+
    public int [][] getShortestPath(int[][] maze) {
         return shortestPath;
+
    }
 
    public void printVisited() {
@@ -137,6 +140,10 @@ public class DungeonMaster {
    }
 
    public int getAmountOfSteps() {
-        return amountOfSteps;
+       if (reachedEnd) {
+           return amountOfSteps;
+       } else {
+           return -1;
+       }
    }
 }
