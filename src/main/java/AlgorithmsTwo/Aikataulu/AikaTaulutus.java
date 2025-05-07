@@ -26,7 +26,11 @@ public class AikaTaulutus {
      */
     public AikaTaulutus(ArrayList<ArrayList<Integer>> kayttajat) {
         asiakkaidenMaara = kayttajat.size();
-        aikojenMaara = 1000;
+        int maksimiAika = kayttajat.stream()
+                .flatMap(List::stream)
+                .max(Integer::compareTo)
+                .orElse(0);
+        this.aikojenMaara = maksimiAika + 1;
 
         kayttajienToiveet = kayttajat;
 
