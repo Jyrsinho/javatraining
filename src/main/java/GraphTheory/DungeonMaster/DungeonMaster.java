@@ -12,8 +12,8 @@ import java.util.Queue;
 public class DungeonMaster {
 
     private int[][] maze;
+    private int[][][] previous;
 
-    private int[][] shortestPath;
     private boolean[][] visited;
 
     private Queue<Integer> rowQueue;
@@ -44,6 +44,8 @@ public class DungeonMaster {
 
         this.rowQueue = new LinkedList<Integer>();
         this.colQueue = new LinkedList<Integer>();
+
+        this.previous = new int[numberOfRows][numberOfColumns][2];
     }
 
 
@@ -52,6 +54,8 @@ public class DungeonMaster {
         startingRow = startingPosition[0];
         startingCol = startingPosition[1];
         visited[startingRow][startingCol] = true;
+        previous[startingRow][startingCol][0] = -1;
+        previous[startingRow][startingCol][1] = -1;
 
         rowQueue.add(startingRow);
         colQueue.add(startingCol);
@@ -101,6 +105,7 @@ public class DungeonMaster {
             }
 
             visited[rr][cc] = true;
+            previous[rr][cc] = new int[] {r, c};
             rowQueue.add(rr);
             colQueue.add(cc);
             nodesInNextLayer++;
@@ -123,20 +128,73 @@ public class DungeonMaster {
         return startingPosition;
     }
 
+    private int[] findEnd() {
+        for (int i = 0; i < maze.length; i++) {
+            for (int j = 0; j < maze[0].length; j++) {
+                if (maze[i][j] == 3) {
+                    return new int[] {i, j};
+                }
+            }
+        }
+        return null;
+    }
 
-   public int [][] getShortestPath(int[][] maze) {
-        return shortestPath;
+
+   public String getShortestPath() {
+        StringBuilder endToStart = new StringBuilder();
+        int[] end = findEnd();
+        if (end == null) {
+            return  "";
+        }
+
+        // adding the end node to the path
+        endToStart.append("[");
+        endToStart.append(end[0]);
+        endToStart.append(",");
+        endToStart.append(end[1]);
+        endToStart.append("]");
+
+        int currentRow = end[0];
+        int currentCol = end[1];
+
+        while (previous[currentRow][currentCol][0] != -1) {
+            endToStart.append("[");
+            endToStart.append(previous[currentRow][currentCol][0]);
+            endToStart.append(",");
+            endToStart.append(previous[currentRow][currentCol][1]);
+            endToStart.append("]");
+
+            currentRow = previous[currentRow][currentCol][0];
+            currentCol = previous[currentRow][currentCol][1];
+        }
+
+        endToStart = reverse(endToStart);
+        endToStart = convertPathToString(endToStart);
+
+        return endToStart.toString();
 
    }
 
    public void printVisited() {
        PrintStream out = System.out;
+       out.println("Visited: ");
         for (int i = 0; i < visited.length; i++) {
            for (int j = 0; j < visited[0].length; j++) {
                out.print(visited[i][j] + " ");
            }
             System.out.println();
        }
+   }
+
+   public void printPrevious() {
+        PrintStream out = System.out;
+        out.println("Previous: ");
+        for (int i = 0; i < previous.length; i++) {
+            for (int j = 0; j < previous[0].length; j++) {
+                out.print("[" + previous[i][j][0] + "," + previous[i][j][1] + "]");
+            }
+            System.out.println();
+        }
    }
 
    public int getAmountOfSteps() {

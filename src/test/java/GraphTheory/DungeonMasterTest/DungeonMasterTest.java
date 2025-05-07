@@ -59,4 +59,18 @@ public class DungeonMasterTest {
         assertTrue(reachedEnd);
         assertEquals(expected, actual);
     }
+
+    @Test
+    public void testDungeonMasterShoudGiveShortestPath() {
+        int [][] maze = {
+                {2, 1, 3},
+        };
+        DungeonMaster dungeonMaster = new DungeonMaster(maze);
+        boolean reachedEnd = dungeonMaster.solveMazeBFS();
+        String expected = "[0,0], [0,1] [0,2]";
+        String actual = dungeonMaster.getShortestPath();
+        dungeonMaster.printVisited();
+        dungeonMaster.printPrevious();
+        assertEquals(expected, actual);
+    }
 }
