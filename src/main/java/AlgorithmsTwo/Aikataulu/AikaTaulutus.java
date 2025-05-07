@@ -17,6 +17,7 @@ public class AikaTaulutus {
     private int[] uParit;
     private int[] vParit;
     private int[] etaisyydet;
+    private int[] aivanTurhaPoistaVaan;
 
 
     /**
