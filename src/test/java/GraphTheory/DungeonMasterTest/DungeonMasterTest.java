@@ -67,7 +67,25 @@ public class DungeonMasterTest {
         };
         DungeonMaster dungeonMaster = new DungeonMaster(maze);
         boolean reachedEnd = dungeonMaster.solveMazeBFS();
-        String expected = "[0,0], [0,1] [0,2]";
+        String expected = "[[0, 0], [0, 1], [0, 2]]";
+        String actual = dungeonMaster.getShortestPath();
+        dungeonMaster.printVisited();
+        dungeonMaster.printPrevious();
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    public void testDungeonMasterShouldGiveShortestPathOn5x5Grid() {
+        int[][] maze = {
+                { 0, 1, 1, 1, 0},
+                { 2, 1, 0, 1, 0},
+                { 1, 0 ,0, 1, 1},
+                { 1, 0, 3, 0, 1},
+                { 1, 0, 1, 1, 1}
+        };
+        DungeonMaster dungeonMaster = new DungeonMaster(maze);
+        boolean reachedEnd = dungeonMaster.solveMazeBFS();
+        String expected = "[[1, 0], [1, 1], [0, 1], [0, 2], [0, 3], [1, 3], [2, 3], [2, 4], [3, 4], [4, 4], [4, 3], [4, 2], [3, 2]]";
         String actual = dungeonMaster.getShortestPath();
         dungeonMaster.printVisited();
         dungeonMaster.printPrevious();

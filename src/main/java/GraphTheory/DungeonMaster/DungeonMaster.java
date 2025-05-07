@@ -1,6 +1,7 @@
 package GraphTheory.DungeonMaster;
 
 import java.io.PrintStream;
+import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.Queue;
 
@@ -141,37 +142,52 @@ public class DungeonMaster {
 
 
    public String getShortestPath() {
-        StringBuilder endToStart = new StringBuilder();
+        int[][] endToStart = new int[amountOfSteps + 1][2];
         int[] end = findEnd();
         if (end == null) {
             return  "";
         }
 
         // adding the end node to the path
-        endToStart.append("[");
-        endToStart.append(end[0]);
-        endToStart.append(",");
-        endToStart.append(end[1]);
-        endToStart.append("]");
 
         int currentRow = end[0];
         int currentCol = end[1];
 
-        while (previous[currentRow][currentCol][0] != -1) {
-            endToStart.append("[");
-            endToStart.append(previous[currentRow][currentCol][0]);
-            endToStart.append(",");
-            endToStart.append(previous[currentRow][currentCol][1]);
-            endToStart.append("]");
+        endToStart[0][0] = currentRow;
+        endToStart[0][1] = currentCol;
 
-            currentRow = previous[currentRow][currentCol][0];
-            currentCol = previous[currentRow][currentCol][1];
+        int index = 0;
+
+        while (currentRow != -1) {
+            int nextRow = previous[currentRow][currentCol][0];
+            int nextCol = previous[currentRow][currentCol][1];
+
+           endToStart[index][0] = currentRow;
+           endToStart[index][1] = currentCol;
+
+            currentRow = nextRow;
+            currentCol = nextCol;
+            index++;
+
         }
 
-        endToStart = reverse(endToStart);
-        endToStart = convertPathToString(endToStart);
 
-        return endToStart.toString();
+
+        endToStart = reversePath(endToStart);
+
+
+        return Arrays.deepToString(endToStart);
+
+   }
+
+   private int[][] reversePath(int[][] endToStart) {
+        int[][] startToEnd = new int[endToStart.length][endToStart[0].length];
+
+       for (int i = 0,  j = endToStart.length -1 ; i < endToStart.length; i++, j--) {
+           startToEnd[i] = endToStart[j];
+       }
+
+       return startToEnd;
 
    }
 
