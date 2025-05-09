@@ -5,10 +5,10 @@ import java.util.ArrayList;
 public class Esitieto {
 
     public void kasitteleSyote(String syote) {
+        // syote -> parser -> kurssilistat kukin kurssilista on kasa kurssiolioita
         Parser parser = new Parser();
-        parser.kasitteleSyote(syote);
+        ArrayList<KurssiLista> kurssilistat = parser.kasitteleSyote(syote);
 
-        ArrayList<KurssiLista> suorituslistat = parser.getKurssiListat();
     }
 
     public static void main(String[] args) {

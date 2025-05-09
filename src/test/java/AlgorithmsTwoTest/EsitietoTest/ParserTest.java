@@ -18,8 +18,8 @@ public class ParserTest {
                 7 3 0  0       0
                 """;
         Parser parser = new Parser();
-        parser.kasitteleSyote(testiSyote);
-        ArrayList<KurssiLista> kurssiListat = parser.getKurssiListat();
-        assertEquals(1, kurssiListat.size());
+        ArrayList<KurssiLista> kurssilistat = parser.kasitteleSyote(testiSyote);
+        int expected = 2;
+        assertEquals(expected, kurssilistat.size());
     }
 }
