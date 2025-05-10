@@ -12,4 +12,15 @@ public class KurssiLista {
     public void lisaaKurssi(Kurssi kurssi) {
         kurssit.add(kurssi);
     }
+
+    public ArrayList<Kurssi> getKurssit() {
+        return kurssit;
+    }
+
+    public void tulostaKurssit() {
+        for (Kurssi kurssi : kurssit) {
+            kurssi.tulosta();
+            System.out.println();
+        }
+    }
 }

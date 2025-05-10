@@ -15,6 +15,14 @@ public class Kurssi {
         this.ennakkotiedot = ennakkotiedot;
     }
 
+    public void tulosta() {
+        System.out.printf("%d %s %d ", id, nimi, periodi);
+        System.out.print("ennakkotiedot: ");
+        for (int ennakkotieto: ennakkotiedot) {
+            System.out.print(ennakkotieto + " ");
+        }
+    }
+
     //  Pitsinnypläys 4: 5 4 8 6 1 10
     //7 3 0
 
