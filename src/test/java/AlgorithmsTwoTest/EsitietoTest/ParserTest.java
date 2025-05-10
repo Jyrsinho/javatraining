@@ -38,7 +38,7 @@ public class ParserTest {
     }
 
     @Test
-    public void testParserShouldCreateKurssiListaWithThreeKurssi() {
+    public void testParserShouldCreateKurssiListaWithThreeKurssisAndDummyForZero() {
         String testiSyote = """
                 1 kokkaus 1: 2 0
                 2 ruuanlaitto 2:    1 0 
@@ -48,7 +48,7 @@ public class ParserTest {
         ArrayList<KurssiLista> kurssilistat = parser.kasitteleSyote(testiSyote);
         KurssiLista kurssiLista = kurssilistat.getFirst();
         ArrayList<Kurssi> kurssit = kurssiLista.getKurssit();
-        int expected = 3;
+        int expected = 4;
         kurssiLista.tulostaKurssit();
         assertEquals(expected, kurssit.size());
     }

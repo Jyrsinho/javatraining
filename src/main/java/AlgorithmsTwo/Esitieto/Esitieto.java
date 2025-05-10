@@ -8,7 +8,9 @@ public class Esitieto {
         // syote -> parser -> kurssilistat kukin kurssilista on kasa kurssiolioita
         Parser parser = new Parser();
         ArrayList<KurssiLista> kurssilistat = parser.kasitteleSyote(syote);
+        for (KurssiLista kurssiLista: kurssilistat) {
 
+        }
     }
 
     public static void main(String[] args) {
