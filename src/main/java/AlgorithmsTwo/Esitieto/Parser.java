@@ -1,6 +1,7 @@
 package AlgorithmsTwo.Esitieto;
 
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class Parser {
 
@@ -44,8 +45,51 @@ public class Parser {
      */
     private KurssiLista luoKurssiLista(String syote) {
         KurssiLista uusiKurssiLista = new KurssiLista();
+
+        String[] kurssit = syote.split("\\s0" );
+
+        for (String kurssiSyote : kurssit) {
+            Kurssi uusiKurssi = luoKurssiSyotteesta(kurssiSyote);
+            uusiKurssiLista.lisaaKurssi(uusiKurssi);
+        }
+        return uusiKurssiLista;
     }
 
+    /**
+     * Saa syotteena kurssin tiedot muodossa:
+     * id, nimi, periodi: ennakkotiedot, 0
+     * Parsii syotteesta kurssiolion ja palauttaa sen
+     * @param syote {String}
+     * @return {Kurssi}
+     */
+    private Kurssi luoKurssiSyotteesta(String syote) {
+        String ennakkotiedotSyote;
+        int id;
+        String nimi;
+        int periodi;
+        ArrayList<Integer> ennakkotiedot = new ArrayList<>();
 
+        String[] osat = syote.split(":");
+        String idNimiJaPeriodi = osat[0];
+        if (osat.length == 2) {
+            ennakkotiedotSyote = osat[1];
+        } else {
+            ennakkotiedotSyote = "";
+        }
+
+        Scanner scanner = new Scanner(idNimiJaPeriodi);
+        id = scanner.nextInt();
+        nimi = scanner.next();
+        periodi = scanner.nextInt();
+
+        Scanner ennakkotiedotScanner = new Scanner(ennakkotiedotSyote);
+        while (ennakkotiedotScanner.hasNext()){
+            int ennakkotieto = ennakkotiedotScanner.nextInt();
+            if (ennakkotieto != 0) {
+                ennakkotiedot.add(ennakkotieto);
+            }
+        }
+        return new Kurssi(id, nimi, periodi, ennakkotiedot);
+    }
 
 }
