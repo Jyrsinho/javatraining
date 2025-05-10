@@ -16,10 +16,10 @@ public class KurssiLista {
     }
 
     public boolean onSilmukka() {
-        vierailtu = new boolean[kurssit.size() + 1];
+        vierailtu = new boolean[kurssit.size()];
 
         for (Kurssi kurssi: kurssit) {
-                rekursioPino = new boolean[kurssit.size() +1];
+                rekursioPino = new boolean[kurssit.size()];
                 if (!dfs(kurssi)) {
                     continue;
                 } else {
@@ -35,11 +35,11 @@ public class KurssiLista {
         rekursioPino[kurssi.getId()] = true;
 
         for (int ennakkotieto: kurssi.getEnnakkotiedot()) {
-            if (rekursioPino[ennakkotieto] == true){
+            if (rekursioPino[ennakkotieto]){
                 return true;
             }
             if (!vierailtu[ennakkotieto]) {
-                dfs(kurssit.get(ennakkotieto));
+               return dfs(kurssit.get(ennakkotieto));
             }
         }
         return false;
