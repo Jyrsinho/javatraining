@@ -1,5 +1,6 @@
 package AlgorithmsTwo.Esitieto;
 
+import java.io.PrintStream;
 import java.util.ArrayList;
 
 public class KurssiLista {
@@ -53,13 +54,27 @@ public class KurssiLista {
     }
 
     public void tulosta() {
-       if (onSilmukka) {
-           for (int i = 1; i < rekursioPino.length; i++) {
-              if (rekursioPino[i]) {
-                  Kurssi tulostettava = kurssit.get(i);
-                  tulostettava.tulosta();
-              }
+        if (onSilmukka) {
+            tulostaSilmukka();
+        } else {
+            tulostaSuoritusAjankohdat();
+        }
+    }
+
+    private void tulostaSilmukka() {
+        PrintStream out = System.out;
+        out.println("Silmukka:");
+        for (int i = 1; i <rekursioPino.length ; i++) {
+           if (rekursioPino[i] ) {
+               Kurssi tulostettava = kurssit.get(i);
+               out.printf(("%d %s"), tulostettava.getId(), tulostettava.getNimi());
+               out.println();
            }
-       }
+        }
+    }
+
+    private void tulostaSuoritusAjankohdat() {
+        PrintStream out = System.out;
+        out.println("SuoritusAjankohdat");
     }
 }

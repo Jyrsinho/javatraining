@@ -49,7 +49,6 @@ public class ParserTest {
         KurssiLista kurssiLista = kurssilistat.getFirst();
         ArrayList<Kurssi> kurssit = kurssiLista.getKurssit();
         int expected = 4;
-        kurssiLista.tulostaKurssit();
         assertEquals(expected, kurssit.size());
     }
 
