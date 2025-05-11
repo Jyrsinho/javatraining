@@ -7,6 +7,7 @@ import java.util.Queue;
 
 public class KurssiLista {
     private ArrayList<Kurssi> kurssit;
+    int V; // Solmujen maara
     boolean[] vierailtu;
     boolean[] rekursioPino;
     boolean onSilmukka;
@@ -21,6 +22,7 @@ public class KurssiLista {
     }
 
     public void analysoiKurssilista() {
+        V = kurssit.size();
         onSilmukka = etsiSilmukka();
         if (!onSilmukka) {
             jarjestaKurssit();
@@ -28,10 +30,10 @@ public class KurssiLista {
     }
 
     private boolean etsiSilmukka() {
-        vierailtu = new boolean[kurssit.size()];
+        vierailtu = new boolean[V + 1];
 
         for (Kurssi kurssi: kurssit) {
-                rekursioPino = new boolean[kurssit.size()];
+                rekursioPino = new boolean[V + 1];
                 if (!dfs(kurssi)) {
                     continue;
                 } else {
@@ -42,7 +44,7 @@ public class KurssiLista {
     }
 
     public void jarjestaKurssit() {
-        vierailtu = new boolean[kurssit.size()];
+        vierailtu = new boolean[V + 1];
         suoritusJarjestys = new LinkedList<>();
 
         for (Kurssi kurssi: kurssit) {
