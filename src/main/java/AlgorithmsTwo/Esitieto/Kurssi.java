@@ -25,6 +25,10 @@ public class Kurssi {
         }
     }
 
+    public void setPeriodi(int periodi) {
+        this.periodi = periodi;
+    }
+
     public int getId() {
         return id;
     }

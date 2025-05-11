@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Queue;
 
+import static AlgorithmsTwo.Esitieto.Util.laskeUusiperiodi;
+
 public class KurssiLista {
     private ArrayList<Kurssi> kurssit;
     int V; // Solmujen maara
@@ -63,7 +65,11 @@ public class KurssiLista {
         }
 
         vierailtu[kurssi.getId()] = true;
+        // En tiedä onko tämä nyt enää kovin tarpeellinen jos tässä päivitetään periodi kurssille
         suoritusJarjestys.add(kurssi.getId());
+        // päivitetään kurssille periodi suhteessa sen vanhempiin
+        paivitaPeriodi(kurssi);
+
     }
 
 
@@ -98,6 +104,30 @@ public class KurssiLista {
 
        return aikaisin;
     }
+
+    /**
+     * Annetaan kurssille suoritusperiodi suhteessa sen esitietokursseihin.
+     * @param kurssi
+     */
+    private void paivitaPeriodi(Kurssi kurssi) {
+        int esitietojenMyohaisinPeriodi = etsiEnnakkotietojenMyohaisinPeriodi(kurssi.getEnnakkotiedot());
+        int uusiperiodi = laskeUusiperiodi(esitietojenMyohaisinPeriodi, kurssi.getPeriodi());
+
+        kurssi.setPeriodi(uusiperiodi);
+    }
+
+    private int etsiEnnakkotietojenMyohaisinPeriodi(ArrayList<Integer> ennakkotiedot) {
+        int myohaisin = 0;
+        for (int ennakkotieto: ennakkotiedot) {
+            Kurssi ennakkotietoKurssi = kurssit.get(ennakkotieto);
+            if (ennakkotietoKurssi.getPeriodi() > myohaisin) {
+                myohaisin = ennakkotietoKurssi.getPeriodi();
+            }
+        }
+        return myohaisin;
+    }
+
+
 
 
     public ArrayList<Kurssi> getKurssit() {
