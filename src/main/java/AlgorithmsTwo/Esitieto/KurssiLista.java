@@ -2,8 +2,6 @@ package AlgorithmsTwo.Esitieto;
 
 import java.io.PrintStream;
 import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.Queue;
 
 import static AlgorithmsTwo.Esitieto.Util.laskeUusiperiodi;
 
@@ -13,7 +11,6 @@ public class KurssiLista {
     boolean[] vierailtu;
     boolean[] rekursioPino;
     boolean onSilmukka;
-    Queue<Integer> suoritusJarjestys;
 
     public KurssiLista() {
         kurssit = new ArrayList<>();
@@ -47,7 +44,6 @@ public class KurssiLista {
 
     public void jarjestaKurssit() {
         vierailtu = new boolean[V];
-        suoritusJarjestys = new LinkedList<>();
 
         for (Kurssi kurssi: kurssit) {
             if (!vierailtu[kurssi.getId()]) {
@@ -65,8 +61,6 @@ public class KurssiLista {
         }
 
         vierailtu[kurssi.getId()] = true;
-        // En tiedä onko tämä nyt enää kovin tarpeellinen jos tässä päivitetään periodi kurssille
-        suoritusJarjestys.add(kurssi.getId());
         // päivitetään kurssille periodi suhteessa sen vanhempiin
         paivitaPeriodi(kurssi);
 
