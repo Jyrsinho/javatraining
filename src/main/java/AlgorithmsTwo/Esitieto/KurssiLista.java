@@ -30,10 +30,10 @@ public class KurssiLista {
     }
 
     private boolean etsiSilmukka() {
-        vierailtu = new boolean[V + 1];
+        vierailtu = new boolean[V];
 
         for (Kurssi kurssi: kurssit) {
-                rekursioPino = new boolean[V + 1];
+                rekursioPino = new boolean[V];
                 if (!dfs(kurssi)) {
                     continue;
                 } else {
@@ -44,7 +44,7 @@ public class KurssiLista {
     }
 
     public void jarjestaKurssit() {
-        vierailtu = new boolean[V + 1];
+        vierailtu = new boolean[V];
         suoritusJarjestys = new LinkedList<>();
 
         for (Kurssi kurssi: kurssit) {
@@ -109,12 +109,13 @@ public class KurssiLista {
     }
 
     /**
-     * Palautetaan kurssien suoritusjarjestys.
+     * Palautetaan kurssien suoritusjarjestys. Poistetaan 0-indeksin dummyKurssi
      * @return {int[]}
      */
     public int[] getSuoritusJarjestys() {
-        int[] jarjestys = new int[kurssit.size()];
-
+        int[] jarjestys = new int[V - 1];
+        //poistetaan dummy
+        suoritusJarjestys.poll();
         int index = 0;
         while (!suoritusJarjestys.isEmpty()) {
            jarjestys[index] = suoritusJarjestys.poll();
