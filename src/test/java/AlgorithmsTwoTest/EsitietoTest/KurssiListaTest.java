@@ -89,4 +89,48 @@ public class KurssiListaTest {
         int [] actual = kurssiLista.getSuoritusJarjestys();
         assertArrayEquals(expected, actual);
     }
+
+    @Test
+    public void testShouldSortKurssiListaWithTwoCoursesHavingSamePrerequisite() {
+        Kurssi kurssi1 = new Kurssi(1, "jaakiekko", 1, new ArrayList<>());
+        Kurssi kurssi2 = new Kurssi(2, "salibandy", 2, new int[] {1});
+        Kurssi kurssi3 = new Kurssi(3, "istuminen", 3, new int[] {1});
+        kurssiLista.lisaaKurssi(kurssi1);
+        kurssiLista.lisaaKurssi(kurssi2);
+        kurssiLista.lisaaKurssi(kurssi3);
+        kurssiLista.analysoiKurssilista();
+        int[] expected = {1,2,3};
+        int[] actual = kurssiLista.getSuoritusJarjestys();
+        assertArrayEquals(expected, actual);
+    }
+
+    @Test
+    public void testShouldSortTwoPrerequisitesWithDifferentPeriods() {
+        Kurssi kurssi1 = new Kurssi(1, "jaakiekko", 2, new int[] {2,3} );
+        Kurssi kurssi2 = new Kurssi(2, "salibandy", 4, new ArrayList<>());
+        Kurssi kurssi3 = new Kurssi(3, "istuminen", 3, new ArrayList<>());
+        kurssiLista.lisaaKurssi(kurssi1);
+        kurssiLista.lisaaKurssi(kurssi2);
+        kurssiLista.lisaaKurssi(kurssi3);
+        kurssiLista.analysoiKurssilista();
+        assertFalse(kurssiLista.onSilmukka());
+        int[] expected = {3,2,1};
+        int[] actual = kurssiLista.getSuoritusJarjestys();
+         assertArrayEquals(expected, actual);
+
+    }
+
+    @Test
+    public void testShouldSortTwoPrerequisitesInLeafLevelWhenLoopStartsInLeafLevel() {
+        Kurssi kurssi1 = new Kurssi(1, "jaakiekko", 2, new ArrayList<>());
+        Kurssi kurssi2 = new Kurssi(2, "salibandy", 1, new ArrayList<>());
+        kurssiLista.lisaaKurssi(kurssi1);
+        kurssiLista.lisaaKurssi(kurssi2);
+        kurssiLista.analysoiKurssilista();
+        int[] expected = {2,1};
+        int [] actual = kurssiLista.getSuoritusJarjestys();
+        assertArrayEquals(expected, actual);
+    }
+
+
 }

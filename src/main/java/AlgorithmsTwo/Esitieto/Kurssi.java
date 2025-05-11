@@ -37,6 +37,10 @@ public class Kurssi {
         return ennakkotiedot;
     }
 
+    public int getPeriodi() {
+        return periodi;
+    }
+
     public void tulosta() {
         System.out.printf("%d %s %d ", id, nimi, periodi);
         System.out.print("ennakkotiedot: ");

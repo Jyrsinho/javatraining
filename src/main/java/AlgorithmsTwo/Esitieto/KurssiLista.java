@@ -48,17 +48,20 @@ public class KurssiLista {
         suoritusJarjestys = new LinkedList<>();
 
         for (Kurssi kurssi: kurssit) {
-            dfsjarjestys(kurssi);
+            if (!vierailtu[kurssi.getId()]) {
+                    dfsjarjestys(kurssi);
+            }
         }
 
     }
 
     private void dfsjarjestys(Kurssi kurssi) {
-        for (int ennakkotieto: kurssi.getEnnakkotiedot()) {
-            if (!vierailtu[ennakkotieto]) {
-                dfsjarjestys(kurssit.get(ennakkotieto));
-            }
+        Kurssi aikaisinEiVierailtu = etsiAikaisinEiVierailtu(kurssi.getEnnakkotiedot());
+        while (aikaisinEiVierailtu != null) {
+            dfsjarjestys(aikaisinEiVierailtu);
+            aikaisinEiVierailtu = etsiAikaisinEiVierailtu(kurssi.getEnnakkotiedot());
         }
+
         vierailtu[kurssi.getId()] = true;
         suoritusJarjestys.add(kurssi.getId());
     }
@@ -77,6 +80,23 @@ public class KurssiLista {
             }
         }
         return false;
+    }
+
+
+    private Kurssi etsiAikaisinEiVierailtu(ArrayList<Integer> ennakkotiedot) {
+       Kurssi aikaisin = null;
+
+       for (int ennakkotieto: ennakkotiedot) {
+           if (!vierailtu[ennakkotieto]) {
+               if (aikaisin == null) {
+                   aikaisin = kurssit.get(ennakkotieto);
+               } if (aikaisin.getPeriodi() > kurssit.get(ennakkotieto).getPeriodi()){
+                    aikaisin = kurssit.get(ennakkotieto);
+               }
+           }
+       }
+
+       return aikaisin;
     }
 
 
