@@ -8,6 +8,7 @@ public class KurssiLista {
     boolean[] vierailtu;
     boolean[] rekursioPino;
     boolean onSilmukka;
+    int[] suoritusJarjestys;
 
     public KurssiLista() {
         kurssit = new ArrayList<>();
@@ -17,7 +18,14 @@ public class KurssiLista {
         kurssit.add(kurssi);
     }
 
-    public boolean onSilmukka() {
+    public void analysoiKurssilista() {
+        onSilmukka = etsiSilmukka();
+        if (!onSilmukka) {
+            jarjestaKurssit();
+        }
+    }
+
+    private boolean etsiSilmukka() {
         vierailtu = new boolean[kurssit.size()];
 
         for (Kurssi kurssi: kurssit) {
@@ -25,12 +33,16 @@ public class KurssiLista {
                 if (!dfs(kurssi)) {
                     continue;
                 } else {
-                    onSilmukka = true;
                     return true;
                 }
         }
-        onSilmukka = false;
        return false;
+    }
+
+    public void jarjestaKurssit() {
+        vierailtu = new boolean[kurssit.size()];
+        suoritusJarjestys = new int[kurssit.size()];
+
     }
 
     private boolean dfs(Kurssi kurssi) {
@@ -71,6 +83,10 @@ public class KurssiLista {
                out.println();
            }
         }
+    }
+
+    public boolean onSilmukka() {
+        return onSilmukka;
     }
 
     private void tulostaSuoritusAjankohdat() {

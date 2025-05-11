@@ -23,6 +23,7 @@ public class KurssiListaTest {
     public void testShouldReturnFalseWhenKurssiListaHasOnlyOneElementWithNoEnnakkotieto() {
         Kurssi kurssi1 = new Kurssi(1, "jaakiekko", 1, new ArrayList<>());
         kurssiLista.lisaaKurssi(kurssi1);
+        kurssiLista.analysoiKurssilista();
         assertFalse(kurssiLista.onSilmukka());
     }
 
@@ -30,6 +31,7 @@ public class KurssiListaTest {
     public void testOnSilmukkaShouldReturnTrueWhenOneElementWithItselfAsEnnakkotieto() {
         Kurssi kurssi = new Kurssi(1, "jaakiekko", 1, new int[] {1});
         kurssiLista.lisaaKurssi(kurssi);
+        kurssiLista.analysoiKurssilista();
         assertTrue(kurssiLista.onSilmukka());
         kurssiLista.tulosta();
     }
@@ -40,6 +42,7 @@ public class KurssiListaTest {
         Kurssi kurssi2 = new Kurssi(2, "salibandy", 1, new int[] {1});
         kurssiLista.lisaaKurssi(kurssi1);
         kurssiLista.lisaaKurssi(kurssi2);
+        kurssiLista.analysoiKurssilista();
         assertTrue(kurssiLista.onSilmukka());
         kurssiLista.tulosta();
     }
@@ -50,6 +53,7 @@ public class KurssiListaTest {
         Kurssi kurssi2 = new Kurssi(2, "salibandy", 1, new ArrayList<>());
         kurssiLista.lisaaKurssi(kurssi1);
         kurssiLista.lisaaKurssi(kurssi2);
+        kurssiLista.analysoiKurssilista();
         assertFalse(kurssiLista.onSilmukka());
         kurssiLista.tulosta();
     }
@@ -68,7 +72,19 @@ public class KurssiListaTest {
         kurssiLista.lisaaKurssi(kurssi4);
         kurssiLista.lisaaKurssi(kurssi5);
         kurssiLista.lisaaKurssi(kurssi6);
+        kurssiLista.analysoiKurssilista();
         assertTrue(kurssiLista.onSilmukka());
         kurssiLista.tulosta();
+    }
+
+    @Test
+    public void testShouldSortKurssiListaThatHasNoOrderOtherThanPeriods() {
+        Kurssi kurssi1 = new Kurssi(1, "jaakiekko", 1, new ArrayList<>());
+        Kurssi kurssi2 = new Kurssi(2, "salibandy", 2, new ArrayList<>());
+        Kurssi kurssi3 = new Kurssi(3, "istuminen", 3, new ArrayList<>());
+        kurssiLista.lisaaKurssi(kurssi1);
+        kurssiLista.lisaaKurssi(kurssi2);
+        kurssiLista.lisaaKurssi(kurssi3);
+        kurssiLista.analysoiKurssilista();
     }
 }
