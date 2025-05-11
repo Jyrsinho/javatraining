@@ -31,6 +31,7 @@ public class KurssiListaTest {
         Kurssi kurssi = new Kurssi(1, "jaakiekko", 1, new int[] {1});
         kurssiLista.lisaaKurssi(kurssi);
         assertTrue(kurssiLista.onSilmukka());
+        kurssiLista.tulosta();
     }
 
     @Test
@@ -40,6 +41,7 @@ public class KurssiListaTest {
         kurssiLista.lisaaKurssi(kurssi1);
         kurssiLista.lisaaKurssi(kurssi2);
         assertTrue(kurssiLista.onSilmukka());
+        kurssiLista.tulosta();
     }
 
     @Test
@@ -49,6 +51,7 @@ public class KurssiListaTest {
         kurssiLista.lisaaKurssi(kurssi1);
         kurssiLista.lisaaKurssi(kurssi2);
         assertFalse(kurssiLista.onSilmukka());
+        kurssiLista.tulosta();
     }
 
     @Test
@@ -66,5 +69,6 @@ public class KurssiListaTest {
         kurssiLista.lisaaKurssi(kurssi5);
         kurssiLista.lisaaKurssi(kurssi6);
         assertTrue(kurssiLista.onSilmukka());
+        kurssiLista.tulosta();
     }
 }

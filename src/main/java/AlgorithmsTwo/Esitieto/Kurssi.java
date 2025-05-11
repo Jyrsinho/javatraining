@@ -31,6 +31,7 @@ public class Kurssi {
         for (int ennakkotieto: ennakkotiedot) {
             System.out.print(ennakkotieto + " ");
         }
+        System.out.println();
     }
 
     public int getId() {

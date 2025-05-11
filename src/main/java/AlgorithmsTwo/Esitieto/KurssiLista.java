@@ -6,6 +6,7 @@ public class KurssiLista {
     private ArrayList<Kurssi> kurssit;
     boolean[] vierailtu;
     boolean[] rekursioPino;
+    boolean onSilmukka;
 
     public KurssiLista() {
         kurssit = new ArrayList<>();
@@ -23,10 +24,11 @@ public class KurssiLista {
                 if (!dfs(kurssi)) {
                     continue;
                 } else {
+                    onSilmukka = true;
                     return true;
                 }
         }
-
+        onSilmukka = false;
        return false;
     }
 
@@ -50,10 +52,14 @@ public class KurssiLista {
         return kurssit;
     }
 
-    public void tulostaKurssit() {
-        for (Kurssi kurssi : kurssit) {
-            kurssi.tulosta();
-            System.out.println();
-        }
+    public void tulosta() {
+       if (onSilmukka) {
+           for (int i = 1; i < rekursioPino.length; i++) {
+              if (rekursioPino[i]) {
+                  Kurssi tulostettava = kurssit.get(i);
+                  tulostettava.tulosta();
+              }
+           }
+       }
     }
 }
