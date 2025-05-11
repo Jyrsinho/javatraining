@@ -2,13 +2,15 @@ package AlgorithmsTwo.Esitieto;
 
 import java.io.PrintStream;
 import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.Queue;
 
 public class KurssiLista {
     private ArrayList<Kurssi> kurssit;
     boolean[] vierailtu;
     boolean[] rekursioPino;
     boolean onSilmukka;
-    int[] suoritusJarjestys;
+    Queue<Integer> suoritusJarjestys;
 
     public KurssiLista() {
         kurssit = new ArrayList<>();
@@ -41,9 +43,24 @@ public class KurssiLista {
 
     public void jarjestaKurssit() {
         vierailtu = new boolean[kurssit.size()];
-        suoritusJarjestys = new int[kurssit.size()];
+        suoritusJarjestys = new LinkedList<>();
+
+        for (Kurssi kurssi: kurssit) {
+            dfsjarjestys(kurssi);
+        }
 
     }
+
+    private void dfsjarjestys(Kurssi kurssi) {
+        for (int ennakkotieto: kurssi.getEnnakkotiedot()) {
+            if (!vierailtu[ennakkotieto]) {
+                dfsjarjestys(kurssit.get(ennakkotieto));
+            }
+        }
+        vierailtu[kurssi.getId()] = true;
+        suoritusJarjestys.add(kurssi.getId());
+    }
+
 
     private boolean dfs(Kurssi kurssi) {
         vierailtu[kurssi.getId()] = true;
@@ -87,6 +104,21 @@ public class KurssiLista {
 
     public boolean onSilmukka() {
         return onSilmukka;
+    }
+
+    /**
+     * Palautetaan kurssien suoritusjarjestys.
+     * @return {int[]}
+     */
+    public int[] getSuoritusJarjestys() {
+        int[] jarjestys = new int[kurssit.size()];
+
+        int index = 0;
+        while (!suoritusJarjestys.isEmpty()) {
+           jarjestys[index] = suoritusJarjestys.poll();
+            index++;
+        }
+        return jarjestys;
     }
 
     private void tulostaSuoritusAjankohdat() {

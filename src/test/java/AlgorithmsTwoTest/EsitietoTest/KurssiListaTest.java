@@ -7,8 +7,7 @@ import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class KurssiListaTest {
         KurssiLista kurssiLista;
@@ -78,13 +77,16 @@ public class KurssiListaTest {
     }
 
     @Test
-    public void testShouldSortKurssiListaThatHasNoOrderOtherThanPeriods() {
+    public void testShouldSortKurssiListaWithLinearOrder() {
         Kurssi kurssi1 = new Kurssi(1, "jaakiekko", 1, new ArrayList<>());
-        Kurssi kurssi2 = new Kurssi(2, "salibandy", 2, new ArrayList<>());
-        Kurssi kurssi3 = new Kurssi(3, "istuminen", 3, new ArrayList<>());
+        Kurssi kurssi2 = new Kurssi(2, "salibandy", 2, new int[] {1});
+        Kurssi kurssi3 = new Kurssi(3, "istuminen", 3, new int[] {2});
         kurssiLista.lisaaKurssi(kurssi1);
         kurssiLista.lisaaKurssi(kurssi2);
         kurssiLista.lisaaKurssi(kurssi3);
         kurssiLista.analysoiKurssilista();
+        int[] expected = {1,2,3};
+        int [] actual = kurssiLista.getSuoritusJarjestys();
+        assertArrayEquals(expected, actual);
     }
 }
