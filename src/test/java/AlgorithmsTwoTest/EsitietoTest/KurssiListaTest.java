@@ -54,7 +54,6 @@ public class KurssiListaTest {
         kurssiLista.lisaaKurssi(kurssi2);
         kurssiLista.analysoiKurssilista();
         assertFalse(kurssiLista.onSilmukka());
-        kurssiLista.tulosta();
     }
 
     @Test
@@ -116,6 +115,7 @@ public class KurssiListaTest {
         assertFalse(kurssiLista.onSilmukka());
         int[] expected = {3,2,1};
         int[] actual = kurssiLista.getSuoritusJarjestys();
+        kurssiLista.tulosta();
          assertArrayEquals(expected, actual);
 
     }
@@ -129,6 +129,7 @@ public class KurssiListaTest {
         kurssiLista.analysoiKurssilista();
         int[] expected = {2,1};
         int [] actual = kurssiLista.getSuoritusJarjestys();
+        kurssiLista.tulosta();
         assertArrayEquals(expected, actual);
     }
 

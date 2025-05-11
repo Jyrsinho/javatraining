@@ -2,7 +2,7 @@ package AlgorithmsTwo.Esitieto;
 
 import java.util.ArrayList;
 
-public class Kurssi {
+public class Kurssi implements Comparable<Kurssi>{
     private int id;
     private String nimi;
     private int periodi;
@@ -53,7 +53,11 @@ public class Kurssi {
         }
         System.out.println();
     }
-    //  Pitsinnypläys 4: 5 4 8 6 1 10
-    //7 3 0
+
+    @Override
+    public int compareTo(Kurssi o) {
+        return this.periodi - o.periodi;
+    }
+
 
 }

@@ -165,11 +165,14 @@ public class KurssiLista {
     public int[] getSuoritusJarjestys() {
         int[] jarjestys = new int[V - 1];
         //poistetaan dummy
-        suoritusJarjestys.poll();
-        int index = 0;
-        while (!suoritusJarjestys.isEmpty()) {
-           jarjestys[index] = suoritusJarjestys.poll();
-            index++;
+        //sortataan kurssit periodiensa mukaan
+
+        kurssit.remove(0);
+        kurssit.sort(Kurssi::compareTo);
+
+
+        for (int i = 0; i < kurssit.size(); i++) {
+           jarjestys[i] = kurssit.get(i).getId();
         }
         return jarjestys;
     }
@@ -177,5 +180,9 @@ public class KurssiLista {
     private void tulostaSuoritusAjankohdat() {
         PrintStream out = System.out;
         out.println("SuoritusAjankohdat");
+        for (Kurssi kurssi: kurssit) {
+            kurssi.tulosta();
+        }
+
     }
 }

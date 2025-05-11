@@ -41,4 +41,13 @@ public class UtilTest {
         int actual = laskeUusiperiodi(myohaisin, kurssinperiodi);
         assertEquals(expected, actual);
     }
+
+    @Test
+    public void testShouldReturn8For4And4() {
+        int myohaisin = 4;
+        int kurssinperiodi = 4;
+        int expected = 8;
+        int actual = laskeUusiperiodi(myohaisin, kurssinperiodi);
+        assertEquals(expected, actual);
+    }
 }
