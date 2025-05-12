@@ -2,6 +2,7 @@ package AlgorithmsTwo.Esitieto;
 
 import java.io.PrintStream;
 import java.util.ArrayList;
+import java.util.LinkedList;
 
 import static AlgorithmsTwo.Esitieto.Util.laskeUusiperiodi;
 
@@ -11,6 +12,7 @@ public class KurssiLista {
     boolean[] vierailtu;
     boolean[] rekursioPino;
     boolean onSilmukka;
+    LinkedList<Integer> sykli;
 
     public KurssiLista() {
         kurssit = new ArrayList<>();
@@ -23,6 +25,9 @@ public class KurssiLista {
     public void analysoiKurssilista() {
         V = kurssit.size();
         onSilmukka = sisaltaaSilmukan();
+        if (onSilmukka) {
+            jarjestaSilmukka();
+        }
         if (!onSilmukka) {
             jarjestaKurssit();
         }
@@ -47,28 +52,53 @@ public class KurssiLista {
 
     private boolean sisaltaaSilmukanHelper(int kurssiID) {
         // Nykyinen node on jo rekursiossa -> cykli havaittu -> lopetetaan dfs
+        System.out.println("Vieraillaan Nodessa: " + kurssiID);
         if (rekursioPino[kurssiID]) {
+            System.out.println("Node " +kurssiID + " oli rekursiopinossa -> sykli havaittu");
+            sykli = new LinkedList<>();
+            sykli.add(kurssiID);
             return true;
         }
         // Nykyinen node jo vierailtu eika restackissa -> ei osa sykliä -> ei tarvitse enaa vierailla
         if (vierailtu[kurssiID]) {
+            System.out.println("Nodessa on jo vierailtu, palautetaan false");
             return false;
         }
         // Jos vieraillaan nodessa ekaa kertaa, merkataan se vierailluksi ja osaksi stakkiä
+        System.out.println("Vieraillaan ekaa kertaa, merkataan rekursiopinoon ja vierailluksi");
         vierailtu[kurssiID]= true;
+        System.out.println("Vierailtu- listan tila : ");
+        for (int i = 0; i < vierailtu.length; i++) {
+           System.out.print(i + ": " + vierailtu[i] + " ") ;
+        }
+        System.out.println();
         rekursioPino[kurssiID] = true;
+        System.out.println("Rekursiopinon tila:");
+        for (int i = 0; i < rekursioPino.length; i++) {
+            System.out.print(i + ": " + rekursioPino[i] + " ") ;
+        }
+        System.out.println();
 
         // Kaydaan rekursiivisesti kaikissa nykyisen noden esitiedoissa jos ne sisaltavat syklin niin palautetaan true
         ArrayList<Integer> ennakkotiedot = kurssit.get(kurssiID).getEnnakkotiedot();
         for (int ennakkotieto : ennakkotiedot){
+            System.out.println("Seuraavaksi kurssin: " +kurssiID +" ennakkotieto: " + ennakkotieto);
             if (sisaltaaSilmukanHelper(ennakkotieto)) {
+                System.out.println("Sykli löytyi: " +kurssiID +" ->");
+                sykli.add(kurssiID);
                 return true;
             }
         }
 
         //Jos syklia ei ole loytynyt niin mennaan takaisin (backtrack) edelliseen nodeen kuitataan etta tasta nodesta
         // ei loytynyt syklia ja poistetaan tama node rekursiopinosta
+        System.out.println("Kurssin " +kurssiID +" lapsista ei löytynyt sykliä - palataan... poistetaan kurssi: " + kurssiID + " rekursiopinosta");
         rekursioPino[kurssiID] = false;
+        System.out.println("Rekursiopinossa nyt poiston jalkeen");
+        for (int i = 0; i < rekursioPino.length; i++) {
+            System.out.print(i + ": " + rekursioPino[i] + " ") ;
+        }
+        System.out.println();
         return false;
     }
 
@@ -147,6 +177,20 @@ public class KurssiLista {
         return kurssit;
     }
 
+    private void jarjestaSilmukka() {
+        //eli syklin eka on syklin loppu loppu on FIFO:n alussa
+        //otetaan ensin pää talteen
+        // käännetään lista
+        // poistetaan niin kauan kunnes tulee päätä vastaava arvo vastaan
+        int syklinAlkuJaLoppu = sykli.poll();
+
+        sykli = sykli.reversed();
+
+        while (!sykli.isEmpty() && sykli.peek() != syklinAlkuJaLoppu) {
+            sykli.poll();
+        }
+    }
+
     public void tulosta() {
         if (onSilmukka) {
             tulostaSilmukka();
@@ -164,12 +208,11 @@ public class KurssiLista {
     private void tulostaSilmukka() {
         PrintStream out = System.out;
         out.println("Silmukka:");
-        for (int i = 1; i <rekursioPino.length ; i++) {
-           if (rekursioPino[i] ) {
-               Kurssi tulostettava = kurssit.get(i);
-               out.printf(("%d %s"), tulostettava.getId(), tulostettava.getNimi());
-               out.println();
-           }
+        while (!sykli.isEmpty()) {
+            int kurssiId = sykli.poll();
+            Kurssi kurssi = kurssit.get(kurssiId);
+            System.out.printf("%d %s", kurssi.getId(), kurssi.getNimi());
+            System.out.println();
         }
     }
 
@@ -190,6 +233,7 @@ public class KurssiLista {
         }
         return jarjestys;
     }
+
 
     private void tulostaSuoritusAjankohdat() {
 

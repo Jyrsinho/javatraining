@@ -23,6 +23,7 @@ public class KurssiListaTest {
         Kurssi kurssi1 = new Kurssi(1, "jaakiekko", 1, new ArrayList<>());
         kurssiLista.lisaaKurssi(kurssi1);
         kurssiLista.analysoiKurssilista();
+        kurssiLista.tulosta();
         assertFalse(kurssiLista.onSilmukka());
     }
 
