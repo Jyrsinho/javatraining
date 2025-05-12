@@ -10,6 +10,7 @@ public class Esitieto {
         for (KurssiLista kurssiLista: kurssilistat) {
             kurssiLista.analysoiKurssilista();
             kurssiLista.tulosta();
+            System.out.println();
         }
     }
 

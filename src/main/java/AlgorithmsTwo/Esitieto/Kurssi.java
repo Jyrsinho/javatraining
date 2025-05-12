@@ -47,10 +47,6 @@ public class Kurssi implements Comparable<Kurssi>{
 
     public void tulosta() {
         System.out.printf("%d %s %d ", id, nimi, periodi);
-        System.out.print("ennakkotiedot: ");
-        for (int ennakkotieto: ennakkotiedot) {
-            System.out.print(ennakkotieto + " ");
-        }
         System.out.println();
     }
 

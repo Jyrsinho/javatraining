@@ -203,7 +203,7 @@ public class KurssiLista {
     private void tulostaSuoritusAjankohdat() {
 
         PrintStream out = System.out;
-        out.println("SuoritusAjankohdat");
+        out.println("SuoritusAjankohdat:");
         for (Kurssi kurssi: kurssit) {
             kurssi.tulosta();
         }
