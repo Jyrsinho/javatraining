@@ -45,8 +45,8 @@ public class Parser {
      */
     private KurssiLista luoKurssiLista(String syote) {
         KurssiLista uusiKurssiLista = new KurssiLista();
-        //lisataan kurssilistaan dummy nollaindeksiin
-
+        //lisataan kurssilistaan dummy nollaindeksiin jotta voidaan kayttaa ykkosesta indekseja
+        uusiKurssiLista.lisaaKurssi(new Kurssi(0,"dummy", 0, new ArrayList<>()));
         String[] kurssit = syote.split("\\s0" );
 
         for (String kurssiSyote : kurssit) {

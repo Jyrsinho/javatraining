@@ -29,9 +29,9 @@ public class KurssiLista {
     }
 
     private boolean etsiSilmukka() {
-        vierailtu = new boolean[V];
 
         for (Kurssi kurssi: kurssit) {
+                vierailtu = new boolean[V];
                 rekursioPino = new boolean[V];
                 if (!dfs(kurssi)) {
                     continue;
@@ -51,6 +51,10 @@ public class KurssiLista {
             }
         }
 
+        //poistetaan dummy taalla, koska taman jalkeen sita ei enaa tarvita
+        // jarjestetaan kurssit myos periodinsa mukaan taalla
+        kurssit.removeFirst();
+        kurssit.sort(Kurssi::compareTo);
     }
 
     private void dfsjarjestys(Kurssi kurssi) {
@@ -76,7 +80,7 @@ public class KurssiLista {
                 return true;
             }
             if (!vierailtu[ennakkotieto]) {
-               return dfs(kurssit.get(ennakkotieto));
+               dfs(kurssit.get(ennakkotieto));
             }
         }
         return false;
@@ -158,13 +162,8 @@ public class KurssiLista {
      */
     public int[] getSuoritusJarjestys() {
         int[] jarjestys = new int[V - 1];
-        //poistetaan dummy
-        //sortataan kurssit periodiensa mukaan
 
-        kurssit.remove(0);
-        kurssit.sort(Kurssi::compareTo);
-
-
+        // Tämä on nyt ihan puhtaasti testaamista varten taalla
         for (int i = 0; i < kurssit.size(); i++) {
            jarjestys[i] = kurssit.get(i).getId();
         }
@@ -172,6 +171,7 @@ public class KurssiLista {
     }
 
     private void tulostaSuoritusAjankohdat() {
+
         PrintStream out = System.out;
         out.println("SuoritusAjankohdat");
         for (Kurssi kurssi: kurssit) {

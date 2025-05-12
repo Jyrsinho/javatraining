@@ -133,5 +133,23 @@ public class KurssiListaTest {
         assertArrayEquals(expected, actual);
     }
 
+    @Test
+    public void testShouldFindLoop() {
+        Kurssi kurssi1 = new Kurssi(1, "LahdeKritiikki", 1, new ArrayList<>());
+        Kurssi kurssi2 = new Kurssi(2, "Etiikka", 2, new int[] {6,5});
+        Kurssi kurssi3 = new Kurssi(3, "Tutkimusmenetelmat", 3, new int[] {2,8,4,5});
+        Kurssi kurssi4 = new Kurssi(4, "Tietosuoja",4, new int[] {} );
+        Kurssi kurssi5 = new Kurssi(5, "Filosofia", 1 ,new int[] {7,6});
+        Kurssi kurssi6 = new Kurssi(6, "Aidinkielie", 2, new int[]{});
+        Kurssi kurssi7 = new Kurssi(7, "Diskurssianalyysi", 3, new int[] {2,6,1});
+        Kurssi kurssi8 = new Kurssi(8, "Tilastotiede", 4, new int[] {});
+        kurssiLista.lisaaKurssi(kurssi1); kurssiLista.lisaaKurssi(kurssi2); kurssiLista.lisaaKurssi(kurssi3);
+        kurssiLista.lisaaKurssi(kurssi4); kurssiLista.lisaaKurssi(kurssi5); kurssiLista.lisaaKurssi(kurssi6);
+        kurssiLista.lisaaKurssi(kurssi7); kurssiLista.lisaaKurssi(kurssi8);
+        kurssiLista.analysoiKurssilista();
+        kurssiLista.tulosta();
+        assertTrue(kurssiLista.onSilmukka());
+    }
+
 
 }
