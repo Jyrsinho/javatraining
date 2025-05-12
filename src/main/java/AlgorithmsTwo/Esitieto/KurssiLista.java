@@ -190,7 +190,7 @@ public class KurssiLista {
             sykli.poll();
         }
     }
-
+//
     public void tulosta() {
         if (onSilmukka) {
             tulostaSilmukka();
