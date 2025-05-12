@@ -1,7 +1,6 @@
 package AlgorithmsTwo.Esitieto;
 
 import java.util.ArrayList;
-import java.util.Objects;
 import java.util.Scanner;
 
 public class Parser {
@@ -19,9 +18,6 @@ public class Parser {
 
         while (scanner.hasNext()) {
             String seuraava = scanner.next();
-            if (Objects.equals(seuraava, "0")) {
-                scanner.close();
-            }
         }
         return new ArrayList<KurssiLista>();
     }

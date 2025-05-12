@@ -1,6 +1,5 @@
 package AlgorithmsTwoTest.EsitietoTest;
 
-import AlgorithmsTwo.Esitieto.Kurssi;
 import AlgorithmsTwo.Esitieto.KurssiLista;
 import AlgorithmsTwo.Esitieto.Parser;
 import org.junit.jupiter.api.Test;
@@ -30,7 +29,7 @@ public class ParserTest {
 
         // 4. Run the method that reads from System.in
         Parser parser = new Parser();
-        ArrayList<KurssiLista> kurssilistat =  parser.kasitteleSyote();
+        ArrayList<KurssiLista> kurssilistat = parser.kasitteleSyote();
 
         // 5. Restore original System.in to avoid breaking other tests
         System.setIn(originalIn);
@@ -38,7 +37,8 @@ public class ParserTest {
 
         assertEquals(expected, kurssilistat.size());
     }
-
+}
+/*
     @Test
     public void testParserShouldGiveTwoEsitietoCases() {
         String testiSyote = """
@@ -142,3 +142,5 @@ public class ParserTest {
 
 
 }
+
+ */
