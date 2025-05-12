@@ -46,7 +46,7 @@ public class Kurssi implements Comparable<Kurssi>{
     }
 
     public void tulosta() {
-        System.out.printf("%d: %d %s ", periodi, id, nimi);
+        System.out.printf("%d: %d %s", periodi, id, nimi);
         System.out.println();
     }
 

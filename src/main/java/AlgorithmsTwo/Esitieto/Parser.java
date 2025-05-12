@@ -64,9 +64,6 @@ public class Parser {
      * @return {Kurssi}
      */
     private Kurssi luoKurssiSyotteesta(String syote) {
-        //TODO: Tulostukset poistettava ennen palautusta
-        // Jos luetaan ensin id, nimi ja periodi voidaan splitata numero + \: kombon kohdalta ja ottaa ennakkotiedot jalkimmaisesta indeksista
-        System.out.println("Kurssisyote: " + syote);
         int id;
         String nimi;
         String periodi;
@@ -74,11 +71,8 @@ public class Parser {
 
         Scanner scanner = new Scanner(syote);
         id = scanner.nextInt();
-        System.out.println("id: " +id );
         nimi = scanner.next();
-        System.out.println("nimi: " +nimi );
         periodi = scanner.next();
-        System.out.println("periodi: " +periodi );
         periodi = periodi.replaceAll(":", "");
         int periodiInt = Integer.parseInt(periodi);
 
