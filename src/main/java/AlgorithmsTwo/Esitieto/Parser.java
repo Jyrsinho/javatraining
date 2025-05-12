@@ -19,7 +19,7 @@ public class Parser {
     }
 
     private String poistaHanta(String syote) {
-        String regex = ("\\s*0\\s*0\\s*0");
+        String regex = ("\\s+0\\s+0\\s+0");
         return syote.split(regex)[0];
     }
 
