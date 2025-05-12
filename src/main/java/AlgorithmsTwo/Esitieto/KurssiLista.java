@@ -110,26 +110,6 @@ public class KurssiLista {
     }
 
 
-
-/*
-    private Kurssi etsiAikaisinEiVierailtu(ArrayList<Integer> ennakkotiedot) {
-       Kurssi aikaisin = null;
-
-       for (int ennakkotieto: ennakkotiedot) {
-           if (!vierailtu[ennakkotieto]) {
-               if (aikaisin == null) {
-                   aikaisin = kurssit.get(ennakkotieto);
-               } if (aikaisin.getPeriodi() > kurssit.get(ennakkotieto).getPeriodi()){
-                    aikaisin = kurssit.get(ennakkotieto);
-               }
-           }
-       }
-
-       return aikaisin;
-    }
-
- */
-
     /**
      * Annetaan kurssille suoritusperiodi suhteessa sen esitietokursseihin.
      * @param kurssi
