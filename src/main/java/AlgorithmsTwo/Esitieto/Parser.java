@@ -64,34 +64,40 @@ public class Parser {
      * @return {Kurssi}
      */
     private Kurssi luoKurssiSyotteesta(String syote) {
-        System.out.println("Kurssisyote:" + syote);
-        String ennakkotiedotSyote;
+        //TODO: Tulostukset poistettava ennen palautusta
+        // Jos luetaan ensin id, nimi ja periodi voidaan splitata numero + \: kombon kohdalta ja ottaa ennakkotiedot jalkimmaisesta indeksista
+        System.out.println("Kurssisyote: " + syote);
         int id;
         String nimi;
-        int periodi;
+        String periodi;
         ArrayList<Integer> ennakkotiedot = new ArrayList<>();
 
-        String[] osat = syote.split(":");
-        String idNimiJaPeriodi = osat[0];
-        if (osat.length == 2) {
-            ennakkotiedotSyote = osat[1];
-        } else {
-            ennakkotiedotSyote = "";
-        }
-
-        Scanner scanner = new Scanner(idNimiJaPeriodi);
+        Scanner scanner = new Scanner(syote);
         id = scanner.nextInt();
+        System.out.println("id: " +id );
         nimi = scanner.next();
-        periodi = scanner.nextInt();
+        System.out.println("nimi: " +nimi );
+        periodi = scanner.next();
+        System.out.println("periodi: " +periodi );
+        periodi = periodi.replaceAll(":", "");
+        int periodiInt = Integer.parseInt(periodi);
 
-        Scanner ennakkotiedotScanner = new Scanner(ennakkotiedotSyote);
-        while (ennakkotiedotScanner.hasNext()){
-            int ennakkotieto = ennakkotiedotScanner.nextInt();
-            if (ennakkotieto != 0) {
-                ennakkotiedot.add(ennakkotieto);
+        while (scanner.hasNext()){
+            String next = scanner.next();
+            try{
+                int ennakkotieto = Integer.parseInt(next);
+                if (ennakkotieto != 0) {
+                    ennakkotiedot.add(ennakkotieto);
+                }
+            }catch (NumberFormatException e){
+                continue;
             }
+
         }
-        return new Kurssi(id, nimi, periodi, ennakkotiedot);
+
+        return new Kurssi(id, nimi, periodiInt, ennakkotiedot);
     }
+
+
 
 }

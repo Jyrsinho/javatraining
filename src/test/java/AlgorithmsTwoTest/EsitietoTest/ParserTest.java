@@ -55,6 +55,7 @@ public class ParserTest {
     @Test
     public void testParserShouldCreateXKurssiListat() {
         // KURSSISSA 5 on kaksi ":" merkkia. Ehka me nyt mietitaan parserin toiminta uudestaan
+        // Ainoa mihin tämän nyt pitäisi vaikuttaa on yksittaisen kurssin syotteen lukeminen
         String testiSyote = """
                 1 Ainoa_kurssi 3 : 0
                 0
