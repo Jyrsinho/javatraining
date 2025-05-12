@@ -6,7 +6,8 @@ public class Esitieto {
 
     public void kasitteleSyote(String syote) {
         Parser parser = new Parser();
-        ArrayList<KurssiLista> kurssilistat = parser.kasitteleSyote(syote);
+        // parser kasitteleSyote avaa scannerin, lukee syotteen ja puskee ulos tarvittavat tietorakenteet
+        ArrayList<KurssiLista> kurssilistat = parser.kasitteleSyote();
         for (KurssiLista kurssiLista: kurssilistat) {
             kurssiLista.analysoiKurssilista();
             kurssiLista.tulosta();
@@ -108,5 +109,7 @@ public class Esitieto {
         esitieto.kasitteleSyote(testiSyote2);
         System.out.println();
         esitieto.kasitteleSyote(testisyote3);
+
+        //TODO syote on liian pitka sita ei voi lukea ensin kokonaisena
     }
 }

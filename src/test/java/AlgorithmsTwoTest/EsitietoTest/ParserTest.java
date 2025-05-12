@@ -5,6 +5,8 @@ import AlgorithmsTwo.Esitieto.KurssiLista;
 import AlgorithmsTwo.Esitieto.Parser;
 import org.junit.jupiter.api.Test;
 
+import java.io.ByteArrayInputStream;
+import java.io.InputStream;
 import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -13,13 +15,27 @@ public class ParserTest {
 
     @Test
     public void testParserShouldGiveOneEsitietoCase() {
-        String testiSyote = """
+
+        String simulatedInput = """
                 1 Sähly 1: 0
                 2 Pitsinnypläys 4:    1       0 0 0
                 """;
+        InputStream testInput = new ByteArrayInputStream(simulatedInput.getBytes());
+
+        // 2. Backup original System.in
+        InputStream originalIn = System.in;
+
+        // 3. Redirect System.in to our test input
+        System.setIn(testInput);
+
+        // 4. Run the method that reads from System.in
         Parser parser = new Parser();
-        ArrayList<KurssiLista> kurssilistat = parser.kasitteleSyote(testiSyote);
+        ArrayList<KurssiLista> kurssilistat =  parser.kasitteleSyote();
+
+        // 5. Restore original System.in to avoid breaking other tests
+        System.setIn(originalIn);
         int expected = 1;
+
         assertEquals(expected, kurssilistat.size());
     }
 
