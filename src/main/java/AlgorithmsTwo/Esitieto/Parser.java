@@ -24,7 +24,7 @@ public class Parser {
     }
 
     private String[] jaaOsiin(String syote) {
-       String regex = ("\\s*0\\s*0");
+       String regex = ("\\s+0\\s+0");
        return syote.split(regex);
     }
 
@@ -64,6 +64,7 @@ public class Parser {
      * @return {Kurssi}
      */
     private Kurssi luoKurssiSyotteesta(String syote) {
+        System.out.println("Kurssisyote:" + syote);
         String ennakkotiedotSyote;
         int id;
         String nimi;
