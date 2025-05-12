@@ -101,21 +101,6 @@ public class KurssiLista {
     }
 
 
-    private boolean dfs(Kurssi kurssi) {
-        vierailtu[kurssi.getId()] = true;
-        rekursioPino[kurssi.getId()] = true;
-
-        for (int ennakkotieto: kurssi.getEnnakkotiedot()) {
-            if (rekursioPino[ennakkotieto]){
-                return true;
-            }
-            if (!vierailtu[ennakkotieto]) {
-               dfs(kurssit.get(ennakkotieto));
-            }
-        }
-        return false;
-    }
-
 
     private Kurssi etsiAikaisinEiVierailtu(ArrayList<Integer> ennakkotiedot) {
        Kurssi aikaisin = null;
@@ -170,6 +155,12 @@ public class KurssiLista {
         }
     }
 
+    public void tulostaEnnakkotiedoilla() {
+        for (Kurssi kurssi: kurssit) {
+            kurssi.tulostaKaikki();
+        }
+    }
+
     private void tulostaSilmukka() {
         PrintStream out = System.out;
         out.println("Silmukka:");
@@ -207,6 +198,6 @@ public class KurssiLista {
         for (Kurssi kurssi: kurssit) {
             kurssi.tulosta();
         }
-
     }
+
 }

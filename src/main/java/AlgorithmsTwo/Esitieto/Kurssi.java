@@ -50,6 +50,16 @@ public class Kurssi implements Comparable<Kurssi>{
         System.out.println();
     }
 
+    public void tulostaKaikki() {
+        System.out.printf("%d: %d %s", periodi, id, nimi);
+        System.out.print("  -   ");
+        System.out.print("ennakkotiedot ");
+        for (Integer integer : ennakkotiedot) {
+            System.out.print(integer + " ");
+        }
+        System.out.println();
+    }
+
     @Override
     public int compareTo(Kurssi o) {
         return this.periodi - o.periodi;

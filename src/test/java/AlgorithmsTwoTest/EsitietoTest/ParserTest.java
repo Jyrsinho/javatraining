@@ -90,8 +90,38 @@ public class ParserTest {
         int expected = 5;
         int actual = kurssiListat.size();
         assertEquals(expected, actual);
+    }
 
-
+    @Test
+    public void KatsotaanMitaEsitietojaParsii() {
+        String testi = """
+                                1 Algoritmit 4: 11 14 15 12 7 5 3 0
+                                2 Biologia 1: 0
+                                3 C-kurssi 3: 0
+                                4 Diskurssianalyysi 3: 10 14 6 1 15 7 0
+                                5 Erikoiskurssi: 4: 8 0
+                                6 Fiilistelykurssi 1: 2 3 0
+                                7 Graduseminaari 3: 3 11 2 15 14 0
+                                8 Harjoitustyö 1: 0
+                                9 Itsenäinen_projekti 3: 2 1 14 4 3 10 0
+                                10 Jatkokurssi 3: 11 5 8 13 12 0
+                                11 Kokeelliset_menetelmät 3: 3 6 0
+                                12 Luonnontiede 3: 6 4 2 14 3 0
+                                13 Menetelmäopinnot 1: 11 2 7 14 6 15 0
+                                14 Numismatiikka 4: 2 6 0
+                                15 Ohjelmistotuotanto 4: 14 11 12 0
+                                0
+                                0
+                                0
+                                
+                """;
+        Parser parser = new Parser();
+        ArrayList<KurssiLista> kurssiListat = parser.kasitteleSyote(testi);
+        int expected = 1;
+        int actual = kurssiListat.size();
+        KurssiLista kurssiLista = kurssiListat.get(0);
+        kurssiLista.tulostaEnnakkotiedoilla();
+        assertEquals(expected, actual);
     }
 
 
