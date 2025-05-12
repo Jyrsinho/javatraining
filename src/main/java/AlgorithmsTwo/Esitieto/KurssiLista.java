@@ -29,7 +29,8 @@ public class KurssiLista {
             jarjestaSilmukka();
         }
         if (!onSilmukka) {
-            jarjestaKurssit();
+            kurssit.removeFirst();
+            kurssit.sort(Kurssi::compareTo);
         }
     }
 
@@ -65,7 +66,7 @@ public class KurssiLista {
             return false;
         }
         // Jos vieraillaan nodessa ekaa kertaa, merkataan se vierailluksi ja osaksi stakkiä
-        System.out.println("Vieraillaan ekaa kertaa, merkataan rekursiopinoon ja vierailluksi");
+        System.out.println("Vieraillaan ekaa kertaa, merkataan rekursiopinoon ja vierailluksi ");
         vierailtu[kurssiID]= true;
         System.out.println("Vierailtu- listan tila : ");
         for (int i = 0; i < vierailtu.length; i++) {
@@ -79,6 +80,8 @@ public class KurssiLista {
         }
         System.out.println();
 
+
+
         // Kaydaan rekursiivisesti kaikissa nykyisen noden esitiedoissa jos ne sisaltavat syklin niin palautetaan true
         ArrayList<Integer> ennakkotiedot = kurssit.get(kurssiID).getEnnakkotiedot();
         for (int ennakkotieto : ennakkotiedot){
@@ -89,6 +92,10 @@ public class KurssiLista {
                 return true;
             }
         }
+
+        // Paivitetaan kurssin periodi sitten kun ollaan graafin syvimmassa pisteessa
+
+        paivitaPeriodi(kurssit.get(kurssiID));
 
         //Jos syklia ei ole loytynyt niin mennaan takaisin (backtrack) edelliseen nodeen kuitataan etta tasta nodesta
         // ei loytynyt syklia ja poistetaan tama node rekursiopinosta
@@ -102,36 +109,9 @@ public class KurssiLista {
         return false;
     }
 
-    public void jarjestaKurssit() {
-        vierailtu = new boolean[V];
-
-        for (Kurssi kurssi: kurssit) {
-            if (!vierailtu[kurssi.getId()]) {
-                    dfsjarjestys(kurssi);
-            }
-        }
-
-        //poistetaan dummy taalla, koska taman jalkeen sita ei enaa tarvita
-        // jarjestetaan kurssit myos periodinsa mukaan taalla
-        kurssit.removeFirst();
-        kurssit.sort(Kurssi::compareTo);
-    }
-
-    private void dfsjarjestys(Kurssi kurssi) {
-        Kurssi aikaisinEiVierailtu = etsiAikaisinEiVierailtu(kurssi.getEnnakkotiedot());
-        while (aikaisinEiVierailtu != null) {
-            dfsjarjestys(aikaisinEiVierailtu);
-            aikaisinEiVierailtu = etsiAikaisinEiVierailtu(kurssi.getEnnakkotiedot());
-        }
-
-        vierailtu[kurssi.getId()] = true;
-        // päivitetään kurssille periodi suhteessa sen vanhempiin
-        paivitaPeriodi(kurssi);
-
-    }
 
 
-
+/*
     private Kurssi etsiAikaisinEiVierailtu(ArrayList<Integer> ennakkotiedot) {
        Kurssi aikaisin = null;
 
@@ -148,17 +128,27 @@ public class KurssiLista {
        return aikaisin;
     }
 
+ */
+
     /**
      * Annetaan kurssille suoritusperiodi suhteessa sen esitietokursseihin.
      * @param kurssi
      */
     private void paivitaPeriodi(Kurssi kurssi) {
+        System.out.println("Nyt ollaan graafin tämän hetken syvimmassa pisteessa");
         int esitietojenMyohaisinPeriodi = etsiEnnakkotietojenMyohaisinPeriodi(kurssi.getEnnakkotiedot());
+        String tulostus = String.format("Kurssin %s %d esitietojenmyohaisinperiodi on %d", kurssi.getNimi(), kurssi.getId(), esitietojenMyohaisinPeriodi);
+        System.out.println(tulostus);
         int uusiperiodi = laskeUusiperiodi(esitietojenMyohaisinPeriodi, kurssi.getPeriodi());
-
+        System.out.println("Kurssin uusi periodi on " +uusiperiodi);
         kurssi.setPeriodi(uusiperiodi);
     }
 
+    /**
+     * Palauttaa kurssin ennakkotietojen myohaisimman periodin. Jos ei ennakkotietoja, niin palautetaan 0.
+     * @param ennakkotiedot {ArrayList<Integer>}
+     * @return ennakkotietojen myohaisin periodi
+     */
     private int etsiEnnakkotietojenMyohaisinPeriodi(ArrayList<Integer> ennakkotiedot) {
         int myohaisin = 0;
         for (int ennakkotieto: ennakkotiedot) {
