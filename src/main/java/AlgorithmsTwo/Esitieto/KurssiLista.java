@@ -22,24 +22,54 @@ public class KurssiLista {
 
     public void analysoiKurssilista() {
         V = kurssit.size();
-        onSilmukka = etsiSilmukka();
+        onSilmukka = sisaltaaSilmukan();
         if (!onSilmukka) {
             jarjestaKurssit();
         }
     }
 
-    private boolean etsiSilmukka() {
+    /**
+     * Kaydaan jokainen graafin node lapi ja kutsutaan niille rekursiivista metodia, joka
+     * tarkistaa onko kyseinen node osa syklia
+     * @return true jos graafi sisaltaa silmukan, false jos ei
+     */
+    private boolean sisaltaaSilmukan() {
+        vierailtu = new boolean[V];
+        rekursioPino = new boolean[V];
 
-        for (Kurssi kurssi: kurssit) {
-                vierailtu = new boolean[V];
-                rekursioPino = new boolean[V];
-                if (!dfs(kurssi)) {
-                    continue;
-                } else {
-                    return true;
-                }
+        for (int i = 0; i < kurssit.size(); i++) {
+            if (!vierailtu[i] && sisaltaaSilmukanHelper(i)) {
+                return true;
+            }
         }
        return false;
+    }
+
+    private boolean sisaltaaSilmukanHelper(int kurssiID) {
+        // Nykyinen node on jo rekursiossa -> cykli havaittu -> lopetetaan dfs
+        if (rekursioPino[kurssiID]) {
+            return true;
+        }
+        // Nykyinen node jo vierailtu eika restackissa -> ei osa sykliä -> ei tarvitse enaa vierailla
+        if (vierailtu[kurssiID]) {
+            return false;
+        }
+        // Jos vieraillaan nodessa ekaa kertaa, merkataan se vierailluksi ja osaksi stakkiä
+        vierailtu[kurssiID]= true;
+        rekursioPino[kurssiID] = true;
+
+        // Kaydaan rekursiivisesti kaikissa nykyisen noden esitiedoissa jos ne sisaltavat syklin niin palautetaan true
+        ArrayList<Integer> ennakkotiedot = kurssit.get(kurssiID).getEnnakkotiedot();
+        for (int ennakkotieto : ennakkotiedot){
+            if (sisaltaaSilmukanHelper(ennakkotieto)) {
+                return true;
+            }
+        }
+
+        //Jos syklia ei ole loytynyt niin mennaan takaisin (backtrack) edelliseen nodeen kuitataan etta tasta nodesta
+        // ei loytynyt syklia ja poistetaan tama node rekursiopinosta
+        rekursioPino[kurssiID] = false;
+        return false;
     }
 
     public void jarjestaKurssit() {
