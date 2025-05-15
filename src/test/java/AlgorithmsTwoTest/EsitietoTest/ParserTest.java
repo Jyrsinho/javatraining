@@ -1,7 +1,10 @@
 package AlgorithmsTwoTest.EsitietoTest;
 
+import AlgorithmsTwo.Esitieto.Kurssi;
 import AlgorithmsTwo.Esitieto.KurssiLista;
 import AlgorithmsTwo.Esitieto.Parser;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.io.ByteArrayInputStream;
@@ -11,6 +14,19 @@ import java.util.ArrayList;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class ParserTest {
+    InputStream originalIn;
+
+    @BeforeEach
+    public void setUp() {
+        originalIn = System.in;
+    }
+
+
+    @AfterEach
+    public void tearDown() {
+        System.setIn(originalIn);
+
+    }
 
     @Test
     public void testParserShouldGiveOneEsitietoCase() {
@@ -20,10 +36,6 @@ public class ParserTest {
                 2 Pitsinnypläys 4:    1       0 0 0
                 """;
         InputStream testInput = new ByteArrayInputStream(simulatedInput.getBytes());
-
-        // 2. Backup original System.in
-        InputStream originalIn = System.in;
-
         // 3. Redirect System.in to our test input
         System.setIn(testInput);
 
@@ -31,14 +43,11 @@ public class ParserTest {
         Parser parser = new Parser();
         ArrayList<KurssiLista> kurssilistat = parser.kasitteleSyote();
 
-        // 5. Restore original System.in to avoid breaking other tests
-        System.setIn(originalIn);
         int expected = 1;
-
         assertEquals(expected, kurssilistat.size());
     }
-}
-/*
+
+
     @Test
     public void testParserShouldGiveTwoEsitietoCases() {
         String testiSyote = """
@@ -47,8 +56,12 @@ public class ParserTest {
                 1 jaakiekko 1: 2 0
                 2 pesapallo 3: 1 0 0 0
                 """;
+        InputStream testInput = new ByteArrayInputStream(testiSyote.getBytes());
+        System.setIn(testInput);
+
         Parser parser = new Parser();
-        ArrayList<KurssiLista> kurssilistat = parser.kasitteleSyote(testiSyote);
+        ArrayList<KurssiLista> kurssilistat = parser.kasitteleSyote();
+
         int expected = 2;
         assertEquals(expected, kurssilistat.size());
     }
@@ -60,13 +73,19 @@ public class ParserTest {
                 2 ruuanlaitto 2:    1 0 
                 3 pesapallo 3: 1 0 0 0
                 """;
+        InputStream testInput = new ByteArrayInputStream(testiSyote.getBytes());
+        System.setIn(testInput);
+
         Parser parser = new Parser();
-        ArrayList<KurssiLista> kurssilistat = parser.kasitteleSyote(testiSyote);
+        ArrayList<KurssiLista> kurssilistat = parser.kasitteleSyote();
         KurssiLista kurssiLista = kurssilistat.getFirst();
         ArrayList<Kurssi> kurssit = kurssiLista.getKurssit();
         int expected = 4;
         assertEquals(expected, kurssit.size());
     }
+}
+
+/*
 
     @Test
     public void testParserShouldCreateXKurssiListat() {
