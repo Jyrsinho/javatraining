@@ -22,6 +22,8 @@ public class Parser {
         this.scanner = new Scanner(System.in);
         ArrayList<KurssiLista> kurssiListat = new ArrayList<>();
         KurssiLista kurssiLista = new KurssiLista();
+        //lisataan jokaisen kurssiListaan dummy kurssi etta voidaan kasitella kursseja indeksista 1 lahtien
+        kurssiLista.lisaaKurssi(new Kurssi(0, "dummy", 0, new ArrayList<>()));
         int nollaLaskuri = 0;
         StringBuilder sb = new StringBuilder();
 

@@ -83,14 +83,11 @@ public class ParserTest {
         int expected = 4;
         assertEquals(expected, kurssit.size());
     }
-}
 
-/*
 
     @Test
-    public void testParserShouldCreateXKurssiListat() {
+    public void testParserShouldCreate5KurssilistatWithInputContainingKaksoispisteKurssiListat() {
         // KURSSISSA 5 on kaksi ":" merkkia. Ehka me nyt mietitaan parserin toiminta uudestaan
-        // Ainoa mihin tämän nyt pitäisi vaikuttaa on yksittaisen kurssin syotteen lukeminen
         String testiSyote = """
                 1 Ainoa_kurssi 3 : 0
                 0
@@ -120,8 +117,11 @@ public class ParserTest {
                 0
                 0
                 """;
+        InputStream testInput = new ByteArrayInputStream(testiSyote.getBytes());
+        System.setIn(testInput);
+
         Parser parser = new Parser();
-        ArrayList<KurssiLista> kurssiListat = parser.kasitteleSyote(testiSyote);
+        ArrayList<KurssiLista> kurssiListat = parser.kasitteleSyote();
         int expected = 5;
         int actual = kurssiListat.size();
         assertEquals(expected, actual);
@@ -129,7 +129,7 @@ public class ParserTest {
 
     @Test
     public void KatsotaanMitaEsitietojaParsii() {
-        String testi = """
+        String testiSyote = """
                                 1 Algoritmit 4: 11 14 15 12 7 5 3 0
                                 2 Biologia 1: 0
                                 3 C-kurssi 3: 0
@@ -150,16 +150,15 @@ public class ParserTest {
                                 0
                                 
                 """;
+        InputStream testInput = new ByteArrayInputStream(testiSyote.getBytes());
+        System.setIn(testInput);
         Parser parser = new Parser();
-        ArrayList<KurssiLista> kurssiListat = parser.kasitteleSyote(testi);
+        ArrayList<KurssiLista> kurssiListat = parser.kasitteleSyote();
         int expected = 1;
         int actual = kurssiListat.size();
         KurssiLista kurssiLista = kurssiListat.get(0);
         kurssiLista.tulostaEnnakkotiedoilla();
         assertEquals(expected, actual);
     }
-
-
 }
 
- */
