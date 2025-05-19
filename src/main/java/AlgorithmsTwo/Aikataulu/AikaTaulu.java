@@ -102,8 +102,7 @@ public class AikaTaulu {
                 System.out.println();
             }
         }
-
-
+        System.out.println();
     }
 
     private int etsiSuurinAika() {

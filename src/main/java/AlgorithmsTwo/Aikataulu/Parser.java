@@ -13,7 +13,7 @@ public class Parser {
         AikaTaulu aikaTaulu = new AikaTaulu();
         ArrayList<Integer> kayttajanToiveet = new ArrayList<>();
         //lisataan aikatauluun aina yksi dummy, etta voidaan kayttaa indekseja ykkosesta
-        aikaTaulu.lisaaKayttaja(kayttajanToiveet);
+        aikaTaulu.lisaaKayttaja(new ArrayList<>());
         Scanner scanner = new Scanner(System.in);
 
         int nollienMaara = 0;

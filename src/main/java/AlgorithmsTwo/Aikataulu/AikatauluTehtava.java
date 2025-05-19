@@ -8,6 +8,7 @@ public class AikatauluTehtava {
         Parser parser = new Parser();
         ArrayList<AikaTaulu> aikaTaulutukset = parser.kasitteleSyote();
 
+
         for (AikaTaulu aikaTaulu: aikaTaulutukset) {
             aikaTaulu.jaaAikataulu();
             aikaTaulu.tulostaAikataulu();

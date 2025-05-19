@@ -160,5 +160,6 @@ public class ParserTest {
         kurssiLista.tulostaEnnakkotiedoilla();
         assertEquals(expected, actual);
     }
+
 }
 
