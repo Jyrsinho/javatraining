@@ -1,7 +1,77 @@
 package AlgorithmsTwoTest.AikatauluTest;
 
+import AlgorithmsTwo.Aikataulu.AikaTaulu;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
+import java.util.ArrayList;
+
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
+
 public class AikatauluTest {
 
+    AikaTaulu aikaTaulu = new AikaTaulu();
 
+    @BeforeEach
+    public void setUp() {
+        aikaTaulu = new AikaTaulu();
+    }
+
+    @Test
+    public void testShouldGiveAikaToOneUser() {
+        ArrayList<Integer> kayttajan1Toiveet = new ArrayList<>();
+        kayttajan1Toiveet.add(1);
+        aikaTaulu.lisaaKayttaja(kayttajan1Toiveet);
+        int [] aikataulutus = aikaTaulu.jaaAikataulu();
+        int[] expected = {-1, 0};
+        aikaTaulu.tulostaAikataulu();
+        assertArrayEquals(expected, aikataulutus);
+    }
+
+    @Test
+    public void testShouldGiveAikaToTwoUsersWhenNoCompetingPreferences() {
+        ArrayList<Integer> kayttajan1Toiveet = new ArrayList<>();
+        kayttajan1Toiveet.add(1);
+        ArrayList<Integer> kayttajan2Toiveet = new ArrayList<>();
+        kayttajan2Toiveet.add(2);
+        aikaTaulu.lisaaKayttaja(kayttajan1Toiveet);
+        aikaTaulu.lisaaKayttaja(kayttajan2Toiveet);
+        int [] aikataulutus = aikaTaulu.jaaAikataulu();
+        int [] expected = {-1, 0, 1};
+        aikaTaulu.tulostaAikataulu();
+        assertArrayEquals(expected, aikataulutus);
+    }
+
+    @Test
+    public void testShouldGiveAikaToFirstUserWhenCompetingPreferences() {
+        ArrayList<Integer> kayttajan1Toiveet = new ArrayList<>();
+        kayttajan1Toiveet.add(1);
+        ArrayList<Integer> kayttajan2Toiveet = new ArrayList<>();
+        kayttajan2Toiveet.add(1);
+        aikaTaulu.lisaaKayttaja(kayttajan1Toiveet);
+        aikaTaulu.lisaaKayttaja(kayttajan2Toiveet);
+        int[] aikataulutus = aikaTaulu.jaaAikataulu();
+        int [] expected = {-1, 0, -1};
+        aikaTaulu.tulostaAikataulu();
+        assertArrayEquals(expected, aikataulutus);
+    }
+
+    @Test
+    public void testShouldGiveAikaToAllThreeUsersWhenCompetingPreferences() {
+        ArrayList<Integer> kayttajan1Toiveet = new ArrayList<>();
+        kayttajan1Toiveet.add(1);
+        kayttajan1Toiveet.add(3);
+        ArrayList<Integer> kayttajan2Toiveet = new ArrayList<>();
+        kayttajan2Toiveet.add(2);
+        ArrayList<Integer> kayttajan3Toiveet = new ArrayList<>();
+        kayttajan3Toiveet.add(1);
+        aikaTaulu.lisaaKayttaja(kayttajan1Toiveet);
+        aikaTaulu.lisaaKayttaja(kayttajan2Toiveet);
+        aikaTaulu.lisaaKayttaja(kayttajan3Toiveet);
+        int[] aikataulutus = aikaTaulu.jaaAikataulu();
+        int[] expected = {-1, 3, 2, 1};
+        aikaTaulu.tulostaAikataulu();
+        assertArrayEquals(expected, aikataulutus);
+    }
 
 }
