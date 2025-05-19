@@ -33,7 +33,10 @@ public class AikaTaulu {
         Arrays.fill(matching, -1);
 
         for (int i = 0; i < this.asiakkaita; i++) {
+            System.out.printf("PARITETAAN ASIAKAS %d :", i);
+            System.out.println();
             used = new boolean[asiakkaita];
+            System.out.println("Alustetaan Used - taulukko: " + Arrays.toString(this.used));
             // kaydaan jokainen asiakas lapi ja kokeillaan parittaa asiakas vapaalle ajalle
             matsaa(i);
         }
@@ -43,14 +46,25 @@ public class AikaTaulu {
 
     private boolean matsaa(int asikas) {
         if (used[asikas]) {
+            System.out.printf("Asiakas %d oli jo yritetty parittaa tällä kierroksella. Palautan false \n", asikas);
             return false;
         }
+
+        //TODO: tahan pitaa tehda rekursiivinen tarkistus voidaanko
         used[asikas] = true;
+        System.out.printf("Merkataan asikas: %d vierailluksi \n" , asikas);
+        System.out.println(Arrays.toString(used));
         ArrayList<Integer> asiakkaanToiveet = kayttajienToiveet.get(asikas);
+        System.out.printf("Käydään löpi asiakkaan %d jokainen toive \n", asikas);
         for (int i = 0; i < asiakkaanToiveet.size(); i++) {
-            if (matching[asiakkaanToiveet.get(i)] == -1) {
+            int asiakkaanToive = asiakkaanToiveet.get(i);
+            if (matching[asiakkaanToiveet.get(i)] == -1 || matsaa(matching[asiakkaanToive])){
+                System.out.printf("Asiakkaan toive %d oli vapaa. Annetaan asiakkaalle %d aika %d \n", asiakkaanToive, asikas, asiakkaanToive);
                 matching[asiakkaanToiveet.get(i)] = asikas;
+                System.out.println("Matchingin tila: "+ Arrays.toString(matching));
                 return true;
+            }else {
+                System.out.printf("Asiakkaan %d toive %d oli varattu eika sille annettua asikasta voida siirtaa toiselle ajalle\n ", asikas, asiakkaanToive);
             }
         }
         return false;
