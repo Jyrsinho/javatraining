@@ -12,6 +12,8 @@ public class Parser {
         ArrayList<AikaTaulu> aikataulut = new ArrayList<>();
         AikaTaulu aikaTaulu = new AikaTaulu();
         ArrayList<Integer> kayttajanToiveet = new ArrayList<>();
+        //lisataan aikatauluun aina yksi dummy, etta voidaan kayttaa indekseja ykkosesta
+        aikaTaulu.lisaaKayttaja(kayttajanToiveet);
         Scanner scanner = new Scanner(System.in);
 
         int nollienMaara = 0;

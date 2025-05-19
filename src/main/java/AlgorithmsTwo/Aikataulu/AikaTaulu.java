@@ -13,12 +13,11 @@ public class AikaTaulu {
     private int asiakkaita;
     private ArrayList<ArrayList<Integer>> kayttajienToiveet;
     private boolean[] used;
-    private int[] matching;
+    private int[] aikojenAsiakkaat; //träkkää mitkä ajat on annettu kenellekin asiakkaalle. Ajat ovat indekseja asiakkaat arvoja
 
     public AikaTaulu() {
         this.kayttajienToiveet = new ArrayList<>();
         this.asiakkaita = 0;
-
 
     }
 
@@ -29,8 +28,9 @@ public class AikaTaulu {
      */
     public int [] jaaAikataulu() {
         // asiakkaita + 1 koska halutaan jattaa 0-indeksi tyhjaksi
-        this.matching = new int[asiakkaita + 1];
-        Arrays.fill(matching, -1);
+        // pitaa loytaa suurin aika kayttajientoiveista tai sitten vaan tehda 1000 alkioinen taulukko suoraan
+        this.aikojenAsiakkaat = new int[etsiSuurinAika() + 1 ];
+        Arrays.fill(aikojenAsiakkaat, -1);
 
         for (int i = 0; i < this.asiakkaita; i++) {
             System.out.printf("PARITETAAN ASIAKAS %d :", i);
@@ -41,7 +41,7 @@ public class AikaTaulu {
             matsaa(i);
         }
 
-        return matching;
+        return aikojenAsiakkaat;
     }
 
     private boolean matsaa(int asikas) {
@@ -58,10 +58,10 @@ public class AikaTaulu {
         System.out.printf("Käydään löpi asiakkaan %d jokainen toive \n", asikas);
         for (int i = 0; i < asiakkaanToiveet.size(); i++) {
             int asiakkaanToive = asiakkaanToiveet.get(i);
-            if (matching[asiakkaanToiveet.get(i)] == -1 || matsaa(matching[asiakkaanToive])){
+            if (aikojenAsiakkaat[asiakkaanToiveet.get(i)] == -1 || matsaa(aikojenAsiakkaat[asiakkaanToive])){
                 System.out.printf("Asiakkaan toive %d oli vapaa. Annetaan asiakkaalle %d aika %d \n", asiakkaanToive, asikas, asiakkaanToive);
-                matching[asiakkaanToiveet.get(i)] = asikas;
-                System.out.println("Matchingin tila: "+ Arrays.toString(matching));
+                aikojenAsiakkaat[asiakkaanToiveet.get(i)] = asikas;
+                System.out.println("Matchingin tila: "+ Arrays.toString(aikojenAsiakkaat));
                 return true;
             }else {
                 System.out.printf("Asiakkaan %d toive %d oli varattu eika sille annettua asikasta voida siirtaa toiselle ajalle\n ", asikas, asiakkaanToive);
@@ -79,15 +79,43 @@ public class AikaTaulu {
         return kayttajienToiveet.get(kayttajanIndeksi);
     }
 
+    /**
+     * Tulostuksen tulkitsemisen helpottamiseksi kukin aika tai 0 kannattaa (mutta
+     * ei ole pakko) tulostaa 4 merkkiä leveän kentän oikeaan reunaan. Kullekin riville
+     * kannattaa tulostaa 10 aikaa tai nollaa, paitsi viimeinen rivi saa jäädä vajaaksi.
+     * Myös viimeisen rivin loppuun kannattaa tulostaa rivinsiirto, vaikka se olisi vajaa.
+     *
+     * Skipataan ensimmainen indeksi, koska se on aina tyhja, koska nolla-aikaa ei ole olemassa.
+     */
     public void tulostaAikataulu() {
-        for (int i = 0; i < matching.length; i++) {
-            System.out.print("Aika: ");
-            System.out.print(i + " ");
-            System.out.print("Kayttaja: ");
-            System.out.print(matching[i] +"   ");
+        int [] asiakkaidenAjat = new int[asiakkaita];
+        for (int i = 0; i < aikojenAsiakkaat.length; i++) {
+            if (aikojenAsiakkaat[i] > 0) {
+                asiakkaidenAjat[aikojenAsiakkaat[i]] = i;
+            }
         }
+        for (int i = 1; i < asiakkaidenAjat.length; i++) {
+            System.out.print("    ");
+            System.out.print(asiakkaidenAjat[i]);
+
+            if (i % 10 == 0) {
+                System.out.println();
+            }
+        }
+
 
     }
 
+    private int etsiSuurinAika() {
+        int suurin = Integer.MIN_VALUE;
 
+        for (ArrayList<Integer> kayttajantoive : kayttajienToiveet) {
+            for (int toive: kayttajantoive) {
+                if (toive > suurin) {
+                    suurin = toive;
+                }
+            }
+        }
+        return suurin;
+    }
 }

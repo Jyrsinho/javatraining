@@ -11,10 +11,13 @@ import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 public class AikatauluTest {
 
     AikaTaulu aikaTaulu = new AikaTaulu();
+    ArrayList<Integer> dummyKayttajanToiveet = new ArrayList<>();
 
     @BeforeEach
     public void setUp() {
         aikaTaulu = new AikaTaulu();
+        aikaTaulu.lisaaKayttaja(dummyKayttajanToiveet);
+
     }
 
     @Test
@@ -23,7 +26,7 @@ public class AikatauluTest {
         kayttajan1Toiveet.add(1);
         aikaTaulu.lisaaKayttaja(kayttajan1Toiveet);
         int [] aikataulutus = aikaTaulu.jaaAikataulu();
-        int[] expected = {-1, 0};
+        int[] expected = {-1, 1};
         aikaTaulu.tulostaAikataulu();
         assertArrayEquals(expected, aikataulutus);
     }
@@ -37,7 +40,7 @@ public class AikatauluTest {
         aikaTaulu.lisaaKayttaja(kayttajan1Toiveet);
         aikaTaulu.lisaaKayttaja(kayttajan2Toiveet);
         int [] aikataulutus = aikaTaulu.jaaAikataulu();
-        int [] expected = {-1, 0, 1};
+        int [] expected = {-1, 1, 2};
         aikaTaulu.tulostaAikataulu();
         assertArrayEquals(expected, aikataulutus);
     }
@@ -51,7 +54,7 @@ public class AikatauluTest {
         aikaTaulu.lisaaKayttaja(kayttajan1Toiveet);
         aikaTaulu.lisaaKayttaja(kayttajan2Toiveet);
         int[] aikataulutus = aikaTaulu.jaaAikataulu();
-        int [] expected = {-1, 0, -1};
+        int [] expected = {-1, 1};
         aikaTaulu.tulostaAikataulu();
         assertArrayEquals(expected, aikataulutus);
     }
@@ -73,9 +76,32 @@ public class AikatauluTest {
         // ajat:        0   1   2   3
         // kayttajat:   -1  3   1   0
         int[] aikataulutus = aikaTaulu.jaaAikataulu();
-        int[] expected = {-1, 2, 1, 0};
+        int[] expected = {-1, 3, 2, 1};
         aikaTaulu.tulostaAikataulu();
         assertArrayEquals(expected, aikataulutus);
+    }
+
+    @Test
+    public void opettajanTestiSyote1() {
+       ArrayList<Integer> kayttajan0Toiveet = new ArrayList<>();
+       ArrayList<Integer> kayttajan1Toiveet = new ArrayList<>();
+       ArrayList<Integer> kayttajan2Toiveet = new ArrayList<>();
+       kayttajan0Toiveet.add(3);
+
+       kayttajan1Toiveet.add(3);
+       kayttajan1Toiveet.add(2);
+
+       kayttajan2Toiveet.add(3);
+       kayttajan2Toiveet.add(1);
+
+       aikaTaulu.lisaaKayttaja(kayttajan0Toiveet);
+       aikaTaulu.lisaaKayttaja(kayttajan1Toiveet);
+       aikaTaulu.lisaaKayttaja(kayttajan2Toiveet);
+
+       int[] aikataulutus = aikaTaulu.jaaAikataulu();
+       int[] expected = {-1, 3, 2, 1};
+       aikaTaulu.tulostaAikataulu();
+       assertArrayEquals(expected, aikataulutus);
     }
 
 }

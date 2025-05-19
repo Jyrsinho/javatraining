@@ -19,5 +19,6 @@ public class AikatauluTehtava {
 
         AikatauluTehtava aikataulu = new AikatauluTehtava();
         aikataulu.kasitteleSyote();
+
     }
 }
