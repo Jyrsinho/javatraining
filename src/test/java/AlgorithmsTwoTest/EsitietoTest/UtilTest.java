@@ -2,7 +2,7 @@ package AlgorithmsTwoTest.EsitietoTest;
 
 import org.junit.jupiter.api.Test;
 
-import static AlgorithmsTwo.Esitieto.Util.laskeUusiperiodi;
+import static AlgorithmsTwo.Esitieto.Esitieto.Util.laskeUusiperiodi;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class UtilTest {
