@@ -1,7 +1,6 @@
 package AlgorithmsTwoTest.AikatauluTest;
 
-import AlgorithmsTwo.Aikataulu.AikaTaulu;
-import AlgorithmsTwo.Aikataulu.Parser;
+import AlgorithmsTwo.Aikataulu.AikatauluTehtava;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -15,13 +14,13 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class ParserTest {
-    Parser parser;
+    AikatauluTehtava.Parser parser;
     InputStream originalIn;
 
     @BeforeEach
     public void setUp() {
         originalIn = System.in;
-        parser = new Parser();
+        parser = new AikatauluTehtava.Parser();
     }
 
 
@@ -44,7 +43,7 @@ public class ParserTest {
         InputStream testInput = new ByteArrayInputStream(testiSyote.getBytes());
         System.setIn(testInput);
 
-        ArrayList<AikaTaulu> aikataulut = parser.kasitteleSyote();
+        ArrayList<AikatauluTehtava.AikaTaulu> aikataulut = parser.kasitteleSyote();
 
         assertEquals(1, aikataulut.size());
     }
@@ -62,7 +61,7 @@ public class ParserTest {
                 """;
         InputStream testInput = new ByteArrayInputStream(testiSyote.getBytes());
         System.setIn(testInput);
-        ArrayList<AikaTaulu> aikataulut = parser.kasitteleSyote();
+        ArrayList<AikatauluTehtava.AikaTaulu> aikataulut = parser.kasitteleSyote();
         assertEquals(3, aikataulut.size());
     }
 
@@ -82,7 +81,7 @@ public class ParserTest {
                 """;
         InputStream testInput = new ByteArrayInputStream(testiSyote.getBytes());
         System.setIn(testInput);
-        ArrayList<AikaTaulu> aikataulut = parser.kasitteleSyote();
+        ArrayList<AikatauluTehtava.AikaTaulu> aikataulut = parser.kasitteleSyote();
         assertEquals(2, aikataulut.size());
     }
 
@@ -97,8 +96,8 @@ public class ParserTest {
                 """;
         InputStream testInput = new ByteArrayInputStream(testiSyote.getBytes());
         System.setIn(testInput);
-        ArrayList<AikaTaulu> aikataulut = parser.kasitteleSyote();
-        AikaTaulu aikaTaulu = aikataulut.getFirst();
+        ArrayList<AikatauluTehtava.AikaTaulu> aikataulut = parser.kasitteleSyote();
+        AikatauluTehtava.AikaTaulu aikaTaulu = aikataulut.getFirst();
         ArrayList<Integer> dummynToiveet = aikaTaulu.getKayttajanToiveet(0);
         ArrayList<Integer> ekanKayttajanToiveet = aikaTaulu.getKayttajanToiveet(1);
         ArrayList<Integer> tokanKayttajantoiveet = aikaTaulu.getKayttajanToiveet(2);

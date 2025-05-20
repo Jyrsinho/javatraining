@@ -1,6 +1,6 @@
 package AlgorithmsTwoTest.AikatauluTest;
 
-import AlgorithmsTwo.Aikataulu.AikaTaulu;
+import AlgorithmsTwo.Aikataulu.AikatauluTehtava;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -10,12 +10,12 @@ import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 
 public class AikatauluTest {
 
-    AikaTaulu aikaTaulu = new AikaTaulu();
+    AikatauluTehtava.AikaTaulu aikaTaulu = new AikatauluTehtava.AikaTaulu();
     ArrayList<Integer> dummyKayttajanToiveet = new ArrayList<>();
 
     @BeforeEach
     public void setUp() {
-        aikaTaulu = new AikaTaulu();
+        aikaTaulu = new AikatauluTehtava.AikaTaulu();
         aikaTaulu.lisaaKayttaja(dummyKayttajanToiveet);
 
     }
