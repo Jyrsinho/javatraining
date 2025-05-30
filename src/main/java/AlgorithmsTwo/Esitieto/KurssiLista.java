@@ -41,7 +41,8 @@ public class KurssiLista {
         vierailtu = new boolean[V];
         rekursioPino = new boolean[V];
 
-        for (int i = 0; i < kurssit.size(); i++) {
+        // aloitetaan ykkosesta koska 0 indeksissa on dummy
+        for (int i = 1; i < kurssit.size(); i++) {
             if (!vierailtu[i] && jarjestaGraafiHelper(i) < 0) {
                 return true;
             }
@@ -58,11 +59,8 @@ public class KurssiLista {
         Kurssi kurssi = kurssit.get(kurssiID);
         int myohaisinEsitieto = 0;
 
-        //jos kurssissa on jo vierailtu palautetaan sen periodi.
-        if (vierailtu[kurssiID]){
-            System.out.printf("Palautetaan kurssin %d periodi", kurssiID);
-            return kurssi.getPeriodi();
-        }
+        // lisätään kurssi rekursiopinoon
+        rekursioPino[kurssiID] = true;
 
         //jos kurssilla on vierailemattomia lapsia, vieraillaan niissa ja palautetaan niistä niiden periodit
         ArrayList<Integer> esitiedot = kurssi.getEnnakkotiedot();
@@ -71,7 +69,7 @@ public class KurssiLista {
             if (rekursioPino[esitieto]) {
                 //silmukka.add(kurssi);
                 return -1;
-            }else {
+            }else if (!vierailtu[esitieto]) {
                 int esitiedonPeriodi = jarjestaGraafiHelper(esitieto);
                 if (esitiedonPeriodi < 0) {
                     silmukka.add(kurssi);
@@ -88,15 +86,28 @@ public class KurssiLista {
         kurssi.setPeriodi(kurssinPeriodi);
         // merkataan kurssi vierailluksi ja rekursiopinoon
         vierailtu[kurssiID] = true;
-        rekursioPino[kurssiID] = true;
         vastaus.push(kurssi);
-
+        // Backtrack: palautetaan kurssin periodi ja poistetaan kurssi rekursiopinosta
+        rekursioPino[kurssiID] = false;
         return kurssi.getPeriodi();
     }
 
 
     public ArrayList<Kurssi> getKurssit() {
         return kurssit;
+    }
+
+
+    public int[] getSuoritusJarjestys() {
+        int [] suoritusJarjestys = new int[V - 1];
+        int index = 0;
+
+        for (Kurssi kurssi: vastaus) {
+            suoritusJarjestys[index] = kurssi.getId();
+            index++;
+        }
+
+        return suoritusJarjestys;
     }
 
 
@@ -128,19 +139,6 @@ public class KurssiLista {
         return onSilmukka;
     }
 
-    /**
-     * Palautetaan kurssien suoritusjarjestys. Poistetaan 0-indeksin dummyKurssi
-     * @return {int[]}
-     */
-    public int[] getSuoritusJarjestys() {
-        int[] jarjestys = new int[V - 1];
-
-        // Tämä on nyt ihan puhtaasti testaamista varten taalla
-        for (int i = 0; i < kurssit.size(); i++) {
-           jarjestys[i] = kurssit.get(i).getId();
-        }
-        return jarjestys;
-    }
 
 
     private void tulostaSuoritusAjankohdat() {
@@ -149,9 +147,7 @@ public class KurssiLista {
         out.println("Suoritusajankohdat:");
 
         for (Kurssi kurssi: vastaus) {
-            if (kurssi.getNimi() != "dummy") {
                 kurssi.tulostaKaikki();
-            }
         }
     }
 

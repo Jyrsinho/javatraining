@@ -36,15 +36,12 @@ public class KurssiListaTest {
         assertTrue(kurssiLista.onSilmukka());
         kurssiLista.tulosta();
     }
-}
-    /*
-
 
 
     @Test
     public void testOnSilmukkaShouldReturnTrueForTwoElementsWithSilmukka() {
-        Kurssi kurssi1 = new Kurssi(1, "jaakiekko", 1, new int[] {2});
-        Kurssi kurssi2 = new Kurssi(2, "salibandy", 1, new int[] {1});
+        Kurssi kurssi1 = new Kurssi(1, "jaakiekko", 1, new int[]{2});
+        Kurssi kurssi2 = new Kurssi(2, "salibandy", 1, new int[]{1});
         kurssiLista.lisaaKurssi(kurssi1);
         kurssiLista.lisaaKurssi(kurssi2);
         kurssiLista.analysoiKurssilista();
@@ -52,9 +49,10 @@ public class KurssiListaTest {
         kurssiLista.tulosta();
     }
 
+
     @Test
     public void testOnSilmukkaShouldReturnFalseForTwoElementsWithoutSilmukka() {
-        Kurssi kurssi1 = new Kurssi(1, "jaakiekko", 1, new int[] {2});
+        Kurssi kurssi1 = new Kurssi(1, "jaakiekko", 1, new int[]{2});
         Kurssi kurssi2 = new Kurssi(2, "salibandy", 1, new ArrayList<>());
         kurssiLista.lisaaKurssi(kurssi1);
         kurssiLista.lisaaKurssi(kurssi2);
@@ -64,12 +62,12 @@ public class KurssiListaTest {
 
     @Test
     public void testShouldReturnOnSilmukkaWhenFiveElementsWithSilmukka() {
-        Kurssi kurssi1 = new Kurssi(1, "jaakiekko", 1, new int[] {2});
-        Kurssi kurssi2 = new Kurssi(2, "salibandy", 1, new int[] {3});
-        Kurssi kurssi3 = new Kurssi(3, "syominen ", 1, new int[] {4,5,6});
-        Kurssi kurssi4 = new Kurssi(4, "istuminen", 1, new int[] {5});
-        Kurssi kurssi5 = new Kurssi(5, "uiminen", 1, new int[] {6});
-        Kurssi kurssi6 = new Kurssi(6, "puiminen", 1, new int[] {1});
+        Kurssi kurssi1 = new Kurssi(1, "jaakiekko", 1, new int[]{2});
+        Kurssi kurssi2 = new Kurssi(2, "salibandy", 1, new int[]{3});
+        Kurssi kurssi3 = new Kurssi(3, "syominen ", 1, new int[]{4, 5, 6});
+        Kurssi kurssi4 = new Kurssi(4, "istuminen", 1, new int[]{5});
+        Kurssi kurssi5 = new Kurssi(5, "uiminen", 1, new int[]{6});
+        Kurssi kurssi6 = new Kurssi(6, "puiminen", 1, new int[]{1});
         kurssiLista.lisaaKurssi(kurssi1);
         kurssiLista.lisaaKurssi(kurssi2);
         kurssiLista.lisaaKurssi(kurssi3);
@@ -81,33 +79,37 @@ public class KurssiListaTest {
         kurssiLista.tulosta();
     }
 
+
     @Test
     public void testShouldSortKurssiListaWithLinearOrder() {
         Kurssi kurssi1 = new Kurssi(1, "jaakiekko", 1, new ArrayList<>());
-        Kurssi kurssi2 = new Kurssi(2, "salibandy", 2, new int[] {1});
-        Kurssi kurssi3 = new Kurssi(3, "istuminen", 3, new int[] {2});
+        Kurssi kurssi2 = new Kurssi(2, "salibandy", 2, new int[]{1});
+        Kurssi kurssi3 = new Kurssi(3, "istuminen", 3, new int[]{2});
         kurssiLista.lisaaKurssi(kurssi1);
         kurssiLista.lisaaKurssi(kurssi2);
         kurssiLista.lisaaKurssi(kurssi3);
         kurssiLista.analysoiKurssilista();
-        int[] expected = {1,2,3};
-        int [] actual = kurssiLista.getSuoritusJarjestys();
+        int[] expected = {1, 2, 3};
+        int[] actual = kurssiLista.getSuoritusJarjestys();
+        // kurssiLista.tulosta();
+        assertFalse(kurssiLista.onSilmukka());
         assertArrayEquals(expected, actual);
     }
 
     @Test
     public void testShouldSortKurssiListaWithTwoCoursesHavingSamePrerequisite() {
         Kurssi kurssi1 = new Kurssi(1, "jaakiekko", 1, new ArrayList<>());
-        Kurssi kurssi2 = new Kurssi(2, "salibandy", 2, new int[] {1});
-        Kurssi kurssi3 = new Kurssi(3, "istuminen", 3, new int[] {1});
+        Kurssi kurssi2 = new Kurssi(2, "salibandy", 2, new int[]{1});
+        Kurssi kurssi3 = new Kurssi(3, "istuminen", 3, new int[]{1});
         kurssiLista.lisaaKurssi(kurssi1);
         kurssiLista.lisaaKurssi(kurssi2);
         kurssiLista.lisaaKurssi(kurssi3);
         kurssiLista.analysoiKurssilista();
-        int[] expected = {1,2,3};
+        int[] expected = {1, 2, 3};
         int[] actual = kurssiLista.getSuoritusJarjestys();
         assertArrayEquals(expected, actual);
     }
+
 
     @Test
     public void testShouldSortTwoPrerequisitesWithDifferentPeriods() {
@@ -121,10 +123,12 @@ public class KurssiListaTest {
         assertFalse(kurssiLista.onSilmukka());
         int[] expected = {3,2,1};
         int[] actual = kurssiLista.getSuoritusJarjestys();
-        kurssiLista.tulosta();
-         assertArrayEquals(expected, actual);
+        //kurssiLista.tulosta();
+        assertArrayEquals(expected, actual);
 
     }
+    }
+    /*
 
     @Test
     public void testShouldSortTwoPrerequisitesInLeafLevelWhenLoopStartsInLeafLevel() {
