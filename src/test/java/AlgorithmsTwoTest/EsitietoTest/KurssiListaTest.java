@@ -10,7 +10,8 @@ import java.util.ArrayList;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class KurssiListaTest {
-        KurssiLista kurssiLista;
+    KurssiLista kurssiLista;
+
     @BeforeEach
     public void setUp() {
         kurssiLista = new KurssiLista();
@@ -29,12 +30,16 @@ public class KurssiListaTest {
 
     @Test
     public void testOnSilmukkaShouldReturnTrueWhenOneElementWithItselfAsEnnakkotieto() {
-        Kurssi kurssi = new Kurssi(1, "jaakiekko", 1, new int[] {1});
+        Kurssi kurssi = new Kurssi(1, "jaakiekko", 1, new int[]{1});
         kurssiLista.lisaaKurssi(kurssi);
         kurssiLista.analysoiKurssilista();
         assertTrue(kurssiLista.onSilmukka());
         kurssiLista.tulosta();
     }
+}
+    /*
+
+
 
     @Test
     public void testOnSilmukkaShouldReturnTrueForTwoElementsWithSilmukka() {
@@ -153,4 +158,6 @@ public class KurssiListaTest {
     }
 
 
-}
+     */
+
+

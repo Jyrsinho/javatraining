@@ -2,7 +2,7 @@ package AlgorithmsTwo.Esitieto;
 
 import java.io.PrintStream;
 import java.util.ArrayList;
-import java.util.LinkedList;
+import java.util.Stack;
 
 import static AlgorithmsTwo.Esitieto.Util.laskeUusiperiodi;
 
@@ -12,10 +12,13 @@ public class KurssiLista {
     boolean[] vierailtu;
     boolean[] rekursioPino;
     boolean onSilmukka;
-    LinkedList<Integer> sykli;
+    Stack<Kurssi> vastaus;
+    Stack<Kurssi> silmukka;
 
     public KurssiLista() {
         kurssit = new ArrayList<>();
+        vastaus = new Stack<>();
+        silmukka = new Stack<>();
     }
 
     public void lisaaKurssi(Kurssi kurssi) {
@@ -25,13 +28,8 @@ public class KurssiLista {
     public void analysoiKurssilista() {
         V = kurssit.size();
         onSilmukka = sisaltaaSilmukan();
-        if (onSilmukka) {
-            jarjestaSilmukka();
-        }
-        if (!onSilmukka) {
-            kurssit.removeFirst();
-            kurssit.sort(Kurssi::compareTo);
-        }
+
+       tulosta();
     }
 
     /**
@@ -44,122 +42,64 @@ public class KurssiLista {
         rekursioPino = new boolean[V];
 
         for (int i = 0; i < kurssit.size(); i++) {
-            if (!vierailtu[i] && sisaltaaSilmukanHelper(i)) {
+            if (!vierailtu[i] && jarjestaGraafiHelper(i) < 0) {
                 return true;
             }
         }
        return false;
     }
 
-    private boolean sisaltaaSilmukanHelper(int kurssiID) {
-        // Nykyinen node on jo rekursiossa -> cykli havaittu -> lopetetaan dfs
-        System.out.println("Vieraillaan Nodessa: " + kurssiID);
-        if (rekursioPino[kurssiID]) {
-            System.out.println("Node " +kurssiID + " oli rekursiopinossa -> sykli havaittu");
-            sykli = new LinkedList<>();
-            sykli.add(kurssiID);
-            return true;
+    /**
+     * Päivittää oman suoritusajankohtansa ennaakotietojensa mukaan ja palauttaa sitten oman suoritusaikansa
+     * @param kurssiID kurssi jossa vieraillaan
+     * @return vierailtavan kurssin suoritusajankohta
+     */
+    private int jarjestaGraafiHelper(int kurssiID) {
+        Kurssi kurssi = kurssit.get(kurssiID);
+        int myohaisinEsitieto = 0;
+
+        //jos kurssissa on jo vierailtu palautetaan sen periodi.
+        if (vierailtu[kurssiID]){
+            System.out.printf("Palautetaan kurssin %d periodi", kurssiID);
+            return kurssi.getPeriodi();
         }
-        // Nykyinen node jo vierailtu eika restackissa -> ei osa sykliä -> ei tarvitse enaa vierailla
-        if (vierailtu[kurssiID]) {
-            System.out.println("Nodessa on jo vierailtu, palautetaan false");
-            return false;
+
+        //jos kurssilla on vierailemattomia lapsia, vieraillaan niissa ja palautetaan niistä niiden periodit
+        ArrayList<Integer> esitiedot = kurssi.getEnnakkotiedot();
+        for (Integer esitieto: esitiedot) {
+            // jos kurssin lapsi on jo rekursiopinossa, looppi on löytynyt palautetaan -1
+            if (rekursioPino[esitieto]) {
+                //silmukka.add(kurssi);
+                return -1;
+            }else {
+                int esitiedonPeriodi = jarjestaGraafiHelper(esitieto);
+                if (esitiedonPeriodi < 0) {
+                    silmukka.add(kurssi);
+                    return -1;
+                }
+                if (esitiedonPeriodi > myohaisinEsitieto) {
+                    myohaisinEsitieto = esitiedonPeriodi;
+                }
+            }
         }
-        // Jos vieraillaan nodessa ekaa kertaa, merkataan se vierailluksi ja osaksi stakkiä
-        System.out.println("Vieraillaan ekaa kertaa, merkataan rekursiopinoon ja vierailluksi ");
-        vierailtu[kurssiID]= true;
-        System.out.println("Vierailtu- listan tila : ");
-        for (int i = 0; i < vierailtu.length; i++) {
-           System.out.print(i + ": " + vierailtu[i] + " ") ;
-        }
-        System.out.println();
+
+        // jos vieraillaan ensimmaista kertaa lasketaan kurssin periodi suhteessa kurssin lasten periodeihin
+        int kurssinPeriodi = laskeUusiperiodi(myohaisinEsitieto, kurssi.getPeriodi());
+        kurssi.setPeriodi(kurssinPeriodi);
+        // merkataan kurssi vierailluksi ja rekursiopinoon
+        vierailtu[kurssiID] = true;
         rekursioPino[kurssiID] = true;
-        System.out.println("Rekursiopinon tila:");
-        for (int i = 0; i < rekursioPino.length; i++) {
-            System.out.print(i + ": " + rekursioPino[i] + " ") ;
-        }
-        System.out.println();
+        vastaus.push(kurssi);
 
-
-
-        // Kaydaan rekursiivisesti kaikissa nykyisen noden esitiedoissa jos ne sisaltavat syklin niin palautetaan true
-        ArrayList<Integer> ennakkotiedot = kurssit.get(kurssiID).getEnnakkotiedot();
-        for (int ennakkotieto : ennakkotiedot){
-            System.out.println("Seuraavaksi kurssin: " +kurssiID +" ennakkotieto: " + ennakkotieto);
-            if (sisaltaaSilmukanHelper(ennakkotieto)) {
-                System.out.println("Sykli löytyi: " +kurssiID +" ->");
-                sykli.add(kurssiID);
-                return true;
-            }
-        }
-
-        // Paivitetaan kurssin periodi sitten kun ollaan graafin syvimmassa pisteessa
-
-        paivitaPeriodi(kurssit.get(kurssiID));
-
-        //Jos syklia ei ole loytynyt niin mennaan takaisin (backtrack) edelliseen nodeen kuitataan etta tasta nodesta
-        // ei loytynyt syklia ja poistetaan tama node rekursiopinosta
-        System.out.println("Kurssin " +kurssiID +" lapsista ei löytynyt sykliä - palataan... poistetaan kurssi: " + kurssiID + " rekursiopinosta");
-        rekursioPino[kurssiID] = false;
-        System.out.println("Rekursiopinossa nyt poiston jalkeen");
-        for (int i = 0; i < rekursioPino.length; i++) {
-            System.out.print(i + ": " + rekursioPino[i] + " ") ;
-        }
-        System.out.println();
-        return false;
+        return kurssi.getPeriodi();
     }
-
-
-    /**
-     * Annetaan kurssille suoritusperiodi suhteessa sen esitietokursseihin.
-     * @param kurssi
-     */
-    private void paivitaPeriodi(Kurssi kurssi) {
-        System.out.println("Nyt ollaan graafin tämän hetken syvimmassa pisteessa");
-        int esitietojenMyohaisinPeriodi = etsiEnnakkotietojenMyohaisinPeriodi(kurssi.getEnnakkotiedot());
-        String tulostus = String.format("Kurssin %s %d esitietojenmyohaisinperiodi on %d", kurssi.getNimi(), kurssi.getId(), esitietojenMyohaisinPeriodi);
-        System.out.println(tulostus);
-        int uusiperiodi = laskeUusiperiodi(esitietojenMyohaisinPeriodi, kurssi.getPeriodi());
-        System.out.println("Kurssin uusi periodi on " +uusiperiodi);
-        kurssi.setPeriodi(uusiperiodi);
-    }
-
-    /**
-     * Palauttaa kurssin ennakkotietojen myohaisimman periodin. Jos ei ennakkotietoja, niin palautetaan 0.
-     * @param ennakkotiedot {ArrayList<Integer>}
-     * @return ennakkotietojen myohaisin periodi
-     */
-    private int etsiEnnakkotietojenMyohaisinPeriodi(ArrayList<Integer> ennakkotiedot) {
-        int myohaisin = 0;
-        for (int ennakkotieto: ennakkotiedot) {
-            Kurssi ennakkotietoKurssi = kurssit.get(ennakkotieto);
-            if (ennakkotietoKurssi.getPeriodi() > myohaisin) {
-                myohaisin = ennakkotietoKurssi.getPeriodi();
-            }
-        }
-        return myohaisin;
-    }
-
-
 
 
     public ArrayList<Kurssi> getKurssit() {
         return kurssit;
     }
 
-    private void jarjestaSilmukka() {
-        //eli syklin eka on syklin loppu loppu on FIFO:n alussa
-        //otetaan ensin pää talteen
-        // käännetään lista
-        // poistetaan niin kauan kunnes tulee päätä vastaava arvo vastaan
-        int syklinAlkuJaLoppu = sykli.poll();
 
-        sykli = sykli.reversed();
-
-        while (!sykli.isEmpty() && sykli.peek() != syklinAlkuJaLoppu) {
-            sykli.poll();
-        }
-    }
 //
     public void tulosta() {
         if (onSilmukka) {
@@ -176,13 +116,11 @@ public class KurssiLista {
     }
 
     private void tulostaSilmukka() {
+        //Tulosta Silmukka voi tulostaa silmukan suoraan rekursiopinosta
         PrintStream out = System.out;
         out.println("Silmukka:");
-        while (!sykli.isEmpty()) {
-            int kurssiId = sykli.poll();
-            Kurssi kurssi = kurssit.get(kurssiId);
-            System.out.printf("%d %s", kurssi.getId(), kurssi.getNimi());
-            System.out.println();
+        for (Kurssi kurssi: silmukka) {
+            kurssi.tulosta();
         }
     }
 
@@ -209,8 +147,11 @@ public class KurssiLista {
 
         PrintStream out = System.out;
         out.println("Suoritusajankohdat:");
-        for (Kurssi kurssi: kurssit) {
-            kurssi.tulosta();
+
+        for (Kurssi kurssi: vastaus) {
+            if (kurssi.getNimi() != "dummy") {
+                kurssi.tulostaKaikki();
+            }
         }
     }
 

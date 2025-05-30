@@ -10,7 +10,6 @@ public class Esitieto {
         ArrayList<KurssiLista> kurssilistat = parser.kasitteleSyote();
         for (KurssiLista kurssiLista: kurssilistat) {
             kurssiLista.analysoiKurssilista();
-            kurssiLista.tulosta();
             System.out.println();
         }
     }
