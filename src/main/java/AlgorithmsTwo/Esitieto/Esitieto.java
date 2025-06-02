@@ -1,9 +1,7 @@
 package AlgorithmsTwo.Esitieto;
 
 import java.io.PrintStream;
-import java.util.ArrayList;
-import java.util.Scanner;
-import java.util.Stack;
+import java.util.*;
 
 public class Esitieto {
 
@@ -20,12 +18,8 @@ public class Esitieto {
     public static void main(String[] args) {
 
         Esitieto esitieto = new Esitieto();
-        long alku = System.nanoTime();
         esitieto.kasitteleSyote();
-         long loppu = System.nanoTime();
 
-        double ms = (loppu - alku) / 1e6;
-        System.out.printf("Suoritus kesti %.3f ms\n", ms);
 
     }
 
@@ -108,6 +102,8 @@ public class Esitieto {
         Stack<Kurssi> vastaus;
         Stack<Kurssi> silmukka;
         Stack<Integer> reitti;
+        Map<Integer, Integer> periodimuisti = new HashMap<>();
+        Set<Integer> kaynnissa = new HashSet<>();
 
         public KurssiLista() {
             kurssit = new ArrayList<>();
@@ -153,73 +149,54 @@ public class Esitieto {
          */
         private int jarjestaGraafiHelper(int kurssiID) {
 
-
-            Kurssi kurssi = kurssit.get(kurssiID);
-            // jos kurssissa on jo vierailtu, palautetaan sen periodi
-            if (vierailtu[kurssiID]) {
-                return kurssi.getPeriodi();
+            // Memoisaatio: jos jo laskettu, palauta suoraan
+            if (periodimuisti.containsKey(kurssiID)) {
+                return periodimuisti.get(kurssiID);
             }
+
+            // Silmukan tarkistus: jos jo tällä rekursioreitillä → sykli
+            if (kaynnissa.contains(kurssiID)) {
+                // Tallennetaan silmukka tulostusta varten
+                silmukka.clear();
+                boolean lisaa = false;
+                for (int kurssiId : reitti) {
+                    if (kurssiId == kurssiID) lisaa = true;
+                    if (lisaa) silmukka.push(kurssit.get(kurssiId));
+                }
+                return -1; // Silmukka havaittu
+            }
+
+            // Aloita uusi vierailu
+            kaynnissa.add(kurssiID);
+            reitti.push(kurssiID);
+            Kurssi kurssi = kurssit.get(kurssiID);
             int myohaisinEsitieto = 0;
 
-            // lisätään kurssi rekursiopinoon ja kuljetulle reitille
-            rekursioPino[kurssiID] = true;
-            reitti.push(kurssiID);
-
-            //jos kurssilla on vierailemattomia lapsia, vieraillaan niissa ja palautetaan niistä niiden periodit
-            ArrayList<Integer> esitiedot = kurssi.getEnnakkotiedot();
-            for (Integer esitieto: esitiedot) {
-                // jos kurssin lapsi on jo rekursiopinossa, looppi on löytynyt palautetaan -1 ja otetaan reitti talteen
-                if (rekursioPino[esitieto]) {
-                    // Silmukka löytyi -> kerätään reitti talteen
-                    silmukka.clear();
-                    boolean lisaa = false;
-                    for (int kurssiId : reitti) {
-                        if (kurssiId == esitieto) {
-                            lisaa = true;
-                        }
-                        if (lisaa) {
-                            silmukka.push(kurssit.get(kurssiId));
-                        }
-                    }
-                  //  silmukka.push(kurssit.get(kurssiID)); // lisää nykyinenkin
-                    return -1;
-                }else   {
-                    int esitiedonPeriodi;
-                    if (vierailtu[esitieto]) {
-                       esitiedonPeriodi = kurssit.get(esitieto).getPeriodi();
-                    } else {
-                        esitiedonPeriodi = jarjestaGraafiHelper(esitieto);
-                    }
-                    if (esitiedonPeriodi < 0) {
-                        return -1;
-                    }
-                    if (esitiedonPeriodi > myohaisinEsitieto) {
-                        myohaisinEsitieto = esitiedonPeriodi;
-                    }
-                }
+            for (int esitietoID : kurssi.getEnnakkotiedot()) {
+                int esitiedonPeriodi = jarjestaGraafiHelper(esitietoID);
+                if (esitiedonPeriodi < 0) return -1;
+                myohaisinEsitieto = Math.max(myohaisinEsitieto, esitiedonPeriodi);
             }
 
-            // jos vieraillaan ensimmaista kertaa lasketaan kurssin periodi suhteessa kurssin lasten periodeihin
+            // Lasketaan kurssin periodi
             int kurssinPeriodi = Util.laskeUusiperiodi(myohaisinEsitieto, kurssi.getPeriodi());
-
             kurssi.setPeriodi(kurssinPeriodi);
-            // merkataan kurssi vierailluksi ja lisätään se vastaukseen
-            vierailtu[kurssiID] = true;
+            periodimuisti.put(kurssiID, kurssinPeriodi); // Memoisaatio
 
+            // Vastaukseen lisäys (suoritusjärjestys stackiin oikeassa järjestyksessä)
             Stack<Kurssi> pienemmat = new Stack<>();
-            while (!vastaus.isEmpty() && vastaus.peek().periodi < kurssi.periodi) {
+            while (!vastaus.isEmpty() && vastaus.peek().getPeriodi() < kurssinPeriodi) {
                 pienemmat.push(vastaus.pop());
             }
-
-            vastaus.add(kurssi);
+            vastaus.push(kurssi);
             while (!pienemmat.isEmpty()) {
                 vastaus.push(pienemmat.pop());
             }
 
-            // Backtrack: palautetaan kurssin periodi ja poistetaan kurssi rekursiopinosta
-            rekursioPino[kurssiID] = false;
+            // Rekursion jälkisiivous
+            kaynnissa.remove(kurssiID);
             reitti.pop();
-            return kurssi.getPeriodi();
+            return kurssinPeriodi;
         }
 
 
@@ -286,7 +263,7 @@ public class Esitieto {
     }
 
     public static class Parser {
-        Scanner scanner;
+        Scanner scanner = new Scanner(System.in);
 
         public Parser() {
         }
@@ -301,13 +278,12 @@ public class Esitieto {
             // 3 nolla lopettaa koko syotteen
             // Kurssin syote tulee jarjestyksessa id nimi periodi : ennakkotiedot
 
-            this.scanner = new Scanner(System.in);
             ArrayList<KurssiLista> kurssiListat = new ArrayList<>();
             KurssiLista kurssiLista = new KurssiLista();
             //lisataan jokaisen kurssiListaan dummy kurssi etta voidaan kasitella kursseja indeksista 1 lahtien
             kurssiLista.lisaaKurssi(new Kurssi(0, "dummy", 0, new ArrayList<>()));
             int nollaLaskuri = 0;
-            StringBuilder sb = new StringBuilder();
+            ArrayList<String> kurssinTiedot = new ArrayList<>();
 
             while (scanner.hasNext()) {
                 String seuraava = scanner.next();
@@ -319,12 +295,13 @@ public class Esitieto {
 
                 switch (nollaLaskuri) {
                     case 0:
-                        sb.append(seuraava);
-                        sb.append(" ");
+                        if (!seuraava.equals(":")) {
+                            kurssinTiedot.add(seuraava);
+                        }
                         continue;
                     case 1:
-                        Kurssi uusiKurssi = luoKurssiSyotteesta(sb.toString());
-                        sb = new StringBuilder();
+                        Kurssi uusiKurssi = luoKurssiSyotteesta(kurssinTiedot);
+                        kurssinTiedot = new ArrayList<>();
                         kurssiLista.lisaaKurssi(uusiKurssi);
                         continue;
                     case 2:
@@ -339,23 +316,18 @@ public class Esitieto {
             return kurssiListat;
         }
 
-        private Kurssi luoKurssiSyotteesta(String s) {
+        private Kurssi luoKurssiSyotteesta(ArrayList<String> kurssinTiedot) {
             ArrayList<Integer> ennakkotiedot = new ArrayList<>();
-            Scanner scanner = new Scanner(s);
-            int id = scanner.nextInt();
-            String nimi = scanner.next();
-            String periodi = scanner.next();
+            int id = Integer.parseInt(kurssinTiedot.getFirst());
+            String nimi = kurssinTiedot.get(1);
+            String periodi = kurssinTiedot.get(2);
             String siivottuperiodi = periodi.replaceAll(":", "");
             int periodiInteger = Integer.parseInt(siivottuperiodi);
 
-            while (scanner.hasNext()) {
-                try {
-                    int ennakkotieto = Integer.parseInt(scanner.next());
-                    ennakkotiedot.add(ennakkotieto);
-                } catch (Exception e) {
-                    continue;
-                }
+            for (int i = 3; i < kurssinTiedot.size(); i++) {
+                ennakkotiedot.add(Integer.parseInt(kurssinTiedot.get(i)));
             }
+
             return new Kurssi(id, nimi, periodiInteger, ennakkotiedot);
         }
     }
